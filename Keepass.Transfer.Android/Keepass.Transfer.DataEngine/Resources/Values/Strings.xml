@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="progress_title">Transfering data</string>
+  <string name="progress_text">Please wait while the password entry is beeing transfered…</string>
+  <string name="invalid_key_title">Invalid Key</string>
+  <string name="invalid_key_text">The choosen keysize is to small for your transfer data. Create a bigger key or reduce the number of fields.</string>
+  <string name="network_error_title">Network Error</string>
+  <string name="network_error_text">Unable to transfer data to server! Check your internet connection.</string>
+  <string name="server_error_title">Server Error</string>
+  <string name="server_error_text">The server rejected the data! Please try again.</string>
+  <string name="invalid_qr_title">Invalid QR-Code</string>
+  <string name="invalid_qr_text">The QR-Code you scanned was invalid! Please scan a valid code.</string>
+  <string name="completed_title">Completed</string>
+  <string name="completed_text">Password entry was successfully transfered!</string>
+  <string name="retry">Retry</string>
+</resources>
