@@ -62,7 +62,7 @@ namespace Keepass.Transfer.DataEngine
                     catch (Exception)
                     {
                         new ScanErrorDialogFragment().Show(this.FragmentManager, "errorDialog");
-                        throw;
+                        this.ScanResultReady(null, true);//was throw... WHY?!?
                     }
                 }
             }

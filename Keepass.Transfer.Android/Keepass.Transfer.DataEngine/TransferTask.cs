@@ -7,9 +7,6 @@ using Newtonsoft.Json;
 using Android.Content;
 using Android.App;
 using Javax.Net.Ssl;
-using Java.Security.Cert;
-using System.Linq;
-using Android.Content.Res;
 using Java.Security;
 
 namespace Keepass.Transfer.DataEngine
@@ -77,24 +74,23 @@ namespace Keepass.Transfer.DataEngine
             {
                 DataEncryptor.EncryptData(entryList, publicKey);
             }
-            catch (System.Exception)
+            catch (Exception)
             {
-                throw;
                 return ResultCode.EncryptError;
             }
 
             try
             {
-                var ksTrust = KeyStore.GetInstance("BKS");
-                ksTrust.Load(this._activity.Resources.OpenRawResource(Resource.Raw.skynetKeystore), "skycoder42".ToCharArray());
-                var tmf = TrustManagerFactory.GetInstance(KeyManagerFactory.DefaultAlgorithm);
-                tmf.Init(ksTrust);
-                var sslContext = SSLContext.GetInstance("TLS");
-                sslContext.Init(null, tmf.GetTrustManagers(), new SecureRandom());
+                //var ksTrust = KeyStore.GetInstance("BKS");
+                //ksTrust.Load(this._activity.Resources.OpenRawResource(Resource.Raw.skynetKeystore), "skycoder42".ToCharArray());
+                //var tmf = TrustManagerFactory.GetInstance(KeyManagerFactory.DefaultAlgorithm);
+                //tmf.Init(ksTrust);
+                //var sslContext = SSLContext.GetInstance("TLS");
+                //sslContext.Init(null, tmf.GetTrustManagers(), new SecureRandom());
 
-                var url = new URL("https://skynet.is-an-engineer.com/keepass_transfer/secretPlacer.php");
+                var url = new URL("https://kpt.skycoder42.de/secretPlacer.php");
                 var con = (HttpsURLConnection)url.OpenConnection();
-                con.SSLSocketFactory = sslContext.SocketFactory;
+                //con.SSLSocketFactory = sslContext.SocketFactory;
 
                 con.RequestMethod = "POST";
                 con.DoOutput = true;
@@ -110,7 +106,7 @@ namespace Keepass.Transfer.DataEngine
                 else
                     return ResultCode.TransferError;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return ResultCode.NetworkError;
             }

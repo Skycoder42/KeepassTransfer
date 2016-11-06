@@ -1,11 +1,6 @@
-using System;
 using System.Collections.Generic;
-using Android.App;
-using Android.Content;
 using Android.OS;
 using Newtonsoft.Json;
-using Exception = Java.Lang.Exception;
-using Object = Java.Lang.Object;
 
 namespace Keepass.Transfer.DataEngine
 {

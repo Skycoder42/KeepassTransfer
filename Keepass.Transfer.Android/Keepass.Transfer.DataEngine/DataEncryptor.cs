@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using Java.Security;
 using Java.Security.Spec;
 using Javax.Crypto;
@@ -10,11 +9,6 @@ namespace Keepass.Transfer.DataEngine
 {
     internal static class DataEncryptor
     {
-        public static Task EncryptDataAsync(IList<DataEntry> transferData, string publicKey)
-        {
-            return Task.Run(() => EncryptData(transferData, publicKey));
-        }
-
         public static void EncryptData(IList<DataEntry> transferData, string publicKey)
         {
             var key = DataEncryptor.ReadKey(publicKey);

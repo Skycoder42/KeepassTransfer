@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keepass.Transfer.ZXingInteg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keepass.Transfer.DataEngine", "Keepass.Transfer.DataEngine\Keepass.Transfer.DataEngine.csproj", "{7115A7CA-C4F9-4FC0-B780-FCE596199E8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeePass.Transfer.TestApp", "KeePass.Transfer.TestApp\KeePass.Transfer.TestApp.csproj", "{21FE320D-D5A0-4D8A-8968-71C7212CA961}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keepass.Transfer.TestApp", "Keepass.Transfer.TestApp\Keepass.Transfer.TestApp.csproj", "{21FE320D-D5A0-4D8A-8968-71C7212CA961}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
