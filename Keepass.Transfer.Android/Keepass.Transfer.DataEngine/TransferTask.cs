@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Net.WebSockets;
 using Android.OS;
 using Java.Net;
 using System.Text;
+using System.Threading;
 using Newtonsoft.Json;
 using Android.Content;
 using Android.App;
@@ -19,6 +21,13 @@ namespace Keepass.Transfer.DataEngine
             EncryptError,
             NetworkError,
             TransferError
+        }
+
+        private class TransferMessage
+        {
+            public readonly string MessageType = "AT";
+            public string Secret;
+            public List<DataEntry> TransferData;
         }
 
         private class ProgressDialogFragment : DialogFragment
@@ -66,45 +75,43 @@ namespace Keepass.Transfer.DataEngine
 
         protected override ResultCode RunInBackground(params string[] @params)
         {
-            var entryList = JsonConvert.DeserializeObject<List<DataEntry>>(@params[0]);
-            var secret = @params[1];
+            var message = new TransferMessage {
+                Secret = @params[1],
+                TransferData = JsonConvert.DeserializeObject<List<DataEntry>>(@params[0])
+            };
             var publicKey = @params[2];
 
             try
             {
-                DataEncryptor.EncryptData(entryList, publicKey);
+                DataEncryptor.EncryptData(message.TransferData, publicKey);
             }
             catch (Exception)
             {
                 return ResultCode.EncryptError;
             }
 
-            try
-            {
-                //var ksTrust = KeyStore.GetInstance("BKS");
-                //ksTrust.Load(this._activity.Resources.OpenRawResource(Resource.Raw.skynetKeystore), "skycoder42".ToCharArray());
-                //var tmf = TrustManagerFactory.GetInstance(KeyManagerFactory.DefaultAlgorithm);
-                //tmf.Init(ksTrust);
-                //var sslContext = SSLContext.GetInstance("TLS");
-                //sslContext.Init(null, tmf.GetTrustManagers(), new SecureRandom());
+            try {
+                //connect
+                var socket = new ClientWebSocket();
+                socket.ConnectAsync(new Uri("wss://kpt.skycoder42.de"), CancellationToken.None).Wait();
+                if(socket.State != WebSocketState.Open)
+                    return ResultCode.NetworkError;
 
-                var url = new URL("https://kpt.skycoder42.de/secretPlacer.php");
-                var con = (HttpsURLConnection)url.OpenConnection();
-                //con.SSLSocketFactory = sslContext.SocketFactory;
+                //send
+                var sendData = JsonConvert.SerializeObject(message);
+                socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(sendData)), 
+                    WebSocketMessageType.Text,
+                    true, 
+                    CancellationToken.None)
+                    .Wait();
 
-                con.RequestMethod = "POST";
-                con.DoOutput = true;
-                var os = con.OutputStream;
-                var postData = Encoding.UTF8.GetBytes($"secret={URLEncoder.Encode(secret, "UTF-8")}&data={URLEncoder.Encode(JsonConvert.SerializeObject(entryList), "UTF-8")}");
-                os.Write(postData, 0, postData.Length);
-                os.Flush();
-                os.Close();
+                //close
+                socket.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None).Wait();
 
-                var status = con.ResponseCode;
-                if ((int)status / 100 == 2)
+                if (socket.State == WebSocketState.Closed)
                     return ResultCode.Success;
                 else
-                    return ResultCode.TransferError;
+                    return ResultCode.NetworkError;
             }
             catch (Exception)
             {
