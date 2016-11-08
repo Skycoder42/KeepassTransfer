@@ -1,0 +1,3 @@
+[submodule "QBackgroundProcess"]
+	path = QBackgroundProcess
+	url = git@github.com:Skycoder42/QBackgroundProcess.git

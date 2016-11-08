@@ -25,7 +25,7 @@ namespace Keepass.Transfer.DataEngine
 
         private class TransferMessage
         {
-            public readonly string MessageType = "AT";
+            public readonly string MessageType = "MC";//MobileClient
             public string Secret;
             public List<DataEntry> TransferData;
         }
