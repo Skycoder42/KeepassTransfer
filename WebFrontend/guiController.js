@@ -73,7 +73,7 @@ GuiController.addEntry = function(key, value, guarded, randID) {
 	var table = $("#entryTable");
 	
 	if(guarded) {
-		editState[randID + "Label"] = 0;
+		GuiController.editState[randID + "Label"] = 0;
 		table.append('<tr><td class="labelTD"><label>' + 
 					 GuiController.escapeHtml(key) + 
 					 '</label>&nbsp;&nbsp;</td><td><input id="' + 
