@@ -1,0 +1,70 @@
+body {
+	background-color: #C1E1A6;
+}
+
+/*Busy-Indicator*/
+.modal {
+	position: fixed;
+	z-index: 999;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.indicator {
+	position: fixed; /* or absolute */
+	top: 50%;
+	left: 50%;
+	z-index: 1000;
+	padding: 10px;
+	width: 150px;
+	background-color: White;
+	border-radius: 10px;
+    border: 1px solid #337ab7;
+	transform: translate(-50%, -50%);
+}
+.indicator img {
+	height: 128px;
+	width: 128px;
+}
+.centertext {
+	text-align: center;
+}
+
+/*Panels*/
+.panel {
+	width: 1000px;
+	max-width: calc(100% - 24px);
+	margin: 12px auto;
+}
+
+/*qrcode-container*/
+.qrcenter {
+  text-align: center;
+}
+.qrcontainer {
+	display: inline-block;
+}
+
+/*password-entries*/
+#entryTable {
+    table-layout: auto;
+	border-spacing: 10px 2px;
+	width: 100%;
+	margin: 0px;
+}
+.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th  {
+    border: none;
+	padding: 4px;
+}
+.labelTD {
+	width: 1px;
+	white-space: nowrap;
+}
+.buttonTD {
+	width: 32px;
+}
+input {
+	width:100%;
+}
