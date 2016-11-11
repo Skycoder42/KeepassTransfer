@@ -132,6 +132,8 @@
 	<script type="text/javascript">
 		$(function() {
 			extractQueryParameters();
+			setSecret("12345"); 
+			generateKeys(getKeySize(), getErrorLevel(), getQrSize()); 
 		});
 	</script>
 </body>

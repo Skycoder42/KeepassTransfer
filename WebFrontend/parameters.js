@@ -24,8 +24,18 @@ function getKeySize() {
 	return getRealParam(urlParams["keySize"], ["512", "1024", "2048", "4096", "8192"], 2);
 }
 
-function getErrorLevel() {
-	return getRealParam(urlParams["errorLevel"], ["L", "M", "Q", "H"], 1);
+function getErrorLevel() {	
+	switch(urlParams["errorLevel"]) {
+    case "L":
+		return 1;
+    case "M":
+    default:
+		return 0;
+    case "Q":
+		return 3;
+    case "H":
+		return 2;
+	}
 }
 
 function getQrSize() {
