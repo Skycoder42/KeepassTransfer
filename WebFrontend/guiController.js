@@ -54,10 +54,8 @@ GuiController.setProgressText = function(progText) {
 }
 
 GuiController.showQrPanel = function() {
-	if(!GuiController.isErrorState) {
-		if(show)
-			$("#qrPanel").show();
-	}
+	if(!GuiController.isErrorState)
+		$("#qrPanel").show();
 }
 
 GuiController.showEntryPanel = function() {	

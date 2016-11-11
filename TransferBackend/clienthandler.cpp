@@ -40,6 +40,7 @@ void ClientHandler::sendData(QJsonValue data)
 
 void ClientHandler::textMessageReceived(const QString &message)
 {
+	qDebug() << "message:" << message;
 	//extract the json
 	QJsonParseError error;
 	auto object = QJsonDocument::fromJson(message.toUtf8(), &error).object();

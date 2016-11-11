@@ -25,7 +25,7 @@ void AppServer::registerWebClient(QString secret, ClientHandler *handler)
 {
 	webClients.insert(secret, handler);
 	connect(handler, &ClientHandler::destroyed, [=](){
-		webClients.remove(secret);
+		webClients.remove(secret);//TODO crashes on shutdown
 	});
 }
 
@@ -33,7 +33,7 @@ void AppServer::registerMobileClient(QString secret, ClientHandler *handler)
 {
 	mobileClients.insert(secret, handler);
 	connect(handler, &ClientHandler::destroyed, [=](){
-		mobileClients.remove(secret);
+		mobileClients.remove(secret);//TODO crashes on shutdown
 	});
 }
 
@@ -60,7 +60,10 @@ bool AppServer::start(int port)
 void AppServer::originAuthenticationRequired(QWebSocketCorsAuthenticator *authenticator)
 {
 	qDebug() << "authenication required for:" << authenticator->origin();
-	authenticator->setAllowed(true);
+	if(authenticator->origin() == QStringLiteral("https://kpt.skycoder42.de"))
+		authenticator->setAllowed(true);
+	else
+		authenticator->setAllowed(false);
 }
 
 void AppServer::newConnection()
