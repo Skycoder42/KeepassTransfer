@@ -26,10 +26,10 @@ Parameters.getKeySize = function() {
 
 Parameters.getErrorLevel = function() {	
 	switch(Parameters.urlParams["errorLevel"]) {
+    default:
     case "L":
 		return 1;
     case "M":
-    default:
 		return 0;
     case "Q":
 		return 3;
