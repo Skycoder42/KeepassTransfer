@@ -1,31 +1,31 @@
-var urlParams;
+function Parameters(){}
 
-function extractQueryParameters() {	
+Parameters.urlParams = {};
+
+Parameters.extractQueryParameters = function() {	
     var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
         search = /([^&=]+)=?([^&]*)/g,
         decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
         query  = window.location.search.substring(1);
 
-    urlParams = {};
+    Parameters.urlParams = {};
     while (match = search.exec(query))
-       urlParams[decode(match[1])] = decode(match[2]);
+       Parameters.urlParams[decode(match[1])] = decode(match[2]);
 }
 
-function getRealParam(value, allowed, defaultIndex) {
+Parameters.getKeySize = function() {
+	var value = Parameters.urlParams["keySize"];
+	var allowed = ["512", "1024", "2048", "4096", "8192"];
 	var index = allowed.indexOf(value);
 	if(index < 0)
-		return allowed[defaultIndex];
+		return allowed[2];
 	else
 		return value;
 }
 
-function getKeySize() {
-	return getRealParam(urlParams["keySize"], ["512", "1024", "2048", "4096", "8192"], 2);
-}
-
-function getErrorLevel() {	
-	switch(urlParams["errorLevel"]) {
+Parameters.getErrorLevel = function() {	
+	switch(Parameters.urlParams["errorLevel"]) {
     case "L":
 		return 1;
     case "M":
@@ -38,10 +38,10 @@ function getErrorLevel() {
 	}
 }
 
-function getQrSize() {
-	var num = parseInt(urlParams["qrSize"]);
+Parameters.getQrSize = function() {
+	var num = parseInt(Parameters.urlParams["qrSize"]);
 	if(isNaN(num))
 		return 512;
 	else
-		return Math.min(Math.max(urlParams["qrSize"], 256), 960);
+		return Math.min(Math.max(Parameters.urlParams["qrSize"], 256), 960);
 }
