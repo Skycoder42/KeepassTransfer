@@ -1,28 +1,3 @@
-<?php
-function getParam($value, $allowed, $defaultIndex) {
-	if(isset($value) &&
-	   in_array($value, $allowed))
-		return $value;
-	else
-		return $allowed[$defaultIndex];
-}
-
-function getKeySize() {
-	return getParam($_GET["keySize"], ["512", "1024", "2048", "4096", "8192"], 2);
-}
-
-function getErrorLevel() {
-	return getParam($_GET["errorLevel"], ["L", "M", "Q", "H"], 0);
-}
-
-function getQrSize() {
-	if(isset($_GET["qrSize"])) {
-		$size = intval($_GET["qrSize"]);
-		return min(max($size, 256), 960);
-	} else 
-		return 512;
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -149,17 +124,24 @@ function getQrSize() {
 	<!-- clipboard CDN -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.15/clipboard.min.js" integrity="sha256-COWXDc7n7PAqsE3y1r4CVopxWU9JI0kenz6K4zBqhT8=" crossorigin="anonymous"></script>
 	<!-- clipboard CDN local fallback
+	<script type="text/javascript" src="./parameters.js"></script>
+	<script type="text/javascript" src="./core.js"></script>
 	<script type="text/javascript" src="./libraries/clipboard.min.js"></script>-->
 
-	<script type="text/javascript" src="./core.js"></script>
 	
-<!-- DEBUG
 	<script type="text/javascript">
 		$(function() {
-			setSecret("<?php //echo dechex(mt_rand()).dechex(mt_rand())?>");
-			generateKeys(<?php //echo getKeySize(); ?>, QRErrorCorrectLevel.<?php echo getErrorLevel(); ?>, <?php echo getQrSize(); ?>);
+			alert("TEST");
+			// extractFragmentParameters();
+			// alert(urlParams["keySize"]);
+			// alert(urlParams["errorLevel"]);
+			// alert(urlParams["qrSize"]);
+			// alert(getKeySize());
+			// alert(getErrorLevel());
+			// alert(getQrSize());
+			//setSecret("<?php //echo dechex(mt_rand()).dechex(mt_rand())?>");
+			//generateKeys(<?php //echo getKeySize(); ?>, QRErrorCorrectLevel.<?php echo getErrorLevel(); ?>, <?php echo getQrSize(); ?>);
 		});
 	</script>
--->
 </body>
 </html>
