@@ -1,6 +1,6 @@
 var urlParams;
 
-function extractFragmentParameters() {	
+function extractQueryParameters() {	
     var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
         search = /([^&=]+)=?([^&]*)/g,
@@ -29,7 +29,8 @@ function getErrorLevel() {
 }
 
 function getQrSize() {
-	if(urlParams.indexOf("qrSize") < 0)
+	var num = parseInt(urlParams["qrSize"]);
+	if(isNaN(num))
 		return 512;
 	else
 		return Math.min(Math.max(urlParams["qrSize"], 256), 960);

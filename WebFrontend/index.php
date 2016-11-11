@@ -124,23 +124,14 @@
 	<!-- clipboard CDN -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.15/clipboard.min.js" integrity="sha256-COWXDc7n7PAqsE3y1r4CVopxWU9JI0kenz6K4zBqhT8=" crossorigin="anonymous"></script>
 	<!-- clipboard CDN local fallback
-	<script type="text/javascript" src="./parameters.js"></script>
-	<script type="text/javascript" src="./core.js"></script>
 	<script type="text/javascript" src="./libraries/clipboard.min.js"></script>-->
 
+	<script type="text/javascript" src="./parameters.js"></script>
+	<script type="text/javascript" src="./core.js"></script>
 	
 	<script type="text/javascript">
 		$(function() {
-			alert("TEST");
-			// extractFragmentParameters();
-			// alert(urlParams["keySize"]);
-			// alert(urlParams["errorLevel"]);
-			// alert(urlParams["qrSize"]);
-			// alert(getKeySize());
-			// alert(getErrorLevel());
-			// alert(getQrSize());
-			//setSecret("<?php //echo dechex(mt_rand()).dechex(mt_rand())?>");
-			//generateKeys(<?php //echo getKeySize(); ?>, QRErrorCorrectLevel.<?php echo getErrorLevel(); ?>, <?php echo getQrSize(); ?>);
+			extractQueryParameters();
 		});
 	</script>
 </body>
