@@ -127,13 +127,12 @@
 	<script type="text/javascript" src="./libraries/clipboard.min.js"></script>-->
 
 	<script type="text/javascript" src="./parameters.js"></script>
+	<script type="text/javascript" src="./guiController.js"></script>
 	<script type="text/javascript" src="./core.js"></script>
 	
 	<script type="text/javascript">
 		$(function() {
-			Parameters.extractQueryParameters();
-			setSecret("12345"); 
-			generateKeys(Parameters.getKeySize(), Parameters.getErrorLevel(), Parameters.getQrSize()); 
+			Core.init(); 
 		});
 	</script>
 </body>
