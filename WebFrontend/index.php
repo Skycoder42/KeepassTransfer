@@ -30,26 +30,42 @@ function getQrSize() {
 	<title>Keepass Transfer</title>
 	<link rel="shortcut icon" href="./launcher_ic.png" />
 	
-	<?php require_once("./libraries/jquery.php"); ?>
-	<script type="text/javascript" src="./jsencrypt.js"></script>
-	<script type="text/javascript" src="./qrcode.js"></script>
-	<script type="text/javascript" src="./jquery.qrcode.js"></script>
-	<script type="text/javascript" src="./libraries/clipboard.min.js"></script>
-	<script type="text/javascript" src="./core.js"></script>
+	<!-- jQuery CDN -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<!-- jQuery local fallback -->
+	<script>window.jQuery || document.write('<script src="./cdns/jquery.min.js"><\/script>')</script>
 	
-	<?php require_once("./libraries/bootstrap.php"); ?>
-	<link rel="stylesheet" type="text/css" href="./styles.css"></link>
-
-	<script type="text/javascript">
-		$(function() {
-			setSecret("<?php echo dechex(mt_rand()).dechex(mt_rand())?>");
-			generateKeys(<?php echo getKeySize(); ?>, QRErrorCorrectLevel.<?php echo getErrorLevel(); ?>, <?php echo getQrSize(); ?>);
-		});
+	<!-- Bootstap CDN -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<!-- Bootstrap JS local fallback -->
+	<script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="./cdns/bootstrap.min.js"><\/script>')}</script>
+	<!-- Bootstrap CSS local fallback -->
+	<script>
+	$(document).ready(function() {
+		var bodyColor = $('body').css('color');
+		if(bodyColor != 'rgb(51, 51, 51)') {
+			$("head").prepend('<link rel="stylesheet" href="/cdns/bootstrap.min.css">');
+		}
+	});
 	</script>
-</head>
-<body>
-	<?php $active_item = 2; include('./libraries/navbar.php'); ?>
 	
+	<!-- Bootstap Dialogs CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.3/js/bootstrap-dialog.min.js" integrity="sha256-8qVHcBsZcW0BFgt8DWh3qVJeci+3rhb4eqtzKAzqb7o=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.3/css/bootstrap-dialog.min.css" integrity="sha256-wstTM1F5dOf7cgnlRHIW3bmoRAAGh6jL7tMIvqTuFZE=" crossorigin="anonymous" />
+	
+	<!-- Bootstrap Dialogs JS local fallback -> do both -->
+	<script>
+	if(typeof(BootstrapDialog.TYPE_DANGER) === 'undefined') {
+		document.write('<script src="./cdns/bootstrap-dialog.min.js"><\/script>');
+		document.write('<link rel="stylesheet" href="/cdns/bootstrap-dialog.min.css">');
+	}
+	</script>
+	
+	<link rel="stylesheet" type="text/css" href="./styles.css"></link>
+</head>
+<body>	
 	<div>
 		<div class="panel panel-info" id="qrPanel" style="display: none">
 			<div class="panel-heading">
@@ -119,5 +135,31 @@ function getQrSize() {
 			<div class="centertext" id="busytext">Generating Key&#8230;</div>
 		</div>
 	</div>
+	
+	<!-- Put Logical scripts at the end -->
+	<!-- JS Encrypt CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js" integrity="sha256-WgvkBqG9+UolqdFC1BJOPcy961WTzXj7C9I034ndc4k=" crossorigin="anonymous"></script>
+	<!-- JS Encrypt CDN local fallback
+	<script>if(typeof(bnpCopyTo) === 'undefined') {document.write('<script src="./cdns/jsencrypt.min.js"><\/script>')}</script> -->
+	<!-- jQuery qrcode CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js" integrity="sha256-9MzwK2kJKBmsJFdccXoIDDtsbWFh8bjYK/C7UjB1Ay0=" crossorigin="anonymous"></script>
+	<!-- jQuery qrcode CDN local fallback
+	<script type="text/javascript" src="./libraries/qrcode.js"></script>
+	<script type="text/javascript" src="./libraries/jquery.qrcode.js"></script> -->
+	<!-- clipboard CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.15/clipboard.min.js" integrity="sha256-COWXDc7n7PAqsE3y1r4CVopxWU9JI0kenz6K4zBqhT8=" crossorigin="anonymous"></script>
+	<!-- clipboard CDN local fallback
+	<script type="text/javascript" src="./libraries/clipboard.min.js"></script>-->
+
+	<script type="text/javascript" src="./core.js"></script>
+	
+<!-- DEBUG
+	<script type="text/javascript">
+		$(function() {
+			setSecret("<?php //echo dechex(mt_rand()).dechex(mt_rand())?>");
+			generateKeys(<?php //echo getKeySize(); ?>, QRErrorCorrectLevel.<?php echo getErrorLevel(); ?>, <?php echo getQrSize(); ?>);
+		});
+	</script>
+-->
 </body>
 </html>
