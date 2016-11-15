@@ -4,7 +4,7 @@ Core.secret = null;
 Core.publicKey = null;
 Core.privateKey = null;
 Core.connection = null;
-Core.initCount = 0;
+Core.normalClosed = false;
 
 Core.init = function() {
 	Parameters.extractQueryParameters();
@@ -13,34 +13,25 @@ Core.init = function() {
 	Core.secret = Core.generateRandom(64);
 	
 	Core.connection = new WebSocket("ws://127.0.0.1:11221/backend/");//DEBUG, normally its: ("wss://kpt.skycoder42.de/backend/");
-	
-	Core.connection.onopen = function () {
-		Core.connection.send(JSON.stringify({
-			"MessageType": "WC",
-			"Secret": Core.secret,
-		}));
-	};
-
-	// Log messages from the server
-	Core.connection.onmessage = function (e) {
-		console.log('Server: ' + e.data);
-	};
-
-	// Log errors
-	Core.connection.onerror = Core.socketError;
+	Core.connection.onopen = Core.sendSecret;
+	Core.connection.onmessage = Core.decryptData;
+	Core.connection.onerror = Core.socketError;	
+	Core.connection.onclose = Core.socketClosed;
 	
 	Core.generateKeys(Parameters.getKeySize(), Parameters.getErrorLevel(), Parameters.getQrSize());
 }
 
-Core.socketReply = function(reply) {
-	//console.log('Server: ' + reply.data);
-	GuiController.setProgressText("Decrypting Data…");
-	GuiController.showProgress(true);
-	Core.decryptData(data);
+Core.sendSecret = function() {
+	Core.connection.send(JSON.stringify({
+		"MessageType": "WC",
+		"Secret": Core.secret,
+	}));
 }
 
 Core.socketClosed = function(closeEvent) {
-	GuiController.showError("Socket was closed with code: " + closeEvent.code);
+	console.log("Disconnected with close code: " + closeEvent.code)
+	if(!Core.normalClosed)
+		GuiController.showError("Connection to server was unexpectedly closed!");
 }
 
 Core.socketError = function(error) {
@@ -63,7 +54,7 @@ Core.generateRandom = function(count) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-    for( var i=0; i < count; i++ )
+    for(var i = 0; i < count; i++) 
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
@@ -73,18 +64,28 @@ Core.createQrCode = function(errorLevel, qrSize) {
 	var sendKey = Core.publicKey.replace(/\n/g, '');
 	sendKey = sendKey.replace("-----BEGIN PUBLIC KEY-----", '');
 	sendKey = sendKey.replace("-----END PUBLIC KEY-----", '');
-	var senddata = "{\"Secret\":\"" + Core.secret + "\",\"PublicKey\":\"" + sendKey + "\"}";
+	var sendData = JSON.stringify({
+		"Secret": Core.secret,
+		"PublicKey": sendKey,
+	});
 	
 	$('#qrcodeCanvas').qrcode({
 		render: "canvas",
 		width: qrSize,
 		height: qrSize,
 		correctLevel: errorLevel,
-		text: senddata
+		text: sendData
 	});
 }
 
-Core.decryptData = function(data) {	
+Core.decryptData = function(message) {
+	GuiController.setProgressText("Decrypting Data…");
+	GuiController.showProgress(true);
+	
+	var data = message.data;
+	Core.normalClosed = true;
+	Core.connection.close();
+	
 	var len = data.length;
 	for(var i = 0; i < len; i++) {
 		var cData = data[i];

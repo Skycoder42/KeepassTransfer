@@ -86,7 +86,7 @@
 					<li class="list-group-item">
 						<h4 class="list-group-item-heading">errorLevel</h4>
 						<p class="list-group-item-text">The <code>errorLevel</code> specifies how much error-correction should be used. The higher the error correction, the more damaged the
-						QR-Code can be, without beeing a problem for readers. More information about the levels can be found at <a target="_blank" href="http://blog.qrstuff.com/2011/12/14/qr-code-error-correction">QRStuff.com &#8690;</a>.<br/>
+						QR-Code can be, without beeing a problem for readers. More information about the levels can be found at <a target="_blank" href="http://blog.qrstuff.com/2011/12/14/qr-code-error-correction">QRStuff.com &#128471;</a>.<br/>
 						The following levels are supported: <b>[L, M, Q, H]</b>. Typically, a QR-Code on the screen is not damaged. To reduce the complexity of the code, the default error correction
 						level is <u>L</u>.</p>
 					</li>
@@ -132,7 +132,7 @@
 	
 	<script type="text/javascript">
 		$(function() {
-			Core.init(); 
+			Core.init();
 		});
 	</script>
 </body>
