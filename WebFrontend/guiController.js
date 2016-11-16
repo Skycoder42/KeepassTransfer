@@ -20,6 +20,7 @@ GuiController.showError = function(errorString) {
 	
 	BootstrapDialog.show({
 		type:  BootstrapDialog.TYPE_DANGER,
+		closable: false,
 		title: "Error",
 		message: errorString + "\n\nPlease refresh the website to start a new session to try again.",
 		buttons: [{
@@ -31,6 +32,7 @@ GuiController.showError = function(errorString) {
 			}
 		}, {
 			label: "Close",
+			hotkey: 27, //Esc
 			action: function(dialogItself){
 				dialogItself.close();
 			}

@@ -62,7 +62,6 @@ bool AppServer::start(int port)
 
 void AppServer::originAuthenticationRequired(QWebSocketCorsAuthenticator *authenticator)
 {
-	authenticator->setAllowed(true);
 	//Allow all because of the mobile client
 //	if(authenticator->origin() == QStringLiteral("https://kpt.skycoder42.de"))
 //		authenticator->setAllowed(true);
