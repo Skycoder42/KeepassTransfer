@@ -46,7 +46,7 @@ namespace KeePass.Transfer.TestApp
             {
                 new DataEntry {Key = "username", Value = _username.Text },
                 new DataEntry {Key = "email", Value = _mail.Text },
-                new DataEntry {Key = "password", Value = _password.Text }
+                new DataEntry {Key = "password", Value = _password.Text, Guarded = true }
             });
         }
     }
