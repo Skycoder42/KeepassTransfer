@@ -93,7 +93,7 @@ namespace Keepass.Transfer.DataEngine
             try {
                 //connect
                 var socket = new ClientWebSocket();
-                socket.ConnectAsync(new Uri("wss://192.168.179.20:11221"), CancellationToken.None).Wait();//DEBUG, normal: wss://kpt.skycoder42.de/backend/
+                socket.ConnectAsync(new Uri("ws://192.168.179.20:11221"), CancellationToken.None).Wait();//DEBUG, normal: wss://kpt.skycoder42.de/backend/
                 if (socket.State != WebSocketState.Open)
                     return ResultCode.NetworkError;
 

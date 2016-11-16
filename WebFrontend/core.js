@@ -79,22 +79,40 @@ Core.createQrCode = function(errorLevel, qrSize) {
 }
 
 Core.decryptData = function(message) {
-	GuiController.setProgressText("Decrypting Data…");
+	GuiController.setProgressText("Decrypting Data\u2026");
 	GuiController.showProgress(true);
 	
-	var data = message.data;
-	Core.normalClosed = true;
-	Core.connection.close();
-	
-	var len = data.length;
-	for(var i = 0; i < len; i++) {
-		var cData = data[i];
-		var crypt = new JSEncrypt();		
-		crypt.setPrivateKey(privateKey);
+	try {
+		var data = JSON.parse(message.data);	
+		for(var i = 0; i < data.length; i++) {
+			var cData = data[i];
+			var crypt = new JSEncrypt();		
+			crypt.setPrivateKey(Core.privateKey);
+			
+			var decr = crypt.decrypt(cData.Value);
+			if(decr != null)
+				GuiController.addEntry(cData.Key, decr, cData.Guarded, Core.generateRandom(10));
+			else
+				throw new Error("Failed to decrypt data with the given key!");
+		}
 		
-		var decr = crypt.decrypt(cData.Value);
-		GuiController.addEntry(cData.Key, decr, cData.Guarded, Core.generateRandom(10));
+		Core.connection.send(JSON.stringify({
+			"Secret": Core.secret,
+			"Successful": true,
+			"Error": null
+		}));
+		
+		GuiController.showEntryPanel();
+	} catch(except) {
+		Core.connection.send(JSON.stringify({
+			"Secret": Core.secret,
+			"Successful": false,
+			"Error": except.message
+		}));
+		
+		GuiController.showError(except.message);		
+	} finally {
+		Core.normalClosed = true;
+		Core.connection.close();
 	}
-	
-	GuiController.showEntryPanel();
 }

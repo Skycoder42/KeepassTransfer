@@ -25,6 +25,7 @@ void AppServer::registerWebClient(QString secret, ClientHandler *handler)
 {
 	webClients.insert(secret, handler);
 	connect(handler, &ClientHandler::destroyed, this, [=](){
+		qDebug() << "Web client removed:" << secret;
 		webClients.remove(secret);
 	});
 }
@@ -33,6 +34,7 @@ void AppServer::registerMobileClient(QString secret, ClientHandler *handler)
 {
 	mobileClients.insert(secret, handler);
 	connect(handler, &ClientHandler::destroyed, this, [=](){
+		qDebug() << "Mobile client removed:" << secret;
 		mobileClients.remove(secret);
 	});
 }
@@ -49,9 +51,10 @@ ClientHandler *AppServer::findMobileClient(QString secret) const
 
 bool AppServer::start(int port)
 {
-	if(server->listen(QHostAddress::LocalHost, (quint16)port))
+	if(server->listen(QHostAddress::Any, (quint16)port)) {
+		qDebug() << "Listening on port" << server->serverPort();
 		return true;
-	else {
+	} else {
 		qCritical() << "Failed to start server on port" << port;
 		return false;
 	}
@@ -59,16 +62,20 @@ bool AppServer::start(int port)
 
 void AppServer::originAuthenticationRequired(QWebSocketCorsAuthenticator *authenticator)
 {
-	if(authenticator->origin() == QStringLiteral("https://kpt.skycoder42.de"))
-		authenticator->setAllowed(true);
-	else
-		authenticator->setAllowed(false);
+	authenticator->setAllowed(true);
+	//Allow all because of the mobile client
+//	if(authenticator->origin() == QStringLiteral("https://kpt.skycoder42.de"))
+//		authenticator->setAllowed(true);
+//	else
+//		authenticator->setAllowed(false);
 }
 
 void AppServer::newConnection()
 {
-	while(server->hasPendingConnections())
+	while(server->hasPendingConnections()) {
+		qDebug() << "New client connected!";
 		new ClientHandler(server->nextPendingConnection(), this);
+	}
 }
 
 void AppServer::acceptError(QAbstractSocket::SocketError socketError)
