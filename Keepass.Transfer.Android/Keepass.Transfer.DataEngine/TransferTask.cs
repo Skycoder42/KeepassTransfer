@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using Android.OS;
-using Java.Net;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
 using Android.Content;
 using Android.App;
-using Javax.Net.Ssl;
-using Java.Security;
 
 namespace Keepass.Transfer.DataEngine
 {

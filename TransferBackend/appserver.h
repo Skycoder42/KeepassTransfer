@@ -22,7 +22,6 @@ public slots:
 	bool start(int port);
 
 private slots:
-	void originAuthenticationRequired(QWebSocketCorsAuthenticator *authenticator);
 	void newConnection();
 
 	void acceptError(QAbstractSocket::SocketError socketError);

@@ -50,7 +50,7 @@ namespace Keepass.Transfer.DataEngine
             var zingResult = IntentIntegrator.ParseActivityResult(requestCode, (int)resultCode, data);
             if (zingResult != null)
             {
-                if (zingResult.Contents == string.Empty)
+                if (string.IsNullOrEmpty(zingResult.Contents))
                     this.ScanResultReady(null, false);
                 else
                 {
@@ -62,7 +62,6 @@ namespace Keepass.Transfer.DataEngine
                     catch (Exception)
                     {
                         new ScanErrorDialogFragment().Show(this.FragmentManager, "errorDialog");
-                        this.ScanResultReady(null, true);//was throw... WHY?!?
                     }
                 }
             }

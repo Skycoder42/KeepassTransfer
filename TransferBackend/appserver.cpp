@@ -9,8 +9,6 @@ AppServer::AppServer(QObject *parent) :
 	webClients(),
 	mobileClients()
 {
-	connect(server, &QWebSocketServer::originAuthenticationRequired,
-			this, &AppServer::originAuthenticationRequired);
 	connect(server, &QWebSocketServer::newConnection,
 			this, &AppServer::newConnection);
 	connect(server, &QWebSocketServer::acceptError,
@@ -58,15 +56,6 @@ bool AppServer::start(int port)
 		qCritical() << "Failed to start server on port" << port;
 		return false;
 	}
-}
-
-void AppServer::originAuthenticationRequired(QWebSocketCorsAuthenticator *authenticator)
-{
-	//Allow all because of the mobile client
-//	if(authenticator->origin() == QStringLiteral("https://kpt.skycoder42.de"))
-//		authenticator->setAllowed(true);
-//	else
-//		authenticator->setAllowed(false);
 }
 
 void AppServer::newConnection()
