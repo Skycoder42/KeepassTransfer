@@ -16,7 +16,7 @@ namespace Keepass.Transfer.DataEngine
         {
             public override Dialog OnCreateDialog(Bundle savedInstanceState)
             {
-                var qrActivity = (QrParserActivity) this.Activity;
+                var qrActivity = (QrParserActivity)Activity;
 
                 return new AlertDialog.Builder(qrActivity)
                     .SetTitle(Resource.String.invalid_qr_title)
@@ -42,7 +42,7 @@ namespace Keepass.Transfer.DataEngine
 
         private void ZXingDialogDismissed(object sender, EventArgs e)
         {
-            this.ScanResultReady(null, true);
+            ScanResultReady(null, true);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -51,17 +51,17 @@ namespace Keepass.Transfer.DataEngine
             if (zingResult != null)
             {
                 if (string.IsNullOrEmpty(zingResult.Contents))
-                    this.ScanResultReady(null, false);
+                    ScanResultReady(null, false);
                 else
                 {
                     try
                     {
                         var codeData = JsonConvert.DeserializeObject<QrData>(zingResult.Contents);
-                        this.ScanResultReady(codeData, false);
+                        ScanResultReady(codeData, false);
                     }
                     catch (Exception)
                     {
-                        new ScanErrorDialogFragment().Show(this.FragmentManager, "errorDialog");
+                        new ScanErrorDialogFragment().Show(FragmentManager, "errorDialog");
                     }
                 }
             }

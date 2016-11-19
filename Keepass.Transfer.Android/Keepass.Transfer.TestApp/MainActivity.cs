@@ -28,21 +28,21 @@ namespace KeePass.Transfer.TestApp
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            _username = this.FindViewById<EditText>(Resource.Id.userNameEdit);
-            _mail = this.FindViewById<EditText>(Resource.Id.emailEdit);
-            _password = this.FindViewById<EditText>(Resource.Id.passwordEdit);
-            _dataView = this.FindViewById<TextView>(Resource.Id.resultView);
-            _busyBar = this.FindViewById<ProgressBar>(Resource.Id.busyBar);
+            _username = FindViewById<EditText>(Resource.Id.userNameEdit);
+            _mail = FindViewById<EditText>(Resource.Id.emailEdit);
+            _password = FindViewById<EditText>(Resource.Id.passwordEdit);
+            _dataView = FindViewById<TextView>(Resource.Id.resultView);
+            _busyBar = FindViewById<ProgressBar>(Resource.Id.busyBar);
 
             FindViewById<Button>(Resource.Id.goButton).Click += StartButton_Click;
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            this._dataView.Visibility = ViewStates.Gone;
-            this._busyBar.Visibility = ViewStates.Visible;
+            _dataView.Visibility = ViewStates.Gone;
+            _busyBar.Visibility = ViewStates.Visible;
 
-            this.StartDataTransfer(new List<DataEntry>
+            StartDataTransfer(new List<DataEntry>
             {
                 new DataEntry {Key = "username", Value = _username.Text },
                 new DataEntry {Key = "email", Value = _mail.Text },

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
-using Android.OS;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Android.Content;
 using Android.App;
@@ -13,34 +13,11 @@ namespace Keepass.Transfer.DataEngine
 {
     internal class TransferEngine
     {
-        public enum ResultCode
-        {
-            Success,
-            EncryptError,
-            NetworkError,
-            TransferError
-        }
-
         private class TransferMessage
         {
             public readonly string MessageType = "MC";//MobileClient
             public string Secret;
-            public List<DataEntry> TransferData;
-        }
-
-        private class ProgressDialogFragment : DialogFragment
-        {
-            public new const string Tag = "ProgressDialogFragmentTag";
-
-            public override Dialog OnCreateDialog(Bundle savedInstanceState)
-            {
-                var dialog = new ProgressDialog(this.Activity);
-                dialog.SetTitle(Resource.String.progress_title);
-                dialog.SetMessage(this.GetString(Resource.String.progress_text));
-                dialog.SetCancelable(false);
-                dialog.SetCanceledOnTouchOutside(false);
-                return dialog;
-            }
+            public IList<DataEntry> TransferData;
         }
 
         private class TransferErrorDialogFragment : MessageDialogFragment
@@ -70,12 +47,87 @@ namespace Keepass.Transfer.DataEngine
         }
 
         public Uri BackendUri { get; set; }
+        public Activity Activity { get; set; }
 
         private TransferEngine() { }
 
-        public async void BeginTransfer(Activity activity)
+        public async Task BeginTransfer(IList<DataEntry> transferData, string secret, string publicKey)
         {
+            UpdateProgressText();
 
+            var message = new TransferMessage {
+                Secret = secret,
+                TransferData = transferData
+            };
+
+            //Try to encrypt the data
+            try {
+                await DataEncryptor.EncryptDataAsync(message.TransferData, publicKey);
+                UpdateProgressText(Resource.String.progress_text_transfer);
+            } catch (Exception) {
+                ShowError(Resource.String.invalid_key_title, Resource.String.invalid_key_text);
+                return;
+            }
+
+            try {
+                //connect
+                var socket = new ClientWebSocket();
+                await socket.ConnectAsync(new Uri("ws://192.168.178.43:11221"), //DEBUG, normal: wss://kpt.skycoder42.de/backend/
+                    new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);//wait at most 10 sec
+                if (socket.State != WebSocketState.Open)
+                    throw new WebSocketException();
+
+                //send
+                var sendData = JsonConvert.SerializeObject(message);
+                await socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(sendData)),
+                    WebSocketMessageType.Text,
+                    true,
+                    new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
+
+                //close
+                await socket.CloseAsync(WebSocketCloseStatus.NormalClosure,
+                    string.Empty,
+                    new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
+
+                if (socket.State != WebSocketState.Closed)
+                    throw new WebSocketException();
+                UpdateProgressText(Resource.String.progress_text_wait);
+            } catch (Exception) {
+                ShowError(Resource.String.network_error_title, Resource.String.network_error_text);
+                return;
+            }
+
+            ShowSuccess();
+        }
+
+        private void UpdateProgressText(int? textId = null)
+        {
+            if (Activity != null) {
+                var fragment = Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as ProgressDialogFragment;
+                if (fragment == null) {
+                    fragment = new ProgressDialogFragment();
+                    fragment.Show(Activity.FragmentManager, ProgressDialogFragment.Tag);
+                }
+                if (textId.HasValue)
+                    fragment.TextId = textId.Value;
+            }
+        }
+
+        private void ShowError(int title, int text)
+        {
+            if (Activity != null) {
+                (Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as DialogFragment)?.Dismiss();
+                new TransferErrorDialogFragment(title, text)
+                    .Show(Activity.FragmentManager, MessageDialogFragment.Tag);
+            }
+        }
+
+        private void ShowSuccess()
+        {
+            if (Activity != null) {
+                (Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as DialogFragment)?.Dismiss();
+                new TransferSuccessDialogFragment().Show(Activity.FragmentManager, MessageDialogFragment.Tag);
+            }
         }
     }
 }

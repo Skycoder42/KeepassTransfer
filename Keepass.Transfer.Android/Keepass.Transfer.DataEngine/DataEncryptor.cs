@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Java.Security;
 using Java.Security.Spec;
 using Javax.Crypto;
@@ -11,9 +13,19 @@ namespace Keepass.Transfer.DataEngine
     {
         public static void EncryptData(IList<DataEntry> transferData, string publicKey)
         {
-            var key = DataEncryptor.ReadKey(publicKey);
+            var key = ReadKey(publicKey);
             foreach (var dataEntry in transferData)
-                dataEntry.Value = Convert.ToBase64String(DataEncryptor.Encrypt(Encoding.UTF8.GetBytes(dataEntry.Value), key));
+                dataEntry.Value = Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(dataEntry.Value), key));
+        }
+
+        public static async Task EncryptDataAsync(IList<DataEntry> transferData, string publicKey)
+        {
+            var key = await Task.Run(() => ReadKey(publicKey));//TODO configureAwait
+            await Task.WhenAll(transferData
+                .Select(dataEntry => Task.Run(() => {
+                    dataEntry.Value = Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(dataEntry.Value), key));
+                }))
+                .ToArray());
         }
 
         private static IPublicKey ReadKey(string key)

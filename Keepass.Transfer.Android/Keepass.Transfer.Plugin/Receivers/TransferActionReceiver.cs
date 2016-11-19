@@ -19,7 +19,7 @@ namespace Keepass.Transfer.Plugin.Receivers
 		{
 			try
 			{
-				oe.AddEntryAction(this.GetName(oe), Resource.Drawable.launcher_ic, null);
+				oe.AddEntryAction(GetName(oe), Resource.Drawable.launcher_ic, null);
 			}
 			catch (PluginAccessException e)
 			{
@@ -43,7 +43,7 @@ namespace Keepass.Transfer.Plugin.Receivers
 			{
 				eom.AddEntryFieldAction("keepass.transfer.plugin",
 					eom.ModifiedFieldId,
-					this.GetName(eom),
+                    GetName(eom),
 					Resource.Drawable.launcher_ic,
 					null);
 			}

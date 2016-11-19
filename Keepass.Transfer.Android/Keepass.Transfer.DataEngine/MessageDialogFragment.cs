@@ -22,7 +22,7 @@ namespace Keepass.Transfer.DataEngine
 
         protected MessageDialogFragment()
         {
-            this.Cancelable = false;
+            Cancelable = false;
         }
 
         protected MessageDialogFragment(int title, int text) : this()
@@ -30,19 +30,19 @@ namespace Keepass.Transfer.DataEngine
             var args = new Bundle();
             args.PutInt(DialogTitle, title);
             args.PutInt(DialogText, text);
-            this.Arguments = args;
+            Arguments = args;
         }
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
-            int title = this.Arguments.GetInt(DialogTitle);
-            int text = this.Arguments.GetInt(DialogText);
+            int title = Arguments.GetInt(DialogTitle);
+            int text = Arguments.GetInt(DialogText);
 
-            var dialog = new AlertDialog.Builder(this.Activity)
+            var dialog = new AlertDialog.Builder(Activity)
                 .SetTitle(title)
                 .SetMessage(text)
                 .SetCancelable(false)
-                .SetPositiveButton(Android.Resource.String.Ok, this.DialogReadyHandler)
+                .SetPositiveButton(Android.Resource.String.Ok, DialogReadyHandler)
                 .Create();
             dialog.SetCanceledOnTouchOutside(false);
             return dialog;

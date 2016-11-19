@@ -9,7 +9,7 @@ namespace Keepass.Transfer.DataEngine
     {
         private const string TransferDataKey = "TRANSFER_DATA";
 
-        private string _transferData;
+        private IList<DataEntry> _transferData;
 
         public Uri BackendUri
         {
@@ -19,33 +19,43 @@ namespace Keepass.Transfer.DataEngine
 
         public DataControllerActivity()
         {
-            this.ScanResultReady += ScanResultDone;
+            ScanResultReady += ScanResultDone;
         }
 
         public bool StartDataTransfer(IList<DataEntry> transferFields)
         {
-            this._transferData = JsonConvert.SerializeObject(transferFields);
-            return this.StartQrScan();
+            _transferData = transferFields;
+            return StartQrScan();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            this._transferData = savedInstanceState?.GetString(DataControllerActivity.TransferDataKey);
+            var serData = savedInstanceState?.GetString(DataControllerActivity.TransferDataKey);
+            if (!string.IsNullOrEmpty(serData))
+                _transferData = JsonConvert.DeserializeObject<List<DataEntry>>(serData);
+            TransferEngine.Instance.Activity = this;
+            //TODO "reload dialogs" ???
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
-            outState.PutString(DataControllerActivity.TransferDataKey, this._transferData);
+            outState.PutString(DataControllerActivity.TransferDataKey, JsonConvert.SerializeObject(_transferData));
         }
 
-        private void ScanResultDone(QrData scanData, bool wasAborted)
+        protected override void OnDestroy()
+        {
+            TransferEngine.Instance.Activity = null;
+            base.OnDestroy();
+        }
+
+        private async void ScanResultDone(QrData scanData, bool wasAborted)
         {
             if (scanData != null)//TODO not like this
-                new TransferTask(this).Execute(this._transferData, scanData.Secret, scanData.PublicKey);
+                await TransferEngine.Instance.BeginTransfer(_transferData, scanData.Secret, scanData.PublicKey);
             else if (wasAborted)
-                this.Finish();
+                Finish();
         }
     }
 }
