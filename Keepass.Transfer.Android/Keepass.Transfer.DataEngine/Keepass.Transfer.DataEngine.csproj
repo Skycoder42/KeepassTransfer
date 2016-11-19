@@ -66,6 +66,10 @@
       <Project>{9427d178-811e-4664-b1f9-c17a47f9d159}</Project>
       <Name>Keepass.Transfer.ZXingIntegration</Name>
     </ProjectReference>
+    <ProjectReference Include="AndroidBindings\Binding_NvWebsocketClient\Keepass.Transfer.NvWebsocketClient.csproj">
+      <Project>{B943D4BE-D371-4E99-ABEA-404BC4FAA5C2}</Project>
+      <Name>Keepass.Transfer.NvWebsocketClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

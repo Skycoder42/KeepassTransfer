@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Android.Content;
 using Android.App;
-
+using Android.Util;
+using Com.Neovisionaries.WS.Client;
 
 namespace Keepass.Transfer.DataEngine
 {
     internal class TransferEngine
     {
+        private const string Tag = "Keepass.Transfer.DataEngine.TransferEngine";
+
         private class TransferMessage
         {
             public string MessageType => "MC";//MobileClient
@@ -43,6 +42,52 @@ namespace Keepass.Transfer.DataEngine
             public override EventHandler<DialogClickEventArgs> DialogReadyHandler => (sender, args) => this.Activity.Finish();
         }
 
+        private class WebSocketListener : WebSocketAdapter
+        {
+            private readonly TransferMessage _message;
+
+            public WebSocketListener(TransferMessage message)
+            {
+                _message = message;
+            }
+
+            public override void OnConnected(WebSocket socket, IDictionary<string, IList<string>> headers)
+            {
+                socket.SendText(JsonConvert.SerializeObject(_message));
+                Instance.UpdateProgressText(Resource.String.progress_text_wait);
+            }
+
+            public override void OnTextMessage(WebSocket socket, string message)
+            {
+                try {
+                    var response = JsonConvert.DeserializeObject<ReplyMessage>(message);
+                    if (response.Successful)
+                        Instance.ShowSuccess();
+                    else
+                        Instance.ShowError(Resource.String.client_error_title, response.Error);
+                } catch (Exception e) {
+                    Log.Error(Tag, e.ToString());
+                    Console.WriteLine(e.ToString());
+                    Instance.ShowError(Resource.String.network_error_title, Resource.String.network_error_text);
+                } finally {
+                    socket.SendClose();
+                }
+            }
+
+            public override void OnDisconnected(WebSocket socket, WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame, bool closedByServer)
+            {
+                if(closedByServer)
+                    Instance.ShowError(Resource.String.network_error_title, Resource.String.network_error_text);
+                Instance._currentSocket = null;//remove myself
+            }
+
+            public override void OnError(WebSocket socket, WebSocketException exception)
+            {
+                Log.Error(Tag, exception.ToString());
+                Instance.ShowError(Resource.String.network_error_title, Resource.String.network_error_text);
+            }
+        }
+
         private static TransferEngine _instance;
         public static TransferEngine Instance
         {
@@ -52,6 +97,8 @@ namespace Keepass.Transfer.DataEngine
                 return _instance;
             }
         }
+
+        private WebSocket _currentSocket;
 
         public Uri BackendUri { get; set; } = new Uri("wss://kpt.skycoder42.de/backend/");
         public Activity Activity { get; set; }
@@ -69,68 +116,23 @@ namespace Keepass.Transfer.DataEngine
 
             //Try to encrypt the data
             try {
-                await DataEncryptor.EncryptDataAsync(message.TransferData, publicKey);
-                UpdateProgressText(Resource.String.progress_text_transfer);
-            } catch (Exception) {
+                await DataEncryptor.EncryptDataAsync(message.TransferData, publicKey);//TODO conf await
+            } catch (Exception e) {
+                Log.Error(Tag, e.ToString());
                 ShowError(Resource.String.invalid_key_title, Resource.String.invalid_key_text);
                 return;
             }
 
-            try {
-                //connect
-                var socket = new ClientWebSocket();
-                await socket.ConnectAsync(BackendUri, 
-                    new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);//wait at most 10 sec
-                if (socket.State != WebSocketState.Open)
-                    throw new WebSocketException();
-
-                await Task.Delay(3000);
-
-                //send
-                var sendData = JsonConvert.SerializeObject(message);
-                await socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(sendData)),
-                    WebSocketMessageType.Text,
-                    true,
-                    new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
-
-                await Task.Delay(3000);
-
-                UpdateProgressText(Resource.String.progress_text_wait);
-                //wait for response
-                var buffer = new byte[1024];
-                var bufferList = new List<byte>();
-                var t = socket.State;
-                do {
-                    var result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), 
-                        new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
-                    bufferList.AddRange(buffer.Take(result.Count));
-                    if(result.EndOfMessage)
-                        break;
-                } while (true);
-                var response = JsonConvert.DeserializeObject<ReplyMessage>(Encoding.UTF8.GetString(bufferList.ToArray()));
-
-                //close
-                await socket.CloseAsync(WebSocketCloseStatus.NormalClosure,
-                    string.Empty,
-                    new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
-
-                if (socket.State != WebSocketState.Closed)
-                    throw new WebSocketException();
-
-                if (response.Successful)
-                    ShowSuccess();
-                else
-                    ShowError(Resource.String.client_error_title, response.Error);
-            } catch (Exception e) {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-                ShowError(Resource.String.network_error_title, Resource.String.network_error_text);
-            }
+            //connect
+            UpdateProgressText(Resource.String.progress_text_transfer);
+            _currentSocket = new WebSocketFactory().CreateSocket(BackendUri.ToString());
+            _currentSocket.AddListener(new WebSocketListener(message));
+            _currentSocket.ConnectAsynchronously();
         }
 
         private void UpdateProgressText(int? textId = null)
         {
-            if (Activity != null) {
+            Activity?.RunOnUiThread(() => {
                 var fragment = Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as ProgressDialogFragment;
                 if (fragment == null) {
                     fragment = new ProgressDialogFragment();
@@ -138,33 +140,33 @@ namespace Keepass.Transfer.DataEngine
                 }
                 if (textId.HasValue)
                     fragment.TextId = textId.Value;
-            }
+            });
         }
 
         private void ShowError(int title, int text)
         {
-            if (Activity != null) {
+            Activity?.RunOnUiThread(() => {
                 (Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as DialogFragment)?.Dismiss();
                 new TransferErrorDialogFragment(title, text)
                     .Show(Activity.FragmentManager, MessageDialogFragment.Tag);
-            }
+            });
         }
 
         private void ShowError(int title, string text)
         {
-            if (Activity != null) {
+            Activity?.RunOnUiThread(() => {
                 (Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as DialogFragment)?.Dismiss();
                 new TransferErrorDialogFragment(title, text)
                     .Show(Activity.FragmentManager, MessageDialogFragment.Tag);
-            }
+            });
         }
 
         private void ShowSuccess()
         {
-            if (Activity != null) {
+            Activity?.RunOnUiThread(() => {
                 (Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as DialogFragment)?.Dismiss();
                 new TransferSuccessDialogFragment().Show(Activity.FragmentManager, MessageDialogFragment.Tag);
-            }
+            });
         }
     }
 }

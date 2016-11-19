@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keepass.Transfer.Plugin", "Keepass.Transfer.Plugin\Keepass.Transfer.Plugin.csproj", "{05614BB6-E207-414E-8BB9-BD5B8AB3D6AA}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keepass.Transfer.DataEngine", "Keepass.Transfer.DataEngine\Keepass.Transfer.DataEngine.csproj", "{7115A7CA-C4F9-4FC0-B780-FCE596199E8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keepass.Transfer.TestApp", "Keepass.Transfer.TestApp\Keepass.Transfer.TestApp.csproj", "{21FE320D-D5A0-4D8A-8968-71C7212CA961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keepass.Transfer.NvWebsocketClient", "Keepass.Transfer.DataEngine\AndroidBindings\Binding_NvWebsocketClient\Keepass.Transfer.NvWebsocketClient.csproj", "{B943D4BE-D371-4E99-ABEA-404BC4FAA5C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{21FE320D-D5A0-4D8A-8968-71C7212CA961}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21FE320D-D5A0-4D8A-8968-71C7212CA961}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21FE320D-D5A0-4D8A-8968-71C7212CA961}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B943D4BE-D371-4E99-ABEA-404BC4FAA5C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B943D4BE-D371-4E99-ABEA-404BC4FAA5C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B943D4BE-D371-4E99-ABEA-404BC4FAA5C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B943D4BE-D371-4E99-ABEA-404BC4FAA5C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
