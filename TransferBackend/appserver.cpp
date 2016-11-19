@@ -49,8 +49,8 @@ ClientHandler *AppServer::findMobileClient(QString secret) const
 
 bool AppServer::start(int port)
 {
-	if(server->listen(QHostAddress::Any, (quint16)port)) {
-		qDebug() << "Listening on port" << server->serverPort();
+	if(server->listen(QHostAddress::LocalHost, (quint16)port)) {
+		qInfo() << "Listening on port" << server->serverPort();
 		return true;
 	} else {
 		qCritical() << "Failed to start server on port" << port;
