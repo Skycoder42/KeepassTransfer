@@ -74,10 +74,6 @@
       <Project>{7115A7CA-C4F9-4FC0-B780-FCE596199E8D}</Project>
       <Name>Keepass.Transfer.DataEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Keepass.Transfer.ZXingIntegration\Keepass.Transfer.ZXingIntegration.csproj">
-      <Project>{9427d178-811e-4664-b1f9-c17a47f9d159}</Project>
-      <Name>Keepass.Transfer.ZXingIntegration</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

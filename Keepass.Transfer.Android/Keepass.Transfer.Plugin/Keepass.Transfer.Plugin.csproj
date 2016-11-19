@@ -91,10 +91,6 @@
       <Project>{119c7aaa-e13d-42cb-a741-6e180c4bff62}</Project>
       <Name>Keepass.Transfer.KeePassPluginSDK</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Keepass.Transfer.ZXingIntegration\Keepass.Transfer.ZXingIntegration.csproj">
-      <Project>{9427d178-811e-4664-b1f9-c17a47f9d159}</Project>
-      <Name>Keepass.Transfer.ZXingIntegration</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
