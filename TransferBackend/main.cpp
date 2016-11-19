@@ -8,9 +8,14 @@
 int main(int argc, char *argv[])
 {
 	QBackgroundProcess::App a(argc, argv);
+	QCoreApplication::setApplicationName(TARGET);
+	QCoreApplication::setApplicationVersion(VERSION);
+	QCoreApplication::setOrganizationName(COMPANY);
+	QCoreApplication::setOrganizationDomain("com.skycoder42");
 	QBackgroundProcess::App::activateTerminalDebugRedirect();
 
 	QCommandLineParser parser;
+	parser.setApplicationDescription(DISPLAY_NAME);
 	parser.addHelpOption();
 	parser.addVersionOption();
 	parser.addPositionalArgument("start|stop", "Starts or stops the application", "[start|stop]");
