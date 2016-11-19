@@ -14,6 +14,8 @@ namespace Keepass.Transfer.DataEngine
 
         private class ScanErrorDialogFragment : DialogFragment
         {
+            public new const string Tag = nameof(ScanErrorDialogFragment);
+
             public override Dialog OnCreateDialog(Bundle savedInstanceState)
             {
                 var qrActivity = (QrParserActivity)Activity;
@@ -61,7 +63,7 @@ namespace Keepass.Transfer.DataEngine
                     }
                     catch (Exception)
                     {
-                        new ScanErrorDialogFragment().Show(FragmentManager, "errorDialog");
+                        new ScanErrorDialogFragment().Show(FragmentManager, ScanErrorDialogFragment.Tag);
                     }
                 }
             }

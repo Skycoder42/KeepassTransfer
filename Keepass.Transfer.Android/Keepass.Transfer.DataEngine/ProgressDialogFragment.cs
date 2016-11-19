@@ -5,8 +5,8 @@ namespace Keepass.Transfer.DataEngine
 {
     internal sealed class ProgressDialogFragment : DialogFragment
     {
-        public new const string Tag = "ProgressDialogFragmentTag";
-        private const string TextKey = "TEXT_ID_KEY";
+        public new const string Tag = nameof(ProgressDialogFragment);
+        private const string TextKeyId = nameof(TextKeyId);
         private int _textId = Resource.String.progress_text_encrypt;
 
         public int TextId
@@ -25,7 +25,7 @@ namespace Keepass.Transfer.DataEngine
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
-            _textId = savedInstanceState?.GetInt(TextKey, _textId) ?? _textId;
+            _textId = savedInstanceState?.GetInt(TextKeyId, _textId) ?? _textId;
             var dialog = new ProgressDialog(Activity);
             dialog.SetTitle(Resource.String.progress_title);
             dialog.SetMessage(GetString(_textId));
@@ -37,7 +37,7 @@ namespace Keepass.Transfer.DataEngine
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
-            outState.PutInt(TextKey, _textId);
+            outState.PutInt(TextKeyId, _textId);
         }
     }
 }

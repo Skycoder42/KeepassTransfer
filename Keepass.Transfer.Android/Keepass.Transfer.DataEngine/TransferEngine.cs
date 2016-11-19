@@ -53,7 +53,7 @@ namespace Keepass.Transfer.DataEngine
             }
         }
 
-        public Uri BackendUri { get; set; }
+        public Uri BackendUri { get; set; } = new Uri("ws://192.168.178.43:11221");//DEBUG, normal: wss://kpt.skycoder42.de/backend/
         public Activity Activity { get; set; }
 
         private TransferEngine() { }
@@ -79,7 +79,7 @@ namespace Keepass.Transfer.DataEngine
             try {
                 //connect
                 var socket = new ClientWebSocket();
-                await socket.ConnectAsync(new Uri("ws://192.168.178.43:11221"), //DEBUG, normal: wss://kpt.skycoder42.de/backend/
+                await socket.ConnectAsync(BackendUri, 
                     new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);//wait at most 10 sec
                 if (socket.State != WebSocketState.Open)
                     throw new WebSocketException();

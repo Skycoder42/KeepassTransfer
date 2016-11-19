@@ -7,10 +7,10 @@ namespace Keepass.Transfer.DataEngine
 {
     public abstract class MessageDialogFragment : DialogFragment
     {
-        public new const string Tag = "ResultDialogFragmentTag";
-        private const string DialogTitle = "DIALOG_TITLE";
-        private const string DialogTextId = "DIALOG_TEXT_ID";
-        private const string DialogTextString = "DIALOG_TEXT_STRING";
+        public new const string Tag = nameof(MessageDialogFragment);
+        private const string DialogTitle = nameof(DialogTitle);
+        private const string DialogTextId = nameof(DialogTextId);
+        private const string DialogTextString = nameof(DialogTextString);
 
         public abstract EventHandler<DialogClickEventArgs> DialogReadyHandler { get; }
 
