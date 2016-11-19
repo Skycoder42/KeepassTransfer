@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -15,16 +16,22 @@ namespace Keepass.Transfer.DataEngine
     {
         private class TransferMessage
         {
-            public readonly string MessageType = "MC";//MobileClient
-            public string Secret;
-            public IList<DataEntry> TransferData;
+            public string MessageType => "MC";//MobileClient
+            public string Secret { get; set; }
+            public IList<DataEntry> TransferData { get; set; }
+        }
+
+        private class ReplyMessage
+        {
+            public bool Successful { get; set; }
+            public string Error { get; set; }
         }
 
         private class TransferErrorDialogFragment : MessageDialogFragment
         {
             public TransferErrorDialogFragment() { }
-
             public TransferErrorDialogFragment(int title, int message) : base(title, message) { }
+            public TransferErrorDialogFragment(int title, string message) : base(title, message) { }
 
             public override EventHandler<DialogClickEventArgs> DialogReadyHandler => (sender, args) => this.Activity.Finish();
         }
@@ -84,6 +91,19 @@ namespace Keepass.Transfer.DataEngine
                     true,
                     new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
 
+                UpdateProgressText(Resource.String.progress_text_wait);
+                //wait for response
+                var buffer = new byte[1024];
+                var bufferList = new List<byte>();
+                do {
+                    var result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), 
+                        new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
+                    bufferList.AddRange(buffer.Take(result.Count));
+                    if(result.EndOfMessage)
+                        break;
+                } while (true);
+                var response = JsonConvert.DeserializeObject<ReplyMessage>(Encoding.UTF8.GetString(bufferList.ToArray()));
+
                 //close
                 await socket.CloseAsync(WebSocketCloseStatus.NormalClosure,
                     string.Empty,
@@ -91,13 +111,14 @@ namespace Keepass.Transfer.DataEngine
 
                 if (socket.State != WebSocketState.Closed)
                     throw new WebSocketException();
-                UpdateProgressText(Resource.String.progress_text_wait);
+
+                if (response.Successful)
+                    ShowSuccess();
+                else
+                    ShowError(Resource.String.client_error_title, response.Error);
             } catch (Exception) {
                 ShowError(Resource.String.network_error_title, Resource.String.network_error_text);
-                return;
             }
-
-            ShowSuccess();
         }
 
         private void UpdateProgressText(int? textId = null)
@@ -114,6 +135,15 @@ namespace Keepass.Transfer.DataEngine
         }
 
         private void ShowError(int title, int text)
+        {
+            if (Activity != null) {
+                (Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as DialogFragment)?.Dismiss();
+                new TransferErrorDialogFragment(title, text)
+                    .Show(Activity.FragmentManager, MessageDialogFragment.Tag);
+            }
+        }
+
+        private void ShowError(int title, string text)
         {
             if (Activity != null) {
                 (Activity.FragmentManager.FindFragmentByTag(ProgressDialogFragment.Tag) as DialogFragment)?.Dismiss();

@@ -97,7 +97,6 @@ Core.decryptData = function(message) {
 		}
 		
 		Core.connection.send(JSON.stringify({
-			"Secret": Core.secret,
 			"Successful": true,
 			"Error": null
 		}));
@@ -105,7 +104,6 @@ Core.decryptData = function(message) {
 		GuiController.showEntryPanel();
 	} catch(except) {
 		Core.connection.send(JSON.stringify({
-			"Secret": Core.secret,
 			"Successful": false,
 			"Error": except.message
 		}));

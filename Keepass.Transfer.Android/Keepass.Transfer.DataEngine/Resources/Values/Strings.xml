@@ -10,6 +10,7 @@
   <string name="network_error_text">Unable to transfer data to server! Check your internet connection.</string>
   <string name="invalid_qr_title">Invalid QR-Code</string>
   <string name="invalid_qr_text">The QR-Code you scanned was invalid! Please scan a valid code.</string>
+  <string name="client_error_title">Error from Web-Client</string>
   <string name="completed_title">Completed</string>
   <string name="completed_text">Password entry was successfully transfered!</string>
   <string name="retry">Retry</string>
