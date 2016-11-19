@@ -12,7 +12,7 @@ Core.init = function() {
 	
 	Core.secret = Core.generateRandom(64);
 	
-	Core.connection = new WebSocket("ws://127.0.0.1:11221/backend/");//DEBUG, normally its: ("wss://kpt.skycoder42.de/backend/");
+	Core.connection = new WebSocket("wss://kpt.skycoder42.de/backend/");
 	Core.connection.onopen = Core.sendSecret;
 	Core.connection.onmessage = Core.decryptData;
 	Core.connection.onerror = Core.socketError;	

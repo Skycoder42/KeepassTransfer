@@ -53,7 +53,7 @@ namespace Keepass.Transfer.DataEngine
             }
         }
 
-        public Uri BackendUri { get; set; } = new Uri("ws://192.168.178.43:11221");//DEBUG, normal: wss://kpt.skycoder42.de/backend/
+        public Uri BackendUri { get; set; } = new Uri("wss://kpt.skycoder42.de/backend/");
         public Activity Activity { get; set; }
 
         private TransferEngine() { }
@@ -84,6 +84,8 @@ namespace Keepass.Transfer.DataEngine
                 if (socket.State != WebSocketState.Open)
                     throw new WebSocketException();
 
+                await Task.Delay(3000);
+
                 //send
                 var sendData = JsonConvert.SerializeObject(message);
                 await socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(sendData)),
@@ -91,10 +93,13 @@ namespace Keepass.Transfer.DataEngine
                     true,
                     new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
 
+                await Task.Delay(3000);
+
                 UpdateProgressText(Resource.String.progress_text_wait);
                 //wait for response
                 var buffer = new byte[1024];
                 var bufferList = new List<byte>();
+                var t = socket.State;
                 do {
                     var result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), 
                         new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token);
@@ -116,7 +121,9 @@ namespace Keepass.Transfer.DataEngine
                     ShowSuccess();
                 else
                     ShowError(Resource.String.client_error_title, response.Error);
-            } catch (Exception) {
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
                 ShowError(Resource.String.network_error_title, Resource.String.network_error_text);
             }
         }
