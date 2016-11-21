@@ -4,6 +4,7 @@ using Android.Content;
 using Android.OS;
 using Com.Google.Zxing.Integration.Android;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Keepass.Transfer.DataEngine
 {
@@ -34,9 +35,8 @@ namespace Keepass.Transfer.DataEngine
         protected bool StartQrScan()
         {
             var integrator = new IntentIntegrator(this);
-            integrator.AddExtra("SCAN_MODE", "QR_CODE_MODE");
             integrator.AddExtra("SAVE_HISTORY", false);
-            var dialog = integrator.InitiateScan();
+            var dialog = integrator.InitiateScan(IntentIntegrator.QrCodeTypes.Cast<string>().ToList());
             if(dialog != null)
                 dialog.DismissEvent += ZXingDialogDismissed;
             return dialog == null;
