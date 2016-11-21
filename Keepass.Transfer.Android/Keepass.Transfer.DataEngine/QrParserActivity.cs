@@ -13,20 +13,28 @@ namespace Keepass.Transfer.DataEngine
         internal delegate void ScanResultHandler(QrData scanData, bool wasAborted);
         internal event ScanResultHandler ScanResultReady = delegate {};
 
-        private class ScanErrorDialogFragment : DialogFragment
+        private sealed class ScanErrorDialogFragment : DialogFragment
         {
             public new const string Tag = nameof(ScanErrorDialogFragment);
+
+            public ScanErrorDialogFragment()
+            {
+                Cancelable = false;
+            }
 
             public override Dialog OnCreateDialog(Bundle savedInstanceState)
             {
                 var qrActivity = (QrParserActivity)Activity;
 
-                return new AlertDialog.Builder(qrActivity)
+                var dialog = new AlertDialog.Builder(qrActivity)
                     .SetTitle(Resource.String.invalid_qr_title)
                     .SetMessage(Resource.String.invalid_qr_text)
                     .SetPositiveButton(Resource.String.retry, (sender, args) => qrActivity.StartQrScan())
                     .SetNegativeButton(Android.Resource.String.Cancel, (sender, args) => qrActivity.ScanResultReady(null, true))
+                    .SetCancelable(false)
                     .Create();
+                dialog.SetCanceledOnTouchOutside(false);
+                return dialog;
             }
         }
 
