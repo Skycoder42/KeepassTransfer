@@ -7,9 +7,9 @@ namespace Keepass.Transfer.Plugin.Receivers
 {
     [BroadcastReceiver(Enabled = true, Exported = true)]
     [IntentFilter(new[]{
-        "keepass2android.ACTION_TRIGGER_REQUEST_ACCESS",
-        "keepass2android.ACTION_RECEIVE_ACCESS",
-        "keepass2android.ACTION_REVOKE_ACCESS"
+        Strings.ActionTriggerRequestAccess,
+        Strings.ActionReceiveAccess,
+        Strings.ActionRevokeAccess
     })]
     public class TransferAccessReceiver : PluginAccessBroadcastReceiver
     {

@@ -4,58 +4,58 @@ using Android.App;
 using Android.Content;
 using Keepass2android.Pluginsdk;
 using Newtonsoft.Json;
+using Android.OS;
 
 namespace Keepass.Transfer.Plugin.Receivers
 {
-	[BroadcastReceiver(Enabled = true, Exported = true)]
-	[IntentFilter(new[]{
-		"keepass2android.ACTION_OPEN_ENTRY",
-		"keepass2android.ACTION_ENTRY_OUTPUT_MODIFIED",
-		"keepass2android.ACTION_ENTRY_ACTION_SELECTED"
-	})]
-	public class TransferActionReceiver : PluginActionBroadcastReceiver
-	{
-		protected override void OpenEntry(OpenEntryAction oe)
-		{
-			try
-			{
-				oe.AddEntryAction(GetName(oe), Resource.Drawable.launcher_ic, null);
-			}
-			catch (PluginAccessException e)
-			{
-				e.PrintStackTrace();
-			}
-		}
+    [BroadcastReceiver(Enabled = true, Exported = true)]
+    [IntentFilter(new[]{
+        Strings.ActionOpenEntry,
+        Strings.ActionEntryActionSelected,
+        Strings.ActionEditPluginSettings//TODO open in main activity
+    })]
+    public class TransferActionReceiver : PluginActionBroadcastReceiver
+    {
+        private Intent _currentIntent;
+
+        protected override void OpenEntry(OpenEntryAction openAction)
+        {
+            try
+            {
+                openAction.AddEntryAction(openAction.Context.GetString(Resource.String.action_entry),
+                    Resource.Drawable.context_ic,
+                    new Bundle());
+            }
+            catch (PluginAccessException e)
+            {
+                e.PrintStackTrace();
+            }
+        }
 
 
-		protected override void ActionSelected(ActionSelectedAction actionSelected)
-		{
-			var intent = new Intent(actionSelected.Context, typeof(ManageTransferActivity));
-			intent.PutExtra(ManageTransferActivity.DataEntriesExtra, JsonConvert.SerializeObject(new Dictionary<string, string>(actionSelected.EntryFields)));
-			intent.PutStringArrayListExtra(ManageTransferActivity.GuardedEntriesExtra, actionSelected.GetProtectedFieldsList()?.ToList() ?? new List<string>());
-			intent.SetFlags(ActivityFlags.NewTask);
-			actionSelected.Context.StartActivity(intent);
-	    }
+        protected override void ActionSelected(ActionSelectedAction actionSelected)
+        {
+            var intent = new Intent(actionSelected.Context, typeof(ManageTransferActivity));
 
-		protected override void EntryOutputModified(EntryOutputModifiedAction eom)
-		{
-			try
-			{
-				eom.AddEntryFieldAction("keepass.transfer.plugin",
-					eom.ModifiedFieldId,
-                    GetName(eom),
-					Resource.Drawable.launcher_ic,
-					null);
-			}
-			catch (PluginAccessException e)
-			{
-				e.PrintStackTrace();
-			}
-		}
+            intent.PutExtra(ManageTransferActivity.DataEntriesExtra,
+                JsonConvert.SerializeObject(new Dictionary<string, string>(actionSelected.EntryFields)));
 
-		private string GetName<T>(T action) where T : PluginEntryActionBase
-		{
-			return action.Context.GetString(Resource.String.action_entry);
-		}
-	}
+            string[] protFields = actionSelected.GetProtectedFieldsList();
+            if (protFields == null) {//in case he fixed it --> only if not successful
+                var extra = _currentIntent.GetStringExtra(Strings.ExtraProtectedFieldsList);
+                protFields = JsonConvert.DeserializeObject<string[]>(extra);
+            }
+            intent.PutStringArrayListExtra(ManageTransferActivity.GuardedEntriesExtra, protFields);
+
+            intent.SetFlags(ActivityFlags.NewTask);
+            actionSelected.Context.StartActivity(intent);
+        }
+
+        public override void OnReceive(Context context, Intent intent)
+        {
+            _currentIntent = intent;
+            base.OnReceive(context, intent);
+            _currentIntent = null;
+        }
+    }
 }
