@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Android.OS;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace Keepass.Transfer.DataEngine
 {
@@ -22,10 +23,20 @@ namespace Keepass.Transfer.DataEngine
             ScanResultReady += ScanResultDone;
         }
 
-        public bool StartDataTransfer(IList<DataEntry> transferFields)
+        public bool StartDataTransfer(IEnumerable<DataEntry> transferFields)
         {
-            _transferData = transferFields;
-            return StartQrScan();
+            _transferData = transferFields
+                .Select(entry => new DataEntry//clone entries
+                {
+                    Key = entry.Key,
+                    Value = entry.Value,
+                    Guarded = entry.Guarded
+                })
+                .ToList();
+            if (_transferData.Count > 0)
+                return StartQrScan();
+            else
+                return false;
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

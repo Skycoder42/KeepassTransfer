@@ -16,8 +16,8 @@ namespace Keepass.Transfer.Plugin
         Theme = "@android:style/android:Theme.Material.Light.Dialog")]
     public class ManageTransferActivity : DataControllerActivity
     {
-        public const string DataEntriesExtra = "DATA_ENTRIES_EXTRA";
-        public const string GuardedEntriesExtra = "GUARDED_ENTRIES_EXTRA";
+        public const string DataEntriesExtra = nameof(DataEntriesExtra);
+        public const string GuardedEntriesExtra = nameof(GuardedEntriesExtra);
 
         private class InvalidStartDialog : DialogFragment//TODO
         {
@@ -57,9 +57,8 @@ namespace Keepass.Transfer.Plugin
                 Activity.Finish();
             }
         }
-
-        private IDictionary<string, string> _transferEntries;
-        private IList<string> _protectedEntries; 
+        
+        private IList<DataEntry> _transferEntries = new List<DataEntry>();
 
         private ListView _listView;
 
@@ -67,18 +66,24 @@ namespace Keepass.Transfer.Plugin
         {
             base.OnCreate(savedInstanceState);
 
-            _transferEntries = JsonConvert.DeserializeObject<Dictionary<string, string>>(Intent?.GetStringExtra(DataEntriesExtra) ?? 
-                                                                                              savedInstanceState?.GetString(DataEntriesExtra) ?? 
-                                                                                              "{}");
-            _protectedEntries = Intent?.GetStringArrayListExtra(GuardedEntriesExtra) ??
-                                     savedInstanceState?.GetStringArrayList(GuardedEntriesExtra) ??
-                                     new List<string>();
+            if(Intent?.HasExtra(DataEntriesExtra) ?? false) {
+                var protectedFields = Intent.GetStringArrayListExtra(GuardedEntriesExtra);
+                _transferEntries = JsonConvert
+                    .DeserializeObject<Dictionary<string, string>>(Intent.GetStringExtra(DataEntriesExtra))
+                    .Select(pair => new DataEntry {
+                        Key = pair.Key,
+                        Value = pair.Value,
+                        Guarded = protectedFields.Contains(pair.Key)
+                    })
+                    .ToList();
+            } else if (savedInstanceState?.ContainsKey(DataEntriesExtra) ?? false)
+                _transferEntries = JsonConvert.DeserializeObject<List<DataEntry>>(savedInstanceState.GetString(DataEntriesExtra));
 
             SetContentView(Resource.Layout.ManageTransferActivity);
 
             _listView = FindViewById<ListView>(Resource.Id.entriesListView);
             _listView.ChoiceMode = ChoiceMode.Multiple;
-            _listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItemMultipleChoice, _transferEntries.Keys.ToList());
+            _listView.Adapter = new ArrayAdapter<DataEntry>(this, Android.Resource.Layout.SimpleListItemMultipleChoice, _transferEntries.ToList());
 
             FindViewById<Button>(Resource.Id.transferButton).Click += TransferButtonClicked;
 
@@ -90,32 +95,11 @@ namespace Keepass.Transfer.Plugin
         {
             base.OnSaveInstanceState(outState);
             outState.PutString(DataEntriesExtra, JsonConvert.SerializeObject(_transferEntries));
-            outState.PutStringArrayList(GuardedEntriesExtra, _protectedEntries);
         }
 
         private void TransferButtonClicked(object sender, EventArgs e)
         {
-            var transferData = new List<DataEntry>();
-
-            var positions = _listView.CheckedItemPositions;
-            var keys = _transferEntries.Keys.ToList();
-            for (int i = 0; i < positions.Size(); i++)
-            {
-                if (positions.ValueAt(i))
-                {
-                    var adapter = (ArrayAdapter<string>)_listView.Adapter;
-                    var key = adapter.GetItem(positions.KeyAt(i));
-                    transferData.Add(new DataEntry
-                    {
-                        Key = key,
-                        Guarded = _protectedEntries.Contains(key),
-                        Value = _transferEntries[key]
-                    });
-                }
-            }
-
-            if (transferData.Count > 0)
-                StartDataTransfer(transferData);
+            StartDataTransfer(_transferEntries.Where((entry, index) => _listView.CheckedItemPositions.Get(index)));
         }
     }
 }
