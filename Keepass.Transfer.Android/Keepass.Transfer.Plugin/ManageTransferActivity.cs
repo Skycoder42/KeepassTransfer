@@ -14,7 +14,7 @@ namespace Keepass.Transfer.Plugin
     [Activity(Label = "@string/application_name",
         Icon = "@drawable/launcher_ic",
         MainLauncher = true,
-        Theme = "@android:style/android:Theme.Material.Light.Dialog")]
+        Theme = "@style/Kpt.Theme")]
     public class ManageTransferActivity : DataControllerActivity
     {
         public const string DataEntriesExtra = nameof(DataEntriesExtra);

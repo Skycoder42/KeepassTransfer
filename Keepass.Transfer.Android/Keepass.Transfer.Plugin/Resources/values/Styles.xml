@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<resources>
+  <!-- inherit from the material theme -->
+  <style name="Kpt.Theme" parent="android:Theme.Material.Light.Dialog">
+    <!-- Main theme colors -->
+    <!--   your app branding color for the app bar -->
+    <item name="android:colorPrimary">#8bc34a</item>
+    <!--   darker variant for the status bar and contextual app bars -->
+    <item name="android:colorPrimaryDark">#548a2e</item>
+    <!--   theme UI controls like checkboxes and text fields -->
+    <item name="android:colorAccent">#0277bd</item>
+  </style>
+</resources>
