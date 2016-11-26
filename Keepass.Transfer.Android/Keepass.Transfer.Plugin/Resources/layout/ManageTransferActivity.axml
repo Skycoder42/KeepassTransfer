@@ -8,9 +8,37 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/entriesListView" />
+  <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/linearLayout4"
+      style="?android:attr/buttonBarStyle"
+      android:measureWithLargestChild="true"
+      android:paddingTop="0dip"
+      android:padding="5dp">
     <Button
-        android:id="@+id/transferButton"
-        android:layout_width="match_parent"
+        android:text="@string/settings_button_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/transfer_button_text" />
+        android:id="@+id/settingsButton"
+        style="?android:attr/buttonBarNeutralButtonStyle" />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/space1"
+        android:layout_weight="1" />
+    <Button
+        android:text="@android:string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelButton"
+        style="?android:attr/buttonBarNegativeButtonStyle" />
+    <Button
+        android:text="@string/transfer_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/transferButton"
+        style="?android:attr/buttonBarPositiveButtonStyle" />
+  </LinearLayout>
 </LinearLayout>

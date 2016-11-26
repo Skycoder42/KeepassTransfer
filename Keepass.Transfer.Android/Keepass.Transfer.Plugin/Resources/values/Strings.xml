@@ -8,5 +8,7 @@
   <string name="no_entry_title">No Entries</string>
   <string name="no_entry_text">Please use KeePass to select an entry!</string>
   <string name="no_entry_start_button">Run Keepass</string>
-  <string name="transfer_button_text">Transfer Selected Entries</string>
+  <string name="settings_button_text">Settings</string>
+  <string name="transfer_button_text">Transfer</string>
+  <string name="transfer_selection_title">Select Entries:&#160;</string>
 </resources>
