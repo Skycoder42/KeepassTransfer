@@ -75,15 +75,10 @@ namespace Keepass.Transfer.Plugin
             base.OnCreate(savedInstanceState);
 
             //load settings
-            var preferences = PreferenceManager.GetDefaultSharedPreferences(this);
-            var uriString = preferences.GetString(BackendUriSettingsKey, null);
-            if (!string.IsNullOrEmpty(uriString))
-                BackendUri = new Uri(uriString);
-            EncryptUnGuarded = preferences.GetBoolean(EncryptUnGuardedSettingsKey, EncryptUnGuarded);
-            _defaultEntries = preferences.GetStringSet(DefaultEntriesSettingsKey, _defaultEntries);
+            ReloadSettings();
 
             //load data
-            if(Intent?.HasExtra(DataEntriesExtra) ?? false) {
+            if (Intent?.HasExtra(DataEntriesExtra) ?? false) {
                 var protectedFields = Intent.GetStringArrayListExtra(GuardedEntriesExtra);
 
                 _transferEntries = JsonConvert
@@ -111,13 +106,13 @@ namespace Keepass.Transfer.Plugin
 
             _listView = FindViewById<ListView>(Resource.Id.entriesListView);
             _listView.ChoiceMode = ChoiceMode.Multiple;
-            _listView.Adapter = new ArrayAdapter<DataEntry>(this, 
+            _listView.Adapter = new ArrayAdapter<DataEntry>(this,
                 Android.Resource.Layout.SimpleListItemMultipleChoice,
                 _transferEntries);
 
             FindViewById<Button>(Resource.Id.transferButton).Click += TransferButtonClicked;
             FindViewById<Button>(Resource.Id.cancelButton).Click += (sender, args) => Finish();
-            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivity(typeof(SettingsActivity));//TODO reload after!
+            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivityForResult(typeof(SettingsActivity), SettingsActivity.StartWithResult);//TODO reload after!
 
             //do default selection
             foreach (var index in _transferEntries.Select((entry, i) => new { entry, i })
@@ -135,6 +130,24 @@ namespace Keepass.Transfer.Plugin
             base.OnSaveInstanceState(outState);
             outState.PutString(DataEntriesExtra, JsonConvert.SerializeObject(_transferEntries));
             outState.PutString(TitleEntryExtra, _titleEntry);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            if (requestCode == SettingsActivity.StartWithResult)
+                ReloadSettings();
+            else
+                base.OnActivityResult(requestCode, resultCode, data);
+        }
+
+        private void ReloadSettings()
+        {
+            var preferences = PreferenceManager.GetDefaultSharedPreferences(this);
+            var uriString = preferences.GetString(BackendUriSettingsKey, null);
+            if (!string.IsNullOrEmpty(uriString))
+                BackendUri = new Uri(uriString);
+            EncryptUnGuarded = preferences.GetBoolean(EncryptUnGuardedSettingsKey, EncryptUnGuarded);
+            _defaultEntries = preferences.GetStringSet(DefaultEntriesSettingsKey, _defaultEntries);
         }
 
         private void TransferButtonClicked(object sender, EventArgs e)

@@ -17,6 +17,6 @@
   <Preference 
       android:title="@string/settings_keepass_title"
       android:summary="@string/settings_keepass_summary" >
-    <intent android:action="keepass2android.ACTION_EDIT_PLUGIN_SETTINGS" /><!-- TODO make it work -->
+    <intent android:action="keepass2android.ACTION_EDIT_PLUGIN_SETTINGS" />
   </Preference>
 </PreferenceScreen>

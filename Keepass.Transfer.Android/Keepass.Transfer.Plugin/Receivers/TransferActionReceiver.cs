@@ -11,8 +11,7 @@ namespace Keepass.Transfer.Plugin.Receivers
     [BroadcastReceiver(Enabled = true, Exported = true)]
     [IntentFilter(new[]{
         Strings.ActionOpenEntry,
-        Strings.ActionEntryActionSelected,
-        Strings.ActionEditPluginSettings//TODO open in main activity
+        Strings.ActionEntryActionSelected
     })]
     public class TransferActionReceiver : PluginActionBroadcastReceiver
     {

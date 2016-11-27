@@ -9,6 +9,8 @@ namespace Keepass.Transfer.Plugin
         MainLauncher = true)]
     public class SettingsActivity : PreferenceActivity
     {
+        public const int StartWithResult = 42;
+
         public class MainPreferenceFragment : PreferenceFragment
         {
             public override void OnCreate(Bundle savedInstanceState)
