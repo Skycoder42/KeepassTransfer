@@ -101,6 +101,7 @@ namespace Keepass.Transfer.DataEngine
         private WebSocket _currentSocket;
 
         public Uri BackendUri { get; set; } = new Uri("wss://kpt.skycoder42.de/backend/");
+        public bool EncryptUnGuarded { get; set; } = false;
         public Activity Activity { get; set; }
 
         private TransferEngine() { }
@@ -116,7 +117,7 @@ namespace Keepass.Transfer.DataEngine
 
             //Try to encrypt the data
             try {
-                await DataEncryptor.EncryptDataAsync(message.TransferData, publicKey);//TODO conf await
+                await DataEncryptor.EncryptDataAsync(message.TransferData, publicKey, EncryptUnGuarded);
             } catch (Exception e) {
                 Log.Error(Tag, e.ToString());
                 ShowError(Resource.String.invalid_key_title, Resource.String.invalid_key_text);

@@ -11,19 +11,25 @@ namespace Keepass.Transfer.DataEngine
 {
     internal static class DataEncryptor
     {
-        public static void EncryptData(IList<DataEntry> transferData, string publicKey)
+        public static void EncryptData(IList<DataEntry> transferData, string publicKey, bool encryptUnGuarded)
         {
             var key = ReadKey(publicKey);
-            foreach (var dataEntry in transferData)
-                dataEntry.Value = Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(dataEntry.Value), key));
+            foreach (var dataEntry in transferData) {
+                if (encryptUnGuarded || dataEntry.Guarded) {
+                    dataEntry.Value = Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(dataEntry.Value), key));
+                    dataEntry.Encrypted = true;
+                }
+            }
         }
 
-        public static async Task EncryptDataAsync(IList<DataEntry> transferData, string publicKey)
+        public static async Task EncryptDataAsync(IList<DataEntry> transferData, string publicKey, bool encryptUnGuarded)
         {
-            var key = await Task.Run(() => ReadKey(publicKey));//TODO configureAwait
+            var key = await Task.Run(() => ReadKey(publicKey));
             await Task.WhenAll(transferData
+                .Where(dataEntry => encryptUnGuarded || dataEntry.Guarded)
                 .Select(dataEntry => Task.Run(() => {
                     dataEntry.Value = Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(dataEntry.Value), key));
+                    dataEntry.Encrypted = true;
                 }))
                 .ToArray());
         }

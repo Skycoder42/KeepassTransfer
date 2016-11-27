@@ -18,6 +18,12 @@ namespace Keepass.Transfer.DataEngine
             set { TransferEngine.Instance.BackendUri = value; }
         }
 
+        public bool EncryptUnGuarded
+        {
+            get { return TransferEngine.Instance.EncryptUnGuarded; }
+            set { TransferEngine.Instance.EncryptUnGuarded = value; }
+        }
+
         public DataControllerActivity()
         {
             ScanResultReady += ScanResultDone;

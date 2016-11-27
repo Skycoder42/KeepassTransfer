@@ -86,12 +86,15 @@ Core.decryptData = function(message) {
 		var data = JSON.parse(message.data);	
 		for(var i = 0; i < data.length; i++) {
 			var cData = data[i];
-			var crypt = new JSEncrypt();		
-			crypt.setPrivateKey(Core.privateKey);
 			
-			var decr = crypt.decrypt(cData.Value);
-			if(decr != null)
-				GuiController.addEntry(cData.Key, decr, cData.Guarded, Core.generateRandom(10));
+			if(cData.Encrypted) {
+				var crypt = new JSEncrypt();		
+				crypt.setPrivateKey(Core.privateKey);			
+				cData.Value = crypt.decrypt(cData.Value);
+			}
+			
+			if(cData.Value != null)
+				GuiController.addEntry(cData.Key, cData.Value, cData.Guarded, Core.generateRandom(10));
 			else
 				throw new Error("Failed to decrypt data with the given key!");
 		}
