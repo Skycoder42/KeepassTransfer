@@ -1,6 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.OS;
 using Android.Preferences;
+using Keepass2android.Pluginsdk;
 
 namespace Keepass.Transfer.Plugin
 {
@@ -17,6 +20,19 @@ namespace Keepass.Transfer.Plugin
             {
                 base.OnCreate(savedInstanceState);
                 AddPreferencesFromResource(Resource.Xml.preferences);
+
+                var listPref = (MultiSelectListPreference)PreferenceScreen.FindPreference("DefaultEntriesSettingsKey");
+                var prefs = PreferenceManager.GetDefaultSharedPreferences(this.Activity);
+                
+                var items = prefs.GetStringSet(ManageTransferActivity.AllEntryKeysSettingsKey, new[]  {
+                    KeepassDefs.UserNameField,
+                    KeepassDefs.PasswordField,
+                    KeepassDefs.UrlField,
+                    KeepassDefs.NotesField
+                }).ToArray();
+                listPref.SetEntries(items);
+                listPref.SetEntryValues(items);
+                listPref.SetDefaultValue(new[] { KeepassDefs.UserNameField, KeepassDefs.PasswordField, KeepassDefs.UrlField });
             }
         }
 

@@ -11,7 +11,7 @@
       android:summary="@string/settings_encrypt_summary"
       android:defaultValue="false" />
   <MultiSelectListPreference
-      android:key="pref_syncConnectionType"
+      android:key="DefaultEntriesSettingsKey"
       android:title="@string/settings_defaults_title"
       android:summary="@string/settings_defaults_summary"/>
   <Preference 

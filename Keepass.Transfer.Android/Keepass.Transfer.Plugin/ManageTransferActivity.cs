@@ -24,6 +24,7 @@ namespace Keepass.Transfer.Plugin
         public const string BackendUriSettingsKey = nameof(BackendUriSettingsKey);
         public const string EncryptUnGuardedSettingsKey = nameof(EncryptUnGuardedSettingsKey);
         public const string DefaultEntriesSettingsKey = nameof(DefaultEntriesSettingsKey);
+        public const string AllEntryKeysSettingsKey = nameof(AllEntryKeysSettingsKey);
 
         private class InvalidStartDialog : DialogFragment//TODO
         {
@@ -94,6 +95,16 @@ namespace Keepass.Transfer.Plugin
                     .FirstOrDefault(entry => entry.Key == KeepassDefs.TitleField)
                     ?.Value;
                 _transferEntries = _transferEntries.Where(entry => entry.Key != KeepassDefs.TitleField).ToList();
+
+                //update the total keys list
+                var prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+                var keyList = _transferEntries
+                    .Select(entry => entry.Key)
+                    .Concat(prefs.GetStringSet(AllEntryKeysSettingsKey, new List<string>()));
+                ISet<string> entrySet = new HashSet<string>(keyList);
+                prefs.Edit()
+                    .PutStringSet(AllEntryKeysSettingsKey, entrySet)
+                    .Apply();
             } else if (savedInstanceState?.ContainsKey(DataEntriesExtra) ?? false) {
                 _transferEntries = JsonConvert.DeserializeObject<List<DataEntry>>(savedInstanceState.GetString(DataEntriesExtra));
                 _titleEntry = savedInstanceState.GetString(TitleEntryExtra);
@@ -112,7 +123,7 @@ namespace Keepass.Transfer.Plugin
 
             FindViewById<Button>(Resource.Id.transferButton).Click += TransferButtonClicked;
             FindViewById<Button>(Resource.Id.cancelButton).Click += (sender, args) => Finish();
-            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivityForResult(typeof(SettingsActivity), SettingsActivity.StartWithResult);//TODO reload after!
+            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivityForResult(typeof(SettingsActivity), SettingsActivity.StartWithResult);
 
             //do default selection
             foreach (var index in _transferEntries.Select((entry, i) => new { entry, i })
