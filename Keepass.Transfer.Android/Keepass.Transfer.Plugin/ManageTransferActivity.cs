@@ -14,7 +14,8 @@ namespace Keepass.Transfer.Plugin
 {
     [Activity(Label = "@string/application_name",
         Icon = "@drawable/launcher_ic",
-        Theme = "@style/Kpt.Theme")]
+        MainLauncher = true,
+        Theme = "@style/Kpt.Theme.DialogActivity")]
     public class ManageTransferActivity : DataControllerActivity
     {
         public const string DataEntriesExtra = nameof(DataEntriesExtra);
@@ -26,7 +27,9 @@ namespace Keepass.Transfer.Plugin
         public const string DefaultEntriesSettingsKey = nameof(DefaultEntriesSettingsKey);
         public const string AllEntryKeysSettingsKey = nameof(AllEntryKeysSettingsKey);
 
-        private class InvalidStartDialog : DialogFragment//TODO
+        public const int StartWithResult = 42;
+
+        private class InvalidStartDialog : DialogFragment
         {
             public new const string Tag = "InvalidStartDialog";
 
@@ -123,7 +126,7 @@ namespace Keepass.Transfer.Plugin
 
             FindViewById<Button>(Resource.Id.transferButton).Click += TransferButtonClicked;
             FindViewById<Button>(Resource.Id.cancelButton).Click += (sender, args) => Finish();
-            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivityForResult(typeof(SettingsActivity), SettingsActivity.StartWithResult);
+            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivityForResult(typeof(SettingsActivity), StartWithResult);
 
             //do default selection
             foreach (var index in _transferEntries.Select((entry, i) => new { entry, i })
@@ -145,7 +148,7 @@ namespace Keepass.Transfer.Plugin
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            if (requestCode == SettingsActivity.StartWithResult)
+            if (requestCode == StartWithResult)
                 ReloadSettings();
             else
                 base.OnActivityResult(requestCode, resultCode, data);

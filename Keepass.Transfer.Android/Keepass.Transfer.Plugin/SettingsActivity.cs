@@ -7,12 +7,11 @@ using Keepass2android.Pluginsdk;
 
 namespace Keepass.Transfer.Plugin
 {
-    [Activity(Label = "@string/application_name",
+    [Activity(Label = "@string/settings_name", 
         Icon = "@drawable/launcher_ic",
-        MainLauncher = true)]
+        Theme = "@style/Kpt.Theme")]
     public class SettingsActivity : PreferenceActivity
     {
-        public const int StartWithResult = 42;
 
         public class MainPreferenceFragment : PreferenceFragment
         {
@@ -21,7 +20,7 @@ namespace Keepass.Transfer.Plugin
                 base.OnCreate(savedInstanceState);
                 AddPreferencesFromResource(Resource.Xml.preferences);
 
-                var listPref = (MultiSelectListPreference)PreferenceScreen.FindPreference("DefaultEntriesSettingsKey");
+                var listPref = (MultiSelectListPreference)PreferenceScreen.FindPreference(ManageTransferActivity.DefaultEntriesSettingsKey);
                 var prefs = PreferenceManager.GetDefaultSharedPreferences(this.Activity);
                 
                 var items = prefs.GetStringSet(ManageTransferActivity.AllEntryKeysSettingsKey, new[]  {
