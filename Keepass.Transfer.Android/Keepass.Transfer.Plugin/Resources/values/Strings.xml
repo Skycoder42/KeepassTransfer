@@ -11,4 +11,12 @@
   <string name="settings_button_text">Settings</string>
   <string name="transfer_button_text">Transfer</string>
   <string name="transfer_selection_title">Select Entries:&#160;</string>
+  <string name="settings_uri_title">Backend Uri</string>
+  <string name="settings_uri_summary">The Websocket URI of the server to be used to transfer the data.</string>
+  <string name="settings_encrypt_title">Encrypt unguarded entries</string>
+  <string name="settings_encrypt_summary">By default, only protected fields are encrypted for transfer. Check to encrypt all fields.</string>
+  <string name="settings_defaults_title">Pre-selected Entries</string>
+  <string name="settings_defaults_summary">Select the entry names to be check for transfer by default.</string>
+  <string name="settings_keepass_title">Open Keepass2Android Settings</string>
+  <string name="settings_keepass_summary">Opens the Plugin Settings of Keepass2Android, to enable this plugin.</string>
 </resources>

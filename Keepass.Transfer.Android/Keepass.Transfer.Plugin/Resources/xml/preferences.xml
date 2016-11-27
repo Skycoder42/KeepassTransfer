@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <EditTextPreference
+      android:key="BackendUriSettingsKey"
+      android:title="@string/settings_uri_title"
+      android:summary="@string/settings_uri_summary"
+      android:defaultValue="wss://kpt.skycoder42.de/backend/" />
+  <CheckBoxPreference
+      android:key="EncryptUnGuardedSettingsKey"
+      android:title="@string/settings_encrypt_title"
+      android:summary="@string/settings_encrypt_summary"
+      android:defaultValue="false" />
+  <MultiSelectListPreference
+      android:key="pref_syncConnectionType"
+      android:title="@string/settings_defaults_title"
+      android:summary="@string/settings_defaults_summary"/>
+  <Preference 
+      android:title="@string/settings_keepass_title"
+      android:summary="@string/settings_keepass_summary" >
+    <intent android:action="keepass2android.ACTION_EDIT_PLUGIN_SETTINGS" /><!-- TODO make it work -->
+  </Preference>
+</PreferenceScreen>

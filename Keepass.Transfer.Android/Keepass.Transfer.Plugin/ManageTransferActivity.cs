@@ -4,6 +4,7 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Preferences;
 using Android.Widget;
 using Keepass.Transfer.DataEngine;
 using Keepass2android.Pluginsdk;
@@ -13,7 +14,6 @@ namespace Keepass.Transfer.Plugin
 {
     [Activity(Label = "@string/application_name",
         Icon = "@drawable/launcher_ic",
-        MainLauncher = true,
         Theme = "@style/Kpt.Theme")]
     public class ManageTransferActivity : DataControllerActivity
     {
@@ -22,6 +22,7 @@ namespace Keepass.Transfer.Plugin
         public const string TitleEntryExtra = nameof(TitleEntryExtra);
 
         public const string BackendUriSettingsKey = nameof(BackendUriSettingsKey);
+        public const string EncryptUnGuardedSettingsKey = nameof(EncryptUnGuardedSettingsKey);
         public const string DefaultEntriesSettingsKey = nameof(DefaultEntriesSettingsKey);
 
         private class InvalidStartDialog : DialogFragment//TODO
@@ -74,10 +75,11 @@ namespace Keepass.Transfer.Plugin
             base.OnCreate(savedInstanceState);
 
             //load settings
-            var preferences = GetPreferences(FileCreationMode.Private);
+            var preferences = PreferenceManager.GetDefaultSharedPreferences(this);
             var uriString = preferences.GetString(BackendUriSettingsKey, null);
             if (!string.IsNullOrEmpty(uriString))
                 BackendUri = new Uri(uriString);
+            EncryptUnGuarded = preferences.GetBoolean(EncryptUnGuardedSettingsKey, EncryptUnGuarded);
             _defaultEntries = preferences.GetStringSet(DefaultEntriesSettingsKey, _defaultEntries);
 
             //load data
@@ -115,7 +117,7 @@ namespace Keepass.Transfer.Plugin
 
             FindViewById<Button>(Resource.Id.transferButton).Click += TransferButtonClicked;
             FindViewById<Button>(Resource.Id.cancelButton).Click += (sender, args) => Finish();
-            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => new InvalidStartDialog().Show(FragmentManager, InvalidStartDialog.Tag);
+            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivity(typeof(SettingsActivity));//TODO reload after!
 
             //do default selection
             foreach (var index in _transferEntries.Select((entry, i) => new { entry, i })
