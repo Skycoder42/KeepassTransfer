@@ -2,13 +2,22 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>WebApp</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Keepass Transfer</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <!-- A busy-indicator -->
+    <div class="overlay">
+      <div class="indicator">
+        <img alt="Please wait, key is beeing generated" src="./loader.gif" />
+        <div class="centertext" id="busytext">App loading&#8230;</div>
+      </div>
+    </div>
+  </app-root>
 </body>
 </html>
