@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Usage</h3>
+  </div>
+  <div class="panel-body">
+    <p>The usage is pretty straight-foreward. Open the website, wait for the QR-Code, scan it in the app and wait for the result to be shown.<br/>
+      However, in some cases you have to customize how the QR-Code is generated. For now, there are 3 Parameters that allow you to configure the code:</p>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">keySize</h4>
+        <p class="list-group-item-text">The <code>keySize</code> parameter can be used to change the size of the generateded key. The bigger the <code>keySize</code>, the more secure
+          it is. In addition to that, the maximum size of the data to encrypt increases. However, if you choose a bigger key, the generation will take much longer.<br>
+          The following sizes are supported: <b>[512, 1024, 2048, 4096, 8192]</b>. The default
+          size (if you leave out the parameter) is <u>2048</u>.</p>
+      </li>
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">errorLevel</h4>
+        <p class="list-group-item-text">The <code>errorLevel</code> specifies how much error-correction should be used. The higher the error correction, the more damaged the
+          QR-Code can be, without beeing a problem for readers. More information about the levels can be found at <a target="_blank" href="http://blog.qrstuff.com/2011/12/14/qr-code-error-correction">QRStuff.com &#128471;</a>.<br/>
+          The following levels are supported: <b>[L, M, Q, H]</b>. Typically, a QR-Code on the screen is not damaged. To reduce the complexity of the code, the default error correction
+          level is <u>L</u>.</p>
+      </li>
+      <li class="list-group-item">
+        <h4 class="list-group-item-heading">qrSize</h4>
+        <p class="list-group-item-text">The <code>qrSize</code> parameter allows you to adjust the size of the generated QR-Code. it specifies the height and width in pixels.
+          Depending on the <code>keySize</code> and <code>errorLevel</code>, as well as the screen-size, you may have to adjust this parameter to get a readable QR-Code.<br/>
+          All sizes from <b>256 to 960</b> are supported. If you enter a lower or higher value, the closest possible one will be choosen. The default size is <u>512</u> pixels.</p>
+      </li>
+    </ul>
+    <p>How to apply these parameters? Just add them as query-parameters to the url! The link below provides a simple example:<br/>
+      <a href="./index.html?keySize=1024&errorLevel=H&qrSize=420">.../index.html<u>?<b>keySize=1024</b>&amp;<b>errorLevel=H</b>&amp;<b>qrSize=420</b></u></a></p>
+  </div>
+</div>

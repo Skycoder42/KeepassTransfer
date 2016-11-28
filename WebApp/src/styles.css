@@ -34,3 +34,10 @@
 .centertext {
   text-align: center;
 }
+
+/*All bootstrap panels*/
+.panel {
+  width: 1000px;
+  max-width: calc(100% - 24px);
+  margin: 12px auto;
+}
