@@ -46,7 +46,7 @@ namespace Keepass.Transfer.Plugin.Receivers
             }
             intent.PutStringArrayListExtra(ManageTransferActivity.GuardedEntriesExtra, protFields);
 
-            intent.SetFlags(ActivityFlags.NewTask);
+            intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
             actionSelected.Context.StartActivity(intent);
         }
 

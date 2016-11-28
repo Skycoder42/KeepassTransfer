@@ -14,7 +14,6 @@ namespace Keepass.Transfer.Plugin
 {
     [Activity(Label = "@string/application_name",
         Icon = "@drawable/launcher_ic",
-        MainLauncher = true,
         Theme = "@style/Kpt.Theme.DialogActivity")]
     public class ManageTransferActivity : DataControllerActivity
     {
@@ -28,45 +27,6 @@ namespace Keepass.Transfer.Plugin
         public const string AllEntryKeysSettingsKey = nameof(AllEntryKeysSettingsKey);
 
         public const int StartWithResult = 42;
-
-        private class InvalidStartDialog : DialogFragment
-        {
-            public new const string Tag = "InvalidStartDialog";
-
-            public InvalidStartDialog()
-            {
-                Cancelable = false;
-            }
-
-            public override Dialog OnCreateDialog(Bundle savedInstanceState)
-            {
-                var dialog = new AlertDialog.Builder(Activity)
-                    .SetTitle(Resource.String.no_entry_title)
-                    .SetMessage(Resource.String.no_entry_text)
-                    .SetCancelable(false)
-                    .SetPositiveButton(Resource.String.no_entry_start_button, RunKeePassHandler)
-                    .SetNegativeButton(Android.Resource.String.Cancel, (o, args) => Activity.Finish())
-                    .Create();
-                dialog.SetCanceledOnTouchOutside(false);
-                return dialog;
-            }
-
-            private void RunKeePassHandler(object o, EventArgs args)
-            {
-                var packageManager = Activity.PackageManager;
-                try
-                {
-                    var intent = packageManager.GetLaunchIntentForPackage("keepass2android.keepass2android");
-                    if(intent != null)
-                    {
-                        intent.AddCategory(Intent.CategoryLauncher);
-                        Activity.StartActivity(intent);
-                    }
-                }
-                catch(Exception) { }
-                Activity.Finish();
-            }
-        }
 
         private ICollection<string> _defaultEntries = new[] {KeepassDefs.UserNameField, KeepassDefs.PasswordField, KeepassDefs.UrlField};
         private IList<DataEntry> _transferEntries = new List<DataEntry>();
@@ -124,9 +84,9 @@ namespace Keepass.Transfer.Plugin
                 Android.Resource.Layout.SimpleListItemMultipleChoice,
                 _transferEntries);
 
-            FindViewById<Button>(Resource.Id.transferButton).Click += TransferButtonClicked;
+            FindViewById<Button>(Resource.Id.transferButton).Click += StartTransfer;
             FindViewById<Button>(Resource.Id.cancelButton).Click += (sender, args) => Finish();
-            FindViewById<Button>(Resource.Id.settingsButton).Click += (sender, args) => StartActivityForResult(typeof(SettingsActivity), StartWithResult);
+            FindViewById<Button>(Resource.Id.settingsButton).Click += OpenSettings;
 
             //do default selection
             foreach (var index in _transferEntries.Select((entry, i) => new { entry, i })
@@ -136,7 +96,7 @@ namespace Keepass.Transfer.Plugin
             }
 
             if (_transferEntries.Count == 0)
-                new InvalidStartDialog().Show(FragmentManager, InvalidStartDialog.Tag);
+                Finish();
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
@@ -164,13 +124,20 @@ namespace Keepass.Transfer.Plugin
             _defaultEntries = preferences.GetStringSet(DefaultEntriesSettingsKey, _defaultEntries);
         }
 
-        private void TransferButtonClicked(object sender, EventArgs e)
+        private void StartTransfer(object sender, EventArgs e)
         {
             var entries = _transferEntries
                 .Where((entry, index) => _listView.CheckedItemPositions.Get(index))
                 .Prepend(new DataEntry {Key = KeepassDefs.TitleField, Value = _titleEntry})
                 .ToList();
             StartDataTransfer(entries);
+        }
+
+        private void OpenSettings(object sender, EventArgs args)
+        {
+            var intent = new Intent(this, typeof(SettingsActivity));
+            intent.PutExtra(SettingsActivity.ShowRunKeepassAction, false);
+            StartActivityForResult(intent, StartWithResult);
         }
     }
 }
