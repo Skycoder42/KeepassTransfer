@@ -1,18 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  overflow: visible;
+}
 .backgroundBase {
   background-color: #C1E1A6;
-}
-.fullScreen {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
 }
 
 /*App loading indicator*/
 .overlay {
   z-index: 999;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
 .indicator {
