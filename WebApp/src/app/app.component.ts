@@ -7,8 +7,10 @@ import {QrConfig} from "./qr-config";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public config: QrConfig = null;
 
   onConfigReady(config: QrConfig){
     console.log(config);
+    this.config = config;
   }
 }

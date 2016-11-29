@@ -17,11 +17,9 @@ export class HelpComponent {
     {key:"Level H (High)",value:2}
   ];
 
-  public completed: boolean = false;
   public currentConfig: QrConfig = new QrConfig();
 
   onSubmit() {
-    this.completed = true;
     this.onConfigReady.emit(this.currentConfig);
   }
 }
