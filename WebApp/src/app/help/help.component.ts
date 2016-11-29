@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { QrConfig } from "../qr-config";
+import {NgControl} from "@angular/forms";
+import {NumberValidator} from "./number-validator";
 
 @Component({
   selector: 'app-help',
@@ -15,9 +17,13 @@ export class HelpComponent {
     {key:"Level H (High)",value:2}
   ];
 
-  public currentConfig = new QrConfig();
+  public completed: boolean = false;
+  public currentConfig: QrConfig = new QrConfig();
 
   onSubmit() {
+    console.log(this.currentConfig.keySize);
+    console.log(this.currentConfig.errorLevel);
     console.log(this.currentConfig.qrSize);
+    this.completed = true;
   }
 }
