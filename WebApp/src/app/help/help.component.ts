@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import { QrConfig } from "../qr-config";
-import {NgControl} from "@angular/forms";
-import {NumberValidator} from "./number-validator";
 
 @Component({
   selector: 'app-help',
@@ -9,6 +7,8 @@ import {NumberValidator} from "./number-validator";
   styleUrls: ['./help.component.css']
 })
 export class HelpComponent {
+  @Output() onConfigReady = new EventEmitter<QrConfig>();
+
   public keySizes = [512, 1024, 2048, 4096, 8192];
   public errorLevels = [
     {key:"Level L (Low)",value:1},
@@ -21,9 +21,7 @@ export class HelpComponent {
   public currentConfig: QrConfig = new QrConfig();
 
   onSubmit() {
-    console.log(this.currentConfig.keySize);
-    console.log(this.currentConfig.errorLevel);
-    console.log(this.currentConfig.qrSize);
     this.completed = true;
+    this.onConfigReady.emit(this.currentConfig);
   }
 }
