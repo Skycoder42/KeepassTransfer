@@ -8,6 +8,41 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style type="text/css">
+    .backgroundBase {
+      background-color: #C1E1A6;
+    }
+
+    /*App loading indicator*/
+    .overlay {
+      z-index: 999;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .indicator {
+      position: fixed; /* or absolute */
+      top: 50%;
+      left: 50%;
+      z-index: 1000;
+      padding: 10px;
+      width: 150px;
+      background-color: White;
+      border-radius: 10px;
+      border: 1px solid #337ab7;
+      transform: translate(-50%, -50%);
+    }
+    .indicator img {
+      height: 128px;
+      width: 128px;
+    }
+    .centertext {
+      text-align: center;
+    }
+  </style>
 </head>
 <body class="backgroundBase">
   <app-root>
