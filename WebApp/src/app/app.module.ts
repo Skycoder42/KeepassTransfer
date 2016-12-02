@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HelpComponent } from './help/help.component';
 import { ProgressComponent } from './progress/progress.component';
+import { ProgressbarModule } from "ng2-bootstrap";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProgressComponent } from './progress/progress.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ProgressbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
