@@ -5,11 +5,13 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HelpComponent } from './help/help.component';
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HelpComponent
+    HelpComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
