@@ -9,27 +9,28 @@ import {EncryptionService} from "../encryption-service";
   styleUrls: ['config.component.css']
 })
 export class ConfigComponent {
-  @Output() onConfigReady = new EventEmitter<QrConfig>();
+  @Output()
+  public onConfigReady: EventEmitter<QrConfig> = new EventEmitter<QrConfig>();
 
-  public keySizes = [512, 1024, 2048, 4096, 8192];
-  public errorLevels = [
+  private keySizes: number[] = [512, 1024, 2048, 4096, 8192];
+  private errorLevels: any[] = [
     {key:"Level L (Low)",value:'L'},
     {key:"Level M (Medium)",value:'M'},
     {key:"Level Q (Quartile)",value:'Q'},
     {key:"Level H (High)",value:'H'}
   ];
 
-  public currentConfig: QrConfig = new QrConfig();
-  public currentLink: string = null;
+  private currentConfig: QrConfig = new QrConfig();
+  private currentLink: string = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  public constructor(private route: ActivatedRoute, private router: Router) {
   }
 
-  onSubmit() {
+  private onSubmit(): void {
     this.onConfigReady.emit(this.currentConfig);
   }
 
-  onCreateLink() {
+  private onCreateLink(): void {
     this.currentLink = this.router.createUrlTree(["/"], {
       queryParams: {
         keySize: this.currentConfig.keySize,

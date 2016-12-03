@@ -13,7 +13,7 @@ export class TransferService {
     this.errorHandler = errorHandler;
   }
 
-  public setResultHandler(resultHandler: (result: any) => any): void {
+  public setResultHandler(resultHandler: (result: any) => boolean|string): void {
     this.resultHandler = resultHandler;
   }
 
@@ -26,7 +26,7 @@ export class TransferService {
     this.socket.onclose = ev => this.socketClosed(ev);
   }
 
-  private sendSecret(): void{
+  private sendSecret(): void {
     this.socket.send(JSON.stringify({
       "MessageType": "WC",
       "Secret": this.secret,

@@ -11,14 +11,14 @@ import {Overlay, Modal} from "angular2-modal";
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  public loading: boolean = false;
-  public loadTitle: string;
-  public loadDesc: string;
+  private loading: boolean = false;
+  private loadTitle: string;
+  private loadDesc: string;
 
-  public config: QrConfig = null;
-  public qrData: string = null;
+  private config: QrConfig = null;
+  private qrData: string = null;
 
-  constructor(private encService: EncryptionService,
+  public constructor(private encService: EncryptionService,
               private transService: TransferService,
               private overlay: Overlay,
               private vcRef: ViewContainerRef,
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.transService.setErrorHandler(null);
   }
 
-  onConfigReady(config: QrConfig){
+  private onConfigReady(config: QrConfig): void{
     this.config = config;
 
     this.loadTitle = "Generating Key";
