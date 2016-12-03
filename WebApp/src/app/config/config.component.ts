@@ -27,6 +27,7 @@ export class ConfigComponent {
   }
 
   private onSubmit(): void {
+    this.currentLink = null;
     this.onConfigReady.emit(this.currentConfig);
   }
 
