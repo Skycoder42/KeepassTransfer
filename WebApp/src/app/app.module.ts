@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { ConfigComponent } from './config/config.component';
 import { ProgressComponent } from './progress/progress.component';
 import { ProgressbarModule } from "ng2-bootstrap";
+import {RouterModule, Routes} from "@angular/router";
+
+const appRoutes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -18,9 +21,9 @@ import { ProgressbarModule } from "ng2-bootstrap";
     BrowserModule,
     FormsModule,
     HttpModule,
-    ProgressbarModule
+    ProgressbarModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

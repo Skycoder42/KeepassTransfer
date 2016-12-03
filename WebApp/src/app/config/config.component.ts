@@ -1,5 +1,6 @@
 import {Component, Output, EventEmitter} from '@angular/core';
 import { QrConfig } from "../qr-config";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-config',
@@ -18,8 +19,22 @@ export class ConfigComponent {
   ];
 
   public currentConfig: QrConfig = new QrConfig();
+  public currentLink: string = null;
+
+  constructor(private route: ActivatedRoute, private router: Router) {
+  }
 
   onSubmit() {
     this.onConfigReady.emit(this.currentConfig);
+  }
+
+  onCreateLink() {
+    this.currentLink = this.router.createUrlTree(["/"], {
+      queryParams: {
+        keySize: this.currentConfig.keySize,
+        errorLevel: this.currentConfig.errorLevel,
+        qrSize: this.currentConfig.qrSize
+      }
+    }).toString();
   }
 }
