@@ -1,7 +1,8 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewContainerRef} from '@angular/core';
 import {QrConfig} from "./qr-config";
 import {EncryptionService} from "./encryption-service";
 import {TransferService} from "./transfer-service";
+import {Overlay, Modal} from "angular2-modal";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,13 @@ export class AppComponent implements OnInit, OnDestroy {
   public config: QrConfig = null;
   public qrData: string = null;
 
-  constructor(private encService: EncryptionService, private transService: TransferService) {}
+  constructor(private encService: EncryptionService,
+              private transService: TransferService,
+              private overlay: Overlay,
+              private vcRef: ViewContainerRef,
+              private modal: Modal) {
+    overlay.defaultViewContainer = vcRef;
+  }
 
   public ngOnInit(): void {
     this.transService.setResultHandler(result => this.resultHandler(result));
@@ -45,12 +52,35 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  private resultHandler(result: any): void {
-    console.log(result);
+  private resultHandler(result: any): boolean|string {
+    for(let i = 0; i < result.length; i++) {
+      let data = result[i];
+
+      if(data.Encrypted)
+        data.Value = this.encService.decryptData(data.Value);
+
+      if(data.Value == null) {
+        let error = "Failed to decrypt data with the given key!";
+        this.errorHandler(error);
+        return error;
+      }
+    }
+
+    return true;
   }
 
   private errorHandler(error: string): void {
-    console.log(error);
+    //noinspection TypeScriptUnresolvedFunction
+    this.modal.alert()
+      .size('lg')
+      .isBlocking(true)
+      .showClose(true)
+      .keyboard(27)
+      .headerClass('modal-header alert-danger')
+      .title('Error occurred!')
+      .body(error)
+      .okBtnClass('btn btn-danger')
+      .open();
   }
 
   private static generateRandom(count: number) : string {

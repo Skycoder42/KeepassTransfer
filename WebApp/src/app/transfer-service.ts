@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-import {EncryptionService} from "./encryption-service";
 
 @Injectable()
 export class TransferService {
@@ -8,9 +7,7 @@ export class TransferService {
   private normalClose: boolean = false;
 
   private errorHandler: (error: string) => any;
-  private resultHandler: (result: any) => any;
-
-  constructor(private encrService: EncryptionService) {}
+  private resultHandler: (result: any) => boolean|string;
 
   public setErrorHandler(errorHandler: (error: string) => any): void {
     this.errorHandler = errorHandler;
@@ -37,44 +34,24 @@ export class TransferService {
   }
 
   private decryptData(messageEvent: MessageEvent): void {
-    //GuiController.setProgressText("Decrypting Data\u2026");
-    //GuiController.showProgress(true);
-
-    let resultArray = [];
-
-    try {
-      let data = JSON.parse(messageEvent.data);
-      for(let i = 0; i < data.length; i++) {
-        let cData = data[i];
-
-        if(cData.Encrypted)
-          cData.Value = this.encrService.decryptData(cData.Value);
-
-        if(cData.Value != null)
-          resultArray[resultArray.length] = cData;
-        else
-          throw new Error("Failed to decrypt data with the given key!");
-      }
-
+    let data = JSON.parse(messageEvent.data);
+    let reply: any = false;
+    if(this.resultHandler)
+      reply = this.resultHandler(data);
+    if(typeof reply == "boolean") {
       this.socket.send(JSON.stringify({
-        "Successful": true,
+        "Successful": reply,
         "Error": null
       }));
-
-      if(this.resultHandler)
-        this.resultHandler(resultArray);
-    } catch(except) {
+    } else if(typeof reply == "string") {
       this.socket.send(JSON.stringify({
         "Successful": false,
-        "Error": except.message
+        "Error": reply
       }));
-
-      if(this.errorHandler)
-        this.errorHandler(except.message);
-    } finally {
-      this.normalClose = true;
-      this.socket.close();
     }
+
+    this.normalClose = true;
+    this.socket.close();
   }
 
   private socketClosed(closeEvent: CloseEvent): void {
@@ -86,6 +63,6 @@ export class TransferService {
   private socketError(errorEvent: ErrorEvent): void {
     console.log(errorEvent.message);
     if(this.errorHandler)
-      this.errorHandler("Failed to communicate with backend! Some unknown error occured");
+      this.errorHandler("Failed to communicate with backend! Some unknown error occurred.");
   }
 }
