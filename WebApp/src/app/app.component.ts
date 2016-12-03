@@ -41,6 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private onConfigReady(config: QrConfig): void{
     this.config = config;
+    this.entryList = null;
 
     this.loadTitle = "Generating Key";
     this.loadDesc = "Please wait while your transfer key is being generated. Depending on the key size, this may take a while.";
@@ -66,6 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.entryList = result;
     this.qrData = null;
+    this.config = null;
     return true;
   }
 
