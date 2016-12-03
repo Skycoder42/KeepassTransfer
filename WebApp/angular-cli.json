@@ -21,7 +21,9 @@
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/qrcodejs2/qrcode.min.js"//TODO jsencrypt in here somehow
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

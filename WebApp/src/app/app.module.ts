@@ -5,10 +5,10 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ConfigComponent } from './config/config.component';
-import { ProgressComponent } from './progress/progress.component';
 import { ProgressbarModule } from "ng2-bootstrap";
 import {RouterModule, Routes} from "@angular/router";
 import {EncryptionService} from "./encryption-service";
+import {QRCodeComponent} from "ng2-qrcode";
 
 const appRoutes: Routes = [];
 
@@ -16,7 +16,7 @@ const appRoutes: Routes = [];
   declarations: [
     AppComponent,
     ConfigComponent,
-    ProgressComponent
+    QRCodeComponent
   ],
   imports: [
     BrowserModule,

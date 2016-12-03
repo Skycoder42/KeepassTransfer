@@ -13,10 +13,10 @@ export class ConfigComponent {
 
   public keySizes = [512, 1024, 2048, 4096, 8192];
   public errorLevels = [
-    {key:"Level L (Low)",value:1},
-    {key:"Level M (Medium)",value:0},
-    {key:"Level Q (Quartile)",value:3},
-    {key:"Level H (High)",value:2}
+    {key:"Level L (Low)",value:'L'},
+    {key:"Level M (Medium)",value:'M'},
+    {key:"Level Q (Quartile)",value:'Q'},
+    {key:"Level H (High)",value:'H'}
   ];
 
   public currentConfig: QrConfig = new QrConfig();

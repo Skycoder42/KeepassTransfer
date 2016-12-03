@@ -23,6 +23,7 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "ng2-bootstrap": "^1.1.16",
+    "ng2-qrcode": "^0.1.1",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.6.23"

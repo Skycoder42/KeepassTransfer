@@ -4,3 +4,6 @@
   max-width: calc(100% - 24px);
   margin: 12px auto;
 }
+img {
+  margin: 0 auto;
+}
