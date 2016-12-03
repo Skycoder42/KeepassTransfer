@@ -1,6 +1,7 @@
 import {Component, Output, EventEmitter} from '@angular/core';
 import { QrConfig } from "../qr-config";
 import {ActivatedRoute, Router} from "@angular/router";
+import {EncryptionService} from "../encryption-service";
 
 @Component({
   selector: 'app-config',

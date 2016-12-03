@@ -8,6 +8,7 @@ import { ConfigComponent } from './config/config.component';
 import { ProgressComponent } from './progress/progress.component';
 import { ProgressbarModule } from "ng2-bootstrap";
 import {RouterModule, Routes} from "@angular/router";
+import {EncryptionService} from "./encryption-service";
 
 const appRoutes: Routes = [];
 
@@ -23,6 +24,9 @@ const appRoutes: Routes = [];
     HttpModule,
     ProgressbarModule,
     RouterModule.forRoot(appRoutes)
+  ],
+  providers: [
+    EncryptionService
   ],
   bootstrap: [AppComponent]
 })
