@@ -25,15 +25,15 @@ export class EntryComponent {
   private translateKey(key: string): string {
     switch (key) {
       case "UserName":
-        return "Username";
+        return "Username:";
       case "Password":
-        return "Password";
+        return "Password:";
       case "URL":
-        return "URL";
+        return "URL:";
       case "Notes":
-        return "Notes";
+        return "Notes:";
       default:
-        return key;
+        return key + ":";
     }
   }
 }

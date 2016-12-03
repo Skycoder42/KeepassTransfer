@@ -13,6 +13,7 @@ import {TransferService} from "./transfer-service";
 import {ModalModule} from "angular2-modal";
 import {BootstrapModalModule} from "angular2-modal/plugins/bootstrap";
 import { EntryComponent } from './entry/entry.component';
+import {ClipboardModule} from "angular2-clipboard";
 
 const appRoutes: Routes = [];
 
@@ -29,6 +30,7 @@ const appRoutes: Routes = [];
     HttpModule,
     ProgressbarModule,
     BootstrapModalModule,
+    ClipboardModule,
     ModalModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],

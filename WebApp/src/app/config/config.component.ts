@@ -1,7 +1,6 @@
 import {Component, Output, EventEmitter} from '@angular/core';
 import { QrConfig } from "../qr-config";
-import {ActivatedRoute, Router} from "@angular/router";
-import {EncryptionService} from "../encryption-service";
+import {ActivatedRoute, Router, UrlTree} from "@angular/router";
 
 @Component({
   selector: 'app-config',
@@ -20,24 +19,16 @@ export class ConfigComponent {
     {key:"Level H (High)",value:'H'}
   ];
 
-  private currentConfig: QrConfig = new QrConfig();
+  private currentConfig: QrConfig = QrConfig.fromQuery(document.location.search);
   private currentLink: string = null;
 
-  public constructor(private route: ActivatedRoute, private router: Router) {
-  }
-
   private onSubmit(): void {
-    this.currentLink = null;
     this.onConfigReady.emit(this.currentConfig);
   }
 
   private onCreateLink(): void {
-    this.currentLink = this.router.createUrlTree(["/"], {
-      queryParams: {
-        keySize: this.currentConfig.keySize,
-        errorLevel: this.currentConfig.errorLevel,
-        qrSize: this.currentConfig.qrSize
-      }
-    }).toString();
+    let url = new URL(document.location.href);
+    url.search = this.currentConfig.toQuery();
+    this.currentLink = url.href;
   }
 }
