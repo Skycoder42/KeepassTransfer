@@ -9,6 +9,7 @@ import { ProgressbarModule } from "ng2-bootstrap";
 import {RouterModule, Routes} from "@angular/router";
 import {EncryptionService} from "./encryption-service";
 import {QRCodeComponent} from "ng2-qrcode";
+import {TransferService} from "./transfer-service";
 
 const appRoutes: Routes = [];
 
@@ -26,7 +27,8 @@ const appRoutes: Routes = [];
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    EncryptionService
+    EncryptionService,
+    TransferService
   ],
   bootstrap: [AppComponent]
 })

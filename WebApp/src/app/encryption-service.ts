@@ -6,17 +6,13 @@ declare var JSEncrypt: any;
 @Injectable()
 export class EncryptionService {
 
-  private privateKey: string;
-  private publicKey: string;
+  private crypt:any;
 
-  generateTransferData(qrConfig : QrConfig, secret: string) : Promise<string> {
+  public generateTransferData(qrConfig : QrConfig, secret: string) : Promise<string> {
     return new Promise(resolve => {
-      let crypt = new JSEncrypt({default_key_size: qrConfig.keySize});
-      crypt.getKey(() => {
-        this.privateKey = crypt.getPrivateKey();
-        this.publicKey = crypt.getPublicKey();
-
-        let sendKey = this.publicKey.replace(/\n/g, '');
+      this.crypt = new JSEncrypt({default_key_size: qrConfig.keySize});
+      this.crypt.getKey(() => {
+        let sendKey = this.crypt.getPublicKey().replace(/\n/g, '');
         sendKey = sendKey.replace("-----BEGIN PUBLIC KEY-----", '');
         sendKey = sendKey.replace("-----END PUBLIC KEY-----", '');
         let sendData = JSON.stringify({
@@ -27,5 +23,9 @@ export class EncryptionService {
         resolve(sendData);
       });
     });
+  }
+
+  public decryptData(encrypted: string): string {
+    return this.crypt.decrypt(encrypted);
   }
 }
