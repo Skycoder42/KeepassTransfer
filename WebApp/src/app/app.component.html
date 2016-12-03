@@ -38,4 +38,5 @@
     </div>
   </div>
 </div>
+<app-entry [entryList]="entryList" *ngIf="entryList"></app-entry>
 <app-config (onConfigReady)="onConfigReady($event)" *ngIf="!config"></app-config>

@@ -3,6 +3,7 @@ import {QrConfig} from "./qr-config";
 import {EncryptionService} from "./encryption-service";
 import {TransferService} from "./transfer-service";
 import {Overlay, Modal} from "angular2-modal";
+import {DataEntry} from "./data-entry";
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private config: QrConfig = null;
   private qrData: string = null;
+
+  private entryList: DataEntry[] = null;
 
   public constructor(private encService: EncryptionService,
               private transService: TransferService,
@@ -52,20 +55,17 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  private resultHandler(result: any): boolean|string {
-    for(let i = 0; i < result.length; i++) {
-      let data = result[i];
-
-      if(data.Encrypted)
-        data.Value = this.encService.decryptData(data.Value);
-
-      if(data.Value == null) {
+  private resultHandler(result: DataEntry[]): boolean|string {
+    for(let entry of result) {
+      if(!this.encService.tryDecryptEntry(entry)) {
         let error = "Failed to decrypt data with the given key!";
         this.errorHandler(error);
         return error;
       }
     }
 
+    this.entryList = result;
+    this.qrData = null;
     return true;
   }
 

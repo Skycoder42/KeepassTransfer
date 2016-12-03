@@ -1,0 +1,32 @@
+<!-- Variable input -->
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{titleEntry.value}}</h3>
+  </div>
+  <div class="panel-body">
+    <div>
+      <form class="form-horizontal">
+        <div class="form-group" *ngFor="let entry of formEntries">
+          <label [for]="entry.key" class="col-sm-2 control-label">{{translateKey(entry.key)}}</label>
+          <div class="col-sm-10 ">
+            <div class="input-group">
+              <input [type]="entry.visible ? 'text' : 'password'"
+                     class="form-control"
+                     [id]="entry.key"
+                     [value]="entry.value"
+                     readonly>
+              <span class="input-group-btn">
+                <button class="btn btn-default"
+                        type="button"
+                        *ngIf="entry.encrypted"
+                        (click)="entry.visible = !entry.visible">👁</button>
+                <button class="btn btn-default"
+                        type="button">📋</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

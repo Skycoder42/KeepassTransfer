@@ -12,6 +12,7 @@ import {QRCodeComponent} from "ng2-qrcode";
 import {TransferService} from "./transfer-service";
 import {ModalModule} from "angular2-modal";
 import {BootstrapModalModule} from "angular2-modal/plugins/bootstrap";
+import { EntryComponent } from './entry/entry.component';
 
 const appRoutes: Routes = [];
 
@@ -19,7 +20,8 @@ const appRoutes: Routes = [];
   declarations: [
     AppComponent,
     ConfigComponent,
-    QRCodeComponent
+    QRCodeComponent,
+    EntryComponent
   ],
   imports: [
     BrowserModule,

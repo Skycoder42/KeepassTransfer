@@ -1,4 +1,7 @@
 import {Injectable} from "@angular/core";
+import {DataEntry} from "./data-entry";
+import {forEach} from "@angular/router/src/utils/collection";
+import {Data} from "@angular/router";
 
 @Injectable()
 export class TransferService {
@@ -7,13 +10,13 @@ export class TransferService {
   private normalClose: boolean = false;
 
   private errorHandler: (error: string) => any;
-  private resultHandler: (result: any) => boolean|string;
+  private resultHandler: (result: DataEntry[]) => boolean|string;
 
   public setErrorHandler(errorHandler: (error: string) => any): void {
     this.errorHandler = errorHandler;
   }
 
-  public setResultHandler(resultHandler: (result: any) => boolean|string): void {
+  public setResultHandler(resultHandler: (result: DataEntry[]) => boolean|string): void {
     this.resultHandler = resultHandler;
   }
 
@@ -36,8 +39,12 @@ export class TransferService {
   private decryptData(messageEvent: MessageEvent): void {
     let data = JSON.parse(messageEvent.data);
     let reply: any = false;
-    if(this.resultHandler)
-      reply = this.resultHandler(data);
+    if(this.resultHandler) {
+      let dataArray: DataEntry[] = [];
+      for(let entry of data)
+        dataArray.push(new DataEntry(entry));
+      reply = this.resultHandler(dataArray);
+    }
     if(typeof reply == "boolean") {
       this.socket.send(JSON.stringify({
         "Successful": reply,

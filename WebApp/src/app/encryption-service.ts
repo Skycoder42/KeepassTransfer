@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {QrConfig} from "./qr-config";
+import {DataEntry} from "./data-entry";
 
 declare var JSEncrypt: any;
 
@@ -25,7 +26,9 @@ export class EncryptionService {
     });
   }
 
-  public decryptData(encrypted: string): string {
-    return this.crypt.decrypt(encrypted);
+  public tryDecryptEntry(entry: DataEntry): boolean {
+    if(entry.encrypted)
+      entry.value = this.crypt.decrypt(entry.value);
+    return entry.value != null;
   }
 }
