@@ -2,11 +2,11 @@ import {Component, Output, EventEmitter} from '@angular/core';
 import { QrConfig } from "../qr-config";
 
 @Component({
-  selector: 'app-help',
-  templateUrl: './help.component.html',
-  styleUrls: ['./help.component.css']
+  selector: 'app-config',
+  templateUrl: 'config.component.html',
+  styleUrls: ['config.component.css']
 })
-export class HelpComponent {
+export class ConfigComponent {
   @Output() onConfigReady = new EventEmitter<QrConfig>();
 
   public keySizes = [512, 1024, 2048, 4096, 8192];
