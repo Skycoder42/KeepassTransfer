@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- app title -->
-  <string name="application_name">KeePass Transfer Plugin</string>
+  <string name="application_name">Keepass Transfer Plugin</string>
   
   <!-- plugin -->
   <string name="kp2aplugin_title">@string/application_name</string>
@@ -15,7 +15,7 @@
   <string name="transfer_button_text">Transfer</string>
   
   <!-- settings activity -->
-  <string name="settings_name">KeePass Transfer Settings</string>
+  <string name="settings_name">Keepass Transfer Settings</string>
   <string name="open_keepass_action">Run Keepass</string>
   <string name="settings_uri_title">Backend Uri</string>
   <string name="settings_uri_summary">The Websocket URI of the server to be used to transfer the data.</string>
