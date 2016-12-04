@@ -1,6 +1,6 @@
 /*All bootstrap panels*/
 .panel {
-  width: 800px;
+  width: 1024px;
   max-width: calc(100% - 24px);
   margin: 12px auto;
 }
