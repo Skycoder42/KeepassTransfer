@@ -1,7 +1,5 @@
 import {Injectable} from "@angular/core";
 import {DataEntry} from "./data-entry";
-import {forEach} from "@angular/router/src/utils/collection";
-import {Data} from "@angular/router";
 
 @Injectable()
 export class TransferService {
@@ -22,7 +20,7 @@ export class TransferService {
 
   public connectService(secret: string): void {
     this.secret = secret;
-    this.socket = new WebSocket("wss://kpt.skycoder42.de/backend/");//TODO generate url
+    this.socket = new WebSocket("wss://" + document.location.host + "/backend/");
     this.socket.onopen = () => this.sendSecret();
     this.socket.onmessage = ev => this.decryptData(ev);
     this.socket.onerror = ev => this.socketError(ev);
@@ -62,12 +60,13 @@ export class TransferService {
   }
 
   private socketClosed(closeEvent: CloseEvent): void {
-    console.log("Disconnected with close code: " + closeEvent.code)
+    console.log("Disconnected with close code: " + closeEvent.code);
     if(!this.normalClose && this.errorHandler)
       this.errorHandler("Connection to server was unexpectedly closed!");
   }
 
   private socketError(errorEvent: ErrorEvent): void {
+    this.normalClose = true;
     console.log(errorEvent.message);
     if(this.errorHandler)
       this.errorHandler("Failed to communicate with backend! Some unknown error occurred.");
