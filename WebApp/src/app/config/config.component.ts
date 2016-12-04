@@ -19,8 +19,19 @@ export class ConfigComponent {
     {key:"Level H (High)",value:'H'}
   ];
 
-  private currentConfig: QrConfig = QrConfig.fromQuery(document.location.search);
+  private currentConfig: QrConfig = QrConfig.fromQuery();
+  private autoStartGeneration: boolean = false;
   private currentLink: string = null;
+
+  private get autoLink(): boolean {
+    return this.autoStartGeneration;
+  }
+
+  private set autoLink(autoLink: boolean) {
+    this.autoStartGeneration = autoLink;
+    if(this.currentLink)
+      this.onCreateLink();
+  }
 
   private onSubmit(): void {
     this.onConfigReady.emit(this.currentConfig);
@@ -29,6 +40,8 @@ export class ConfigComponent {
   private onCreateLink(): void {
     let url = new URL(document.location.href);
     url.search = this.currentConfig.toQuery();
+    if(this.autoStartGeneration)
+      url.search += "&autoload=true";
     this.currentLink = url.href;
   }
 }

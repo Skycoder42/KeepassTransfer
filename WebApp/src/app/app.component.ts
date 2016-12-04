@@ -4,6 +4,7 @@ import {EncryptionService} from "./encryption-service";
 import {TransferService} from "./transfer-service";
 import {Overlay, Modal} from "angular2-modal";
 import {DataEntry} from "./data-entry";
+import {UrlQuery} from "./url-query";
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,10 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.transService.setResultHandler(result => this.resultHandler(result));
     this.transService.setErrorHandler(error => this.errorHandler(error));
+
+    let query = new UrlQuery();
+    if(query.query["autoload"])
+      this.onConfigReady(QrConfig.fromQuery());
   }
 
   public ngOnDestroy(): void {
