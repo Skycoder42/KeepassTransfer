@@ -27,7 +27,7 @@ win32 {
 	QMAKE_LFLAGS += '-Wl,-rpath,\'\$$ORIGIN/lib\''
 }
 
-include(../QBackgroundProcess/qbackgroundprocess.pri)
+include(../QtBackgroundProcess/qtbackgroundprocess.pri)
 
 SOURCES += main.cpp \
     appserver.cpp \
