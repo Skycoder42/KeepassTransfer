@@ -1,0 +1,3 @@
+[submodule "webapp/cryptopp/src"]
+	path = webapp/cryptopp/src
+	url = https://github.com/weidai11/cryptopp.git
