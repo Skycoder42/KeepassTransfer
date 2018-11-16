@@ -1,0 +1,6 @@
+[submodule "3rdparty/cryptopp/src"]
+	path = 3rdparty/cryptopp/src
+	url = https://github.com/weidai11/cryptopp
+[submodule "3rdparty/qzxing/src"]
+	path = 3rdparty/qzxing/src
+	url = https://github.com/ftylitak/qzxing
