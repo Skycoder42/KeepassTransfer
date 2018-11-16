@@ -1,5 +1,7 @@
 OUT_ROOT = $$shadowed($$SRC_ROOT_DIR)
 
+DEFINES += QZXING_QML
+
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_ROOT/3rdparty/qzxing/release/ -lQZXing
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_ROOT/3rdparty/qzxing/debug/ -lQZXing
 else:unix: LIBS += -L$$OUT_ROOT/3rdparty/qzxing/ -lQZXing

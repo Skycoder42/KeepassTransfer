@@ -1,6 +1,7 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtQuick.Controls 2.4
+import QtQuick.Layouts 1.3
 
 Window {
 	visible: true
@@ -8,8 +9,17 @@ Window {
 	height: 480
 	title: qsTr("Hello World")
 
-	Label {
+	ColumnLayout {
 		anchors.centerIn: parent
-		text: qsTr("Hello World!")
+
+		Label {
+			id: hLabel
+			text: qsTr("Hello World!")
+		}
+
+		Image {
+			source: "image://QZXing/encode/" + hLabel.text;
+			cache: false;
+		}
 	}
 }
