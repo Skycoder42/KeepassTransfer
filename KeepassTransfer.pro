@@ -1,4 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    webapp
+	webapp
+
+DISTFILES += \
+	.qmake.conf
