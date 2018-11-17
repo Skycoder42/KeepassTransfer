@@ -2,13 +2,16 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 	3rdparty \
+	lib \
 	webapp \
-    clients
+	clients
 
 !cross_compile: SUBDIRS += server
 
-webapp.depends += 3rdparty
-server.depends += 3rdparty
+lib.depends += 3rdparty
+webapp.depends += 3rdparty lib
+clients.depends += 3rdparty lib
+server.depends += 3rdparty lib
 
 DISTFILES += \
 	.qmake.conf

@@ -7,11 +7,13 @@ CONFIG -= app_bundle
 TARGET = $${PROJECT_TARGET}-server
 
 HEADERS += \
-	kptservice.h
+	kptservice.h \
+    transferserver.h
 
 SOURCES += \
 	main.cpp \
-	kptservice.cpp
+	kptservice.cpp \
+    transferserver.cpp
 
 DISTFILES += \
 	kptservice.service \

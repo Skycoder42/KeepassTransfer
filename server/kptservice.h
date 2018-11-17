@@ -2,8 +2,8 @@
 #define KPTSERVICE_H
 
 #include <QtService/Service>
-#include <QWebSocket>
-#include <QWebSocketServer>
+
+#include "transferserver.h"
 
 class KPTService : public QtService::Service
 {
@@ -17,7 +17,7 @@ protected:
 	CommandResult onStop(int &exitCode) override;
 
 private:
-	QWebSocketServer *_server;
+	TransferServer *_server = nullptr;
 };
 
 #undef qService

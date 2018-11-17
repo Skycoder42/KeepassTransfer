@@ -6,8 +6,7 @@ QT += quick quickcontrols2 websockets
 CONFIG += qtquickcompiler
 
 SOURCES += \
-	main.cpp \
-	cryptopp_test.cpp
+	main.cpp
 
 RESOURCES += qml.qrc
 
