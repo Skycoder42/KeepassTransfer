@@ -1,0 +1,11 @@
+[Unit]
+Description=server Service Socket
+Documentation=https://github.com/Skycoder42/QtService
+After=network.target
+PartOf=kptservice.service
+
+[Socket]
+ListenStream=27352
+
+[Install]
+WantedBy=sockets.target

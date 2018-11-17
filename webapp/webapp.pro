@@ -1,13 +1,13 @@
 TEMPLATE = app
 
-TARGET = $${PROJECT_TARGET}_webapp
+TARGET = $${PROJECT_TARGET}-webapp
 
-QT += quick quickcontrols2
+QT += quick quickcontrols2 websockets
 CONFIG += qtquickcompiler
 
 SOURCES += \
 	main.cpp \
-    cryptopp_test.cpp
+	cryptopp_test.cpp
 
 RESOURCES += qml.qrc
 

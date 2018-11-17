@@ -1,0 +1,20 @@
+[Unit]
+Description=server Service
+Documentation=https://github.com/Skycoder42/QtService
+After=network-online.target kptservice.socket
+
+[Service]
+Type=notify
+NotifyAccess=exec
+ExecStart=/path/to/server -platform minimal --backend systemd
+ExecReload=/path/to/server -platform minimal --backend systemd reload $MAINPID
+ExecStop=/path/to/server -platform minimal --backend systemd stop $MAINPID
+#WatchdogSec=10
+Restart=on-abnormal
+RuntimeDirectory=server
+
+[Install]
+# Use the following for a system service
+#WantedBy=multi-user.target
+# Use the following for a user service
+WantedBy=default.target

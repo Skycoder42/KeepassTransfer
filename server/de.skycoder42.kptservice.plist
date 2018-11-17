@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>de.skycoder42.KPTService</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/path/to/server</string>
+		<string>--backend</string>
+		<string>launchd</string>
+	</array>
+	<key>RunAtLoad</key>
+	<boolean>false</boolean>
+	<key>Sockets</key>
+	<dict>
+		<key>Listeners</key>
+		<dict>
+			<key>SockServiceName</key>
+			<string>27352</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
