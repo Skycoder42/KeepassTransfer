@@ -1,7 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QWebSocket>
 #include <QZXing.h>
+
+#include <serverconnector.h>
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +10,8 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 	QZXing::registerQMLTypes();
+
+	ServerConnector connector{QStringLiteral("ws://localhost:27352")};
 
 	QQmlApplicationEngine engine;
 	QZXing::registerQMLImageProvider(engine);

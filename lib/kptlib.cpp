@@ -65,14 +65,23 @@ QVariant KPTLib::deserializeMessageImpl(const QByteArray &data)
 
 // visitor
 
-bool KPTLib::MessageVisitor::visit(const QVariant &message) const
+void KPTLib::MessageVisitor::addFallbackVisitor(std::function<void(int)> visitor)
 {
+	_fallbackVisitor = std::move(visitor);
+}
+
+bool KPTLib::MessageVisitor::visit(const QByteArray &messageData) const
+{
+	const auto message = KPTLib::deserializeMessageImpl(messageData);
 	auto visitor = _visitors.value(message.userType());
 	if(visitor) {
 		visitor(message);
 		return true;
-	} else
+	} else {
+		if(_fallbackVisitor)
+			_fallbackVisitor(message.userType());
 		return false;
+	}
 }
 
 void KPTLib::MessageVisitor::addVisitorImpl(int typeId, const std::function<void (QVariant)> &visitor)

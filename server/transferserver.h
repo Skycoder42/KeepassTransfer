@@ -5,6 +5,8 @@
 #include <QWebSocket>
 #include <QWebSocketServer>
 
+#include <messages/appidentmessage.h>
+
 class TransferServer : public QObject
 {
 	Q_OBJECT
@@ -21,10 +23,15 @@ private slots:
 	void acceptError(QAbstractSocket::SocketError socketError);
 	void serverError(QWebSocketProtocol::CloseCode closeCode);
 
+	void onInvalidMessage(int typeId, QWebSocket *socket);
+
+	void onAppIdent(const AppIdentMessage &message, QWebSocket *socket);
+
 private:
 	QWebSocketServer *_server = nullptr;
 
 	void setup();
+	void setupCleanupConnections(QWebSocket *socket);
 };
 
 #endif // TRANSFERSERVER_H

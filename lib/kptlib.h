@@ -12,17 +12,22 @@ public:
 	class MessageVisitor
 	{
 	public:
-		template <typename TMessage>
-		void addVisitor(std::function<void(TMessage)> visitor);
-		template <typename TClass, typename TMessage>
-		void addVisitor(TClass *object, void(TClass::*visitor)(TMessage));
+		template <typename TMessage, typename TFunc>
+		void addVisitor(const TFunc &visitor);
+		template <typename TMessage, typename TClass, typename... TArgs>
+		void addVisitor(TClass *object, void(TClass::*visitor)(TMessage, TArgs...), TArgs... args);
 
-		bool visit(const QVariant &message) const;
+		void addFallbackVisitor(std::function<void(int)> visitor);
+		template <typename TClass, typename... TArgs>
+		void addFallbackVisitor(TClass *object, void(TClass::*visitor)(int, TArgs...), TArgs... args);
+
+		bool visit(const QByteArray &message) const;
 
 	private:
 		void addVisitorImpl(int typeId, const std::function<void(QVariant)> &visitor);
 
 		QHash<int, std::function<void(QVariant)>> _visitors;
+		std::function<void(int)> _fallbackVisitor;
 	};
 
 	KPTLib() = delete;
@@ -48,18 +53,24 @@ QByteArray KPTLib::serializeMessage(const TMessage &message)
 	return serializeMessageImpl(QVariant::fromValue(message));
 }
 
-template<typename TMessage>
-void KPTLib::MessageVisitor::addVisitor(std::function<void(TMessage)> visitor)
+template<typename TMessage, typename TFunc>
+void KPTLib::MessageVisitor::addVisitor(const TFunc &visitor)
 {
 	addVisitorImpl(qMetaTypeId<TMessage>(), [visitor](const QVariant &message){
 		visitor(message.template value<TMessage>());
 	});
 }
 
-template<typename TClass, typename TMessage>
-void KPTLib::MessageVisitor::addVisitor(TClass *object, void (TClass::*visitor)(TMessage))
+template<typename TMessage, typename TClass, typename... TArgs>
+void KPTLib::MessageVisitor::addVisitor(TClass *object, void(TClass::*visitor)(TMessage, TArgs...), TArgs... args)
 {
-	return addVisitor(std::bind(visitor, object, std::placeholders::_1));
+	return addVisitor<typename std::decay<TMessage>::type>(std::bind(visitor, object, std::placeholders::_1, args...));
+}
+
+template<typename TClass, typename... TArgs>
+void KPTLib::MessageVisitor::addFallbackVisitor(TClass *object, void(TClass::*visitor)(int, TArgs...), TArgs... args)
+{
+	return addFallbackVisitor(std::bind(visitor, object, std::placeholders::_1, args...));
 }
 
 #endif // KPTLIB_H
