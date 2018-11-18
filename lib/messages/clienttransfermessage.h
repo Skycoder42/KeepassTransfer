@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QUuid>
 #include "kptlib.h"
+#include "encrypteddata.h"
 
 class ClientTransferMessage
 {
@@ -11,12 +12,12 @@ class ClientTransferMessage
 
 	Q_PROPERTY(quint32 version MEMBER version)
 	Q_PROPERTY(QUuid channelId MEMBER channelId)
-	Q_PROPERTY(QByteArray data MEMBER data)
+	Q_PROPERTY(EncryptedData data MEMBER data)
 
 public:
 	quint32 version = KPTLib::ProtocolVersion;
 	QUuid channelId;
-	QByteArray data;
+	EncryptedData data;
 };
 
 Q_DECLARE_METATYPE(ClientTransferMessage)

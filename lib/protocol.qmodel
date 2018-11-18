@@ -325,7 +325,7 @@
                          <object>{3cc34d47-04f5-49ed-85f2-0403058736b8}</object>
                          <a>{86ef1741-8dab-4c5f-9f73-4c565cd6b578}</a>
                          <b>{cfd42762-8068-4fe9-ada1-379ba8ef2dbb}</b>
-                         <name>ClientTransfer{version: int, id: uuid, payload: data}</name>
+                         <name>ClientTransfer{version: int, id: uuid, payload: EncData}</name>
                         </DRelation>
                        </base-DRelation>
                        <custom-relation>Message</custom-relation>
@@ -396,7 +396,7 @@
                          <object>{2baad4b6-b8ad-4d89-a670-67655b5bd875}</object>
                          <a>{cfd42762-8068-4fe9-ada1-379ba8ef2dbb}</a>
                          <b>{55680277-1836-44e0-a1ad-5d1d7ece4f08}</b>
-                         <name>ServerTransfer{payload: data}</name>
+                         <name>ServerTransfer{payload: EncData}</name>
                         </DRelation>
                        </base-DRelation>
                        <custom-relation>Message</custom-relation>
@@ -1345,7 +1345,7 @@
                                <uid>{2baad4b6-b8ad-4d89-a670-67655b5bd875}</uid>
                               </MElement>
                              </base-MElement>
-                             <name>ServerTransfer{payload: data}</name>
+                             <name>ServerTransfer{payload: EncData}</name>
                              <a>{f8460a36-7598-4c2d-b2d1-7dd8d10d0e8d}</a>
                              <b>{66a41e64-8580-467f-a05f-5fdac93af6d0}</b>
                             </MRelation>
@@ -1432,7 +1432,7 @@
                                <uid>{3cc34d47-04f5-49ed-85f2-0403058736b8}</uid>
                               </MElement>
                              </base-MElement>
-                             <name>ClientTransfer{version: int, id: uuid, payload: data}</name>
+                             <name>ClientTransfer{version: int, id: uuid, payload: EncData}</name>
                              <a>{64f718d2-1ffd-4228-8d33-77d6960ac392}</a>
                              <b>{f8460a36-7598-4c2d-b2d1-7dd8d10d0e8d}</b>
                             </MRelation>

@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>ErrorDialog.qml</file>
+        <file>MainView.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>QrTabView.qml</file>
     </qresource>
 </RCC>

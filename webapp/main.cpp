@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 	QZXing::registerQMLTypes();
+	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 
 	ServerConnector connector{QStringLiteral("ws://localhost:27352")};
 

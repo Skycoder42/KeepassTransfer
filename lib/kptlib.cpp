@@ -27,7 +27,7 @@ QByteArray KPTLib::serializeMessageImpl(const QVariant &message)
 			continue;
 		QMetaType::save(stream,
 						prop.userType(),
-						prop.readOnGadget(&message).constData());
+						prop.readOnGadget(message.constData()).constData());
 	}
 
 	return data;

@@ -11,7 +11,7 @@ ServerConnector::ServerConnector(QUrl url, QObject *parent) :
 
 bool ServerConnector::isConnected() const
 {
-	return _socket && _socket->state() == QAbstractSocket::ConnectedState;
+	return _socket;
 }
 
 QUuid ServerConnector::appId() const

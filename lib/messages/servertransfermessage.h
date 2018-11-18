@@ -3,15 +3,16 @@
 
 #include <QObject>
 #include "kptlib.h"
+#include "encrypteddata.h"
 
 class ServerTransferMessage
 {
 	Q_GADGET
 
-	Q_PROPERTY(QByteArray data MEMBER data)
+	Q_PROPERTY(EncryptedData data MEMBER data)
 
 public:
-	QByteArray data;
+	EncryptedData data;
 };
 
 Q_DECLARE_METATYPE(ServerTransferMessage)
