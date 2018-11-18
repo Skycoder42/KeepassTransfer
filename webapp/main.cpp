@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QZXing.h>
 
 #include <serverconnector.h>
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
 
 	QQmlApplicationEngine engine;
 	QZXing::registerQMLImageProvider(engine);
+	engine.rootContext()->setContextProperty(QStringLiteral("connector"), &connector);
+
 	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 	if (engine.rootObjects().isEmpty())
 		return -1;

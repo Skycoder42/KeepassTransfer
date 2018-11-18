@@ -9,11 +9,23 @@ ServerConnector::ServerConnector(QUrl url, QObject *parent) :
 	recreateSocket();
 }
 
+bool ServerConnector::isConnected() const
+{
+	return _socket && _socket->state() == QAbstractSocket::ConnectedState;
+}
+
+QUuid ServerConnector::appId() const
+{
+	return _appId;
+}
+
 void ServerConnector::connected()
 {
 	_retryTimeout = 1000;
 	qDebug() << "Connection to server established. Sending AppIdent";
 	_socket->sendBinaryMessage(KPTLib::serializeMessage(AppIdentMessage{}));
+
+	emit connectedChanged(isConnected(), {});
 }
 
 void ServerConnector::disconnected()
@@ -22,8 +34,12 @@ void ServerConnector::disconnected()
 	_socket->disconnect(this);
 	_socket->deleteLater();
 	_socket = nullptr;
+	_appId = {};
 	QTimer::singleShot(_retryTimeout, this, &ServerConnector::recreateSocket);
 	_retryTimeout = std::min(_retryTimeout * 2, 30000);
+
+	emit connectedChanged(isConnected(), {});
+	emit appIdChanged(_appId, {});
 }
 
 void ServerConnector::error(QAbstractSocket::SocketError error)
@@ -36,21 +52,32 @@ void ServerConnector::error(QAbstractSocket::SocketError error)
 
 void ServerConnector::binaryMessageReceived(const QByteArray &message)
 {
-	qDebug() << message;
+	KPTLib::MessageVisitor visitor;
+	visitor.addFallbackVisitor(this, &ServerConnector::onFallback);
+	visitor.addVisitor(this, &ServerConnector::onServerIdent);
+	visitor.addVisitor(this, &ServerConnector::onError);
+	visitor.visit(message);
 }
 
 void ServerConnector::recreateSocket()
 {
-	qDebug(Q_FUNC_INFO);
-
+	// cleanup socket if still connected
 	if(_socket) {
 		_socket->disconnect(this);
 		connect(_socket, &QWebSocket::disconnected,
 				_socket, &QWebSocket::deleteLater);
 		_socket->close();
 		_socket = nullptr;
+		emit connectedChanged(isConnected(), {});
 	}
 
+	// cleanup appid if still set
+	if(!_appId.isNull()) {
+		_appId = {};
+		emit appIdChanged(_appId, {});
+	}
+
+	// create and connect the new socket
 	_socket = new QWebSocket{_serverUrl.authority(), QWebSocketProtocol::VersionLatest, this};
 	connect(_socket, &QWebSocket::connected,
 			this, &ServerConnector::connected);
@@ -62,4 +89,24 @@ void ServerConnector::recreateSocket()
 			this, &ServerConnector::binaryMessageReceived);
 
 	_socket->open(_serverUrl);
+}
+
+void ServerConnector::onServerIdent(const ServerIdentMessage message)
+{
+	_appId = message.channelId;
+	qDebug() << message.channelId;
+	emit appIdChanged(_appId, {});
+}
+
+void ServerConnector::onError(const ErrorMessage &message)
+{
+	emit serverError(message.message);
+	_socket->close();
+}
+
+void ServerConnector::onFallback(int typeId)
+{
+	qWarning() << "Invalid message received from server - unexpected message type:"
+			   << QMetaType::typeName(typeId);
+	_socket->close(QWebSocketProtocol::CloseCodeBadOperation);
 }

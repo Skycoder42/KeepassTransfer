@@ -3,6 +3,11 @@
 #include <qtcoawaitables.h>
 #include <kptlib.h>
 
+#include <messages/serveridentmessage.h>
+#include <messages/errormessage.h>
+
+#include <QTimer>
+
 TransferServer::TransferServer(QObject *parent) :
 	QObject{parent}
 {}
@@ -71,10 +76,33 @@ void TransferServer::onInvalidMessage(int typeId, QWebSocket *socket)
 	socket->close(QWebSocketProtocol::CloseCodeBadOperation);
 }
 
-void TransferServer::onAppIdent(const AppIdentMessage &message, QWebSocket *socket)
+void TransferServer::onAppIdent(const AppIdentMessage message, QWebSocket *socket)
 {
-	qDebug() << "AppIdentMessage received by" << socket->peerAddress()
-			 << "with" << message.version;
+	if(message.version != KPTLib::ProtocolVersion) {
+		socket->sendBinaryMessage(KPTLib::serializeMessage(ErrorMessage{
+			tr("Server uses different message protocol. "
+			   "It uses version %1, whilest you are using version %2. "
+			   "Please update your application to get support for the newer version.")
+			.arg(KPTLib::ProtocolVersion)
+			.arg(message.version)
+		}));
+		QTimer::singleShot(5000, socket, std::bind(&QWebSocket::close, socket, QWebSocketProtocol::CloseCodeBadOperation, QString{}));
+		return;
+	}
+
+	QUuid id;
+	do {
+		id = QUuid::createUuid();
+	} while(_appHash.contains(id));
+
+	_appHash.insert(id, socket);
+	connect(socket, &QWebSocket::disconnected,
+			this, [this, id](){
+		_appHash.remove(id);
+	});
+
+	qDebug() << "WebApp socket " << socket->peerAddress() << "connected for id" << id;
+	socket->sendBinaryMessage(KPTLib::serializeMessage(ServerIdentMessage{id}));
 }
 
 void TransferServer::setup()

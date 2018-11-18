@@ -93,7 +93,7 @@
                          </base-DElement>
                          <object>{74c84411-c5a1-4f79-9566-5c7c1662e86c}</object>
                          <name>Client</name>
-                         <pos>x:960;y:40</pos>
+                         <pos>x:955;y:430</pos>
                          <rect>x:-45;y:-20;w:90;h:40</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -231,7 +231,7 @@
                           </DElement>
                          </base-DElement>
                          <object>{f8460a36-7598-4c2d-b2d1-7dd8d10d0e8d}</object>
-                         <pos>x:560;y:400</pos>
+                         <pos>x:555;y:555</pos>
                          <rect>x:-5;y:-35;w:10;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -277,7 +277,7 @@
                           </DElement>
                          </base-DElement>
                          <object>{64f718d2-1ffd-4228-8d33-77d6960ac392}</object>
-                         <pos>x:960;y:400</pos>
+                         <pos>x:955;y:555</pos>
                          <rect>x:-5;y:-30;w:10;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -348,7 +348,7 @@
                           </DElement>
                          </base-DElement>
                          <object>{66a41e64-8580-467f-a05f-5fdac93af6d0}</object>
-                         <pos>x:125;y:400</pos>
+                         <pos>x:120;y:555</pos>
                          <rect>x:-5;y:-35;w:10;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -419,7 +419,7 @@
                           </DElement>
                          </base-DElement>
                          <object>{8630b60c-5a89-4c90-8477-e40298ced175}</object>
-                         <pos>x:125;y:510</pos>
+                         <pos>x:120;y:665</pos>
                          <rect>x:-5;y:-35;w:10;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -465,7 +465,7 @@
                           </DElement>
                          </base-DElement>
                          <object>{db8ae957-e384-48d5-9e59-dc53460d8726}</object>
-                         <pos>x:560;y:510</pos>
+                         <pos>x:555;y:665</pos>
                          <rect>x:-5;y:-30;w:10;h:60</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -536,7 +536,7 @@
                           </DElement>
                          </base-DElement>
                          <object>{46642b67-5f2a-4ec0-b9c8-c0ee8366b710}</object>
-                         <pos>x:960;y:510</pos>
+                         <pos>x:955;y:665</pos>
                          <rect>x:-5;y:-20;w:10;h:40</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -607,7 +607,7 @@
                           </DElement>
                          </base-DElement>
                          <object>{dc856761-15f4-43ef-9b6a-b289a68e20bd}</object>
-                         <pos>x:125;y:615</pos>
+                         <pos>x:120;y:770</pos>
                          <rect>x:-5;y:-5;w:10;h:10</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -648,51 +648,6 @@
                         <DObject>
                          <base-DElement>
                           <DElement>
-                           <uid>{8a9e14fb-9939-439a-91f0-acc5bb9b685a}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{d5806f30-0d19-437e-9e99-e5ba0e72f752}</object>
-                         <pos>x:960;y:615</pos>
-                         <rect>x:-5;y:-5;w:10;h:10</rect>
-                         <visual-role>0</visual-role>
-                        </DObject>
-                       </base-DObject>
-                       <variety>endlifeline</variety>
-                       <shape-editable>false</shape-editable>
-                      </DItem>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DConnection">
-                      <DConnection>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{c91a9d52-2ee7-44e3-8bc5-8185a09a0e0f}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{83034f11-9719-473e-a9b6-e270e8d83e12}</object>
-                         <a>{e39160df-0f29-4fed-a8f6-53ce7fb96d6b}</a>
-                         <b>{8a9e14fb-9939-439a-91f0-acc5bb9b685a}</b>
-                        </DRelation>
-                       </base-DRelation>
-                       <custom-relation>Lifeline</custom-relation>
-                       <a>
-                        <DConnectionEnd>
-                         <navigable>true</navigable>
-                        </DConnectionEnd>
-                       </a>
-                      </DConnection>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DItem">
-                      <DItem>
-                       <base-DObject>
-                        <DObject>
-                         <base-DElement>
-                          <DElement>
                            <uid>{f9cc88e8-0b6f-4cf2-b1ce-bddc6d961973}</uid>
                           </DElement>
                          </base-DElement>
@@ -706,30 +661,6 @@
                        <variety>activation</variety>
                        <shape-editable>false</shape-editable>
                       </DItem>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DConnection">
-                      <DConnection>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{9faaa3b4-1507-4390-828d-cd387deec30b}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{b23d3aae-3e70-4a12-b290-7e218049d716}</object>
-                         <a>{f9cc88e8-0b6f-4cf2-b1ce-bddc6d961973}</a>
-                         <b>{55680277-1836-44e0-a1ad-5d1d7ece4f08}</b>
-                        </DRelation>
-                       </base-DRelation>
-                       <custom-relation>Lifeline</custom-relation>
-                       <a>
-                        <DConnectionEnd>
-                         <navigable>true</navigable>
-                        </DConnectionEnd>
-                       </a>
-                      </DConnection>
                      </instance>
                     </item>
                     <item>
@@ -761,30 +692,6 @@
                         <DRelation>
                          <base-DElement>
                           <DElement>
-                           <uid>{570378e6-990f-4d0e-b6ce-498195f639ce}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{ed5874b4-0a2f-4079-930d-a38e02fb8724}</object>
-                         <a>{647526d4-2ad9-4975-ada9-90648bb434e6}</a>
-                         <b>{cfd42762-8068-4fe9-ada1-379ba8ef2dbb}</b>
-                        </DRelation>
-                       </base-DRelation>
-                       <custom-relation>Lifeline</custom-relation>
-                       <a>
-                        <DConnectionEnd>
-                         <navigable>true</navigable>
-                        </DConnectionEnd>
-                       </a>
-                      </DConnection>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DConnection">
-                      <DConnection>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
                            <uid>{78ba91dd-b1da-43de-9986-07b6702d2233}</uid>
                           </DElement>
                          </base-DElement>
@@ -803,9 +710,281 @@
                       </DConnection>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DItem">
+                      <DItem>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{98e6313c-216f-47bb-834d-809daa468df9}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{d0d93a55-07c1-43cd-b124-5ddf9878976a}</object>
+                         <name>Server</name>
+                         <pos>x:555;y:430</pos>
+                         <rect>x:-45;y:-20;w:90;h:40</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <variety>instance</variety>
+                       <shape-editable>false</shape-editable>
+                      </DItem>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DItem">
+                      <DItem>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{920eb10a-4685-4b63-ae56-851a73ce3791}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{29a2e9b8-7350-410e-9ffd-720fe6c249f4}</object>
+                         <name>Webapp</name>
+                         <pos>x:120;y:430</pos>
+                         <rect>x:-45;y:-20;w:90;h:40</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <variety>instance</variety>
+                       <shape-editable>false</shape-editable>
+                      </DItem>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DConnection">
+                      <DConnection>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{90cdda9f-bac0-43cb-b20c-419e34bb6d88}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{2baf251f-a987-4f67-8db4-c807662e6580}</object>
+                         <a>{920eb10a-4685-4b63-ae56-851a73ce3791}</a>
+                         <b>{55680277-1836-44e0-a1ad-5d1d7ece4f08}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <custom-relation>Lifeline</custom-relation>
+                       <a>
+                        <DConnectionEnd>
+                         <navigable>true</navigable>
+                        </DConnectionEnd>
+                       </a>
+                      </DConnection>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DConnection">
+                      <DConnection>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{f709ecc3-c6df-4413-b3da-bf31885aa0ec}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{56a4a718-2449-4ed1-83a9-04658fd76263}</object>
+                         <a>{98e6313c-216f-47bb-834d-809daa468df9}</a>
+                         <b>{cfd42762-8068-4fe9-ada1-379ba8ef2dbb}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <custom-relation>Lifeline</custom-relation>
+                       <a>
+                        <DConnectionEnd>
+                         <navigable>true</navigable>
+                        </DConnectionEnd>
+                       </a>
+                      </DConnection>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DItem">
+                      <DItem>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{ccc65b6f-1d79-48d9-be27-889038aa8627}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{16aa5e55-c719-4c26-8c3a-1b9dafadd1ab}</object>
+                         <pos>x:125;y:350</pos>
+                         <rect>x:-5;y:-5;w:10;h:10</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <variety>endlifeline</variety>
+                       <shape-editable>false</shape-editable>
+                      </DItem>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DConnection">
+                      <DConnection>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{cfce578e-5080-4d7b-92f3-87b0ee8e9770}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{a8f013bd-fa7c-4a48-89b8-ac39223f2fbf}</object>
+                         <a>{f9cc88e8-0b6f-4cf2-b1ce-bddc6d961973}</a>
+                         <b>{ccc65b6f-1d79-48d9-be27-889038aa8627}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <custom-relation>Lifeline</custom-relation>
+                       <a>
+                        <DConnectionEnd>
+                         <navigable>true</navigable>
+                        </DConnectionEnd>
+                       </a>
+                      </DConnection>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DItem">
+                      <DItem>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{59ae28f0-d2a9-4d76-9c56-cbea5c9ba726}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{9ab2f9d2-0313-4948-8b5f-6f91f73f937d}</object>
+                         <pos>x:560;y:350</pos>
+                         <rect>x:-5;y:-5;w:10;h:10</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <variety>endlifeline</variety>
+                       <shape-editable>false</shape-editable>
+                      </DItem>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DConnection">
+                      <DConnection>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{f4640eec-0869-4221-8683-d310b855cf8b}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{30ca06aa-bfa3-4506-8bb9-85cb06d14640}</object>
+                         <a>{647526d4-2ad9-4975-ada9-90648bb434e6}</a>
+                         <b>{59ae28f0-d2a9-4d76-9c56-cbea5c9ba726}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <custom-relation>Lifeline</custom-relation>
+                       <a>
+                        <DConnectionEnd>
+                         <navigable>true</navigable>
+                        </DConnectionEnd>
+                       </a>
+                      </DConnection>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DItem">
+                      <DItem>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{311c4e21-6061-4928-9a54-0f86cc649e32}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{046be6cd-6f32-42cf-afcf-7da7907df26c}</object>
+                         <pos>x:955;y:770</pos>
+                         <rect>x:-5;y:-5;w:10;h:10</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <variety>destruction</variety>
+                       <shape-editable>false</shape-editable>
+                      </DItem>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DConnection">
+                      <DConnection>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{bcc9108b-204b-412b-8e20-827f699d9c44}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{4181a46a-60fb-45a7-9e88-e52131366fbb}</object>
+                         <a>{e39160df-0f29-4fed-a8f6-53ce7fb96d6b}</a>
+                         <b>{311c4e21-6061-4928-9a54-0f86cc649e32}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <custom-relation>Lifeline</custom-relation>
+                       <a>
+                        <DConnectionEnd>
+                         <navigable>true</navigable>
+                        </DConnectionEnd>
+                       </a>
+                      </DConnection>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DItem">
+                      <DItem>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{644678fa-13be-4ab1-a54f-f661dfd0915e}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{751ed2a8-17dc-4f57-bbeb-99ee588d95cc}</object>
+                         <pos>x:555;y:770</pos>
+                         <rect>x:-5;y:-5;w:10;h:10</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <variety>endlifeline</variety>
+                       <shape-editable>false</shape-editable>
+                      </DItem>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DConnection">
+                      <DConnection>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{887d6e4d-5feb-48c9-85b6-f0323b7db9e1}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{9b0ed549-8a8f-467f-9fa2-c8652722c360}</object>
+                         <a>{b848b1ee-ac13-4b21-906f-8439ab498c94}</a>
+                         <b>{644678fa-13be-4ab1-a54f-f661dfd0915e}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <custom-relation>Lifeline</custom-relation>
+                       <a>
+                        <DConnectionEnd>
+                         <navigable>true</navigable>
+                        </DConnectionEnd>
+                       </a>
+                      </DConnection>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1542470155251</last-modified>
+                  <last-modified>1542534214279</last-modified>
                   <toolbarid>Sequences</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -1501,6 +1680,34 @@
                         </target>
                        </handle>
                       </item>
+                      <item>
+                       <handle>
+                        <uid>{9b0ed549-8a8f-467f-9fa2-c8652722c360}</uid>
+                        <target>
+                         <instance type="MConnection">
+                          <MConnection>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{9b0ed549-8a8f-467f-9fa2-c8652722c360}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{db8ae957-e384-48d5-9e59-dc53460d8726}</a>
+                             <b>{751ed2a8-17dc-4f57-bbeb-99ee588d95cc}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <custom-relation>Lifeline</custom-relation>
+                           <a>
+                            <MConnectionEnd>
+                             <navigable>true</navigable>
+                            </MConnectionEnd>
+                           </a>
+                          </MConnection>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
                      </qlist>
                     </handles>
                    </handles>
@@ -1546,6 +1753,34 @@
                              </base-MElement>
                              <a>{46642b67-5f2a-4ec0-b9c8-c0ee8366b710}</a>
                              <b>{d5806f30-0d19-437e-9e99-e5ba0e72f752}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <custom-relation>Lifeline</custom-relation>
+                           <a>
+                            <MConnectionEnd>
+                             <navigable>true</navigable>
+                            </MConnectionEnd>
+                           </a>
+                          </MConnection>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{4181a46a-60fb-45a7-9e88-e52131366fbb}</uid>
+                        <target>
+                         <instance type="MConnection">
+                          <MConnection>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{4181a46a-60fb-45a7-9e88-e52131366fbb}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{46642b67-5f2a-4ec0-b9c8-c0ee8366b710}</a>
+                             <b>{046be6cd-6f32-42cf-afcf-7da7907df26c}</b>
                             </MRelation>
                            </base-MRelation>
                            <custom-relation>Lifeline</custom-relation>
@@ -1661,6 +1896,34 @@
                         </target>
                        </handle>
                       </item>
+                      <item>
+                       <handle>
+                        <uid>{a8f013bd-fa7c-4a48-89b8-ac39223f2fbf}</uid>
+                        <target>
+                         <instance type="MConnection">
+                          <MConnection>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{a8f013bd-fa7c-4a48-89b8-ac39223f2fbf}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{86c5640f-d012-4ff6-98da-1793e23ba973}</a>
+                             <b>{16aa5e55-c719-4c26-8c3a-1b9dafadd1ab}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <custom-relation>Lifeline</custom-relation>
+                           <a>
+                            <MConnectionEnd>
+                             <navigable>true</navigable>
+                            </MConnectionEnd>
+                           </a>
+                          </MConnection>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
                      </qlist>
                     </handles>
                    </handles>
@@ -1748,6 +2011,34 @@
                         </target>
                        </handle>
                       </item>
+                      <item>
+                       <handle>
+                        <uid>{30ca06aa-bfa3-4506-8bb9-85cb06d14640}</uid>
+                        <target>
+                         <instance type="MConnection">
+                          <MConnection>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{30ca06aa-bfa3-4506-8bb9-85cb06d14640}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{b7de3924-cd5a-47b8-8efb-4519cedfdae6}</a>
+                             <b>{9ab2f9d2-0313-4948-8b5f-6f91f73f937d}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <custom-relation>Lifeline</custom-relation>
+                           <a>
+                            <MConnectionEnd>
+                             <navigable>true</navigable>
+                            </MConnectionEnd>
+                           </a>
+                          </MConnection>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
                      </qlist>
                     </handles>
                    </handles>
@@ -1756,6 +2047,212 @@
                 </base-MObject>
                 <variety-editable>false</variety-editable>
                 <variety>activation</variety>
+               </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{d0d93a55-07c1-43cd-b124-5ddf9878976a}</uid>
+             <target>
+              <instance type="MItem">
+               <MItem>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{d0d93a55-07c1-43cd-b124-5ddf9878976a}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>Server</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{56a4a718-2449-4ed1-83a9-04658fd76263}</uid>
+                        <target>
+                         <instance type="MConnection">
+                          <MConnection>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{56a4a718-2449-4ed1-83a9-04658fd76263}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{d0d93a55-07c1-43cd-b124-5ddf9878976a}</a>
+                             <b>{f8460a36-7598-4c2d-b2d1-7dd8d10d0e8d}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <custom-relation>Lifeline</custom-relation>
+                           <a>
+                            <MConnectionEnd>
+                             <navigable>true</navigable>
+                            </MConnectionEnd>
+                           </a>
+                          </MConnection>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <variety-editable>false</variety-editable>
+                <variety>instance</variety>
+               </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{29a2e9b8-7350-410e-9ffd-720fe6c249f4}</uid>
+             <target>
+              <instance type="MItem">
+               <MItem>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{29a2e9b8-7350-410e-9ffd-720fe6c249f4}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>Webapp</name>
+                  <relations>
+                   <handles>
+                    <handles>
+                     <qlist>
+                      <item>
+                       <handle>
+                        <uid>{2baf251f-a987-4f67-8db4-c807662e6580}</uid>
+                        <target>
+                         <instance type="MConnection">
+                          <MConnection>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{2baf251f-a987-4f67-8db4-c807662e6580}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{29a2e9b8-7350-410e-9ffd-720fe6c249f4}</a>
+                             <b>{66a41e64-8580-467f-a05f-5fdac93af6d0}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <custom-relation>Lifeline</custom-relation>
+                           <a>
+                            <MConnectionEnd>
+                             <navigable>true</navigable>
+                            </MConnectionEnd>
+                           </a>
+                          </MConnection>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                     </qlist>
+                    </handles>
+                   </handles>
+                  </relations>
+                 </MObject>
+                </base-MObject>
+                <variety-editable>false</variety-editable>
+                <variety>instance</variety>
+               </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{16aa5e55-c719-4c26-8c3a-1b9dafadd1ab}</uid>
+             <target>
+              <instance type="MItem">
+               <MItem>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{16aa5e55-c719-4c26-8c3a-1b9dafadd1ab}</uid>
+                   </MElement>
+                  </base-MElement>
+                 </MObject>
+                </base-MObject>
+                <variety-editable>false</variety-editable>
+                <variety>endlifeline</variety>
+               </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{9ab2f9d2-0313-4948-8b5f-6f91f73f937d}</uid>
+             <target>
+              <instance type="MItem">
+               <MItem>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{9ab2f9d2-0313-4948-8b5f-6f91f73f937d}</uid>
+                   </MElement>
+                  </base-MElement>
+                 </MObject>
+                </base-MObject>
+                <variety-editable>false</variety-editable>
+                <variety>endlifeline</variety>
+               </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{046be6cd-6f32-42cf-afcf-7da7907df26c}</uid>
+             <target>
+              <instance type="MItem">
+               <MItem>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{046be6cd-6f32-42cf-afcf-7da7907df26c}</uid>
+                   </MElement>
+                  </base-MElement>
+                 </MObject>
+                </base-MObject>
+                <variety-editable>false</variety-editable>
+                <variety>destruction</variety>
+               </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{751ed2a8-17dc-4f57-bbeb-99ee588d95cc}</uid>
+             <target>
+              <instance type="MItem">
+               <MItem>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{751ed2a8-17dc-4f57-bbeb-99ee588d95cc}</uid>
+                   </MElement>
+                  </base-MElement>
+                 </MObject>
+                </base-MObject>
+                <variety-editable>false</variety-editable>
+                <variety>endlifeline</variety>
                </MItem>
               </instance>
              </target>

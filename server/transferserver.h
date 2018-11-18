@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QWebSocket>
 #include <QWebSocketServer>
+#include <QUuid>
 
 #include <messages/appidentmessage.h>
 
@@ -25,10 +26,11 @@ private slots:
 
 	void onInvalidMessage(int typeId, QWebSocket *socket);
 
-	void onAppIdent(const AppIdentMessage &message, QWebSocket *socket);
+	void onAppIdent(const AppIdentMessage message, QWebSocket *socket);
 
 private:
 	QWebSocketServer *_server = nullptr;
+	QHash<QUuid, QWebSocket*> _appHash;
 
 	void setup();
 	void setupCleanupConnections(QWebSocket *socket);

@@ -38,8 +38,6 @@ public:
 	template <typename TMessage>
 	static QByteArray serializeMessage(const TMessage &message);
 
-
-
 private:
 	static void setupStream(QDataStream &stream);
 

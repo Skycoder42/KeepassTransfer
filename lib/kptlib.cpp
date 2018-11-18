@@ -60,7 +60,10 @@ QVariant KPTLib::deserializeMessageImpl(const QByteArray &data)
 		prop.writeOnGadget(message.data(), tData);
 	}
 
-	return message;
+	if(stream.commitTransaction())
+		return message;
+	else
+		return {};
 }
 
 // visitor

@@ -4,13 +4,28 @@
 #include <QObject>
 #include <QWebSocket>
 
+#include <messages/serveridentmessage.h>
+#include <messages/errormessage.h>
+
 class ServerConnector : public QObject
 {
 	Q_OBJECT
 
+	Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
+	Q_PROPERTY(QUuid appId READ appId NOTIFY appIdChanged)
+
 public:
 	explicit ServerConnector(QUrl url,
 							 QObject *parent = nullptr);
+
+	bool isConnected() const;
+	QUuid appId() const;
+
+signals:
+	void serverError(const QString &message);
+
+	void connectedChanged(bool connected, QPrivateSignal);
+	void appIdChanged(QUuid appId, QPrivateSignal);
 
 private slots:
 	void connected();
@@ -23,8 +38,13 @@ private slots:
 private:
 	const QUrl _serverUrl;
 	QWebSocket *_socket = nullptr;
+	QUuid _appId;
 
 	int _retryTimeout = 1000;
+
+	void onServerIdent(const ServerIdentMessage message);
+	void onError(const ErrorMessage &message);
+	void onFallback(int typeId);
 };
 
 #endif // SERVERCONNECTOR_H

@@ -2,12 +2,14 @@ TEMPLATE = app
 
 TARGET = $${PROJECT_TARGET}-webapp
 
-QT += quick quickcontrols2 websockets
+QT += quick websockets svg
 CONFIG += qtquickcompiler
+
+QTPLUGIN.imageformats = qsvg
 
 SOURCES += \
 	main.cpp \
-    serverconnector.cpp
+	serverconnector.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,4 +18,4 @@ include($$SRC_ROOT_DIR/3rdparty/cryptopp/cryptopp.pri)
 include($$SRC_ROOT_DIR/lib/lib.pri)
 
 HEADERS += \
-    serverconnector.h
+	serverconnector.h
