@@ -16,7 +16,7 @@ public:
 
 	Q_INVOKABLE int keyCount() const;
 	Q_INVOKABLE QString key(int index) const;
-	Q_INVOKABLE QVariant value(const QString &key) const;
+	Q_INVOKABLE QVariant value(const QString &key, const QVariant &defaultValue) const;
 	Q_INVOKABLE void setValue(const QString &key, const QVariant &value);
 	Q_INVOKABLE void remove(const QString &key);
 	Q_INVOKABLE void clear();

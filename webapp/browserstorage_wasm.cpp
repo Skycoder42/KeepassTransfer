@@ -36,7 +36,7 @@ QString BrowserStorage::key(int index) const
 				QLatin1String{reinterpret_cast<char*>(intPtr)};
 }
 
-QVariant BrowserStorage::value(const QString &key) const
+QVariant BrowserStorage::value(const QString &key, const QVariant &defaultValue) const
 {
 	const auto keyData = key.toLocal8Bit();
 	auto intPtr = EM_ASM_INT({
@@ -47,7 +47,7 @@ QVariant BrowserStorage::value(const QString &key) const
 		return resPtr;
 	}, keyData.constData());
 	return intPtr == 0 ?
-				QVariant{} :
+				defaultValue :
 				QVariant{QLatin1String{reinterpret_cast<char*>(intPtr)}};
 }
 

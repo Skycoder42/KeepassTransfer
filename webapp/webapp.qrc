@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>main.qml</file>
+        <file>ErrorDialog.qml</file>
+        <file>MainView.qml</file>
+        <file>QrTabView.qml</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file alias="unlocked.svg">icons/baseline-lock_open-24px.svg</file>
+        <file alias="locked.svg">icons/baseline-lock-24px.svg</file>
+    </qresource>
+</RCC>

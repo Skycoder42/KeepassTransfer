@@ -16,6 +16,10 @@ ScrollView {
 			curve: curveBox.model.get(curveBox.currentIndex).value
 		}
 
+		BrowserStorage {
+			id: storage
+		}
+
 		ColumnLayout {
 			id: contentLayout
 			anchors.fill: parent
@@ -37,6 +41,8 @@ ScrollView {
 
 					ComboBox {
 						id: curveBox
+						Layout.fillWidth: true
+
 						model: ListModel {
 							ListElement { key: "secp128r1"; value: DataEncryptor.secp128r1 }
 							ListElement { key: "secp256r1"; value: DataEncryptor.secp256r1 }
@@ -47,8 +53,8 @@ ScrollView {
 						}
 						textRole: "key"
 
-						currentIndex: 2
-						Layout.fillWidth: true
+						currentIndex: storage.value("curveIndex", 2)
+						onCurrentIndexChanged: storage.setValue("curveIndex", currentIndex)
 					}
 
 					Label {
@@ -58,6 +64,8 @@ ScrollView {
 
 					ComboBox {
 						id: ecBox
+						Layout.fillWidth: true
+
 						model: ListModel {
 							ListElement { key: qsTr("Low (Level L)"); value: "L" }
 							ListElement { key: qsTr("Medium (Level M)"); value: "M" }
@@ -66,8 +74,8 @@ ScrollView {
 						}
 						textRole: "key"
 
-						currentIndex: 0
-						Layout.fillWidth: true
+						currentIndex: storage.value("ecIndex", 0)
+						onCurrentIndexChanged: storage.setValue("ecIndex", currentIndex)
 					}
 
 					Label {
@@ -78,10 +86,11 @@ ScrollView {
 					SpinBox {
 						id: heightBox
 						Layout.fillWidth: true
+						editable: true
 						from: 16
 						to: 4096
-						value: 512
-						editable: true
+						value: storage.value("qrSize", 512)
+						onValueChanged: storage.setValue("qrSize", value)
 					}
 
 					Button {

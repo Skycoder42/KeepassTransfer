@@ -25,7 +25,8 @@ SOURCES += \
 	iencoder.cpp \
 	qrencoder.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += \
+    webapp.qrc
 
 wasm: SOURCES += browserstorage_wasm.cpp
 else: SOURCES += browserstorage.cpp

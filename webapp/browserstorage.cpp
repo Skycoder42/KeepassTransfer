@@ -15,9 +15,9 @@ QString BrowserStorage::key(int index) const
 	return _settings->allKeys().value(index);
 }
 
-QVariant BrowserStorage::value(const QString &key) const
+QVariant BrowserStorage::value(const QString &key, const QVariant &defaultValue) const
 {
-	return _settings->value(key);
+	return _settings->value(key, defaultValue);
 }
 
 void BrowserStorage::setValue(const QString &key, const QVariant &value)
