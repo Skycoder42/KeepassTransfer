@@ -15,7 +15,6 @@ ApplicationWindow {
 		id: mainStack
 		anchors.fill: parent
 		initialItem: MainView {
-
 		}
 	}
 

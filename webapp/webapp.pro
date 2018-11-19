@@ -13,6 +13,11 @@ ADDED_IMPORTS += \
 	qtquickcontrols2fusionstyleplugin \
 	qtquickcontrols2imaginestyleplugin
 
+HEADERS += \
+	serverconnector.h \
+	iencoder.h \
+	qrencoder.h
+
 SOURCES += \
 	main.cpp \
 	serverconnector.cpp \
@@ -21,13 +26,13 @@ SOURCES += \
 
 RESOURCES += qml.qrc
 
+wasm {
+	HEADERS += browserstorage.h
+	SOURCES += browserstorage.cpp
+}
+
 include($$SRC_ROOT_DIR/lib/lib.pri)
 include($$SRC_ROOT_DIR/3rdparty/qzxing/qzxing.pri)
-
-HEADERS += \
-	serverconnector.h \
-	iencoder.h \
-	qrencoder.h
 
 html_install.files += $${TARGET}.html \
 	$${TARGET}.js \
