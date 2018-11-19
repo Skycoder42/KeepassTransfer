@@ -16,7 +16,8 @@ ADDED_IMPORTS += \
 HEADERS += \
 	serverconnector.h \
 	iencoder.h \
-	qrencoder.h
+	qrencoder.h \
+	browserstorage.h
 
 SOURCES += \
 	main.cpp \
@@ -26,10 +27,8 @@ SOURCES += \
 
 RESOURCES += qml.qrc
 
-wasm {
-	HEADERS += browserstorage.h
-	SOURCES += browserstorage.cpp
-}
+wasm: SOURCES += browserstorage_wasm.cpp
+else: SOURCES += browserstorage.cpp
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
 include($$SRC_ROOT_DIR/3rdparty/qzxing/qzxing.pri)

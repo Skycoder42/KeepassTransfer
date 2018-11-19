@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QVariant>
+#ifndef Q_OS_WASM
+#include <QSettings>
+#endif
 
 class BrowserStorage : public QObject
 {
@@ -17,6 +20,11 @@ public:
 	Q_INVOKABLE void setValue(const QString &key, const QVariant &value);
 	Q_INVOKABLE void remove(const QString &key);
 	Q_INVOKABLE void clear();
+
+private:
+#ifndef Q_OS_WASM
+	QSettings *_settings;
+#endif
 };
 
 #endif // BROWSERSTORAGE_H

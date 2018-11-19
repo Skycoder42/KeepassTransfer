@@ -7,9 +7,7 @@
 #include <dataencryptor.h>
 
 #include "qrencoder.h"
-#ifdef QT_OS_WASM
 #include "browserstorage.h"
-#endif
 
 int main(int argc, char *argv[])
 {
@@ -21,23 +19,7 @@ int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 	qmlRegisterUncreatableType<DataEncryptor>("de.skycoder42.kpt", 1, 0, "DataEncryptor", {});
 	qmlRegisterType<QrEncoder>("de.skycoder42.kpt", 1, 0, "QrEncoder");
-
-#ifdef QT_OS_WASM
-	BrowserStorage storage;
-	qDebug() << storage.keyCount();
-	for(auto i = 0, total = storage.keyCount(); i < total; ++i) {
-		qDebug() << storage.key(i);
-		qDebug() << storage.value(storage.key(i));
-	}
-
-	storage.clear();
-	storage.setValue(QStringLiteral("test1"), 42);
-	storage.setValue(QStringLiteral("test2"), 24);
-	qDebug() << storage.value(QStringLiteral("test1"))
-			 << storage.value(QStringLiteral("test2"));
-	storage.remove(QStringLiteral("test2"));
-	qDebug() << storage.value(QStringLiteral("test2"));
-#endif
+	qmlRegisterType<BrowserStorage>("de.skycoder42.kpt", 1, 0, "BrowserStorage");
 
 	ServerConnector connector{QStringLiteral("ws://localhost:27352")};
 
