@@ -32,6 +32,10 @@ public:
 QDataStream &operator<<(QDataStream &stream, const EncryptedData &data);
 QDataStream &operator>>(QDataStream &stream, EncryptedData &data);
 
+inline uint qHash(EncryptedData::DataMode key, uint seed) {
+	return qHash(static_cast<int>(key), seed);
+}
+
 Q_DECLARE_METATYPE(EncryptedData)
 Q_DECLARE_TYPEINFO(EncryptedData, Q_MOVABLE_TYPE);
 

@@ -1,6 +1,7 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.3
+import de.skycoder42.kpt 1.0
 
 ScrollView {
 	id: qrViewContainer
@@ -9,6 +10,11 @@ ScrollView {
 		id: qrView
 		width: qrViewContainer.width
 		height: contentLayout.implicitHeight
+
+		QrEncoder {
+			id: encoder
+			curve: curveBox.model.get(curveBox.currentIndex).value
+		}
 
 		ColumnLayout {
 			id: contentLayout
@@ -30,8 +36,18 @@ ScrollView {
 					}
 
 					ComboBox {
-						model: ["secp128r1", "secp256r1", "secp128r2", "secp256k1", "brainpoolP256r1", "brainpoolP512r1"]
-						currentIndex: 1
+						id: curveBox
+						model: ListModel {
+							ListElement { key: "secp128r1"; value: DataEncryptor.secp128r1 }
+							ListElement { key: "secp256r1"; value: DataEncryptor.secp256r1 }
+							ListElement { key: "secp128r2"; value: DataEncryptor.secp128r2 }
+							ListElement { key: "secp256k1"; value: DataEncryptor.secp256k1 }
+							ListElement { key: "brainpoolP256r1"; value: DataEncryptor.brainpoolP256r1 }
+							ListElement { key: "brainpoolP512r1"; value: DataEncryptor.brainpoolP512r1 }
+						}
+						textRole: "key"
+
+						currentIndex: 2
 						Layout.fillWidth: true
 					}
 
@@ -41,13 +57,14 @@ ScrollView {
 					}
 
 					ComboBox {
+						id: ecBox
 						model: ListModel {
-							ListElement { text: qsTr("Low (Level L)"); value: 0 }
-							ListElement { text: qsTr("Medium (Level M)"); value: 1 }
-							ListElement { text: qsTr("Quartile (Level Q)"); value: 2 }
-							ListElement { text: qsTr("High (Level H)"); value: 3 }
+							ListElement { key: qsTr("Low (Level L)"); value: "L" }
+							ListElement { key: qsTr("Medium (Level M)"); value: "M" }
+							ListElement { key: qsTr("Quartile (Level Q)"); value: "Q" }
+							ListElement { key: qsTr("High (Level H)"); value: "H" }
 						}
-						textRole: "text"
+						textRole: "key"
 
 						currentIndex: 0
 						Layout.fillWidth: true
@@ -59,6 +76,7 @@ ScrollView {
 					}
 
 					SpinBox {
+						id: heightBox
 						Layout.fillWidth: true
 						from: 16
 						to: 4096
@@ -69,9 +87,27 @@ ScrollView {
 					Button {
 						Layout.columnSpan: 2
 						Layout.alignment: Qt.AlignRight
-						text: qsTr("Generate QR-Code")
+						text: qsTr("Generate new Key")
 						highlighted: true
+						onClicked: encoder.recreateKeys()
 					}
+				}
+			}
+
+			GroupBox {
+				id: qrViewBox
+				title: qsTr("QR-Code")
+				Layout.alignment: Qt.AlignCenter
+				visible: encoder.valid
+
+				Image {
+					source: "image://QZXing/encode/%2?format=qrcode&corretionLevel=%1"
+							.arg(ecBox.model.get(ecBox.currentIndex).value)
+							.arg(encoder.publicKey)
+					sourceSize: Qt.size(heightBox.value, heightBox.value)
+					cache: false
+					height: heightBox.value
+					width: height
 				}
 			}
 		}

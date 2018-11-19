@@ -45,6 +45,10 @@ public:
 	inline QByteArray serializePublicKey(const QSharedPointer<CryptoPP::X509PublicKey> &pubKey) const {
 		return serializePublicKey(*(pubKey.data()));
 	}
+	QByteArray serializePublicKey(const CryptoPP::PKCS8PrivateKey &privKey) const;
+	inline QByteArray serializePublicKey(const QSharedPointer<CryptoPP::PKCS8PrivateKey> &privKey) const {
+		return serializePublicKey(*(privKey.data()));
+	}
 	QSharedPointer<CryptoPP::X509PublicKey> deserializePublicKey(CryptoPP::RandomNumberGenerator &rng,
 																 const QByteArray &data) const;
 

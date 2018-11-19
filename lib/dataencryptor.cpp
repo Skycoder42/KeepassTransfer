@@ -110,6 +110,13 @@ QByteArray DataEncryptor::serializePublicKey(const X509PublicKey &pubKey) const
 	return data;
 }
 
+QByteArray DataEncryptor::serializePublicKey(const PKCS8PrivateKey &privKey) const
+{
+	EciesScheme::PublicKey pubKey;
+	static_cast<const EciesScheme::PrivateKey &>(privKey).MakePublicKey(pubKey);
+	return serializePublicKey(pubKey);
+}
+
 QSharedPointer<X509PublicKey> DataEncryptor::deserializePublicKey(RandomNumberGenerator &rng, const QByteArray &data) const
 {
 	auto pubKey = QSharedPointer<EciesScheme::PublicKey>::create();

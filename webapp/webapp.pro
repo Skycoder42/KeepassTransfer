@@ -15,16 +15,19 @@ ADDED_IMPORTS += \
 
 SOURCES += \
 	main.cpp \
-	serverconnector.cpp
+	serverconnector.cpp \
+	iencoder.cpp \
+	qrencoder.cpp
 
 RESOURCES += qml.qrc
 
-include($$SRC_ROOT_DIR/3rdparty/qzxing/qzxing.pri)
-include($$SRC_ROOT_DIR/3rdparty/cryptopp/cryptopp.pri)
 include($$SRC_ROOT_DIR/lib/lib.pri)
+include($$SRC_ROOT_DIR/3rdparty/qzxing/qzxing.pri)
 
 HEADERS += \
-	serverconnector.h
+	serverconnector.h \
+	iencoder.h \
+	qrencoder.h
 
 html_install.files += $${TARGET}.html \
 	$${TARGET}.js \

@@ -20,20 +20,4 @@ ApplicationWindow {
 	}
 
 	ErrorDialog {}
-
-//	ColumnLayout {
-//		anchors.centerIn: parent
-
-//		Label {
-//			id: hLabel
-//			text: qsTr("Current status: %1\nAppId: %2")
-//				.arg(connector.connected ? "connected" : "disconnected")
-//				.arg(connector.appId)
-//		}
-
-//		Image {
-//			source: "image://QZXing/encode/" + hLabel.text;
-//			cache: false;
-//		}
-//	}
 }
