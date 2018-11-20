@@ -2,10 +2,10 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 	cryptopp \
-	qzxing
+	QR-Code-generator
 
 system_cryptopp: SUBDIRS -= cryptopp
 
 DISTFILES += \
 	cryptopp/cryptopp.pri \
-	qzxing/qzxing.pri
+	QR-Code-generator/QR-Code-generator.pri
