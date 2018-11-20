@@ -1,5 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
+import QtQuick.Controls.Material 2.4
 import QtQuick.Layouts 1.3
 import de.skycoder42.kpt 1.0
 
@@ -14,6 +15,7 @@ ScrollView {
 		QrEncoder {
 			id: encoder
 			curve: curveBox.model.get(curveBox.currentIndex).value
+			channelId: connector.appId
 		}
 
 		BrowserStorage {
@@ -84,7 +86,7 @@ ScrollView {
 					}
 
 					SpinBox {
-						id: heightBox
+						id: sizeBox
 						Layout.fillWidth: true
 						editable: true
 						from: 16
@@ -112,11 +114,11 @@ ScrollView {
 				Image {
 					source: "image://QZXing/encode/%2?format=qrcode&corretionLevel=%1"
 							.arg(ecBox.model.get(ecBox.currentIndex).value)
-							.arg(encoder.publicKey)
-					sourceSize: Qt.size(heightBox.value, heightBox.value)
+							.arg(encoder.qrData)
+					sourceSize: Qt.size(sizeBox.value, sizeBox.value)
 					cache: false
-					height: heightBox.value
-					width: height
+					height: sizeBox.value
+					width: sizeBox.value
 				}
 			}
 		}

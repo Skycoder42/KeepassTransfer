@@ -2,6 +2,7 @@
 #define QRENCODER_H
 
 #include <QObject>
+#include <QUuid>
 #include <QQmlParserStatus>
 #include <iencoder.h>
 
@@ -12,14 +13,16 @@ class QrEncoder : public IEncoder, public QQmlParserStatus
 
 	Q_PROPERTY(DataEncryptor::ECCCurve curve READ curve WRITE setCurve NOTIFY curveChanged)
 
-	Q_PROPERTY(QString publicKey READ publicKey NOTIFY publicKeyChanged)
-	Q_PROPERTY(bool valid READ isValid NOTIFY publicKeyChanged)
+	Q_PROPERTY(QUuid channelId READ channelId WRITE setChannelId NOTIFY qrDataChanged)
+	Q_PROPERTY(QString qrData READ qrData NOTIFY qrDataChanged)
+	Q_PROPERTY(bool valid READ isValid NOTIFY qrDataChanged)
 
 public:
 	explicit QrEncoder(QObject *parent = nullptr);
 
 	DataEncryptor::ECCCurve curve() const;
-	QString publicKey() const;
+	QUuid channelId() const;
+	QString qrData() const;
 	bool isValid() const;
 
 	void classBegin() override;
@@ -29,9 +32,10 @@ public slots:
 	void recreateKeys();
 
 	void setCurve(DataEncryptor::ECCCurve curve);
+	void setChannelId(QUuid channelId);
 
 signals:
-	void publicKeyChanged(QPrivateSignal);
+	void qrDataChanged(QPrivateSignal);
 	void curveChanged(DataEncryptor::ECCCurve curve);
 
 protected:
@@ -42,7 +46,10 @@ private:
 
 	bool _blocked = false;
 	QSharedPointer<CryptoPP::PKCS8PrivateKey> _privKey;
+	QUuid _channelId;
+
 	mutable QString _pubKey;
+	mutable QString _qrData;
 };
 
 #endif // QRENCODER_H

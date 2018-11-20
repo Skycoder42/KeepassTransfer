@@ -1,5 +1,6 @@
 #include "qrencoder.h"
 #include <QDebug>
+#include <QJsonDocument>
 using namespace CryptoPP;
 
 QrEncoder::QrEncoder(QObject *parent) :
@@ -13,18 +14,32 @@ DataEncryptor::ECCCurve QrEncoder::curve() const
 	return _curve;
 }
 
-QString QrEncoder::publicKey() const
+QUuid QrEncoder::channelId() const
+{
+	return _channelId;
+}
+
+QString QrEncoder::qrData() const
 {
 	try {
 		if(!_privKey)
 			return {};
 
 		if(_pubKey.isNull()) {
+			_qrData.clear();
 			auto baData = encryptor()->serializePublicKey(_privKey);
 			_pubKey = QString::fromUtf8(baData.toBase64());
 		}
 
-		return _pubKey;
+		if(_qrData.isNull()) {
+			QJsonObject qrObj {
+				{QStringLiteral("c"), _channelId.toString(QUuid::WithoutBraces)},
+				{QStringLiteral("k"), _pubKey}
+			};
+			_qrData = QString::fromUtf8(QJsonDocument{qrObj}.toJson(QJsonDocument::Compact));
+		}
+
+		return _qrData;
 	} catch(std::exception &e) {
 		qCritical() << "Failed to obtain public key from private key with error:"
 					<< e.what();
@@ -34,7 +49,7 @@ QString QrEncoder::publicKey() const
 
 bool QrEncoder::isValid() const
 {
-	return _privKey;
+	return _privKey && !_channelId.isNull();
 }
 
 void QrEncoder::classBegin()
@@ -57,9 +72,10 @@ void QrEncoder::recreateKeys()
 		//TODO make async
 		_privKey.clear();
 		_pubKey.clear();
-		emit publicKeyChanged({});
+		_qrData.clear();
+		emit qrDataChanged({});
 		_privKey = encryptor()->generateAsymKey(rng(), _curve);
-		emit publicKeyChanged({});
+		emit qrDataChanged({});
 	} catch(std::exception &e) {
 		qCritical() << "Failed to generate new private key with error:"
 					<< e.what();
@@ -74,6 +90,16 @@ void QrEncoder::setCurve(DataEncryptor::ECCCurve curve)
 	_curve = curve;
 	emit curveChanged(_curve);
 	recreateKeys();
+}
+
+void QrEncoder::setChannelId(QUuid channelId)
+{
+	if (_channelId == channelId)
+		return;
+
+	_channelId = std::move(channelId);
+	_qrData.clear();
+	emit qrDataChanged({});
 }
 
 QByteArray QrEncoder::decryptData(const QByteArray &keyInfo, const QByteArray &iv, const QByteArray &data) const

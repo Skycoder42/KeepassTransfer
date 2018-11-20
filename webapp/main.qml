@@ -7,8 +7,8 @@ import QtQuick.Controls.Material 2.4
 ApplicationWindow {
 	id: appWindow
 	visible: true
-	width: 640
-	height: 480
+	width: 960
+	height: width * 0.75
 	title: qsTr("KeePass Transfer")
 
 	StackView {

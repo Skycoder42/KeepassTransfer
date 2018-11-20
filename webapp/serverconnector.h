@@ -6,6 +6,7 @@
 
 #include <messages/serveridentmessage.h>
 #include <messages/errormessage.h>
+#include <messages/servertransfermessage.h>
 
 class ServerConnector : public QObject
 {
@@ -44,6 +45,7 @@ private:
 
 	void onServerIdent(const ServerIdentMessage message);
 	void onError(const ErrorMessage &message);
+	void onServerTransfer(const ServerTransferMessage &message);
 	void onFallback(int typeId);
 };
 

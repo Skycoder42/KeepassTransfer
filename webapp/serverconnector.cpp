@@ -1,6 +1,8 @@
 #include "serverconnector.h"
-#include <messages/appidentmessage.h>
 #include <QTimer>
+#include <messages/appidentmessage.h>
+#include <messages/appokmessage.h>
+#include "iencoder.h"
 
 ServerConnector::ServerConnector(QUrl url, QObject *parent) :
 	QObject{parent},
@@ -56,6 +58,7 @@ void ServerConnector::binaryMessageReceived(const QByteArray &message)
 	visitor.addFallbackVisitor(this, &ServerConnector::onFallback);
 	visitor.addVisitor(this, &ServerConnector::onServerIdent);
 	visitor.addVisitor(this, &ServerConnector::onError);
+	visitor.addVisitor(this, &ServerConnector::onServerTransfer);
 	visitor.visit(message);
 }
 
@@ -102,6 +105,19 @@ void ServerConnector::onError(const ErrorMessage &message)
 {
 	emit serverError(message.message);
 	_socket->close();
+}
+
+void ServerConnector::onServerTransfer(const ServerTransferMessage &message)
+{
+	auto data = IEncoder::decodeData(message.data);
+	if(data.isEmpty()){
+		_socket->sendBinaryMessage(KPTLib::serializeMessage(ErrorMessage{
+			tr("Invalid message data. WebApp was unable to decode the received data")
+		}));
+	} else {
+		_socket->sendBinaryMessage(KPTLib::serializeMessage(AppOkMessage{}));
+		qDebug() << data;
+	}
 }
 
 void ServerConnector::onFallback(int typeId)

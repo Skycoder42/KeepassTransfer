@@ -68,6 +68,11 @@ QVariant KPTLib::deserializeMessageImpl(const QByteArray &data)
 
 // visitor
 
+void KPTLib::MessageVisitor::clearVisitors()
+{
+	_visitors.clear();
+}
+
 void KPTLib::MessageVisitor::addFallbackVisitor(std::function<void(int)> visitor)
 {
 	_fallbackVisitor = std::move(visitor);

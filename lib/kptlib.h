@@ -16,6 +16,7 @@ public:
 		void addVisitor(const TFunc &visitor);
 		template <typename TMessage, typename TClass, typename... TArgs>
 		void addVisitor(TClass *object, void(TClass::*visitor)(TMessage, TArgs...), TArgs... args);
+		void clearVisitors();
 
 		void addFallbackVisitor(std::function<void(int)> visitor);
 		template <typename TClass, typename... TArgs>
