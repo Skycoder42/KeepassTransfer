@@ -8,7 +8,7 @@ ApplicationWindow {
 	id: appWindow
 	visible: true
 	width: 960
-	height: width * 0.75
+	height: 720
 	title: qsTr("KeePass Transfer")
 
 	StackView {
