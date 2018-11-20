@@ -55,7 +55,7 @@ ScrollView {
 						}
 						textRole: "key"
 
-						currentIndex: storage.value("curveIndex", 2)
+						currentIndex: storage.value("curveIndex", 4)
 						onCurrentIndexChanged: storage.setValue("curveIndex", currentIndex)
 					}
 
@@ -112,11 +112,12 @@ ScrollView {
 				visible: encoder.valid
 
 				Image {
-					source: "image://QZXing/encode/%2?format=qrcode&corretionLevel=%1"
+					source: "image://qrcode/%2?eccLevel=%1"
 							.arg(ecBox.model.get(ecBox.currentIndex).value)
 							.arg(encoder.qrData)
 					sourceSize: Qt.size(sizeBox.value, sizeBox.value)
 					cache: false
+					smooth: false
 					height: sizeBox.value
 					width: sizeBox.value
 				}

@@ -1,3 +1,6 @@
 [submodule "3rdparty/cryptopp/src"]
 	path = 3rdparty/cryptopp/src
 	url = https://github.com/weidai11/cryptopp
+[submodule "3rdparty/QR-Code-generator/src"]
+	path = 3rdparty/QR-Code-generator/src
+	url = https://github.com/nayuki/QR-Code-generator.git

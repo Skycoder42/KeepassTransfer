@@ -2,13 +2,13 @@
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QZXing.h>
 
 #include <serverconnector.h>
 #include <dataencryptor.h>
 
 #include "qrencoder.h"
 #include "browserstorage.h"
+#include "qrimageprovider.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationDisplayName(QStringLiteral(PROJECT_NAME));
 	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/locked.svg")}); //TODO dummy
 
-	QZXing::registerQMLTypes();
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 	qmlRegisterUncreatableType<DataEncryptor>("de.skycoder42.kpt", 1, 0, "DataEncryptor", {});
 	qmlRegisterType<QrEncoder>("de.skycoder42.kpt", 1, 0, "QrEncoder");
@@ -31,7 +30,7 @@ int main(int argc, char *argv[])
 	ServerConnector connector{QStringLiteral("ws://localhost:27352")};
 
 	QQmlApplicationEngine engine;
-	QZXing::registerQMLImageProvider(engine);
+	engine.addImageProvider(QStringLiteral("qrcode"), new QrImageProvider{});
 	engine.rootContext()->setContextProperty(QStringLiteral("connector"), &connector);
 
 	engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
