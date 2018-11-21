@@ -7,6 +7,7 @@ SUBDIRS += \
 	clients
 
 !cross_compile: SUBDIRS += server
+wasm: SUBDIRS -= clients
 
 lib.depends += 3rdparty
 webapp.depends += 3rdparty lib
