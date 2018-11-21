@@ -9,21 +9,21 @@ class CredentialsEditViewModel : public QtMvvm::ViewModel
 {
 	Q_OBJECT
 
-	Q_PROPERTY(QAbstractListModel* credentialsModel READ getCredentialsModel CONSTANT)
+	Q_PROPERTY(QMetaObjectModel* credentialsModel READ getCredentialsModel CONSTANT)
 
 public:
 	Q_INVOKABLE explicit CredentialsEditViewModel(QObject *parent = nullptr);
 
-	QGadgetListModel<Credential> *credentialsModel() const;
+	QGenericListModel<Credential> *credentialsModel() const;
 
 public slots:
 	void addEmptyEntry();
 	void commitCredentials();
 
 private:
-	QGadgetListModel<Credential> *_credModel;
+	QGenericListModel<Credential> *_credModel;
 
-	QAbstractListModel* getCredentialsModel() const;
+	QMetaObjectModel* getCredentialsModel() const;
 };
 
 #endif // CREDENTIALSEDITVIEWMODEL_H

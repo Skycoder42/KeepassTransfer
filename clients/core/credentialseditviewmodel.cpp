@@ -3,8 +3,9 @@
 
 CredentialsEditViewModel::CredentialsEditViewModel(QObject *parent) :
 	ViewModel{parent},
-	_credModel{new QGadgetListModel<Credential>{this}}
+	_credModel{new QGenericListModel<Credential>{this}}
 {
+	_credModel->setEditable(true);
 	addEmptyEntry();
 }
 
@@ -25,7 +26,7 @@ void CredentialsEditViewModel::commitCredentials()
 		qDebug() << cred.key() << cred.value() << cred.confidential();
 }
 
-QAbstractListModel *CredentialsEditViewModel::getCredentialsModel() const
+QMetaObjectModel *CredentialsEditViewModel::getCredentialsModel() const
 {
 	return credentialsModel();
 }
