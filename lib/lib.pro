@@ -15,7 +15,8 @@ HEADERS += \
 	messages/appokmessage.h \
 	messages/serverokmessage.h \
 	dataencryptor.h \
-    encrypteddata.h
+    encrypteddata.h \
+    credential.h
 
 SOURCES += \
 	kptlib.cpp \
@@ -27,7 +28,8 @@ SOURCES += \
 	messages/appokmessage.cpp \
 	messages/serverokmessage.cpp \
 	dataencryptor.cpp \
-    encrypteddata.cpp
+    encrypteddata.cpp \
+    credential.cpp
 
 DISTFILES += \
 	protocol.qmodel \

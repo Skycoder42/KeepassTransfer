@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/"/>
+    <qresource prefix="/qtmvvm/views"/>
+    <qresource prefix="/icons">
+        <file alias="send.svg">icons/baseline-send-24px.svg</file>
+        <file alias="add.svg">icons/baseline-add-24px.svg</file>
+    </qresource>
+</RCC>

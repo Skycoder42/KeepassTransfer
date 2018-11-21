@@ -2,7 +2,12 @@
     <qresource prefix="/">
         <file>App.qml</file>
     </qresource>
-	<qresource prefix="/qtmvvm/views">
+    <qresource prefix="/qtmvvm/views">
         <file>MainView.qml</file>
+        <file>CredentialsEditView.qml</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file alias="send.svg">icons/baseline-send-24px.svg</file>
+        <file alias="add.svg">icons/baseline-add-24px.svg</file>
     </qresource>
 </RCC>

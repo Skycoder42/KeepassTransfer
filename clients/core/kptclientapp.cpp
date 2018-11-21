@@ -1,6 +1,5 @@
 #include "kptclientapp.h"
-#include "mainviewmodel.h"
-
+#include "credentialseditviewmodel.h"
 #include <QGuiApplication>
 #include <QCommandLineParser>
 
@@ -34,6 +33,6 @@ int KPTClientApp::startApp(const QStringList &arguments)
 		return EXIT_SUCCESS;
 
 	//show a viewmodel to complete the startup
-	show<MainViewModel>();
+	show<CredentialsEditViewModel>();
 	return EXIT_SUCCESS;
 }

@@ -2,7 +2,7 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QtMvvmQuick/QuickPresenter>
 #include <kptclientapp.h>
-#include <mainviewmodel.h>
+#include <credentialseditviewmodel.h>
 
 QTMVVM_REGISTER_CORE_APP(KPTClientApp)
 
@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 
 	QtMvvm::QuickPresenter::getInputViewFactory(); //Workaround for QTBUG-69963
-	qmlRegisterUncreatableType<MainViewModel>("com.example.clients", 1, 0, "MainViewModel", "ViewModels cannot be created!");
+	qmlRegisterUncreatableType<CredentialsEditViewModel>("de.skycoder42.kpt", 1, 0, "CredentialsEditViewModel", QStringLiteral("ViewModels cannot be created!"));
 
 	QQmlApplicationEngine engine;
 	engine.load(QUrl(QStringLiteral("qrc:/App.qml")));

@@ -7,11 +7,13 @@ TARGET = $${PROJECT_TARGET}-core
 
 HEADERS += \
 	mainviewmodel.h \
-    kptclientapp.h
+	kptclientapp.h \
+	credentialseditviewmodel.h
 
 SOURCES += \
 	mainviewmodel.cpp \
-    kptclientapp.cpp
+	kptclientapp.cpp \
+	credentialseditviewmodel.cpp
 
 RESOURCES += \
 	clientscore.qrc
@@ -19,8 +21,12 @@ RESOURCES += \
 TRANSLATIONS += clients_core_de.ts \
 	clients_core_template.ts
 
-DISTFILES += $$TRANSLATIONS
-QTMVVM_TS_SETTINGS = settings.xml
-_never_true_condition: SOURCES += $$files($$PWD/.ts-dummy/*)
-# Uncomment the following line to automatically generated and update settings translations when building
-#PRE_TARGETDEPS += qtmvvm-tsgen
+SETTINGS_TRANSLATIONS = settings.xml
+
+DISTFILES += $$TRANSLATIONS \
+	qpmx.json
+
+include($$SRC_ROOT_DIR/lib/lib.pri)
+
+!ReleaseBuild:!DebugBuild:!system(qpmx -d $$shell_quote($$_PRO_FILE_PWD_) --qmake-run init $$QPMX_EXTRA_OPTIONS $$shell_quote($$QMAKE_QMAKE) $$shell_quote($$OUT_PWD)): error(qpmx initialization failed. Check the compilation log for details.)
+else: include($$OUT_PWD/qpmx_generated.pri)

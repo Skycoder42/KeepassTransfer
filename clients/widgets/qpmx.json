@@ -1,0 +1,16 @@
+{
+	"dependencies": [],
+	"license": {
+		"file": "",
+		"name": ""
+	},
+	"prcFile": "",
+	"priFile": "",
+	"priIncludes": [
+		"../core"
+	],
+	"publishers": {
+	},
+	"qbsFile": "",
+	"source": false
+}
