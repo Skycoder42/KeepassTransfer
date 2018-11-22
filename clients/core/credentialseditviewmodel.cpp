@@ -6,10 +6,18 @@ CredentialsEditViewModel::CredentialsEditViewModel(QObject *parent) :
 	_credModel{new QGenericListModel<Credential>{this}}
 {
 	_credModel->setEditable(true);
+	auto column = _credModel->addColumn(tr("Key"), "key");
+	_credModel->addRole(column, Qt::EditRole, "key");
+	column = _credModel->addColumn(tr("Value"), "value");
+	_credModel->addRole(column, Qt::EditRole, "value");
+	column = _credModel->addColumn(tr("Confidential"));
+	_credModel->addRole(column, Qt::CheckStateRole, "value");
+	//TODO add extra flags for checkable to work
+
 	addEmptyEntry();
 }
 
-QGadgetListModel<Credential> *CredentialsEditViewModel::credentialsModel() const
+QGenericListModel<Credential> *CredentialsEditViewModel::credentialsModel() const
 {
 	return _credModel;
 }

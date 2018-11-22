@@ -5,12 +5,15 @@ CONFIG += c++14
 
 TARGET = $${PROJECT_TARGET}-client
 
-HEADERS += mainwindow.h
+HEADERS += mainwindow.h \
+    credentialseditdialog.h
 
 SOURCES += main.cpp \
-	mainwindow.cpp
+	mainwindow.cpp \
+    credentialseditdialog.cpp
 
-FORMS += mainwindow.ui
+FORMS += mainwindow.ui \
+    credentialseditdialog.ui
 
 TRANSLATIONS += \
 	kpt_client_widgets_de.ts \
