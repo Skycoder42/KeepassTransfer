@@ -5,27 +5,15 @@
 #include <qgadgetlistmodel.h>
 #include <credential.h>
 
-class CredentialsModel : public QGenericListModel<Credential>
-{
-	Q_OBJECT
-
-public:
-	CredentialsModel(QObject *parent = nullptr);
-
-	Qt::ItemFlags flags(const QModelIndex& index) const override;
-
-protected:
-	QVariant originalData(const QModelIndex &index, int role) const override;
-	bool setOriginalData(const QModelIndex &index, const QVariant &value, int role) override;
-};
-
 class CredentialsEditViewModel : public QtMvvm::ViewModel
 {
 	Q_OBJECT
 
-	Q_PROPERTY(CredentialsModel* credentialsModel READ credentialsModel CONSTANT)
+	Q_PROPERTY(CredentialsEditViewModel::CredentialsModel* credentialsModel READ credentialsModel CONSTANT)
 
 public:
+	using CredentialsModel = QGenericListModel<Credential>;
+
 	Q_INVOKABLE explicit CredentialsEditViewModel(QObject *parent = nullptr);
 
 	CredentialsModel *credentialsModel() const;
@@ -36,6 +24,10 @@ public slots:
 
 private:
 	CredentialsModel *_credModel;
+
+	void setupModel();
 };
+
+Q_DECLARE_METATYPE(CredentialsEditViewModel::CredentialsModel*)
 
 #endif // CREDENTIALSEDITVIEWMODEL_H

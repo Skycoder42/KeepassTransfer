@@ -2,20 +2,26 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>CredentialsModel</name>
+    <name>CredentialsEditViewModel</name>
     <message>
-        <location filename="credentialseditviewmodel.cpp" line="+33"/>
+        <location filename="credentialseditviewmodel.cpp" line="+34"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+4"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+4"/>
+        <location line="+6"/>
         <source>Confidential</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Common</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

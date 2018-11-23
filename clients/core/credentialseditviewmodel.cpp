@@ -5,10 +5,11 @@ CredentialsEditViewModel::CredentialsEditViewModel(QObject *parent) :
 	ViewModel{parent},
 	_credModel{new CredentialsModel{this}}
 {
+	setupModel();
 	addEmptyEntry();
 }
 
-CredentialsModel *CredentialsEditViewModel::credentialsModel() const
+CredentialsEditViewModel::CredentialsModel *CredentialsEditViewModel::credentialsModel() const
 {
 	return _credModel;
 }
@@ -25,43 +26,35 @@ void CredentialsEditViewModel::commitCredentials()
 		qDebug() << cred.key() << cred.value() << cred.confidential();
 }
 
-
-CredentialsModel::CredentialsModel(QObject *parent) :
-	QGenericListModel{parent}
+void CredentialsEditViewModel::setupModel()
 {
-	setEditable(true);
-	auto column = addColumn(tr("Key"), "key");
-	addRole(column, Qt::EditRole, "key");
-	column = addColumn(tr("Value"), "value");
-	addRole(column, Qt::EditRole, "value");
-	column = addColumn(tr("Confidential"), "confidential");
-	addRole(column, Qt::CheckStateRole, "confidential");
-}
+	_credModel->setEditable(true);
 
-Qt::ItemFlags CredentialsModel::flags(const QModelIndex &index) const
-{
-	auto flags = QGenericListModel<Credential>::flags(index);
-	if(index.column() == 2) {
-		flags |= Qt::ItemIsUserCheckable;
-		flags &= ~Qt::ItemIsEditable;
-	}
-	return flags;
-}
+	// key column
+	auto column = _credModel->addColumn(tr("Key"), "key");
+	_credModel->addRole(column, Qt::EditRole, "key");
 
-QVariant CredentialsModel::originalData(const QModelIndex &index, int role) const
-{
-	//TODO move this conversion to QModelAliasBaseAdapter
-	//TODO should be possible to convert per orig role OR per alias column and role
-	auto resData = QGenericListModel<Credential>::originalData(index, role);
-	if(roleNames().value(role) == "confidential")
-		resData = QVariant::fromValue(resData.toBool() ? Qt::Checked : Qt::Unchecked);
-	return resData;
-}
+	// value column
+	column = _credModel->addColumn(tr("Value"), "value");
+	_credModel->addRole(column, Qt::EditRole, "value");
 
-bool CredentialsModel::setOriginalData(const QModelIndex &index, const QVariant &value, int role)
-{
-	if(roleNames().value(role) == "confidential")
-		return QGenericListModel<Credential>::setOriginalData(index, value.value<Qt::CheckState>() != Qt::Unchecked, role);
-	else
-		return QGenericListModel<Credential>::setOriginalData(index, value, role);
+	// confidential column
+	column = _credModel->addColumn(tr("Confidential"), "confidential");
+	_credModel->addRole(column, Qt::CheckStateRole, "confidential");
+	using Convert = CredentialsModel::Convert;
+	_credModel->setExtraFlags(column, Qt::ItemIsUserCheckable, Qt::ItemIsEditable);
+	_credModel->addAliasConverter(column, Qt::DisplayRole, [](Convert c, const QVariant &value){
+		if(c == Convert::Read)
+			return QVariant{value.toBool() ? tr("Confidential") : tr("Common")};
+		else
+			return QVariant{};
+	});
+	_credModel->addAliasConverter(column, Qt::CheckStateRole, [](Convert c, const QVariant &value){
+		if(c == Convert::Read)
+			return QVariant::fromValue(value.toBool() ? Qt::Checked : Qt::Unchecked);
+		else if(c == Convert::Write)
+			return QVariant{value.value<Qt::CheckState>() != Qt::Unchecked};
+		else
+			Q_UNREACHABLE();
+	});
 }
