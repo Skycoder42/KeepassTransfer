@@ -6,18 +6,18 @@ CONFIG += static
 TARGET = $${PROJECT_TARGET}-core
 
 HEADERS += \
-	mainviewmodel.h \
 	kptclientapp.h \
 	credentialseditviewmodel.h \
     encryptionservice.h \
-    transferselectionviewmodel.h
+    transferselectionviewmodel.h \
+    kptrootviewmodel.h
 
 SOURCES += \
-	mainviewmodel.cpp \
 	kptclientapp.cpp \
 	credentialseditviewmodel.cpp \
     encryptionservice.cpp \
-    transferselectionviewmodel.cpp
+    transferselectionviewmodel.cpp \
+    kptrootviewmodel.cpp
 
 RESOURCES += \
 	clientscore.qrc

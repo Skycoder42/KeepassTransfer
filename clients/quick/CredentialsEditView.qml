@@ -13,6 +13,12 @@ Page {
 			anchors.fill: parent
 			spacing: 0
 
+			ActionButton {
+				icon.name: "open-menu-symbolic"
+				icon.source: "qrc:/icons/menu.svg"
+				onClicked: QuickPresenter.toggleDrawer()
+			}
+
 			ToolBarLabel {
 				text: qsTr("Enter Credentials")
 				Layout.fillWidth: true

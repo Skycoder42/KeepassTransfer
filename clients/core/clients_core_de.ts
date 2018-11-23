@@ -4,7 +4,17 @@
 <context>
     <name>CredentialsEditViewModel</name>
     <message>
-        <location filename="credentialseditviewmodel.cpp" line="+35"/>
+        <location filename="credentialseditviewmodel.cpp" line="+23"/>
+        <source>Invalid Credentials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>You must enter at least one credential before you can continue!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>

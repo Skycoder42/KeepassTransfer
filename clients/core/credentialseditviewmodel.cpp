@@ -1,6 +1,6 @@
 #include "credentialseditviewmodel.h"
 #include "transferselectionviewmodel.h"
-#include <QDebug>
+#include <QtMvvmCore/Messages>
 
 CredentialsEditViewModel::CredentialsEditViewModel(QObject *parent) :
 	ViewModel{parent},
@@ -15,16 +15,23 @@ CredentialsEditViewModel::CredentialsModel *CredentialsEditViewModel::credential
 	return _credModel;
 }
 
-void CredentialsEditViewModel::addEmptyEntry()
-{
-	_credModel->addGadget({});
-}
-
-void CredentialsEditViewModel::commitCredentials()
+bool CredentialsEditViewModel::commitCredentials()
 {
 	auto creds = _credModel->gadgets();
 	Credential::filterOutEmpty(creds);
-	show<TransferSelectionViewModel>(TransferSelectionViewModel::params(creds));
+	if(creds.isEmpty()) {
+		QtMvvm::critical(tr("Invalid Credentials"),
+						 tr("You must enter at least one credential before you can continue!"));
+		return false;
+	} else {
+		show<TransferSelectionViewModel>(TransferSelectionViewModel::params(creds));
+		return true;
+	}
+}
+
+void CredentialsEditViewModel::addEmptyEntry()
+{
+	_credModel->addGadget({});
 }
 
 void CredentialsEditViewModel::setupModel()

@@ -32,26 +32,30 @@ QStandardItemModel *TransferSelectionViewModel::modeModel() const
 	return _modeModel;
 }
 
-void TransferSelectionViewModel::startTransfer(int index)
+bool TransferSelectionViewModel::startTransfer(int index)
 {
 	switch (index) {
 	case 0: //qrItem
 		qDebug() << "starting qrItem";
-		break;
+		return true;
 	case 1: //pubItem
 		qDebug() << "starting pubItem";
-		break;
+		return true;
 	case 2: //passItem
 		qDebug() << "starting passItem";
-		break;
+		return true;
 	default:
-		Q_UNREACHABLE();
+		qWarning() << "Unknown index" << index;
+		return false;
 	}
 }
 
-void TransferSelectionViewModel::startTransfer(const QModelIndex &index)
+bool TransferSelectionViewModel::startTransfer(const QModelIndex &index)
 {
-	startTransfer(index.row());
+	if(_modeModel->checkIndex(index, QStandardItemModel::CheckIndexOption::IndexIsValid))
+		return startTransfer(index.row());
+	else
+		return false;
 }
 
 void TransferSelectionViewModel::onInit(const QVariantHash &params)

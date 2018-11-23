@@ -10,9 +10,20 @@ Page {
 	property TransferSelectionViewModel viewModel: null
 
 	header: ContrastToolBar {
-		ToolBarLabel {
-			text: qsTr("Select a mode")
+		RowLayout {
 			anchors.fill: parent
+			spacing: 0
+
+			ActionButton {
+				icon.name: "open-menu-symbolic"
+				icon.source: "qrc:/icons/menu.svg"
+				onClicked: QuickPresenter.toggleDrawer()
+			}
+
+			ToolBarLabel {
+				text: qsTr("Select a mode")
+				Layout.fillWidth: true
+			}
 		}
 	}
 

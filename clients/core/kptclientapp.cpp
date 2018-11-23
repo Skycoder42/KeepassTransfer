@@ -2,7 +2,7 @@
 #include <QGuiApplication>
 #include <QCommandLineParser>
 #include <QtMvvmCore/ServiceRegistry>
-#include "credentialseditviewmodel.h"
+#include "kptrootviewmodel.h"
 #include "encryptionservice.h"
 
 KPTClientApp::KPTClientApp(QObject *parent) :
@@ -20,6 +20,11 @@ void KPTClientApp::performRegistrations()
 {
 	//if you are using a qt resource (e.g. "clientscore.qrc"), initialize it here
 	Q_INIT_RESOURCE(clientscore);
+
+	qRegisterMetaType<KptRootViewModel*>();
+
+	// register services
+	QtMvvm::ServiceRegistry::instance()->registerObject<EncryptionService>();
 }
 
 int KPTClientApp::startApp(const QStringList &arguments)
@@ -34,10 +39,7 @@ int KPTClientApp::startApp(const QStringList &arguments)
 	if(!autoParse(parser, arguments))
 		return EXIT_SUCCESS;
 
-	// register services
-	QtMvvm::ServiceRegistry::instance()->registerObject<EncryptionService>();
-
 	//show a viewmodel to complete the startup
-	show<CredentialsEditViewModel>();
+	show<KptRootViewModel>();
 	return EXIT_SUCCESS;
 }

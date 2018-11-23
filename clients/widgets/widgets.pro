@@ -5,15 +5,19 @@ CONFIG += c++14
 
 TARGET = $${PROJECT_TARGET}-client
 
-HEADERS += mainwindow.h \
-    credentialseditdialog.h
+HEADERS += \
+    kptrootwizard.h \
+    credentialseditpage.h \
+    transferselectionpage.h
 
 SOURCES += main.cpp \
-	mainwindow.cpp \
-    credentialseditdialog.cpp
+    kptrootwizard.cpp \
+    credentialseditpage.cpp \
+    transferselectionpage.cpp
 
-FORMS += mainwindow.ui \
-    credentialseditdialog.ui
+FORMS += \
+    credentialseditpage.ui \
+    transferselectionpage.ui
 
 TRANSLATIONS += \
 	kpt_client_widgets_de.ts \

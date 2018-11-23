@@ -8,6 +8,7 @@
 class CredentialsEditViewModel : public QtMvvm::ViewModel
 {
 	Q_OBJECT
+	QTMVVM_CONTAINER_VM(KptRootViewModel)
 
 	Q_PROPERTY(CredentialsEditViewModel::CredentialsModel* credentialsModel READ credentialsModel CONSTANT)
 
@@ -18,9 +19,10 @@ public:
 
 	CredentialsModel *credentialsModel() const;
 
+	Q_INVOKABLE bool commitCredentials();
+
 public slots:
 	void addEmptyEntry();
-	void commitCredentials();
 
 private:
 	CredentialsModel *_credModel;

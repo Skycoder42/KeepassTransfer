@@ -9,6 +9,7 @@
 class TransferSelectionViewModel : public QtMvvm::ViewModel
 {
 	Q_OBJECT
+	QTMVVM_CONTAINER_VM(KptRootViewModel)
 
 	Q_PROPERTY(QStandardItemModel* modeModel READ modeModel CONSTANT)
 
@@ -20,10 +21,10 @@ public:
 
 	QStandardItemModel* modeModel() const;
 
-public slots:
-	void startTransfer(int index);
-	void startTransfer(const QModelIndex &index);
+	Q_INVOKABLE bool startTransfer(int index);
+	bool startTransfer(const QModelIndex &index);
 
+public slots:
 	void onInit(const QVariantHash &params) override;
 
 private:

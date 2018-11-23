@@ -2,14 +2,20 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>CredentialsEditDialog</name>
+    <name>CredentialsEditPage</name>
     <message>
-        <location filename="credentialseditdialog.ui" line="+14"/>
+        <location filename="credentialseditpage.ui" line="+14"/>
+        <location line="+3"/>
         <source>Enter Credentials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+3"/>
+        <source>Enter the credentials to be sent to the target.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+67"/>
         <source>&amp;Add Entry</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20,20 +26,20 @@
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>TransferSelectionPage</name>
     <message>
-        <location filename="mainwindow.ui" line="+47"/>
-        <source>&amp;File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Settings</source>
+        <location filename="transferselectionpage.ui" line="+14"/>
+        <source>WizardPage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Ctrl+Alt+S</source>
+        <source>Select a mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select which backend you want to use to connect to the target and send the credentials.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

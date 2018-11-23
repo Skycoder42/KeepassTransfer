@@ -1,10 +1,10 @@
-#include "credentialseditdialog.h"
-#include "ui_credentialseditdialog.h"
+#include "credentialseditpage.h"
+#include "ui_credentialseditpage.h"
 
-CredentialsEditDialog::CredentialsEditDialog(QtMvvm::ViewModel *viewModel, QWidget *parent) :
-	QDialog{parent},
+CredentialsEditPage::CredentialsEditPage(QtMvvm::ViewModel *viewModel, QWidget *parent) :
+	QWizardPage{parent},
 	_viewModel{static_cast<CredentialsEditViewModel*>(viewModel)},
-	_ui{new Ui::CredentialsEditDialog{}}
+	_ui{new Ui::CredentialsEditPage{}}
 {
 	_ui->setupUi(this);
 
@@ -13,16 +13,16 @@ CredentialsEditDialog::CredentialsEditDialog(QtMvvm::ViewModel *viewModel, QWidg
 	connect(_ui->action_Add_Entry, &QAction::triggered,
 			_viewModel, &CredentialsEditViewModel::addEmptyEntry);
 
+	_ui->tableView->addAction(_ui->action_Add_Entry);
 	_ui->tableView->setModel(_viewModel->credentialsModel());
 	_ui->tableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Interactive);
 	_ui->tableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 	_ui->tableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
 }
 
-void CredentialsEditDialog::accept()
-{
-	_viewModel->commitCredentials();
-	QDialog::accept();
-}
+CredentialsEditPage::~CredentialsEditPage() = default;
 
-CredentialsEditDialog::~CredentialsEditDialog() = default;
+bool CredentialsEditPage::validatePage()
+{
+	return _viewModel->commitCredentials();
+}
