@@ -1,4 +1,5 @@
 #include "kptrootwizard.h"
+#include <QStringListModel>
 #include <QDebug>
 
 namespace {
@@ -21,8 +22,19 @@ private:
 }
 
 KptRootWizard::KptRootWizard(QtMvvm::ViewModel *viewModel, QWidget *parent) :
-	QWizard{parent}
-{}
+	QWizard{parent, Qt::Window | Qt::WindowCloseButtonHint | Qt::WindowMinMaxButtonsHint},
+	_viewModel{static_cast<KptRootViewModel*>(viewModel)}
+{
+	setOptions(QWizard::IndependentPages |
+			   QWizard::NoBackButtonOnStartPage |
+			   QWizard::HaveHelpButton);
+	setButtonText(QWizard::HelpButton, tr("About"));
+	connect(this, &QWizard::helpRequested,
+			_viewModel, &KptRootViewModel::about);
+#ifdef Q_OS_LINUX
+	setWizardStyle(ModernStyle);
+#endif
+}
 
 bool KptRootWizard::tryPresent(QWidget *view)
 {

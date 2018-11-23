@@ -7,9 +7,9 @@ TransferSelectionPage::TransferSelectionPage(QtMvvm::ViewModel *viewModel, QWidg
 	_ui{new Ui::TransferSelectionPage{}}
 {
 	_ui->setupUi(this);
-	setFinalPage(true);
-
 	_ui->listView->setModel(_viewModel->modeModel());
+	_ui->listView->selectionModel()->select(_viewModel->modeModel()->index(0, 0),
+											QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
 }
 
 bool TransferSelectionPage::validatePage()

@@ -36,6 +36,26 @@
     </message>
 </context>
 <context>
+    <name>KptRootViewModel</name>
+    <message>
+        <location filename="kptrootviewmodel.cpp" line="+11"/>
+        <source>A tool to securely transfer passwords and other credentials from any device to a remote computer for easy access anywhere.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>GPL v3</source>
+        <oldsource>GPL3</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <oldsource>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TransferSelectionViewModel</name>
     <message>
         <location filename="transferselectionviewmodel.cpp" line="+17"/>

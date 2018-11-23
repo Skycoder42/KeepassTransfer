@@ -5,6 +5,7 @@
 #include <QtMvvmCore/ViewModel>
 #include <QtMvvmWidgets/IPresentingView>
 #include <QtWidgets/QWizard>
+#include <kptrootviewmodel.h>
 
 class KptRootWizard : public QWizard, public QtMvvm::IPresentingView
 {
@@ -27,6 +28,8 @@ private slots:
 	void dropPage(int id);
 
 private:
+	KptRootViewModel *_viewModel;
+
 	int _pageCounter = 0;
 	QStack<int> _pageStack;
 

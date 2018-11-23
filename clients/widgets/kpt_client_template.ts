@@ -26,6 +26,14 @@
     </message>
 </context>
 <context>
+    <name>KptRootWizard</name>
+    <message>
+        <location filename="kptrootwizard.cpp" line="+31"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TransferSelectionPage</name>
     <message>
         <location filename="transferselectionpage.ui" line="+14"/>

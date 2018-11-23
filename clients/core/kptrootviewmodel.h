@@ -12,6 +12,8 @@ public:
 	Q_INVOKABLE explicit KptRootViewModel(QObject *parent = nullptr);
 
 public slots:
+	void about();
+
 	void onInit(const QVariantHash &params) override;
 };
 
