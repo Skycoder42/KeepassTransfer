@@ -4,7 +4,7 @@
 <context>
     <name>CredentialsEditViewModel</name>
     <message>
-        <location filename="credentialseditviewmodel.cpp" line="+34"/>
+        <location filename="credentialseditviewmodel.cpp" line="+35"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22,6 +22,39 @@
     <message>
         <location line="+0"/>
         <source>Common</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TransferSelectionViewModel</name>
+    <message>
+        <location filename="transferselectionviewmodel.cpp" line="+17"/>
+        <source>QR-Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Take a foto of a QR-Code with key data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Public Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enter a public key received from the target.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Choose a password and enter it here and on the target.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

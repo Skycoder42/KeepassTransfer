@@ -1,4 +1,5 @@
 #include "credentialseditviewmodel.h"
+#include "transferselectionviewmodel.h"
 #include <QDebug>
 
 CredentialsEditViewModel::CredentialsEditViewModel(QObject *parent) :
@@ -21,9 +22,9 @@ void CredentialsEditViewModel::addEmptyEntry()
 
 void CredentialsEditViewModel::commitCredentials()
 {
-	Q_UNIMPLEMENTED();
-	for(const auto &cred : _credModel->gadgets())
-		qDebug() << cred.key() << cred.value() << cred.confidential();
+	auto creds = _credModel->gadgets();
+	Credential::filterOutEmpty(creds);
+	show<TransferSelectionViewModel>(TransferSelectionViewModel::params(creds));
 }
 
 void CredentialsEditViewModel::setupModel()

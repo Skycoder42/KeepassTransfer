@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSharedData>
+#include <QDataStream>
 
 class CredentialData;
 class Credential
@@ -23,6 +24,8 @@ public:
 	Credential &operator=(Credential &&other) noexcept;
 	~Credential();
 
+	static void filterOutEmpty(QList<Credential> &credentials);
+
 	bool isValid() const;
 	explicit operator bool() const;
 	bool operator!() const;
@@ -39,8 +42,14 @@ public:
 	bool operator!=(const Credential &other) const;
 
 private:
+	friend QDataStream &operator<<(QDataStream &stream, const Credential &credential);
+	friend QDataStream &operator>>(QDataStream &stream, Credential &credential);
+
 	QSharedDataPointer<CredentialData> d;
 };
+
+QDataStream &operator<<(QDataStream &stream, const Credential &credential);
+QDataStream &operator>>(QDataStream &stream, Credential &credential);
 
 Q_DECLARE_METATYPE(Credential)
 Q_DECLARE_TYPEINFO(Credential, Q_MOVABLE_TYPE);

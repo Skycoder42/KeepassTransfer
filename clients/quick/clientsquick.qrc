@@ -5,6 +5,7 @@
     <qresource prefix="/qtmvvm/views">
         <file>MainView.qml</file>
         <file>CredentialsEditView.qml</file>
+        <file>TransferSelectionView.qml</file>
     </qresource>
     <qresource prefix="/icons">
         <file alias="send.svg">icons/baseline-send-24px.svg</file>

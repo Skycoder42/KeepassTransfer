@@ -39,9 +39,9 @@ public:
 	template <typename TMessage>
 	static QByteArray serializeMessage(const TMessage &message);
 
-private:
 	static void setupStream(QDataStream &stream);
 
+private:
 	static QByteArray serializeMessageImpl(const QVariant &message);
 	static QVariant deserializeMessageImpl(const QByteArray &data);
 };

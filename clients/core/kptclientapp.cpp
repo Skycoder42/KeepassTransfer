@@ -1,7 +1,9 @@
 #include "kptclientapp.h"
-#include "credentialseditviewmodel.h"
 #include <QGuiApplication>
 #include <QCommandLineParser>
+#include <QtMvvmCore/ServiceRegistry>
+#include "credentialseditviewmodel.h"
+#include "encryptionservice.h"
 
 KPTClientApp::KPTClientApp(QObject *parent) :
 	CoreApp{parent}
@@ -31,6 +33,9 @@ int KPTClientApp::startApp(const QStringList &arguments)
 	//shows help or version automatically
 	if(!autoParse(parser, arguments))
 		return EXIT_SUCCESS;
+
+	// register services
+	QtMvvm::ServiceRegistry::instance()->registerObject<EncryptionService>();
 
 	//show a viewmodel to complete the startup
 	show<CredentialsEditViewModel>();

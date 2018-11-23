@@ -8,12 +8,16 @@ TARGET = $${PROJECT_TARGET}-core
 HEADERS += \
 	mainviewmodel.h \
 	kptclientapp.h \
-	credentialseditviewmodel.h
+	credentialseditviewmodel.h \
+    encryptionservice.h \
+    transferselectionviewmodel.h
 
 SOURCES += \
 	mainviewmodel.cpp \
 	kptclientapp.cpp \
-	credentialseditviewmodel.cpp
+	credentialseditviewmodel.cpp \
+    encryptionservice.cpp \
+    transferselectionviewmodel.cpp
 
 RESOURCES += \
 	clientscore.qrc

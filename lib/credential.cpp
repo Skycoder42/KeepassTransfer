@@ -19,6 +19,16 @@ Credential::Credential(QString key, QString value, bool confidential) :
 	d{new CredentialData{std::move(key), std::move(value), confidential}}
 {}
 
+void Credential::filterOutEmpty(QList<Credential> &credentials)
+{
+	for(auto it = credentials.begin(); it != credentials.end();) {
+		if(it->isValid())
+			++it;
+		else
+			it = credentials.erase(it);
+	}
+}
+
 bool Credential::isValid() const
 {
 	return !d->key.isEmpty();
@@ -88,4 +98,20 @@ bool Credential::operator!=(const Credential &other) const
 				d->key != other.d->key ||
 				d->value != other.d->value ||
 				d->confidential != other.d->confidential);
+}
+
+QDataStream &operator<<(QDataStream &stream, const Credential &credential)
+{
+	stream << credential.d->key
+		   << credential.d->value
+		   << credential.d->confidential;
+	return stream;
+}
+
+QDataStream &operator>>(QDataStream &stream, Credential &credential)
+{
+	stream >> credential.d->key
+		   >> credential.d->value
+		   >> credential.d->confidential;
+	return stream;
 }

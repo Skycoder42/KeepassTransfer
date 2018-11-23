@@ -2,7 +2,9 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QtMvvmQuick/QuickPresenter>
 #include <kptclientapp.h>
+#include <encryptionservice.h>
 #include <credentialseditviewmodel.h>
+#include <transferselectionviewmodel.h>
 
 QTMVVM_REGISTER_CORE_APP(KPTClientApp)
 
@@ -13,7 +15,9 @@ int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 
 	QtMvvm::QuickPresenter::getInputViewFactory(); //Workaround for QTBUG-69963
+	qmlRegisterInterface<IClientEncryptor>("IClientEncryptor");
 	qmlRegisterUncreatableType<CredentialsEditViewModel>("de.skycoder42.kpt", 1, 0, "CredentialsEditViewModel", QStringLiteral("ViewModels cannot be created!"));
+	qmlRegisterUncreatableType<TransferSelectionViewModel>("de.skycoder42.kpt", 1, 0, "TransferSelectionViewModel", QStringLiteral("ViewModels cannot be created!"));
 
 	QQmlApplicationEngine engine;
 	engine.load(QUrl(QStringLiteral("qrc:/App.qml")));
