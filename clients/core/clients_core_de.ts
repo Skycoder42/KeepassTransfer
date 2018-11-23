@@ -2,9 +2,9 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>CredentialsEditViewModel</name>
+    <name>CredentialsModel</name>
     <message>
-        <location filename="credentialseditviewmodel.cpp" line="+9"/>
+        <location filename="credentialseditviewmodel.cpp" line="+33"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>

@@ -14,6 +14,9 @@ CredentialsEditDialog::CredentialsEditDialog(QtMvvm::ViewModel *viewModel, QWidg
 			_viewModel, &CredentialsEditViewModel::addEmptyEntry);
 
 	_ui->tableView->setModel(_viewModel->credentialsModel());
+	_ui->tableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Interactive);
+	_ui->tableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+	_ui->tableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
 }
 
 void CredentialsEditDialog::accept()

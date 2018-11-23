@@ -5,5 +5,7 @@
     <qresource prefix="/icons">
         <file alias="send.svg">icons/baseline-send-24px.svg</file>
         <file alias="add.svg">icons/baseline-add-24px.svg</file>
+        <file alias="locked.svg">icons/baseline-lock-24px.svg</file>
+        <file alias="unlocked.svg">icons/baseline-lock_open-24px.svg</file>
     </qresource>
 </RCC>

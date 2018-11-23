@@ -63,8 +63,13 @@ Page {
 						flat: true
 						checkable: true
 						icon.name: checked ? "lock" : "unlock"
+						icon.source: checked ? "qrc:/icons/locked.svg" : "qrc:/icons/unlocked.svg"
 						checked: confidential
 						onCheckedChanged: confidential = checked
+
+						ToolTip.visible: pressed
+						ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+						ToolTip.text:  checked ? qsTr("Condfidential") : qsTr("Common")
 					}
 				}
 			}
