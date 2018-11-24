@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += quick mvvmquick
+QT += quick mvvmquick websockets concurrent
 CONFIG += qtquickcompiler
 
 TARGET = $${PROJECT_TARGET}-app

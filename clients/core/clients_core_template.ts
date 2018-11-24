@@ -2,6 +2,47 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>ClientTransferService</name>
+    <message>
+        <location filename="clienttransferservice.cpp" line="+21"/>
+        <source>Transferring data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Encrypting and transferring credentials to the partner. Please wait…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <source>Transfer completed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Data was transferred to the client successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+11"/>
+        <location line="+9"/>
+        <source>Transfer failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-19"/>
+        <location line="+20"/>
+        <source>&lt;p&gt;Failed to transfer credentials to partner with error:&lt;/p&gt;&lt;p&gt;&lt;i&gt;%1&lt;/i&gt;&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-9"/>
+        <source>Failed to transfer credentials to partner. An invalid reply was received, the connection seems to have been cut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CredentialsEditViewModel</name>
     <message>
         <location filename="credentialseditviewmodel.cpp" line="+23"/>

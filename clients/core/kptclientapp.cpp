@@ -3,7 +3,7 @@
 #include <QCommandLineParser>
 #include <QtMvvmCore/ServiceRegistry>
 #include "kptrootviewmodel.h"
-#include "encryptionservice.h"
+#include "clienttransferservice.h"
 
 KPTClientApp::KPTClientApp(QObject *parent) :
 	CoreApp{parent}
@@ -24,7 +24,7 @@ void KPTClientApp::performRegistrations()
 	qRegisterMetaType<KptRootViewModel*>();
 
 	// register services
-	QtMvvm::ServiceRegistry::instance()->registerObject<EncryptionService>();
+	QtMvvm::ServiceRegistry::instance()->registerObject<ClientTransferService>();
 }
 
 int KPTClientApp::startApp(const QStringList &arguments)

@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-QT += mvvmcore
+QT += mvvmcore websockets concurrent
 CONFIG += static
 
 TARGET = $${PROJECT_TARGET}-core
@@ -8,16 +8,16 @@ TARGET = $${PROJECT_TARGET}-core
 HEADERS += \
 	kptclientapp.h \
 	credentialseditviewmodel.h \
-    encryptionservice.h \
-    transferselectionviewmodel.h \
-    kptrootviewmodel.h
+	transferselectionviewmodel.h \
+	kptrootviewmodel.h \
+	clienttransferservice.h
 
 SOURCES += \
 	kptclientapp.cpp \
 	credentialseditviewmodel.cpp \
-    encryptionservice.cpp \
-    transferselectionviewmodel.cpp \
-    kptrootviewmodel.cpp
+	transferselectionviewmodel.cpp \
+	kptrootviewmodel.cpp \
+	clienttransferservice.cpp
 
 RESOURCES += \
 	clientscore.qrc

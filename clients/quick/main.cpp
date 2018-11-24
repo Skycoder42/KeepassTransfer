@@ -2,7 +2,7 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QtMvvmQuick/QuickPresenter>
 #include <kptclientapp.h>
-#include <encryptionservice.h>
+#include <clienttransferservice.h>
 #include <kptrootviewmodel.h>
 #include <credentialseditviewmodel.h>
 #include <transferselectionviewmodel.h>

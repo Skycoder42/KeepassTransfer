@@ -1,23 +1,23 @@
 TEMPLATE = app
 
-QT += widgets mvvmwidgets
+QT += widgets mvvmwidgets websockets concurrent
 CONFIG += c++14
 
 TARGET = $${PROJECT_TARGET}-client
 
 HEADERS += \
-    kptrootwizard.h \
-    credentialseditpage.h \
-    transferselectionpage.h
+	kptrootwizard.h \
+	credentialseditpage.h \
+	transferselectionpage.h
 
 SOURCES += main.cpp \
-    kptrootwizard.cpp \
-    credentialseditpage.cpp \
-    transferselectionpage.cpp
+	kptrootwizard.cpp \
+	credentialseditpage.cpp \
+	transferselectionpage.cpp
 
 FORMS += \
-    credentialseditpage.ui \
-    transferselectionpage.ui
+	credentialseditpage.ui \
+	transferselectionpage.ui
 
 TRANSLATIONS += \
 	kpt_client_widgets_de.ts \
