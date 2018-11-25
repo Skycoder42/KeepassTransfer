@@ -10,14 +10,16 @@ HEADERS += \
 	credentialseditviewmodel.h \
 	transferselectionviewmodel.h \
 	kptrootviewmodel.h \
-	clienttransferservice.h
+	clienttransferservice.h \
+    qrcodeconnectorviewmodel.h
 
 SOURCES += \
 	kptclientapp.cpp \
 	credentialseditviewmodel.cpp \
 	transferselectionviewmodel.cpp \
 	kptrootviewmodel.cpp \
-	clienttransferservice.cpp
+	clienttransferservice.cpp \
+    qrcodeconnectorviewmodel.cpp
 
 RESOURCES += \
 	clientscore.qrc

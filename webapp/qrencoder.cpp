@@ -1,6 +1,7 @@
 #include "qrencoder.h"
 #include <QDebug>
-#include <QJsonDocument>
+#include <kptlib.h>
+#include <qrdata.h>
 using namespace CryptoPP;
 
 QrEncoder::QrEncoder(QObject *parent) :
@@ -27,17 +28,11 @@ QString QrEncoder::qrData() const
 
 		if(_pubKey.isNull()) {
 			_qrData.clear();
-			auto baData = encryptor()->serializePublicKey(_privKey);
-			_pubKey = QString::fromUtf8(baData.toBase64());
+			_pubKey = encryptor()->serializePublicKey(_privKey);
 		}
 
-		if(_qrData.isNull()) {
-			QJsonObject qrObj {
-				{QStringLiteral("c"), _channelId.toString(QUuid::WithoutBraces)},
-				{QStringLiteral("k"), _pubKey}
-			};
-			_qrData = QString::fromUtf8(QJsonDocument{qrObj}.toJson(QJsonDocument::Compact));
-		}
+		if(_qrData.isNull())
+			_qrData = QString::fromUtf8(KPTLib::encode(QrData{_channelId, _pubKey}, true));
 
 		return _qrData;
 	} catch(std::exception &e) {

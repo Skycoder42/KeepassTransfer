@@ -4,12 +4,12 @@
 #include <QObject>
 #include <QPointer>
 #include <QHash>
-#include <QJsonObject>
 
 #include <cryptopp/osrng.h>
 
 #include <encrypteddata.h>
 #include <dataencryptor.h>
+#include <credential.h>
 
 class IEncoder : public QObject
 {
@@ -18,7 +18,7 @@ class IEncoder : public QObject
 public:
 	explicit IEncoder(QObject *parent = nullptr);
 
-	static QJsonObject decodeData(const EncryptedData &data);
+	static QList<Credential> decodeData(const EncryptedData &data);
 
 protected:
 	static void registerEncoder(EncryptedData::DataMode mode, IEncoder *encoder);

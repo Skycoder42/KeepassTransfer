@@ -1,6 +1,16 @@
 #include "kptlib.h"
+#include "encrypteddata.h"
+#include "credential.h"
+#include "qrdata.h"
 
 const quint32 KPTLib::ProtocolVersion = 0x01;
+
+void KPTLib::setup()
+{
+	qRegisterMetaTypeStreamOperators<EncryptedData>();
+	qRegisterMetaTypeStreamOperators<Credential>();
+	qRegisterMetaTypeStreamOperators<QrData>();
+}
 
 void KPTLib::setupStream(QDataStream &stream)
 {

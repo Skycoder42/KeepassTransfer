@@ -16,7 +16,8 @@ HEADERS += \
 	messages/serverokmessage.h \
 	dataencryptor.h \
     encrypteddata.h \
-    credential.h
+    credential.h \
+    qrdata.h
 
 SOURCES += \
 	kptlib.cpp \
@@ -29,7 +30,8 @@ SOURCES += \
 	messages/serverokmessage.cpp \
 	dataencryptor.cpp \
     encrypteddata.cpp \
-    credential.cpp
+    credential.cpp \
+    qrdata.cpp
 
 DISTFILES += \
 	protocol.qmodel \

@@ -1,5 +1,5 @@
 #include "iencoder.h"
-#include <QJsonDocument>
+#include <kptlib.h>
 #include <QDebug>
 using namespace CryptoPP;
 
@@ -10,7 +10,7 @@ IEncoder::IEncoder(QObject *parent) :
 	_encryptor{new DataEncryptor{this}}
 {}
 
-QJsonObject IEncoder::decodeData(const EncryptedData &data)
+QList<Credential> IEncoder::decodeData(const EncryptedData &data)
 {
 	try {
 		auto encoder = _encoders.value(data.mode);
@@ -19,14 +19,8 @@ QJsonObject IEncoder::decodeData(const EncryptedData &data)
 			return {};
 		}
 
-		auto rawData = encoder->decryptData(data.keyInfo, data.iv, data.data);
-		QJsonParseError error;
-		auto jDoc = QJsonDocument::fromJson(rawData, &error);
-		if(error.error != QJsonParseError::NoError) {
-			qCritical().noquote() << "Failed to parse decrypted data with error:"
-								  << error.errorString();
-		}
-		return jDoc.object();
+		const auto rawData = encoder->decryptData(data.keyInfo, data.iv, data.data);
+		return KPTLib::decode<QList<Credential>>(rawData);
 	} catch(std::exception &e) {
 		qCritical() << "Failed to decrypt data with error:" << e.what();
 		return {};

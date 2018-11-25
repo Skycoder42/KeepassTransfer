@@ -10,4 +10,5 @@
         <file alias="menu.svg">icons/baseline-menu-24px.svg</file>
         <file alias="about.svg">icons/outline-info-24px.svg</file>
     </qresource>
+    <qresource prefix="/qtmvvm/views/helpers"/>
 </RCC>

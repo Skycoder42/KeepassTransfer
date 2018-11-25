@@ -56,15 +56,12 @@ EncryptedData ClientTransferService::encrypt(IClientEncryptor *clientCrypt, cons
 	return QtCoroutine::asyncAwait([this, clientCrypt, credentials](){
 		auto &rng = _rngs.localData();
 
-		QByteArray plain;
-		QDataStream stream{&plain, QIODevice::WriteOnly};
-		stream << credentials;
-
+		const auto plain = KPTLib::encode(credentials);
 		QByteArray iv{AES::BLOCKSIZE, Qt::Uninitialized};
 		rng.GenerateBlock(reinterpret_cast<byte*>(iv.data()), AES::BLOCKSIZE);
 		rng.DiscardBytes(qChecksum(plain.constData(), static_cast<uint>(plain.size())));
 		auto keys = clientCrypt->obtainKeys(rng);
-		auto cipher = _encryptor->encryptSymmetric({}, keys.first, iv);
+		auto cipher = _encryptor->encryptSymmetric(plain, keys.first, iv);
 
 		return EncryptedData {
 			clientCrypt->mode(),

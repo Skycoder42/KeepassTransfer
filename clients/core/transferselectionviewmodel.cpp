@@ -1,4 +1,5 @@
 #include "transferselectionviewmodel.h"
+#include <qrcodeconnectorviewmodel.h>
 #include <QDebug>
 
 const QString TransferSelectionViewModel::paramCred = QStringLiteral("credentials");
@@ -15,12 +16,8 @@ TransferSelectionViewModel::TransferSelectionViewModel(QObject *parent) :
 	_modeModel{new QStandardItemModel{0, 1, this}}
 {
 	auto qrItem = new QStandardItem{tr("QR-Code")};
-	qrItem->setToolTip(tr("Take a foto of a QR-Code with key data."));
+	qrItem->setToolTip(tr("Take a foto (or enter the contents) of a QR-Code with key data."));
 	_modeModel->appendRow(qrItem);
-
-	auto pubItem = new QStandardItem{tr("Public Key")};
-	pubItem->setToolTip(tr("Enter a public key received from the target."));
-	_modeModel->appendRow(pubItem);
 
 	auto passItem = new QStandardItem{tr("Passphrase")};
 	passItem->setToolTip(tr("Choose a password and enter it here and on the target."));
@@ -36,12 +33,9 @@ bool TransferSelectionViewModel::startTransfer(int index)
 {
 	switch (index) {
 	case 0: //qrItem
-		qDebug() << "starting qrItem";
+		show<QrCodeConnectorViewModel>(params(_credentials));
 		return true;
-	case 1: //pubItem
-		qDebug() << "starting pubItem";
-		return true;
-	case 2: //passItem
+	case 1: //passItem
 		qDebug() << "starting passItem";
 		return true;
 	default:
@@ -61,5 +55,4 @@ bool TransferSelectionViewModel::startTransfer(const QModelIndex &index)
 void TransferSelectionViewModel::onInit(const QVariantHash &params)
 {
 	_credentials = params.value(paramCred).value<QList<Credential>>();
-	qDebug() << _credentials.size();
 }

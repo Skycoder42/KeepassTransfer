@@ -48,7 +48,7 @@ private:
 	QSharedPointer<CryptoPP::PKCS8PrivateKey> _privKey;
 	QUuid _channelId;
 
-	mutable QString _pubKey;
+	mutable QByteArray _pubKey;
 	mutable QString _qrData;
 };
 

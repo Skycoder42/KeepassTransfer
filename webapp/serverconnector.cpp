@@ -116,7 +116,7 @@ void ServerConnector::onServerTransfer(const ServerTransferMessage &message)
 		}));
 	} else {
 		_socket->sendBinaryMessage(KPTLib::serializeMessage(AppOkMessage{}));
-		qDebug() << data;
+		qDebug() << data.size();
 	}
 }
 

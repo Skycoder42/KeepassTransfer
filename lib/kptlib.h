@@ -36,6 +36,13 @@ public:
 
 	static const quint32 ProtocolVersion;
 
+	static void setup();
+
+	template <typename TData>
+	static QByteArray encode(const TData &gadget, bool asBase64 = false);
+	template <typename TData>
+	static TData decode(const QByteArray &data, bool asBase64 = false);
+
 	template <typename TMessage>
 	static QByteArray serializeMessage(const TMessage &message);
 
@@ -45,6 +52,27 @@ private:
 	static QByteArray serializeMessageImpl(const QVariant &message);
 	static QVariant deserializeMessageImpl(const QByteArray &data);
 };
+
+template<typename TData>
+QByteArray KPTLib::encode(const TData &gadget, bool asBase64)
+{
+	QByteArray data;
+	QDataStream stream{&data, QIODevice::WriteOnly};
+	setupStream(stream);
+	stream << gadget;
+	return asBase64 ? data.toBase64() : data;
+}
+
+template<typename TData>
+TData KPTLib::decode(const QByteArray &data, bool asBase64)
+{
+	TData gadget;
+	QDataStream stream{asBase64 ? QByteArray::fromBase64(data) : data};
+	setupStream(stream);
+	stream.startTransaction();
+	stream >> gadget;
+	return stream.commitTransaction() ? gadget : TData{};
+}
 
 template<typename TMessage>
 QByteArray KPTLib::serializeMessage(const TMessage &message)

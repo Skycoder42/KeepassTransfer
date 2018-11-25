@@ -14,7 +14,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+60"/>
+        <location line="+57"/>
         <source>Transfer completed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -99,33 +99,25 @@
 <context>
     <name>TransferSelectionViewModel</name>
     <message>
-        <location filename="transferselectionviewmodel.cpp" line="+17"/>
+        <location filename="transferselectionviewmodel.cpp" line="+18"/>
         <source>QR-Code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Take a foto of a QR-Code with key data.</source>
+        <source>Take a foto (or enter the contents) of a QR-Code with key data.</source>
+        <oldsource>Take a foto of a QR-Code with key data.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Public Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Enter a public key received from the target.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Passphrase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Choose a password and enter it here and on the target.</source>
+        <oldsource>Enter a public key received from the target.</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Passphrase</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

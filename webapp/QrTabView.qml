@@ -111,15 +111,44 @@ ScrollView {
 				Layout.alignment: Qt.AlignCenter
 				visible: encoder.valid
 
-				Image {
-					source: "image://qrcode/%2?eccLevel=%1"
-							.arg(ecBox.model.get(ecBox.currentIndex).value)
-							.arg(encoder.qrData)
-					sourceSize: Qt.size(sizeBox.value, sizeBox.value)
-					cache: false
-					smooth: false
-					height: sizeBox.value
-					width: sizeBox.value
+				ColumnLayout {
+					anchors.fill: parent
+					spacing: 8
+
+					Image {
+						id: qrImage
+						source: "image://qrcode/%2?eccLevel=%1"
+								.arg(ecBox.model.get(ecBox.currentIndex).value)
+								.arg(encoder.qrData)
+						sourceSize: Qt.size(sizeBox.value, sizeBox.value)
+						cache: false
+						smooth: false
+						Layout.preferredWidth: sizeBox.value
+						Layout.preferredHeight: sizeBox.value
+					}
+
+					TextArea {
+						id: codeArea
+						Layout.fillWidth: true
+						Layout.preferredWidth: sizeBox.value
+						text: encoder.qrData
+						readOnly: true
+						selectByMouse: true
+						wrapMode: TextArea.WrapAnywhere
+						textFormat: TextEdit.PlainText
+
+						onPressed: {
+							codeArea.selectAll();
+							codeArea.copy();
+						}
+					}
+
+					Label {
+						opacity: 0.5
+						text: qsTr("Click the text to copy it to the clipboard")
+						font.italic: true
+						Layout.fillWidth: true
+					}
 				}
 			}
 		}

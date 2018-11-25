@@ -6,6 +6,7 @@
         <file>CredentialsEditView.qml</file>
         <file>TransferSelectionView.qml</file>
         <file>KptRootDrawer.qml</file>
+        <file>QrCodeConnectorView.qml</file>
     </qresource>
     <qresource prefix="/icons">
         <file alias="send.svg">icons/baseline-send-24px.svg</file>
@@ -14,5 +15,8 @@
         <file alias="unlocked.svg">icons/baseline-lock_open-24px.svg</file>
         <file alias="menu.svg">icons/baseline-menu-24px.svg</file>
         <file alias="about.svg">icons/outline-info-24px.svg</file>
+    </qresource>
+    <qresource prefix="/qtmvvm/views/helpers">
+        <file>QrTextInput.qml</file>
     </qresource>
 </RCC>
