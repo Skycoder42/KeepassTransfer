@@ -15,10 +15,12 @@ QDataStream &operator>>(QDataStream &stream, QrData &data)
 	stream >> data.channelId
 		   >> data.pubKey
 		   >> checksum;
-	if(checksum == data.calcChecksum())
-		stream.commitTransaction();
-	else
+	if(stream.status() != QDataStream::Ok)
+		stream.rollbackTransaction();
+	else if(checksum != data.calcChecksum())
 		stream.abortTransaction();
+	else
+		stream.commitTransaction();
 	return stream;
 }
 

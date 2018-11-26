@@ -24,7 +24,7 @@ public:
 	};
 	Q_ENUM(ECCCurve)
 
-	explicit DataEncryptor(QObject *parent = nullptr);
+	Q_INVOKABLE explicit DataEncryptor(QObject *parent = nullptr);
 
 	// symmetric encryption
 	QByteArray encryptSymmetric(const QByteArray &plain,

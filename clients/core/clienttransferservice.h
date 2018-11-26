@@ -5,6 +5,7 @@
 #include <QtCore/QThreadStorage>
 #include <QtWebSockets/QWebSocket>
 #include <QtMvvmCore/ProgressControl>
+#include <QtMvvmCore/Injection>
 #include <credential.h>
 #include <encrypteddata.h>
 #include <dataencryptor.h>
@@ -13,14 +14,13 @@
 #include <messages/serverokmessage.h>
 #include <messages/errormessage.h>
 
-class IClientEncryptor : public QObject
+class IClientEncryptor
 {
-	Q_OBJECT
-
+	Q_DISABLE_COPY(IClientEncryptor)
 public:
-	explicit IClientEncryptor(QObject *parent = nullptr);
+	IClientEncryptor();
+	virtual ~IClientEncryptor();
 
-	virtual QString name() const = 0;
 	virtual EncryptedData::DataMode mode() const = 0;
 	virtual QUuid channelId() const = 0;
 	virtual std::pair<CryptoPP::SecByteBlock, QByteArray> obtainKeys(CryptoPP::RandomNumberGenerator &rng) = 0;
@@ -29,6 +29,7 @@ public:
 class ClientTransferService : public QObject
 {
 	Q_OBJECT
+	QTMVVM_INJECT_PROP(DataEncryptor*, encryptor, _encryptor)
 
 public:
 	Q_INVOKABLE explicit ClientTransferService(QObject *parent = nullptr);
@@ -40,7 +41,7 @@ public slots:
 private:
 	static QThreadStorage<CryptoPP::AutoSeededRandomPool> _rngs;
 
-	DataEncryptor *_encryptor;
+	DataEncryptor *_encryptor = nullptr;
 
 	EncryptedData encrypt(IClientEncryptor *clientCrypt, const QList<Credential> &credentials);
 

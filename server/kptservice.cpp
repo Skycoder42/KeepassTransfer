@@ -1,6 +1,6 @@
 #include "kptservice.h"
 
-#include <QThread>
+#include <kptlib.h>
 
 KPTService::KPTService(int &argc, char **argv) :
 	Service{argc, argv}
@@ -13,6 +13,8 @@ KPTService::KPTService(int &argc, char **argv) :
 
 QtService::Service::CommandResult KPTService::onStart()
 {
+	KPTLib::setup();
+
 	_server = new TransferServer{this};
 
 	const auto hostName = QStringLiteral("localhost"); //TODO make configurable

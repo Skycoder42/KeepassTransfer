@@ -21,9 +21,12 @@ void KPTClientApp::performRegistrations()
 	//if you are using a qt resource (e.g. "clientscore.qrc"), initialize it here
 	Q_INIT_RESOURCE(clientscore);
 
+	KPTLib::setup();
+
 	qRegisterMetaType<KptRootViewModel*>();
 
 	// register services
+	QtMvvm::ServiceRegistry::instance()->registerObject<DataEncryptor>();
 	QtMvvm::ServiceRegistry::instance()->registerObject<ClientTransferService>();
 }
 

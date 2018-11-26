@@ -11,7 +11,8 @@ HEADERS += \
 	transferselectionviewmodel.h \
 	kptrootviewmodel.h \
 	clienttransferservice.h \
-    qrcodeconnectorviewmodel.h
+    qrcodeconnectorviewmodel.h \
+    qrclientencryptor.h
 
 SOURCES += \
 	kptclientapp.cpp \
@@ -19,7 +20,8 @@ SOURCES += \
 	transferselectionviewmodel.cpp \
 	kptrootviewmodel.cpp \
 	clienttransferservice.cpp \
-    qrcodeconnectorviewmodel.cpp
+    qrcodeconnectorviewmodel.cpp \
+    qrclientencryptor.cpp
 
 RESOURCES += \
 	clientscore.qrc

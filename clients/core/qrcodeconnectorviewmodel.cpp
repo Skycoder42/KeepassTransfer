@@ -12,12 +12,23 @@ QString QrCodeConnectorViewModel::qrData() const
 
 bool QrCodeConnectorViewModel::isValid() const
 {
-	return _qrData.isValid();
+	return _qrCryptor->qrData().isValid();
+}
+
+void QrCodeConnectorViewModel::transfer()
+{
+	if(!isValid())
+		return;
+
+	_transferService->sendCredentials(_qrCryptor, _credentials);
 }
 
 void QrCodeConnectorViewModel::onInit(const QVariantHash &params)
 {
 	Q_ASSERT(_transferService);
+	Q_ASSERT(_encryptor);
+	_qrCryptor = new QrClientEncryptor{_encryptor, this};
+
 	_credentials = params.value(TransferSelectionViewModel::paramCred).value<QList<Credential>>();
 }
 
@@ -27,6 +38,6 @@ void QrCodeConnectorViewModel::setQrData(QString qrData)
 		return;
 
 	_qrRawData = std::move(qrData);
-	_qrData = KPTLib::decode<QrData>(_qrRawData.toUtf8(), true);
+	_qrCryptor->setQrData(KPTLib::decode<QrData>(_qrRawData.trimmed().toUtf8(), true));
 	emit qrDataChanged({});
 }

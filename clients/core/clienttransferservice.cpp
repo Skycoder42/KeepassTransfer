@@ -10,44 +10,60 @@ using namespace CryptoPP;
 QThreadStorage<CryptoPP::AutoSeededRandomPool> ClientTransferService::_rngs;
 
 ClientTransferService::ClientTransferService(QObject *parent) :
-	QObject{parent},
-	_encryptor{new DataEncryptor{this}}
+	QObject{parent}
 {}
 
 void ClientTransferService::sendCredentials(IClientEncryptor *clientCrypt, const QList<Credential> &credentials)
 {
+	Q_ASSERT(_encryptor);
 	QtCoroutine::createAndRun([=](){
 		auto control = QtMvvm::showBusy(this,
 										tr("Transferring data"),
 										tr("Encrypting and transferring credentials to the partner. Please wait…"),
 										false);
 
-		ClientTransferMessage message;
-		message.channelId = clientCrypt->channelId();
-		message.data = encrypt(clientCrypt, credentials); //TODO make async
+		QWebSocket *socket = nullptr;
+		try {
+			ClientTransferMessage message;
+			message.channelId = clientCrypt->channelId();
+			message.data = encrypt(clientCrypt, credentials);
 
-		//TODO obtain origin/url from browser
-		const QUrl targetUrl{QStringLiteral("ws://localhost:27352")};
-		auto socket = new QWebSocket{targetUrl.authority(), QWebSocketProtocol::VersionLatest, this};
-		const auto cancelCon = connect(socket, &QWebSocket::destroyed,
-									   socket, std::bind(&QtCoroutine::cancel, QtCoroutine::current()));
-		connect(socket, &QWebSocket::disconnected,
-				socket, &QWebSocket::deleteLater);
-		connect(socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error),
-				this, std::bind(&ClientTransferService::onSocketError, this, socket, control));
+			//TODO obtain origin/url from browser
+			const QUrl targetUrl{QStringLiteral("ws://localhost:27352")};
+			socket = new QWebSocket{targetUrl.authority(), QWebSocketProtocol::VersionLatest, this};
+			const auto cancelCon = connect(socket, &QWebSocket::destroyed,
+										   socket, std::bind(&QtCoroutine::cancel, QtCoroutine::current()));
+			connect(socket, &QWebSocket::disconnected,
+					socket, &QWebSocket::deleteLater);
+			connect(socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error),
+					this, std::bind(&ClientTransferService::onSocketError, this, socket, control));
 
-		socket->open(targetUrl);
-		QtCoroutine::await(socket, &QWebSocket::connected);
-		socket->sendBinaryMessage(KPTLib::serializeMessage(message));
+			socket->open(targetUrl);
+			QtCoroutine::await(socket, &QWebSocket::connected);
+			socket->sendBinaryMessage(KPTLib::serializeMessage(message));
 
-		KPTLib::MessageVisitor visitor;
-		visitor.addFallbackVisitor(this, &ClientTransferService::onFallback, control);
-		visitor.addVisitor(this, &ClientTransferService::onServerOk, control);
-		visitor.addVisitor(this, &ClientTransferService::onError, control);
-		const auto ok = visitor.visit(QtCoroutine::awaitargs<QByteArray>::await(socket, &QWebSocket::binaryMessageReceived));
+			KPTLib::MessageVisitor visitor;
+			visitor.addFallbackVisitor(this, &ClientTransferService::onFallback, control);
+			visitor.addVisitor(this, &ClientTransferService::onServerOk, control);
+			visitor.addVisitor(this, &ClientTransferService::onError, control);
+			const auto ok = visitor.visit(QtCoroutine::awaitargs<QByteArray>::await(socket, &QWebSocket::binaryMessageReceived));
 
-		disconnect(cancelCon);
-		socket->close(ok ? QWebSocketProtocol::CloseCodeNormal : QWebSocketProtocol::CloseCodeBadOperation);
+			disconnect(cancelCon);
+			socket->close(ok ? QWebSocketProtocol::CloseCodeNormal : QWebSocketProtocol::CloseCodeBadOperation);
+		} catch(std::exception &e) {
+			qCritical() << "Exception thrown:" << e.what();
+			QMetaObject::invokeMethod(control, "close", Qt::QueuedConnection);
+			QtMvvm::critical(tr("Transfer failed!"),
+							 tr("An internal error occured. Unable to encrypt data."));
+
+			if(socket) {
+				if(socket->state() == QAbstractSocket::ConnectedState) {
+					const auto ok = QMetaObject::invokeMethod(socket, "close", Qt::QueuedConnection);
+					Q_ASSERT(ok); //TODO debug remove
+				} else
+					socket->deleteLater();
+			}
+		}
 	});
 }
 
@@ -63,6 +79,7 @@ EncryptedData ClientTransferService::encrypt(IClientEncryptor *clientCrypt, cons
 		auto keys = clientCrypt->obtainKeys(rng);
 		auto cipher = _encryptor->encryptSymmetric(plain, keys.first, iv);
 
+		//TODO test try/catch
 		return EncryptedData {
 			clientCrypt->mode(),
 			std::move(keys.second),
@@ -112,3 +129,9 @@ void ClientTransferService::onSocketError(QWebSocket *socket, QtMvvm::ProgressCo
 											  Q_ARG(QWebSocketProtocol::CloseCode, QWebSocketProtocol::CloseCodeProtocolError));
 	Q_ASSERT(ok); //TODO debug remove
 }
+
+
+
+IClientEncryptor::IClientEncryptor() = default;
+
+IClientEncryptor::~IClientEncryptor() = default;

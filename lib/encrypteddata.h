@@ -14,7 +14,7 @@ class EncryptedData
 	Q_PROPERTY(QByteArray data MEMBER data)
 
 public:
-	enum class DataMode {
+	enum class DataMode : int {
 		QrCode,
 		Password
 	};

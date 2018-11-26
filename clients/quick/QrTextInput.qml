@@ -59,6 +59,7 @@ Pane {
 			enabled: viewModel.valid
 			text: qsTr("Transfer")
 			highlighted: true
+			onClicked: viewModel.transfer()
 		}
 	}
 }

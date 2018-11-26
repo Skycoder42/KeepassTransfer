@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationDisplayName(QStringLiteral(PROJECT_NAME));
 	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/locked.svg")}); //TODO dummy
 
+	KPTLib::setup();
+
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 	qmlRegisterUncreatableType<DataEncryptor>("de.skycoder42.kpt", 1, 0, "DataEncryptor", {});
 	qmlRegisterType<QrEncoder>("de.skycoder42.kpt", 1, 0, "QrEncoder");

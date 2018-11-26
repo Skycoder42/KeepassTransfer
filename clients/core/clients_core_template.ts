@@ -14,7 +14,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+57"/>
+        <location line="+35"/>
+        <source>An internal error occured. Unable to encrypt data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+39"/>
         <source>Transfer completed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24,7 +29,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-41"/>
+        <location line="+47"/>
         <location line="+11"/>
         <location line="+9"/>
         <source>Transfer failed!</source>
