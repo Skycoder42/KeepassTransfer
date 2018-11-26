@@ -19,7 +19,7 @@ Page {
 			anchors.fill: parent
 			columnSpacing: 0
 			rowSpacing: 0
-			columns: 2
+			columns: 3
 
 			ActionButton {
 				icon.name: "open-menu-symbolic"
@@ -33,10 +33,19 @@ Page {
 				Layout.preferredHeight: 56
 			}
 
+			ActionButton {
+				id: focusButton
+				visible: swipeView.currentIndex == 0
+				text: qsTr("Let the camera Auto-Focus")
+				icon.name: "camera-photo"
+				icon.source: "qrc:/icons/focus.svg"
+				onClicked: imageInput.focusCamera()
+			}
+
 			TabBar {
 				id: inputBar
 				Layout.fillWidth: true
-				Layout.columnSpan: 2
+				Layout.columnSpan: 3
 				position: TabBar.Header
 				Material.background: Material.primary
 				currentIndex: swipeView.currentIndex
@@ -59,7 +68,10 @@ Page {
 		anchors.fill: parent
 		currentIndex: inputBar.currentIndex
 
-		Item {}
+		QrImageInput {
+			id: imageInput
+			viewModel: qrView.viewModel
+		}
 
 		QrTextInput {
 			id: textInput

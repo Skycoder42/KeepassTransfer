@@ -131,7 +131,7 @@ ScrollView {
 						id: codeArea
 						Layout.fillWidth: true
 						Layout.preferredWidth: sizeBox.value
-						text: encoder.qrData
+						text: encoder.qrData //TODO use monospace font
 						readOnly: true
 						selectByMouse: true
 						wrapMode: TextArea.WrapAnywhere
