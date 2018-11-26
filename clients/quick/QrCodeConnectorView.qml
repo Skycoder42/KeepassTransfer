@@ -5,21 +5,22 @@ import QtQuick.Layouts 1.3
 import de.skycoder42.QtMvvm.Core 1.1
 import de.skycoder42.QtMvvm.Quick 1.1
 import de.skycoder42.kpt 1.0
-import "helpers"
 
 Page {
 	id: qrView
 	property QrCodeConnectorViewModel viewModel: null
 
+	function captureImage() {
+		console.log("UNIMPLEMENTED");
+	}
+
 	header: ContrastToolBar {
 		height: headerLayout.implicitHeight
 
-		GridLayout {
+		RowLayout {
 			id: headerLayout
 			anchors.fill: parent
-			columnSpacing: 0
-			rowSpacing: 0
-			columns: 3
+			spacing: 0
 
 			ActionButton {
 				icon.name: "open-menu-symbolic"
@@ -34,48 +35,72 @@ Page {
 			}
 
 			ActionButton {
-				id: focusButton
-				visible: swipeView.currentIndex == 0
-				text: qsTr("Let the camera Auto-Focus")
+				text: qsTr("Take another image")
 				icon.name: "camera-photo"
-				icon.source: "qrc:/icons/focus.svg"
-				onClicked: imageInput.focusCamera()
-			}
-
-			TabBar {
-				id: inputBar
-				Layout.fillWidth: true
-				Layout.columnSpan: 3
-				position: TabBar.Header
-				Material.background: Material.primary
-				currentIndex: swipeView.currentIndex
-
-				TabButton {
-					text: qsTr("Take Image")
-				}
-
-				TabButton {
-					text: qsTr("Enter Text")
-				}
+				icon.source: "qrc:/icons/camera.svg"
+				onClicked: captureImage()
 			}
 		}
 	}
 
+	Component.onCompleted: captureImage()
+
 	PresenterProgress {}
 
-	SwipeView {
-		id: swipeView
+	Pane {
 		anchors.fill: parent
-		currentIndex: inputBar.currentIndex
+		GridLayout {
+			anchors.fill: parent
+			columns: 3
 
-		QrImageInput {
-			id: imageInput
-			viewModel: qrView.viewModel
-		}
+			ScrollView {
+				id: textScroller
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				Layout.columnSpan: 3
 
-		QrTextInput {
-			id: textInput
-			viewModel: qrView.viewModel
+				Flickable {
+					TextArea.flickable: TextArea {
+						id: codeArea
+						selectByMouse: true
+						selectByKeyboard: true
+						wrapMode: TextArea.WrapAnywhere
+						textFormat: TextEdit.PlainText
+
+						MvvmBinding {
+							viewModel: qrView.viewModel
+							viewModelProperty: "qrData"
+							view: codeArea
+							viewProperty: "text"
+							type: MvvmBinding.OneWayToViewModel
+						}
+					}
+				}
+			}
+
+			Label {
+				Layout.fillWidth: true
+				text: viewModel.valid ? qsTr("Content is valid") : qsTr("Content is invalid")
+				font.italic: true
+				color: viewModel.valid ? "green" : "red"
+			}
+
+			Button {
+				id: pasteBtn
+				text: qsTr("Paste")
+				onClicked: {
+					codeArea.clear();
+					codeArea.paste();
+				}
+			}
+
+			Button {
+				id: acceptBtn
+				enabled: viewModel.valid
+				text: qsTr("Transfer")
+				highlighted: true
+				onClicked: viewModel.transfer()
+			}
 		}
 	}
 }

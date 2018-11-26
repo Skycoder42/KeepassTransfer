@@ -15,10 +15,6 @@
         <file alias="unlocked.svg">icons/baseline-lock_open-24px.svg</file>
         <file alias="menu.svg">icons/baseline-menu-24px.svg</file>
         <file alias="about.svg">icons/outline-info-24px.svg</file>
-        <file alias="focus.svg">icons/baseline-center_focus_strong-24px.svg</file>
-    </qresource>
-    <qresource prefix="/qtmvvm/views/helpers">
-        <file>QrTextInput.qml</file>
-        <file>QrImageInput.qml</file>
+        <file alias="camera.svg">icons/baseline-photo_camera-24px.svg</file>
     </qresource>
 </RCC>

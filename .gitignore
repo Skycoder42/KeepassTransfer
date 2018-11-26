@@ -76,4 +76,4 @@ Thumbs.db
 *.tsdummy.cpp
 *.json.user
 .tsdummy.pro.dummy
-/gui/quick/syrem_quick_qmlcache.qrc
+*_qmlcache.qrc
