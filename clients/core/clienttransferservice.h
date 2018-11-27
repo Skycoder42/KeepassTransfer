@@ -3,6 +3,8 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QThreadStorage>
+#include <QtCore/QFutureWatcher>
+#include <QtCore/QPointer>
 #include <QtWebSockets/QWebSocket>
 #include <QtMvvmCore/ProgressControl>
 #include <QtMvvmCore/Injection>
@@ -38,17 +40,32 @@ public slots:
 	void sendCredentials(IClientEncryptor *clientCrypt,
 						 const QList<Credential> &credentials);
 
+private slots:
+	void connected();
+	void disconnected();
+	void binaryMessageReceived(const QByteArray &message);
+	void onSocketError();
+
+	void cryptDataReady();
+
 private:
 	static QThreadStorage<CryptoPP::AutoSeededRandomPool> _rngs;
 
 	DataEncryptor *_encryptor = nullptr;
 
+	QWebSocket *_currentSocket = nullptr;
+	QPointer<QtMvvm::ProgressControl> _currentControl = nullptr;
+	QFutureWatcher<EncryptedData> *_cryptWatcher = nullptr;
+	IClientEncryptor *_currentCrypt = nullptr;
+	bool _doSend = false;
+
 	EncryptedData encrypt(IClientEncryptor *clientCrypt, const QList<Credential> &credentials);
 
-	void onServerOk(const ServerOkMessage message, QtMvvm::ProgressControl *control);
-	void onError(const ErrorMessage &message, QtMvvm::ProgressControl *control);
-	void onFallback(int typeId, QtMvvm::ProgressControl *control);
-	void onSocketError(QWebSocket *socket, QtMvvm::ProgressControl *control);
+	void onServerOk(const ServerOkMessage message);
+	void onError(const ErrorMessage &message);
+	void onFallback(int typeId);
+
+	void sendData();
 };
 
 #define IClientEncryptorIid "de.skycoder42.kpt.IClientEncryptor"

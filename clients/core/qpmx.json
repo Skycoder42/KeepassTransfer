@@ -1,26 +1,21 @@
 {
-    "dependencies": [
-        {
-            "package": "de.skycoder42.qobjectlistmodel",
-            "provider": "qpm",
-            "version": "2.1.0"
-        },
-        {
-            "package": "de.skycoder42.qtcoroutines",
-            "provider": "qpm",
-            "version": "1.1.2"
-        }
-    ],
-    "license": {
-        "file": "",
-        "name": ""
-    },
-    "prcFile": "",
-    "priFile": "",
-    "priIncludes": [
-    ],
-    "publishers": {
-    },
-    "qbsFile": "",
-    "source": false
+	"dependencies": [
+		{
+			"package": "de.skycoder42.qobjectlistmodel",
+			"provider": "qpm",
+			"version": "2.1.0"
+		}
+	],
+	"license": {
+		"file": "",
+		"name": ""
+	},
+	"prcFile": "",
+	"priFile": "",
+	"priIncludes": [
+	],
+	"publishers": {
+	},
+	"qbsFile": "",
+	"source": false
 }
