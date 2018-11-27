@@ -34,7 +34,7 @@ void ClientTransferService::sendCredentials(IClientEncryptor *clientCrypt, const
 									   false);
 
 	// step 2: initiate the connection
-	const QUrl targetUrl{QStringLiteral("ws://localhost:27352")};
+	const QUrl targetUrl{QStringLiteral("ws://192.168.179.37:27352")}; //TODO get from settings
 	_currentSocket = new QWebSocket{targetUrl.authority(), QWebSocketProtocol::VersionLatest, this};
 	connect(_currentSocket, &QWebSocket::connected,
 			this, &ClientTransferService::connected);
@@ -95,6 +95,7 @@ void ClientTransferService::binaryMessageReceived(const QByteArray &message)
 
 void ClientTransferService::onSocketError()
 {
+	_doSend = false;
 	if(_currentSocket)
 		qWarning() << "Socket-Error:" << _currentSocket->error();
 	_currentControl->close();

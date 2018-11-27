@@ -23,7 +23,7 @@ QtService::Service::CommandResult KPTService::onStart()
 	if(socket != -1)
 		ok = _server->startServer(hostName, socket);
 	else
-		ok = _server->startServer(hostName, true, 27352); //TODO make configurable
+		ok = _server->startServer(hostName, false, 27352); //TODO make configurable
 	if(!ok)
 		return OperationFailed;
 
