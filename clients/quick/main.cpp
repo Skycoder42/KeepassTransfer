@@ -7,6 +7,7 @@
 #include <credentialseditviewmodel.h>
 #include <transferselectionviewmodel.h>
 #include <qrcodeconnectorviewmodel.h>
+#include <qrcodescanner.h>
 
 QTMVVM_REGISTER_CORE_APP(KPTClientApp)
 
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
 
 	QtMvvm::QuickPresenter::getInputViewFactory(); //Workaround for QTBUG-69963
 	qmlRegisterInterface<IClientEncryptor>("IClientEncryptor");
+	qmlRegisterType<QrCodeScanner>("de.skycoder42.kpt", 1, 0, "QrCodeScanner");
 	qmlRegisterUncreatableType<KptRootViewModel>("de.skycoder42.kpt", 1, 0, "KptRootViewModel", QStringLiteral("ViewModels cannot be created!"));
 	qmlRegisterUncreatableType<CredentialsEditViewModel>("de.skycoder42.kpt", 1, 0, "CredentialsEditViewModel", QStringLiteral("ViewModels cannot be created!"));
 	qmlRegisterUncreatableType<TransferSelectionViewModel>("de.skycoder42.kpt", 1, 0, "TransferSelectionViewModel", QStringLiteral("ViewModels cannot be created!"));

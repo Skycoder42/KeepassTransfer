@@ -1,11 +1,13 @@
 TEMPLATE = app
 
 QT += quick mvvmquick websockets concurrent
+android: QT += androidextras
 CONFIG += qtquickcompiler
 
 TARGET = $${PROJECT_TARGET}-app
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+	qrcodescanner.cpp
 
 RESOURCES += \
 	clientsquick.qrc
@@ -14,13 +16,14 @@ TRANSLATIONS += \
 	kpt_client_quick_de.ts \
 	kpt_client_quick_template.ts
 
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
 DISTFILES += $$TRANSLATIONS \
 	qpmx.json \
 	android/AndroidManifest.xml \
-	android/res/values/libs.xml \
+	$$files(android/src/*, true) \
+	$$files(android/res/*, true) \
 	android/build.gradle
-
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 # Link with core project
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -l$${PROJECT_TARGET}-core
@@ -40,3 +43,6 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../core/lib$${PROJECT_TARGET}-core.a
 else: include($$OUT_PWD/qpmx_generated.pri)
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
+
+HEADERS += \
+	qrcodescanner.h

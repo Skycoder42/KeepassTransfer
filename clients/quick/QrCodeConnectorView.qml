@@ -10,8 +10,12 @@ Page {
 	id: qrView
 	property QrCodeConnectorViewModel viewModel: null
 
+	QrCodeScanner {
+		id: scanner
+	}
+
 	function captureImage() {
-		console.log("UNIMPLEMENTED");
+		scanner.initiateScan();
 	}
 
 	header: ContrastToolBar {
