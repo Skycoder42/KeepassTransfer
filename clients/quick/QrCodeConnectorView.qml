@@ -36,6 +36,11 @@ Page {
 		}
 	}
 
+	Connections {
+		target: viewModel.transferService
+		onTransferCompleted: Qt.quit() // TODO quit or return to credentials VM
+	}
+
 	header: ContrastToolBar {
 		height: headerLayout.implicitHeight
 
@@ -57,6 +62,7 @@ Page {
 			}
 
 			ActionButton {
+				id: scanButton
 				visible: scanner.canScan
 				text: qsTr("Take another image")
 				icon.name: "camera-photo"
@@ -127,6 +133,8 @@ Page {
 				onClicked: {
 					codeArea.clear();
 					codeArea.paste();
+					if(viewModel.valid)
+						viewModel.transfer();
 				}
 			}
 		}

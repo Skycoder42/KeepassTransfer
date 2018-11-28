@@ -14,7 +14,8 @@ class QrCodeConnectorViewModel : public QtMvvm::ViewModel
 	QTMVVM_CONTAINER_VM(KptRootViewModel)
 
 	QTMVVM_INJECT_PROP(DataEncryptor*, encryptor, _encryptor)
-	QTMVVM_INJECT_PROP(ClientTransferService*, transferService, _transferService)
+	Q_PROPERTY(ClientTransferService* transferService MEMBER _transferService NOTIFY transferServiceChanged)
+	QTMVVM_INJECT(ClientTransferService*, transferService)
 
 	Q_PROPERTY(QString qrData READ qrData WRITE setQrData NOTIFY qrDataChanged)
 	Q_PROPERTY(bool valid READ isValid NOTIFY qrDataChanged)
@@ -34,6 +35,7 @@ public slots:
 
 signals:
 	void qrDataChanged(QPrivateSignal);
+	void transferServiceChanged(ClientTransferService *transferService);
 
 private:
 	DataEncryptor *_encryptor = nullptr;

@@ -31,7 +31,9 @@ void ClientTransferService::sendCredentials(IClientEncryptor *clientCrypt, const
 	_currentControl = QtMvvm::showBusy(this,
 									   tr("Transferring data"),
 									   tr("Encrypting and transferring credentials to the partner. Please wait…"),
-									   false);
+									   true);
+	connect(_currentControl, &QtMvvm::ProgressControl::canceled,
+			this, &ClientTransferService::userCanceled);
 
 	// step 2: initiate the connection
 	const QUrl targetUrl{QStringLiteral("ws://192.168.179.37:27352")}; //TODO get from settings
@@ -99,6 +101,7 @@ void ClientTransferService::onSocketError()
 	if(_currentSocket)
 		qWarning() << "Socket-Error:" << _currentSocket->error();
 	_currentControl->close();
+	_currentControl.clear();
 	QtMvvm::critical(tr("Transfer failed!"),
 					 tr("<p>Failed to transfer credentials to partner with error:</p>"
 						"<p><i>%1</i></p>")
@@ -112,6 +115,15 @@ void ClientTransferService::cryptDataReady()
 	// step 4: send the data (if already connected)
 	if(_doSend && _currentSocket->state() == QAbstractSocket::ConnectedState)
 		sendData();
+}
+
+void ClientTransferService::userCanceled()
+{
+	_doSend = false;
+	_currentControl->close();
+	_currentControl.clear();
+	if(_currentSocket)
+		_currentSocket->close();
 }
 
 EncryptedData ClientTransferService::encrypt(IClientEncryptor *clientCrypt, const QList<Credential> &credentials)
@@ -139,7 +151,10 @@ void ClientTransferService::onServerOk(const ServerOkMessage message)
 	_currentControl->close();
 	_currentControl.clear();
 	QtMvvm::information(tr("Transfer completed!"),
-						tr("Data was transferred to the client successfully"));
+						tr("Data was transferred to the client successfully"),
+						this, [this](){
+		QMetaObject::invokeMethod(this, "transferCompleted", Qt::QueuedConnection);
+	});
 	_currentSocket->close();
 }
 

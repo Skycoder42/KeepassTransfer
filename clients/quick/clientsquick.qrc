@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>App.qml</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
     <qresource prefix="/qtmvvm/views">
         <file>CredentialsEditView.qml</file>

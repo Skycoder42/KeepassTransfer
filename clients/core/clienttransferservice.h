@@ -40,6 +40,9 @@ public slots:
 	void sendCredentials(IClientEncryptor *clientCrypt,
 						 const QList<Credential> &credentials);
 
+signals:
+	void transferCompleted();
+
 private slots:
 	void connected();
 	void disconnected();
@@ -47,6 +50,7 @@ private slots:
 	void onSocketError();
 
 	void cryptDataReady();
+	void userCanceled();
 
 private:
 	static QThreadStorage<CryptoPP::AutoSeededRandomPool> _rngs;

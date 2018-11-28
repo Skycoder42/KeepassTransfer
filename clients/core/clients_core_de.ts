@@ -14,12 +14,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+149"/>
+        <location line="+164"/>
         <source>An internal error occured. Unable to encrypt data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-41"/>
+        <location line="-44"/>
         <source>Transfer completed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29,15 +29,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-40"/>
-        <location line="+48"/>
+        <location line="-49"/>
+        <location line="+60"/>
         <location line="+13"/>
         <location line="+18"/>
         <source>Transfer failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-164"/>
+        <location line="-179"/>
         <source>Already transferring data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,18 +47,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+85"/>
-        <location line="+48"/>
+        <location line="+88"/>
+        <location line="+60"/>
         <source>&lt;p&gt;Failed to transfer credentials to partner with error:&lt;/p&gt;&lt;p&gt;&lt;i&gt;%1&lt;/i&gt;&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-44"/>
+        <location line="-56"/>
         <source>Unknown Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+57"/>
+        <location line="+69"/>
         <source>Failed to transfer credentials to partner. An invalid reply was received, the connection seems to have been cut.</source>
         <translation type="unfinished"></translation>
     </message>
