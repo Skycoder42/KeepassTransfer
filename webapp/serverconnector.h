@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QWebSocket>
 
+#include <credential.h>
 #include <messages/serveridentmessage.h>
 #include <messages/errormessage.h>
 #include <messages/servertransfermessage.h>
@@ -23,6 +24,7 @@ public:
 	QUuid appId() const;
 
 signals:
+	void credentialsReceived(const QVariantList &receivedCreds);
 	void serverError(const QString &message);
 
 	void connectedChanged(bool connected, QPrivateSignal);

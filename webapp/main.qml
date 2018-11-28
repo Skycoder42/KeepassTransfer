@@ -16,6 +16,20 @@ ApplicationWindow {
 		anchors.fill: parent
 		initialItem: MainView {
 		}
+
+		Component {
+			id: credentialsViewComponent
+			CredentialsView {}
+		}
+
+		Connections {
+			target: connector
+			onCredentialsReceived: {
+				mainStack.push(credentialsViewComponent, {
+								   credentials: receivedCreds
+							   });
+			}
+		}
 	}
 
 	ErrorDialog {}

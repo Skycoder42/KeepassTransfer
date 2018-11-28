@@ -109,14 +109,18 @@ void ServerConnector::onError(const ErrorMessage &message)
 
 void ServerConnector::onServerTransfer(const ServerTransferMessage &message)
 {
-	auto data = IEncoder::decodeData(message.data);
-	if(data.isEmpty()){
+	const auto credentials = IEncoder::decodeData(message.data);
+	if(credentials.isEmpty()){
 		_socket->sendBinaryMessage(KPTLib::serializeMessage(ErrorMessage{
 			tr("Invalid message data. WebApp was unable to decode the received data")
 		}));
 	} else {
 		_socket->sendBinaryMessage(KPTLib::serializeMessage(AppOkMessage{}));
-		qDebug() << data.size();
+		QVariantList credList;
+		credList.reserve(credentials.size());
+		for(const auto &cred : credentials)
+			credList.append(QVariant::fromValue(cred));
+		emit credentialsReceived(credList);
 	}
 }
 

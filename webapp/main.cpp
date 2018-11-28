@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 
 	KPTLib::setup();
 
+	qmlRegisterUncreatableType<Credential>("de.skycoder42.kpt", 1, 0, "Credential", {});
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 	qmlRegisterUncreatableType<DataEncryptor>("de.skycoder42.kpt", 1, 0, "DataEncryptor", {});
 	qmlRegisterType<QrEncoder>("de.skycoder42.kpt", 1, 0, "QrEncoder");

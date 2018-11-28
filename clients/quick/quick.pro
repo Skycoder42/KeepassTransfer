@@ -2,7 +2,7 @@ TEMPLATE = app
 
 QT += quick mvvmquick websockets concurrent
 android: QT += androidextras
-CONFIG += qtquickcompiler
+CONFIG(release, debug|release): CONFIG += qtquickcompiler
 
 TARGET = $${PROJECT_TARGET}-app
 

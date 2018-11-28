@@ -3,7 +3,7 @@ TEMPLATE = app
 TARGET = $${PROJECT_TARGET}-webapp
 
 QT += quick websockets svg quickcontrols2
-CONFIG += qtquickcompiler
+CONFIG(release, debug|release): CONFIG += qtquickcompiler
 
 QTPLUGIN.imageformats = qsvg
 
@@ -18,14 +18,14 @@ HEADERS += \
 	iencoder.h \
 	qrencoder.h \
 	browserstorage.h \
-    qrimageprovider.h
+	qrimageprovider.h
 
 SOURCES += \
 	main.cpp \
 	serverconnector.cpp \
 	iencoder.cpp \
 	qrencoder.cpp \
-    qrimageprovider.cpp
+	qrimageprovider.cpp
 
 RESOURCES += \
 	webapp.qrc
