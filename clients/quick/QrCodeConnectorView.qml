@@ -10,12 +10,30 @@ Page {
 	id: qrView
 	property QrCodeConnectorViewModel viewModel: null
 
-	QrCodeScanner {
-		id: scanner
+	function closeAction() {
+		if(scanner.scanning) {
+			scanner.scanning = false;
+			return true;
+		} else
+			return false;
 	}
 
-	function captureImage() {
-		scanner.initiateScan();
+	QrCodeScanner {
+		id: scanner
+
+		property bool scanning: false
+
+		onScanResultReady: {
+			scanning = (scanResult == "");
+			codeArea.text = scanResult
+			if(viewModel.valid)
+				viewModel.transfer();
+		}
+
+		function startScan() {
+			scanning = true;
+			initiateScan();
+		}
 	}
 
 	header: ContrastToolBar {
@@ -39,15 +57,28 @@ Page {
 			}
 
 			ActionButton {
+				visible: scanner.canScan
 				text: qsTr("Take another image")
 				icon.name: "camera-photo"
 				icon.source: "qrc:/icons/camera.svg"
-				onClicked: captureImage()
+				onClicked: scanner.startScan()
+			}
+
+			ActionButton {
+				text: qsTr("Send")
+				display: ToolButton.TextBesideIcon
+				enabled: viewModel.valid
+				icon.name: "mail-send"
+				icon.source: "qrc:/icons/send.svg"
+				onClicked: viewModel.transfer()
 			}
 		}
 	}
 
-	Component.onCompleted: captureImage()
+	Component.onCompleted: {
+		if(scanner.canScan)
+			scanner.startScan();
+	}
 
 	PresenterProgress {}
 
@@ -55,13 +86,13 @@ Page {
 		anchors.fill: parent
 		GridLayout {
 			anchors.fill: parent
-			columns: 3
+			columns: 2
 
 			ScrollView {
 				id: textScroller
 				Layout.fillWidth: true
 				Layout.fillHeight: true
-				Layout.columnSpan: 3
+				Layout.columnSpan: 2
 
 				Flickable {
 					TextArea.flickable: TextArea {
@@ -70,6 +101,7 @@ Page {
 						selectByKeyboard: true
 						wrapMode: TextArea.WrapAnywhere
 						textFormat: TextEdit.PlainText
+						placeholderText: qsTr("Scan a QR-Code or paste the\npublic key data here to continue.")
 
 						MvvmBinding {
 							viewModel: qrView.viewModel
@@ -96,14 +128,6 @@ Page {
 					codeArea.clear();
 					codeArea.paste();
 				}
-			}
-
-			Button {
-				id: acceptBtn
-				enabled: viewModel.valid
-				text: qsTr("Transfer")
-				highlighted: true
-				onClicked: viewModel.transfer()
 			}
 		}
 	}
