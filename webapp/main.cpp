@@ -9,6 +9,9 @@
 #include "qrencoder.h"
 #include "browserstorage.h"
 #include "qrimageprovider.h"
+#ifdef Q_OS_WASM
+#include "emclipboard.h"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +26,10 @@ int main(int argc, char *argv[])
 	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/locked.svg")}); //TODO dummy
 
 	KPTLib::setup();
+
+#ifdef Q_OS_WASM
+	EmClipboard clipboard;
+#endif
 
 	qmlRegisterUncreatableType<Credential>("de.skycoder42.kpt", 1, 0, "Credential", {});
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});

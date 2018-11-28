@@ -30,8 +30,15 @@ SOURCES += \
 RESOURCES += \
 	webapp.qrc
 
-wasm: SOURCES += browserstorage_wasm.cpp
-else: SOURCES += browserstorage.cpp
+wasm {
+	HEADERS += \
+		emclipboard.h
+
+	SOURCES += \
+		browserstorage_wasm.cpp \
+		emclipboard.cpp
+} else: SOURCES += browserstorage.cpp
+
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
 include($$SRC_ROOT_DIR/3rdparty/QR-Code-generator/QR-Code-generator.pri)

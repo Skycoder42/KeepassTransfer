@@ -1,8 +1,5 @@
 #include "browserstorage.h"
 
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#include <emscripten/bind.h>
 #include <emscripten/val.h>
 using namespace emscripten;
 
