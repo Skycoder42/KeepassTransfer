@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	KPTLib::setup();
 
 #ifdef Q_OS_WASM
-	EmClipboard clipboard;
+	EmClipboard::instance(); //initialize it
 #endif
 
 	qmlRegisterUncreatableType<Credential>("de.skycoder42.kpt", 1, 0, "Credential", {});

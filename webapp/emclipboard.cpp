@@ -1,31 +1,30 @@
 #include "emclipboard.h"
 #include <QGuiApplication>
+#include <QGlobalStatic>
 #include <QDebug>
 
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
 using namespace emscripten;
 
+Q_GLOBAL_STATIC(EmClipboard, clipInstance)
+
 namespace {
 
-void test1(val self) {
-	qDebug() << Q_FUNC_INFO << self.typeOf().as<std::string>().c_str();
+void onPasteEvent(val event) {
+	event.call<void>("preventDefault");
+	clipInstance->readText();
 }
 
-void test2(val self) {
-	qDebug() << Q_FUNC_INFO << self.typeOf().as<std::string>().c_str();
-}
-
-void test3(val self) {
-	qDebug() << Q_FUNC_INFO << self.typeOf().as<std::string>().c_str();
+void onGetTextCallback(val text) {
+	clipInstance->updateClipboard(QString::fromStdString(text.as<std::string>()));
 }
 
 }
 
 EMSCRIPTEN_BINDINGS(EmClipboardModule) {
-	function("test1", &test1);
-	function("test2", &test2);
-	function("test3", &test3);
+	function("onPasteEvent", &onPasteEvent);
+	function("onGetTextCallback", &onGetTextCallback);
 }
 
 EmClipboard::EmClipboard(QObject *parent) :
@@ -34,15 +33,44 @@ EmClipboard::EmClipboard(QObject *parent) :
 {
 	connect(_qtClipboard, &QClipboard::dataChanged,
 			this, &EmClipboard::qtDataChanged);
-	qtDataChanged();
+	QMetaObject::invokeMethod(this, "installPasteHandler", Qt::QueuedConnection);
+}
+
+EmClipboard *EmClipboard::instance()
+{
+	return clipInstance;
+}
+
+void EmClipboard::readText()
+{
+	auto navigator = val::global("navigator");
+	auto clipboard = navigator["clipboard"];
+	auto promise = clipboard.call<val>("readText");
+	promise.call<val>("then", val::module_property("onGetTextCallback"));
+}
+
+void EmClipboard::updateClipboard(const QString &text)
+{
+	_skipNext = true;
+	_qtClipboard->setText(text);
 }
 
 void EmClipboard::qtDataChanged()
 {
+	if(_skipNext) {
+		_skipNext = false;
+		return;
+	}
+
 	auto navigator = val::global("navigator");
 	auto clipboard = navigator["clipboard"];
-	auto promise = clipboard.call<val>("writeText", _qtClipboard->text().toStdString());
-	promise.call<val>("then", val::module_property("test1"))
-			.call<val>("catch", val::module_property("test2"))
-			.call<val>("finally", val::module_property("test3"));
+	clipboard.call<val>("writeText", _qtClipboard->text().toStdString());
+}
+
+void EmClipboard::installPasteHandler()
+{
+	auto document = val::global("document");
+	document.call<void>("addEventListener",
+						std::string{"paste"},
+						val::module_property("onPasteEvent"));
 }
