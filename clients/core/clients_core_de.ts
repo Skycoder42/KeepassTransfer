@@ -145,7 +145,7 @@
 <context>
     <name>settings.xml</name>
     <message>
-        <location filename="../../../build-KeepassTransfer-Android_f_r_armeabi_v7a_GCC_4_9_Qt_5_11_2_for_Android_ARMv7-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
+        <location filename="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
         <source>&amp;Check me</source>
         <translation type="unfinished"></translation>
     </message>
