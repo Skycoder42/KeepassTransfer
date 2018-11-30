@@ -14,12 +14,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+164"/>
+        <location line="+176"/>
         <source>An internal error occured. Unable to encrypt data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-44"/>
+        <location line="-50"/>
         <source>Transfer completed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29,15 +29,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-49"/>
-        <location line="+60"/>
-        <location line="+13"/>
-        <location line="+18"/>
+        <location line="-53"/>
+        <location line="+66"/>
+        <location line="+15"/>
+        <location line="+20"/>
         <source>Transfer failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-179"/>
+        <location line="-191"/>
         <source>Already transferring data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,18 +47,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+88"/>
-        <location line="+60"/>
+        <location line="+90"/>
+        <location line="+66"/>
         <source>&lt;p&gt;Failed to transfer credentials to partner with error:&lt;/p&gt;&lt;p&gt;&lt;i&gt;%1&lt;/i&gt;&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-56"/>
+        <location line="-62"/>
         <source>Unknown Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+69"/>
+        <location line="+77"/>
         <source>Failed to transfer credentials to partner. An invalid reply was received, the connection seems to have been cut.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -100,8 +100,10 @@ void ClientTransferService::onSocketError()
 	_doSend = false;
 	if(_currentSocket)
 		qWarning() << "Socket-Error:" << _currentSocket->error();
-	_currentControl->close();
-	_currentControl.clear();
+	if(_currentControl) {
+		_currentControl->close();
+		_currentControl.clear();
+	}
 	QtMvvm::critical(tr("Transfer failed!"),
 					 tr("<p>Failed to transfer credentials to partner with error:</p>"
 						"<p><i>%1</i></p>")
@@ -120,8 +122,10 @@ void ClientTransferService::cryptDataReady()
 void ClientTransferService::userCanceled()
 {
 	_doSend = false;
-	_currentControl->close();
-	_currentControl.clear();
+	if(_currentControl) {
+		_currentControl->close();
+		_currentControl.clear();
+	}
 	if(_currentSocket)
 		_currentSocket->close();
 }
@@ -148,8 +152,10 @@ EncryptedData ClientTransferService::encrypt(IClientEncryptor *clientCrypt, cons
 void ClientTransferService::onServerOk(const ServerOkMessage message)
 {
 	Q_UNUSED(message);
-	_currentControl->close();
-	_currentControl.clear();
+	if(_currentControl) {
+		_currentControl->close();
+		_currentControl.clear();
+	}
 	QtMvvm::information(tr("Transfer completed!"),
 						tr("Data was transferred to the client successfully"),
 						this, [this](){
@@ -160,8 +166,10 @@ void ClientTransferService::onServerOk(const ServerOkMessage message)
 
 void ClientTransferService::onError(const ErrorMessage &message)
 {
-	_currentControl->close();
-	_currentControl.clear();
+	if(_currentControl) {
+		_currentControl->close();
+		_currentControl.clear();
+	}
 	QtMvvm::critical(tr("Transfer failed!"),
 					 tr("<p>Failed to transfer credentials to partner with error:</p>"
 						"<p><i>%1</i></p>")
@@ -173,8 +181,10 @@ void ClientTransferService::onFallback(int typeId)
 {
 	qWarning() << "Invalid message received - unexpected message type:"
 			   << QMetaType::typeName(typeId);
-	_currentControl->close();
-	_currentControl.clear();
+	if(_currentControl) {
+		_currentControl->close();
+		_currentControl.clear();
+	}
 	QtMvvm::critical(tr("Transfer failed!"),
 					 tr("Failed to transfer credentials to partner. "
 						"An invalid reply was received, the connection seems to have been cut."));
@@ -191,8 +201,10 @@ void ClientTransferService::sendData()
 		_currentSocket->sendBinaryMessage(KPTLib::serializeMessage(message));
 	} catch(std::exception &e) {
 		qCritical() << "Exception thrown:" << e.what();
-		_currentControl->close();
-		_currentControl.clear();
+		if(_currentControl) {
+			_currentControl->close();
+			_currentControl.clear();
+		}
 		QtMvvm::critical(tr("Transfer failed!"),
 						 tr("An internal error occured. Unable to encrypt data."));
 		_currentSocket->close();
