@@ -15,5 +15,6 @@
         <file alias="hide.svg">icons/baseline-visibility_off-24px.svg</file>
         <file alias="show.svg">icons/baseline-visibility-24px.svg</file>
         <file alias="copy.svg">icons/baseline-file_copy-24px.svg</file>
+        <file alias="main.svg">icons/kpt.svg</file>
     </qresource>
 </RCC>

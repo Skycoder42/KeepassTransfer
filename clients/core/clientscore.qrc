@@ -2,4 +2,7 @@
     <qresource prefix="/etc">
         <file>settings.xml</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file alias="main.svg">kpt.svg</file>
+    </qresource>
 </RCC>

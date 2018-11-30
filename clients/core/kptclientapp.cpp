@@ -1,5 +1,6 @@
 #include "kptclientapp.h"
 #include <QGuiApplication>
+#include <QIcon>
 #include <QCommandLineParser>
 #include <QtMvvmCore/ServiceRegistry>
 #include "kptrootviewmodel.h"
@@ -13,13 +14,13 @@ KPTClientApp::KPTClientApp(QObject *parent) :
 	QCoreApplication::setOrganizationName(QStringLiteral(COMPANY));
 	QCoreApplication::setOrganizationDomain(QStringLiteral(BUNDLE));
 	QGuiApplication::setApplicationDisplayName(QStringLiteral(PROJECT_NAME));
-	//TODO QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/locked.svg")});
 }
 
 void KPTClientApp::performRegistrations()
 {
 	//if you are using a qt resource (e.g. "clientscore.qrc"), initialize it here
 	Q_INIT_RESOURCE(clientscore);
+	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/main.svg")});
 
 	KPTLib::setup();
 

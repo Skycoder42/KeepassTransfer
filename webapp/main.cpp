@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	QCoreApplication::setOrganizationName(QStringLiteral(COMPANY));
 	QCoreApplication::setOrganizationDomain(QStringLiteral(BUNDLE));
 	QGuiApplication::setApplicationDisplayName(QStringLiteral(PROJECT_NAME));
-	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/locked.svg")}); //TODO dummy
+	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/main.svg")});
 
 	KPTLib::setup();
 
