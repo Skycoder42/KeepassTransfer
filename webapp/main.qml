@@ -26,7 +26,8 @@ ApplicationWindow {
 			target: connector
 			onCredentialsReceived: {
 				mainStack.push(credentialsViewComponent, {
-								   credentials: receivedCreds
+								   credentials: receivedCreds,
+								   idCred: entryTitle
 							   });
 			}
 		}

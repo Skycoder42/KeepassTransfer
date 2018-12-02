@@ -62,6 +62,7 @@ Page {
 						placeholderText: qsTr("Value")
 						text: value
 						onTextEdited: value = text
+						echoMode: confButton.checked ? TextField.Password : TextField.Normal
 					}
 
 					ToolButton {

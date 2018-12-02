@@ -118,9 +118,14 @@ void ServerConnector::onServerTransfer(const ServerTransferMessage &message)
 		_socket->sendBinaryMessage(KPTLib::serializeMessage(AppOkMessage{}));
 		QVariantList credList;
 		credList.reserve(credentials.size());
-		for(const auto &cred : credentials)
-			credList.append(QVariant::fromValue(cred));
-		emit credentialsReceived(credList);
+		auto entryTitle = tr("<Unnamed>");
+		for(const auto &cred : credentials) {
+			if(cred.key() == QStringLiteral("Title") && !cred.confidential())
+				entryTitle = cred.value();
+			else
+				credList.append(QVariant::fromValue(cred));
+		}
+		emit credentialsReceived(credList, entryTitle);
 	}
 }
 

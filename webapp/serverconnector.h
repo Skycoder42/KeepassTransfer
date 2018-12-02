@@ -24,7 +24,7 @@ public:
 	QUuid appId() const;
 
 signals:
-	void credentialsReceived(const QVariantList &receivedCreds);
+	void credentialsReceived(const QVariantList &receivedCreds, const QString &entryTitle);
 	void serverError(const QString &message);
 
 	void connectedChanged(bool connected, QPrivateSignal);

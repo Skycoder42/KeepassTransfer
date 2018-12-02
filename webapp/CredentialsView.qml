@@ -1,13 +1,48 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
+import QtQuick.Controls.Material 2.4
 import QtQuick.Layouts 1.3
 import de.skycoder42.kpt 1.0
 
 Page {
 	id: credPage
 	property alias credentials: listView.model
+	property string idCred: qsTr("<Unnamed>")
 
 	property real preferredLabelWidth: 0
+
+	header: ToolBar {
+		Material.background: Material.primary
+		Material.foreground: "black"
+		height: 56
+
+		RowLayout {
+			anchors.fill: parent
+
+			ToolButton {
+				id: backBtn
+				flat: true
+				icon.name: "draw-arrow-back"
+				icon.source: "qrc:/icons/back.svg"
+				onClicked: mainStack.pop()
+
+				ToolTip.visible: pressed
+				ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+				ToolTip.text:  qsTr("Go back to the setup page")
+			}
+
+			Label {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				text: qsTr("%1 — Keepass Transfer").arg(idCred)
+				font.pointSize: 14
+				font.bold: true
+				elide: Label.ElideRight
+				horizontalAlignment: Qt.AlignLeft
+				verticalAlignment: Qt.AlignVCenter
+			}
+		}
+	}
 
 	ScrollView {
 		id: scrollView
@@ -79,6 +114,16 @@ Page {
 					Button {
 						Layout.alignment: Qt.AlignRight
 						text: qsTr("Clear Clipboard")
+						onClicked: {
+							cpClear.selectAll();
+							cpClear.copy();
+						}
+
+						TextField {
+							id: cpClear
+							visible: false
+							text: qsTr("-- Clipboard was cleared --")
+						}
 					}
 				}
 			}
