@@ -9,9 +9,7 @@
 #include "qrencoder.h"
 #include "browserstorage.h"
 #include "qrimageprovider.h"
-#ifdef Q_OS_WASM
-#include "emclipboard.h"
-#endif
+#include "emjsconnector.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,10 +25,6 @@ int main(int argc, char *argv[])
 
 	KPTLib::setup();
 
-#ifdef Q_OS_WASM
-	EmClipboard::instance(); //initialize it
-#endif
-
 	qmlRegisterUncreatableType<Credential>("de.skycoder42.kpt", 1, 0, "Credential", {});
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 	qmlRegisterUncreatableType<DataEncryptor>("de.skycoder42.kpt", 1, 0, "DataEncryptor", {});
@@ -42,6 +36,7 @@ int main(int argc, char *argv[])
 	QQmlApplicationEngine engine;
 	engine.addImageProvider(QStringLiteral("qrcode"), new QrImageProvider{});
 	engine.rootContext()->setContextProperty(QStringLiteral("connector"), &connector);
+	engine.rootContext()->setContextProperty(QStringLiteral("emjscon"), EmJsConnector::instance());
 
 	engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 	if (engine.rootObjects().isEmpty())

@@ -18,7 +18,8 @@ HEADERS += \
 	iencoder.h \
 	qrencoder.h \
 	browserstorage.h \
-	qrimageprovider.h
+	qrimageprovider.h \
+	emjsconnector.h
 
 SOURCES += \
 	main.cpp \
@@ -31,13 +32,14 @@ RESOURCES += \
 	webapp.qrc
 
 wasm {
-	HEADERS += \
-		emclipboard.h
-
 	SOURCES += \
 		browserstorage_wasm.cpp \
-		emclipboard.cpp
-} else: SOURCES += browserstorage.cpp
+		emjsconnector_wasm.cpp
+} else {
+	SOURCES += \
+		browserstorage.cpp \
+		emjsconnector.cpp
+}
 
 
 include($$SRC_ROOT_DIR/lib/lib.pri)

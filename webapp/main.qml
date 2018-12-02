@@ -22,6 +22,8 @@ ApplicationWindow {
 			CredentialsView {}
 		}
 
+		onCurrentItemChanged: emjscon.setTag(mainStack.depth)
+
 		Connections {
 			target: connector
 			onCredentialsReceived: {
@@ -29,6 +31,17 @@ ApplicationWindow {
 								   credentials: receivedCreds,
 								   idCred: entryTitle
 							   });
+			}
+		}
+
+		Connections {
+			target: emjscon
+			onTagChanged: {
+				if(tag != "") {
+					var index = Number(tag);
+					if(tag < mainStack.depth)
+						mainStack.pop(mainStack.get(index - 1, StackView.ForceLoad));
+				}
 			}
 		}
 	}

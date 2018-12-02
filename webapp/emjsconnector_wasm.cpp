@@ -1,4 +1,4 @@
-#include "emclipboard.h"
+#include "emjsconnector.h"
 #include <QGuiApplication>
 #include <QGlobalStatic>
 #include <QDebug>
@@ -7,7 +7,7 @@
 #include <emscripten/val.h>
 using namespace emscripten;
 
-Q_GLOBAL_STATIC(EmClipboard, clipInstance)
+Q_GLOBAL_STATIC(EmJsConnector, clipInstance)
 
 namespace {
 
@@ -20,28 +20,35 @@ void onGetTextCallback(val text) {
 	clipInstance->updateClipboard(QString::fromStdString(text.as<std::string>()));
 }
 
+void onPopState(val event) {
+	Q_UNUSED(event)
+	auto location = val::global("location");
+	emit clipInstance->tagChanged(QString::fromStdString(location["hash"].as<std::string>()).mid(1));
 }
 
-EMSCRIPTEN_BINDINGS(EmClipboardModule) {
+}
+
+EMSCRIPTEN_BINDINGS(EmJsConnectorModule) {
 	function("onPasteEvent", &onPasteEvent);
 	function("onGetTextCallback", &onGetTextCallback);
+	function("onPopState", &onPopState);
 }
 
-EmClipboard::EmClipboard(QObject *parent) :
+EmJsConnector::EmJsConnector(QObject *parent) :
 	QObject{parent},
 	_qtClipboard{QGuiApplication::clipboard()}
 {
 	connect(_qtClipboard, &QClipboard::dataChanged,
-			this, &EmClipboard::qtDataChanged);
-	QMetaObject::invokeMethod(this, "installPasteHandler", Qt::QueuedConnection);
+			this, &EmJsConnector::qtDataChanged);
+	QMetaObject::invokeMethod(this, "installHandlers", Qt::QueuedConnection);
 }
 
-EmClipboard *EmClipboard::instance()
+EmJsConnector *EmJsConnector::instance()
 {
 	return clipInstance;
 }
 
-void EmClipboard::readText()
+void EmJsConnector::readText()
 {
 	auto navigator = val::global("navigator");
 	auto clipboard = navigator["clipboard"];
@@ -49,13 +56,19 @@ void EmClipboard::readText()
 	promise.call<val>("then", val::module_property("onGetTextCallback"));
 }
 
-void EmClipboard::updateClipboard(const QString &text)
+void EmJsConnector::updateClipboard(const QString &text)
 {
 	_skipNext = true;
 	_qtClipboard->setText(text);
 }
 
-void EmClipboard::qtDataChanged()
+void EmJsConnector::setTag(const QString &tag)
+{
+	auto location = val::global("location");
+	location.set("hash", "#" + tag.toStdString());
+}
+
+void EmJsConnector::qtDataChanged()
 {
 	if(_skipNext) {
 		_skipNext = false;
@@ -67,10 +80,12 @@ void EmClipboard::qtDataChanged()
 	clipboard.call<val>("writeText", _qtClipboard->text().toStdString());
 }
 
-void EmClipboard::installPasteHandler()
+void EmJsConnector::installHandlers()
 {
 	auto document = val::global("document");
 	document.call<void>("addEventListener",
 						std::string{"paste"},
 						val::module_property("onPasteEvent"));
+	auto window = val::global("window");
+	window.set("onpopstate", val::module_property("onPopState"));
 }
