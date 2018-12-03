@@ -34,6 +34,9 @@ public class KptActivity extends QtActivity {
 	public static final String GuardedEntriesExtra = "de.skycoder42.kpt.KptActivity.GuardedEntriesExtra";
 
 	private ArrayList<KptEntry> _cachedFields;
+	private synchronized void setTransferEntries(ArrayList<KptEntry> entries) {
+		_cachedFields = entries;
+	}
 
 	private native void reportScanResult(String result);
 
@@ -43,7 +46,7 @@ public class KptActivity extends QtActivity {
 		integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
 	}
 
-	public List<KptEntry> getLastTransferEntries() {
+	public synchronized List<KptEntry> getLastTransferEntries() {
 		return _cachedFields;
 	}
 
@@ -53,15 +56,16 @@ public class KptActivity extends QtActivity {
 		if(intent != null && intent.hasExtra(DataEntriesExtra) && intent.hasExtra(GuardedEntriesExtra)) {
 			HashMap<String, String> entries = (HashMap<String, String>)intent.getSerializableExtra(DataEntriesExtra);
 			List<String> guarded = Arrays.asList(intent.getStringArrayExtra(GuardedEntriesExtra));
-			_cachedFields = new ArrayList<KptEntry>(entries.size());
+			ArrayList<KptEntry> fields = new ArrayList<>(entries.size());
 			for (Map.Entry<String, String> entry : entries.entrySet()) {
-				_cachedFields.add(new KptEntry(
+				fields.add(new KptEntry(
 					entry.getKey(),
 					entry.getValue(),
 					guarded.contains(entry.getKey())));
 			}
+			setTransferEntries(fields);
 		} else
-			_cachedFields = null;
+			setTransferEntries(null);
 		super.onCreate(savedInstanceState);
 	}
 
