@@ -15,12 +15,18 @@ bool QrCodeConnectorViewModel::isValid() const
 	return _qrCryptor->qrData().isValid();
 }
 
-void QrCodeConnectorViewModel::transfer()
+ClientTransferService *QrCodeConnectorViewModel::transferService() const
+{
+	return _transferService;
+}
+
+bool QrCodeConnectorViewModel::transfer()
 {
 	if(!isValid())
-		return;
+		return false;
 
 	_transferService->sendCredentials(_qrCryptor, _credentials);
+	return true;
 }
 
 void QrCodeConnectorViewModel::onInit(const QVariantHash &params)

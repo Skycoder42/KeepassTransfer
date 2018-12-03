@@ -8,16 +8,19 @@ TARGET = $${PROJECT_TARGET}-client
 HEADERS += \
 	kptrootwizard.h \
 	credentialseditpage.h \
-	transferselectionpage.h
+	transferselectionpage.h \
+    qrcodeconnectorpage.h
 
 SOURCES += main.cpp \
 	kptrootwizard.cpp \
 	credentialseditpage.cpp \
-	transferselectionpage.cpp
+	transferselectionpage.cpp \
+    qrcodeconnectorpage.cpp
 
 FORMS += \
 	credentialseditpage.ui \
-	transferselectionpage.ui
+	transferselectionpage.ui \
+    qrcodeconnectorpage.ui
 
 TRANSLATIONS += \
 	kpt_client_widgets_de.ts \

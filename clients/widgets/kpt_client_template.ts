@@ -29,7 +29,61 @@
     <name>KptRootWizard</name>
     <message>
         <location filename="kptrootwizard.cpp" line="+38"/>
+        <source>Transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QrCodeConnectorPage</name>
+    <message>
+        <location filename="qrcodeconnectorpage.ui" line="+14"/>
+        <source>WizardPage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>QR-Code Transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Paste the QR-Code data that you obtained from the partner here. Visit https://kpt.skycoder42.de to obtain the data.</source>
+        <oldsource>Paste the QR-Code data that you obtained from the client here. Visit https://kpt.skycoder42.de to obtain the data.</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Paste the QR-Code data here to continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Paste Qr-Code-Data from the clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ctrl+Shift+V</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="qrcodeconnectorpage.cpp" line="+48"/>
+        <source>Content is valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Content is invalid</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

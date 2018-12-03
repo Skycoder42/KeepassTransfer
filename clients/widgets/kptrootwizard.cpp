@@ -35,6 +35,7 @@ KptRootWizard::KptRootWizard(QtMvvm::ViewModel *viewModel, QWidget *parent) :
 			   QWizard::HaveHelpButton);
 	setPixmap(QWizard::LogoPixmap, windowIcon().pixmap(windowHandle(), {64, 64}));
 
+	setButtonText(QWizard::FinishButton, tr("Transfer"));
 	setButtonText(QWizard::HelpButton, tr("About"));
 	connect(this, &QWizard::helpRequested,
 			_viewModel, &KptRootViewModel::about);
@@ -59,9 +60,9 @@ bool KptRootWizard::tryPresent(QWidget *view)
 
 bool KptRootWizard::validateCurrentPage()
 {
-	if(currentPage() && currentPage()->isFinalPage())
+	/*if(currentPage() && currentPage()->isFinalPage())
 		return QWizard::validateCurrentPage();
-	else if(currentId() == topStack()) {
+	else*/ if(currentId() == topStack()) {
 		QWizard::validateCurrentPage();
 		return false;
 	} else

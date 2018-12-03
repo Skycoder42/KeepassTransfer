@@ -26,8 +26,10 @@ public:
 	QString qrData() const;
 	bool isValid() const;
 
+	ClientTransferService* transferService() const;
+
 public slots:
-	void transfer();
+	bool transfer();
 
 	void onInit(const QVariantHash &params) override;
 
