@@ -28,7 +28,7 @@
 <context>
     <name>KptRootWizard</name>
     <message>
-        <location filename="kptrootwizard.cpp" line="+31"/>
+        <location filename="kptrootwizard.cpp" line="+38"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>

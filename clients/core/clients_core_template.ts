@@ -106,14 +106,14 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>GPL v3</source>
-        <oldsource>GPL3</oldsource>
+        <source>GPL-3.0</source>
+        <oldsource>GPL v3</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <oldsource>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</oldsource>
+        <source>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <oldsource>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -145,7 +145,7 @@
 <context>
     <name>settings.xml</name>
     <message>
-        <location filename="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
+        <location filename="../../../build-KeepassTransfer-Android_f_r_armeabi_v7a_GCC_4_9_Qt_5_11_2_for_Android_ARMv7-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
         <source>&amp;Check me</source>
         <translation type="unfinished"></translation>
     </message>
