@@ -2,6 +2,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.4
 import QtQuick.Controls.Material 2.4
 import QtQuick.Layouts 1.3
+import Qt.labs.settings 1.0
 import de.skycoder42.kpt 1.0
 
 ScrollView {
@@ -18,8 +19,13 @@ ScrollView {
 			channelId: connector.appId
 		}
 
-		BrowserStorage {
-			id: storage
+		Settings {
+			id: settings
+			category: "qrview"
+
+			property alias curveIndex: curveBox.currentIndex
+			property alias ecIndex: ecBox.currentIndex
+			property alias qrSize: sizeBox.value
 		}
 
 		ColumnLayout {
@@ -55,8 +61,7 @@ ScrollView {
 						}
 						textRole: "key"
 
-						currentIndex: storage.value("curveIndex", 4)
-						onCurrentIndexChanged: storage.setValue("curveIndex", currentIndex)
+						currentIndex: 4
 					}
 
 					Label {
@@ -76,8 +81,7 @@ ScrollView {
 						}
 						textRole: "key"
 
-						currentIndex: storage.value("ecIndex", 0)
-						onCurrentIndexChanged: storage.setValue("ecIndex", currentIndex)
+						currentIndex: 0
 					}
 
 					Label {
@@ -91,8 +95,7 @@ ScrollView {
 						editable: true
 						from: 16
 						to: 4096
-						value: storage.value("qrSize", 512)
-						onValueChanged: storage.setValue("qrSize", value)
+						value: 512
 					}
 
 					Button {

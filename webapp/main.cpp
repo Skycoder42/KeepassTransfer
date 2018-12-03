@@ -7,9 +7,12 @@
 #include <dataencryptor.h>
 
 #include "qrencoder.h"
-#include "browserstorage.h"
 #include "qrimageprovider.h"
 #include "emjsconnector.h"
+
+#ifdef QT_OS_WASM
+#include "qwasmsettings.h"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -23,13 +26,16 @@ int main(int argc, char *argv[])
 	QGuiApplication::setApplicationDisplayName(QStringLiteral(PROJECT_NAME));
 	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/main.svg")});
 
+#ifdef QT_OS_WASM
+	QWasmSettings::registerFormat();
+#endif
+
 	KPTLib::setup();
 
 	qmlRegisterUncreatableType<Credential>("de.skycoder42.kpt", 1, 0, "Credential", {});
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 	qmlRegisterUncreatableType<DataEncryptor>("de.skycoder42.kpt", 1, 0, "DataEncryptor", {});
 	qmlRegisterType<QrEncoder>("de.skycoder42.kpt", 1, 0, "QrEncoder");
-	qmlRegisterType<BrowserStorage>("de.skycoder42.kpt", 1, 0, "BrowserStorage");
 
 	ServerConnector connector{QStringLiteral("ws://localhost:27352")};
 

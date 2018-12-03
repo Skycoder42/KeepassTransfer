@@ -17,7 +17,6 @@ HEADERS += \
 	serverconnector.h \
 	iencoder.h \
 	qrencoder.h \
-	browserstorage.h \
 	qrimageprovider.h \
 	emjsconnector.h
 
@@ -32,12 +31,14 @@ RESOURCES += \
 	webapp.qrc
 
 wasm {
+	HEADERS += \
+		qwasmsettings.h
+
 	SOURCES += \
-		browserstorage_wasm.cpp \
+		qwasmsettings.cpp \
 		emjsconnector_wasm.cpp
 } else {
 	SOURCES += \
-		browserstorage.cpp \
 		emjsconnector.cpp
 }
 
