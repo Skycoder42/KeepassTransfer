@@ -5,6 +5,7 @@
 #include <QtMvvmCore/ServiceRegistry>
 #include "kptrootviewmodel.h"
 #include "clienttransferservice.h"
+#include "transferselectionviewmodel.h"
 
 KPTClientApp::KPTClientApp(QObject *parent) :
 	CoreApp{parent}
@@ -14,6 +15,11 @@ KPTClientApp::KPTClientApp(QObject *parent) :
 	QCoreApplication::setOrganizationName(QStringLiteral(COMPANY));
 	QCoreApplication::setOrganizationDomain(QStringLiteral(BUNDLE));
 	QGuiApplication::setApplicationDisplayName(QStringLiteral(PROJECT_NAME));
+}
+
+void KPTClientApp::overwriteInitCredentials(const QList<Credential> &credentials)
+{
+	_initCredentials = credentials;
 }
 
 void KPTClientApp::performRegistrations()
@@ -37,13 +43,15 @@ int KPTClientApp::startApp(const QStringList &arguments)
 	parser.addVersionOption();
 	parser.addHelpOption();
 
-	//add more options
+	//TODO add more options
 
 	//shows help or version automatically
 	if(!autoParse(parser, arguments))
 		return EXIT_SUCCESS;
 
 	//show a viewmodel to complete the startup
-	show<KptRootViewModel>();
+	show<KptRootViewModel>(_initCredentials.isEmpty() ?
+							   QVariantHash{} :
+							   TransferSelectionViewModel::params(_initCredentials));
 	return EXIT_SUCCESS;
 }

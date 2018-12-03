@@ -100,7 +100,7 @@
 <context>
     <name>KptRootViewModel</name>
     <message>
-        <location filename="kptrootviewmodel.cpp" line="+11"/>
+        <location filename="kptrootviewmodel.cpp" line="+12"/>
         <source>A tool to securely transfer passwords and other credentials from any device to a remote computer for easy access anywhere.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -145,7 +145,7 @@
 <context>
     <name>settings.xml</name>
     <message>
-        <location filename="../../../build-KeepassTransfer-Android_f_r_armeabi_v7a_GCC_4_9_Qt_5_11_2_for_Android_ARMv7-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
+        <location filename="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
         <source>&amp;Check me</source>
         <translation type="unfinished"></translation>
     </message>

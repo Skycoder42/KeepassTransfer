@@ -35,7 +35,7 @@ public class TransferActionReceiver extends PluginActionBroadcastReceiver {
 		intent.putExtra(KptActivity.DataEntriesExtra, actionSelected.getEntryFields());
 
 		String[] protFields = actionSelected.getProtectedFieldsList();
-		if (protFields == null) {//in case he fixed it --> only if not successful
+		if (protFields == null) {//in case it was fixed -> only if not successful (see https://github.com/PhilippC/keepass2android/issues/627)
 			try {
 				JSONArray fieldData = new JSONArray(_currentIntent.getStringExtra(Strings.EXTRA_PROTECTED_FIELDS_LIST));
 				protFields = new String[fieldData.length()];

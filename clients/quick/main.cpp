@@ -55,8 +55,7 @@ int main(int argc, char *argv[])
 	// If you want to support file dialogs on platforms other then android, use a QApplication instead (and add QT += widgets to the pro file)
 	QGuiApplication app(argc, argv);
 
-	const auto credentials = TransferLoader::loadCredentials();
-	qDebug() << credentials;
+	coreApp->overwriteInitCredentials(TransferLoader::loadCredentials());
 
 	QtMvvm::QuickPresenter::getInputViewFactory(); //Workaround for QTBUG-69963
 	qmlRegisterInterface<IClientEncryptor>("IClientEncryptor");

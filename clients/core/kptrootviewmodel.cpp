@@ -1,6 +1,7 @@
 #include "kptrootviewmodel.h"
 #include <QtMvvmCore/Messages>
-#include <credentialseditviewmodel.h>
+#include "credentialseditviewmodel.h"
+#include "transferselectionviewmodel.h"
 
 KptRootViewModel::KptRootViewModel(QObject *parent) :
 	ViewModel{parent}
@@ -24,5 +25,8 @@ void KptRootViewModel::about()
 void KptRootViewModel::onInit(const QVariantHash &params)
 {
 	Q_UNUSED(params);
-	show<CredentialsEditViewModel>();
+	if(params.contains(TransferSelectionViewModel::paramCred))
+		show<TransferSelectionViewModel>(params);
+	else
+		show<CredentialsEditViewModel>();
 }
