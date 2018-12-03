@@ -26,6 +26,7 @@ protected:
 
 private slots:
 	void dropPage(int id);
+	void customAction(int button);
 
 private:
 	KptRootViewModel *_viewModel;

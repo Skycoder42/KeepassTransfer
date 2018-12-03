@@ -12,6 +12,7 @@ ColumnLayout {
 	property Drawer drawer: null
 
 	anchors.fill: parent
+	spacing: 0
 
 	ColorHelper {
 		id: helper
@@ -28,6 +29,30 @@ ColumnLayout {
 		id: spacer
 		Layout.fillHeight: true
 		Layout.fillWidth: true
+	}
+
+	MenuSeparator {
+		Layout.fillWidth: true
+		topPadding: 0
+		bottomPadding: 0
+	}
+
+	ItemDelegate {
+		Layout.fillWidth: true
+		display: Button.TextBesideIcon
+		icon.name: "settings-configure"
+		icon.source: "qrc:/de/skycoder42/qtmvvm/icons/settings.svg"
+		text: qsTr("Settings")
+		onClicked: {
+			viewModel.showSettings();
+			drawer.close();
+		}
+	}
+
+	MenuSeparator {
+		Layout.fillWidth: true
+		topPadding: 0
+		bottomPadding: 0
 	}
 
 	ItemDelegate {

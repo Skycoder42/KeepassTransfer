@@ -100,7 +100,7 @@
 <context>
     <name>KptRootViewModel</name>
     <message>
-        <location filename="kptrootviewmodel.cpp" line="+12"/>
+        <location filename="kptrootviewmodel.cpp" line="+18"/>
         <source>A tool to securely transfer passwords and other credentials from any device to a remote computer for easy access anywhere.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -146,12 +146,27 @@
     <name>settings.xml</name>
     <message>
         <location filename="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
-        <source>&amp;Check me</source>
+        <source>&amp;Exit after transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>I am a checkbox!</source>
+        <source>If activated, the application will quit automatically after informing you that data was transfered to a partner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>QR-Code Transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Automatically &amp;send on paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>If activated, the application will automatically start the transfer if valid data was pasted in the QR-View</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

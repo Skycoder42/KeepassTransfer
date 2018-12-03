@@ -30,15 +30,19 @@ KptRootWizard::KptRootWizard(QtMvvm::ViewModel *viewModel, QWidget *parent) :
 	setWizardStyle(ModernStyle);
 #endif
 
-	setOptions(QWizard::IndependentPages |
-			   QWizard::NoBackButtonOnStartPage |
-			   QWizard::HaveHelpButton);
-	setPixmap(QWizard::LogoPixmap, windowIcon().pixmap(windowHandle(), {64, 64}));
+	setOptions(IndependentPages |
+			   NoBackButtonOnStartPage |
+			   HaveHelpButton |
+			   HaveCustomButton1);
+	setPixmap(LogoPixmap, windowIcon().pixmap(windowHandle(), {64, 64}));
 
-	setButtonText(QWizard::FinishButton, tr("Transfer"));
-	setButtonText(QWizard::HelpButton, tr("About"));
-	connect(this, &QWizard::helpRequested,
+	setButtonText(FinishButton, tr("Transfer"));
+	setButtonText(HelpButton, tr("About"));
+	setButtonText(CustomButton1, tr("Settings"));
+	connect(this, &KptRootWizard::helpRequested,
 			_viewModel, &KptRootViewModel::about);
+	connect(this, &KptRootWizard::customButtonClicked,
+			this, &KptRootWizard::customAction);
 }
 
 bool KptRootWizard::tryPresent(QWidget *view)
@@ -104,6 +108,17 @@ void KptRootWizard::dropPage(int id)
 	auto cPage = page(id);
 	removePage(id);
 	cPage->deleteLater();
+}
+
+void KptRootWizard::customAction(int button)
+{
+	switch (button) {
+	case CustomButton1:
+		_viewModel->showSettings();
+		break;
+	default:
+		break;
+	}
 }
 
 int KptRootWizard::topStack() const

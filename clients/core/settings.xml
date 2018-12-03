@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SettingsConfig>
-	<Entry key="property"
-		   type="bool"
-		   title="&amp;Check me"
-		   tooltip="I am a checkbox!"
-		   default="false" />
+	<Group>
+		<Entry key="transfer/exit"
+			   type="bool"
+			   title="&amp;Exit after transfer"
+			   tooltip="If activated, the application will quit automatically after informing you that data was transfered to a partner."
+			   default="true" />
+	</Group>
+	<Group title="QR-Code Transfer">
+		<Entry key="transfer/commit"
+			   type="bool"
+			   title="Automatically &amp;send on paste"
+			   tooltip="If activated, the application will automatically start the transfer if valid data was pasted in the QR-View"
+			   default="true" />
+	</Group>
 </SettingsConfig>

@@ -1,11 +1,17 @@
 #include "kptrootviewmodel.h"
 #include <QtMvvmCore/Messages>
+#include <QtMvvmCore/SettingsViewModel>
 #include "credentialseditviewmodel.h"
 #include "transferselectionviewmodel.h"
 
 KptRootViewModel::KptRootViewModel(QObject *parent) :
 	ViewModel{parent}
 {}
+
+void KptRootViewModel::showSettings()
+{
+	show<QtMvvm::SettingsViewModel>();
+}
 
 void KptRootViewModel::about()
 {

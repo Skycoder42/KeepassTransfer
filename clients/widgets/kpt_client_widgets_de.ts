@@ -28,13 +28,18 @@
 <context>
     <name>KptRootWizard</name>
     <message>
-        <location filename="kptrootwizard.cpp" line="+38"/>
+        <location filename="kptrootwizard.cpp" line="+39"/>
         <source>Transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
