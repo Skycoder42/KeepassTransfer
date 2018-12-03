@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Keepass Transfer</string>
+
+	<!-- plugin -->
+	<string name="kp2aplugin_title">@string/app_name</string>
+	<string name="kp2aplugin_shortdesc">A Plugin to transfer password entries to the browser in a secure manner</string>
+	<string name="kp2aplugin_author">Felix Barz</string>
+	<string name="action_entry">Transfer Entry</string>
 </resources>

@@ -7,7 +7,8 @@ CONFIG(release, debug|release): CONFIG += qtquickcompiler
 TARGET = $${PROJECT_TARGET}-app
 
 SOURCES += main.cpp \
-	qrcodescanner.cpp
+	qrcodescanner.cpp \
+    transferloader.cpp
 
 RESOURCES += \
 	clientsquick.qrc
@@ -23,7 +24,9 @@ DISTFILES += $$TRANSLATIONS \
 	android/AndroidManifest.xml \
 	$$files(android/src/*, true) \
 	$$files(android/res/*, true) \
-	android/build.gradle
+	android/build.gradle \
+	android/src/de/skycoder42/kpt/TransferAccessReceiver.java \
+    android/src/de/skycoder42/kpt/TransferActionReceiver.java
 
 # Link with core project
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -l$${PROJECT_TARGET}-core
@@ -45,4 +48,5 @@ else: include($$OUT_PWD/qpmx_generated.pri)
 include($$SRC_ROOT_DIR/lib/lib.pri)
 
 HEADERS += \
-	qrcodescanner.h
+	qrcodescanner.h \
+    transferloader.h

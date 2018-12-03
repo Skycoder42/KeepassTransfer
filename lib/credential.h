@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSharedData>
 #include <QDataStream>
+#include <QDebug>
 
 class CredentialData;
 class Credential
@@ -50,6 +51,8 @@ private:
 
 QDataStream &operator<<(QDataStream &stream, const Credential &credential);
 QDataStream &operator>>(QDataStream &stream, Credential &credential);
+
+QDebug operator<<(QDebug stream, const Credential &credential);
 
 Q_DECLARE_METATYPE(Credential)
 Q_DECLARE_TYPEINFO(Credential, Q_MOVABLE_TYPE);

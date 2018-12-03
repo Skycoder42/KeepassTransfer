@@ -115,3 +115,15 @@ QDataStream &operator>>(QDataStream &stream, Credential &credential)
 		   >> credential.d->confidential;
 	return stream;
 }
+
+QDebug operator<<(QDebug stream, const Credential &credential)
+{
+	QDebugStateSaver state{stream};
+	stream.nospace().noquote() << "{"
+							   << credential.key() << ": "
+							   << (credential.confidential() ?
+									   QString{credential.value().size(), QLatin1Char('*')} :
+									   credential.value())
+							   << "}";
+	return stream;
+}

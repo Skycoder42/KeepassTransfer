@@ -64,9 +64,24 @@
 				-->
 			<meta-data android:name="android.app.extract_android_style" android:value="full"/>
 			<!-- extract android style -->
-	</activity>
+		</activity>
 
-	<!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
+		<!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
+
+		<!-- Keepass2Android plugin receivers -->
+		<receiver android:name=".TransferAccessReceiver" android:exported="true">
+			<intent-filter>
+				<action android:name="keepass2android.ACTION_TRIGGER_REQUEST_ACCESS" />
+				<action android:name="keepass2android.ACTION_RECEIVE_ACCESS" />
+				<action android:name="keepass2android.ACTION_REVOKE_ACCESS" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name=".TransferActionReceiver" android:exported="true">
+			<intent-filter>
+				<action android:name="keepass2android.ACTION_OPEN_ENTRY" />
+				<action android:name="keepass2android.ACTION_ENTRY_ACTION_SELECTED" />
+			</intent-filter>
+		</receiver>
 
 	</application>
 

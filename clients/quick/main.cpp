@@ -11,6 +11,7 @@
 #include <transferselectionviewmodel.h>
 #include <qrcodeconnectorviewmodel.h>
 #include <qrcodescanner.h>
+#include "transferloader.h"
 
 QTMVVM_REGISTER_CORE_APP(KPTClientApp)
 
@@ -53,6 +54,9 @@ int main(int argc, char *argv[])
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	// If you want to support file dialogs on platforms other then android, use a QApplication instead (and add QT += widgets to the pro file)
 	QGuiApplication app(argc, argv);
+
+	const auto credentials = TransferLoader::loadCredentials();
+	qDebug() << credentials;
 
 	QtMvvm::QuickPresenter::getInputViewFactory(); //Workaround for QTBUG-69963
 	qmlRegisterInterface<IClientEncryptor>("IClientEncryptor");
