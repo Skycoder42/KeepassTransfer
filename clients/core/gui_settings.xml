@@ -6,6 +6,7 @@
 			   title="Server-&amp;URL"
 			   tooltip="The URL of the delegate server to route the transfer through."
 			   default="wss://kpt.skycoder42.de/backend" >
+			<Property key="qtmvvm_preview" type="string" tr="true">Current Server: %1</Property>
 			<Property key="allowedSchemes" type="list">
 				<Element type="string">wss</Element>
 				<Element type="string">ws</Element>
@@ -17,11 +18,15 @@
 			   type="bool"
 			   title="&amp;Exit after transfer"
 			   tooltip="If activated, the application will quit automatically after informing you that data was transfered to a partner."
-			   default="true" />
+			   default="true">
+			<Property key="qtmvvm_preview" type="string" tr="true">Exit app after successful transfers</Property>
+		</Entry>
 		<Entry key="transfer/commit"
 			   type="bool"
 			   title="Automatically &amp;send on paste"
 			   tooltip="If activated, the application will automatically start the transfer if valid data was pasted in the QR-View"
-			   default="true" />
+			   default="true">
+		   <Property key="qtmvvm_preview" type="string" tr="true">Send data to partner if valid data was pasted</Property>
+	   </Entry>
 	</Group>
 </SettingsConfig>

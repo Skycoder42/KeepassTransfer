@@ -156,6 +156,11 @@
     </message>
     <message>
         <location line="+1"/>
+        <source>Current Server: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Data-Transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -171,12 +176,22 @@
     </message>
     <message>
         <location line="+1"/>
+        <source>Exit app after successful transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Automatically &amp;send on paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>If activated, the application will automatically start the transfer if valid data was pasted in the QR-View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Send data to partner if valid data was pasted</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
