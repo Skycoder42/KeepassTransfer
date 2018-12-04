@@ -1,5 +1,6 @@
 #include "kptsettingsviewmodel.h"
 #include "settings.h"
+#include "transferpreselectionentry.h"
 
 KptSettingsViewModel::KptSettingsViewModel(QObject *parent) :
 	SettingsViewModel{parent}
@@ -10,6 +11,7 @@ QVariant KptSettingsViewModel::loadValue(const QString &key, const QVariant &def
 	if(key == QStringLiteral("transfer/preselected")) {
 		Settings settings{accessor(), nullptr};
 		QVariantList presel;
+		presel.reserve(settings.preselected.size());
 		for(const auto &entry : settings.preselected)
 			presel.append(QVariant::fromValue(TransferPreSelectionEntry{entry.key, entry.confidential, entry.selected}));
 		return presel;

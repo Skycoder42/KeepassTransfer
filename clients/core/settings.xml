@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Settings name="Settings">
 	<Include>QUrl</Include>
-	<Include local="true">transferpreselection.h</Include>
 
 	<TypeMapping key="url" type="QUrl"/>
+	<TypeMapping key="TransferPreSelection" type="QVariantList"/>
 	<Import>gui_settings.xml</Import>
 
 	<ListNode key="preselected">

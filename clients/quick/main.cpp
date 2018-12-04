@@ -11,12 +11,26 @@
 #include <transferselectionviewmodel.h>
 #include <qrcodeconnectorviewmodel.h>
 #include <qrcodescanner.h>
-#include <transferpreselection.h>
+#include <transferpreselectionentry.h>
 #include "transferloader.h"
 
 QTMVVM_REGISTER_CORE_APP(KPTClientApp)
 
 namespace {
+
+class TransferPreSelectionFormatter : public QtMvvm::Formatter
+{
+public:
+	QString format(const QString &formatString, const QVariant &value, const QVariantMap &viewProperties) const override {
+		Q_UNUSED(viewProperties)
+		auto cnt = 0;
+		for(const auto &entry : value.toList()) {
+			if(entry.value<TransferPreSelectionEntry>().selected)
+				++cnt;
+		}
+		return formatString.arg(cnt);
+	}
+};
 
 void setStatusBarColor(const QColor &color)
 {
@@ -58,8 +72,10 @@ int main(int argc, char *argv[])
 
 	coreApp->overwriteInitCredentials(TransferLoader::loadCredentials());
 
-	QtMvvm::QuickPresenter::getInputViewFactory()->addSimpleInput<TransferPreSelection>(QStringLiteral("qrc:/qtmvvm/inputs/TransferPreSelectionEdit.qml"));
-	QtMvvm::QuickPresenter::getInputViewFactory()->addInputAlias("TransferPreSelection", "QList<TransferPreSelectionEntry>");
+	QtMvvm::QuickPresenter::getInputViewFactory()->addSimpleInput("TransferPreSelection",
+																  QStringLiteral("qrc:/qtmvvm/inputs/TransferPreSelectionEdit.qml"));
+	QtMvvm::QuickPresenter::getInputViewFactory()->addFormatter("TransferPreSelection",
+																new TransferPreSelectionFormatter{});
 
 	qmlRegisterInterface<IClientEncryptor>("IClientEncryptor");
 	qmlRegisterType<QrCodeScanner>("de.skycoder42.kpt", 1, 0, "QrCodeScanner");

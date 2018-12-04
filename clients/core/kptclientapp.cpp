@@ -3,11 +3,10 @@
 #include <QIcon>
 #include <QCommandLineParser>
 #include <QtMvvmCore/ServiceRegistry>
-#include <QJsonSerializer>
 #include "kptrootviewmodel.h"
 #include "clienttransferservice.h"
 #include "transferselectionviewmodel.h"
-#include "transferpreselection.h"
+#include "transferpreselectionentry.h"
 
 KPTClientApp::KPTClientApp(QObject *parent) :
 	CoreApp{parent}
@@ -32,9 +31,7 @@ void KPTClientApp::performRegistrations()
 
 	KPTLib::setup();
 
-	qRegisterMetaType<TransferPreSelection>("TransferPreSelection");
 	qRegisterMetaType<KptRootViewModel*>();
-	QJsonSerializer::registerListConverters<TransferPreSelectionEntry>();
 	registerInputTypeMapping<QVariantList>("TransferPreSelection");
 
 	// register services

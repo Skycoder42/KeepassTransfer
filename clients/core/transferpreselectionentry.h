@@ -1,5 +1,5 @@
-#ifndef TRANSFERPRESELECTION_H
-#define TRANSFERPRESELECTION_H
+#ifndef TRANSFERPRESELECTIONENTRY_H
+#define TRANSFERPRESELECTIONENTRY_H
 
 #include <QList>
 #include <QObject>
@@ -18,9 +18,7 @@ public:
 	bool selected = false;
 };
 
-using TransferPreSelection = QList<TransferPreSelectionEntry>;
-
 Q_DECLARE_METATYPE(TransferPreSelectionEntry)
 Q_DECLARE_TYPEINFO(TransferPreSelectionEntry, Q_MOVABLE_TYPE);
 
-#endif // TRANSFERPRESELECTION_H
+#endif // TRANSFERPRESELECTIONENTRY_H

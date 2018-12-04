@@ -15,8 +15,9 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	QtMvvm::WidgetsPresenter::getInputWidgetFactory()->addSimpleWidget<TransferPreSelection, TransferPreSelectionEdit>();
-	QtMvvm::WidgetsPresenter::getInputWidgetFactory()->addAlias("TransferPreSelection", "QList<TransferPreSelectionEntry>");
+	QtMvvm::WidgetsPresenter::getInputWidgetFactory()->addSimpleWidget("TransferPreSelection", [](QWidget *parent){
+		return new TransferPreSelectionEdit{parent};
+	});
 
 	QtMvvm::WidgetsPresenter::registerView<KptRootWizard>();
 	QtMvvm::WidgetsPresenter::registerView<CredentialsEditPage>();
