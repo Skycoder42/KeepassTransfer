@@ -9,13 +9,15 @@ HEADERS += \
 	kptrootwizard.h \
 	credentialseditpage.h \
 	transferselectionpage.h \
-	qrcodeconnectorpage.h
+	qrcodeconnectorpage.h \
+    transferpreselectionedit.h
 
 SOURCES += main.cpp \
 	kptrootwizard.cpp \
 	credentialseditpage.cpp \
 	transferselectionpage.cpp \
-	qrcodeconnectorpage.cpp
+	qrcodeconnectorpage.cpp \
+    transferpreselectionedit.cpp
 
 FORMS += \
 	credentialseditpage.ui \

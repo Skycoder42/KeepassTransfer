@@ -6,6 +6,7 @@
 #include "credentialseditpage.h"
 #include "transferselectionpage.h"
 #include "qrcodeconnectorpage.h"
+#include "transferpreselectionedit.h"
 
 // Register the core app
 QTMVVM_REGISTER_CORE_APP(KPTClientApp)
@@ -13,6 +14,9 @@ QTMVVM_REGISTER_CORE_APP(KPTClientApp)
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+
+	QtMvvm::WidgetsPresenter::getInputWidgetFactory()->addSimpleWidget<TransferPreSelection, TransferPreSelectionEdit>();
+	QtMvvm::WidgetsPresenter::getInputWidgetFactory()->addAlias("TransferPreSelection", "QList<TransferPreSelectionEntry>");
 
 	QtMvvm::WidgetsPresenter::registerView<KptRootWizard>();
 	QtMvvm::WidgetsPresenter::registerView<CredentialsEditPage>();

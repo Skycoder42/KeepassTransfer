@@ -3,6 +3,7 @@
 #include <QtMvvmCore/SettingsViewModel>
 #include "credentialseditviewmodel.h"
 #include "transferselectionviewmodel.h"
+#include "kptsettingsviewmodel.h"
 
 KptRootViewModel::KptRootViewModel(QObject *parent) :
 	ViewModel{parent}
@@ -10,7 +11,7 @@ KptRootViewModel::KptRootViewModel(QObject *parent) :
 
 void KptRootViewModel::showSettings()
 {
-	show<QtMvvm::SettingsViewModel>();
+	show<KptSettingsViewModel>();
 }
 
 void KptRootViewModel::about()

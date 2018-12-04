@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-QT += mvvmcore websockets concurrent
+QT += mvvmcore websockets concurrent jsonserializer
 CONFIG += static
 
 TARGET = $${PROJECT_TARGET}-core
@@ -12,7 +12,9 @@ HEADERS += \
 	kptrootviewmodel.h \
 	clienttransferservice.h \
 	qrcodeconnectorviewmodel.h \
-	qrclientencryptor.h
+	qrclientencryptor.h \
+	transferpreselection.h \
+	kptsettingsviewmodel.h
 
 SOURCES += \
 	kptclientapp.cpp \
@@ -21,7 +23,9 @@ SOURCES += \
 	kptrootviewmodel.cpp \
 	clienttransferservice.cpp \
 	qrcodeconnectorviewmodel.cpp \
-	qrclientencryptor.cpp
+	qrclientencryptor.cpp \
+	transferpreselection.cpp \
+	kptsettingsviewmodel.cpp
 
 SETTINGS_DEFINITIONS += \
 	settings.xml

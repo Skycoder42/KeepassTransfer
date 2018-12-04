@@ -3,9 +3,11 @@
 #include <QIcon>
 #include <QCommandLineParser>
 #include <QtMvvmCore/ServiceRegistry>
+#include <QJsonSerializer>
 #include "kptrootviewmodel.h"
 #include "clienttransferservice.h"
 #include "transferselectionviewmodel.h"
+#include "transferpreselection.h"
 
 KPTClientApp::KPTClientApp(QObject *parent) :
 	CoreApp{parent}
@@ -30,7 +32,10 @@ void KPTClientApp::performRegistrations()
 
 	KPTLib::setup();
 
+	qRegisterMetaType<TransferPreSelection>("TransferPreSelection");
 	qRegisterMetaType<KptRootViewModel*>();
+	QJsonSerializer::registerListConverters<TransferPreSelectionEntry>();
+	registerInputTypeMapping<QVariantList>("TransferPreSelection");
 
 	// register services
 	QtMvvm::ServiceRegistry::instance()->registerObject<DataEncryptor>();
@@ -48,6 +53,9 @@ int KPTClientApp::startApp(const QStringList &arguments)
 	//shows help or version automatically
 	if(!autoParse(parser, arguments))
 		return EXIT_SUCCESS;
+
+	// invoke to prepare defaults
+	Settings::instance()->preselectedSetupDummy.get();
 
 	//show a viewmodel to complete the startup
 	show<KptRootViewModel>(_initCredentials.isEmpty() ?

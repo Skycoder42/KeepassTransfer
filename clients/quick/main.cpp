@@ -11,6 +11,7 @@
 #include <transferselectionviewmodel.h>
 #include <qrcodeconnectorviewmodel.h>
 #include <qrcodescanner.h>
+#include <transferpreselection.h>
 #include "transferloader.h"
 
 QTMVVM_REGISTER_CORE_APP(KPTClientApp)
@@ -57,7 +58,9 @@ int main(int argc, char *argv[])
 
 	coreApp->overwriteInitCredentials(TransferLoader::loadCredentials());
 
-	QtMvvm::QuickPresenter::getInputViewFactory(); //Workaround for QTBUG-69963
+	QtMvvm::QuickPresenter::getInputViewFactory()->addSimpleInput<TransferPreSelection>(QStringLiteral("qrc:/qtmvvm/inputs/TransferPreSelectionEdit.qml"));
+	QtMvvm::QuickPresenter::getInputViewFactory()->addInputAlias("TransferPreSelection", "QList<TransferPreSelectionEntry>");
+
 	qmlRegisterInterface<IClientEncryptor>("IClientEncryptor");
 	qmlRegisterType<QrCodeScanner>("de.skycoder42.kpt", 1, 0, "QrCodeScanner");
 	qmlRegisterUncreatableType<KptRootViewModel>("de.skycoder42.kpt", 1, 0, "KptRootViewModel", QStringLiteral("ViewModels cannot be created!"));

@@ -24,9 +24,15 @@
 		<Entry key="transfer/commit"
 			   type="bool"
 			   title="Automatically &amp;send on paste"
-			   tooltip="If activated, the application will automatically start the transfer if valid data was pasted in the QR-View"
+			   tooltip="If activated, the application will automatically start the transfer if valid data was pasted in the QR-View."
 			   default="true">
-		   <Property key="qtmvvm_preview" type="string" tr="true">Send data to partner if valid data was pasted</Property>
-	   </Entry>
+			<Property key="qtmvvm_preview" type="string" tr="true">Send data to partner if valid data was pasted</Property>
+		</Entry>
+		<Entry key="transfer/preselected"
+			   type="TransferPreSelection"
+			   title="Default &amp;transfer entries"
+			   tooltip="Select the entries you would like to be transfered to the partner by default. When starting a transfer from Keepass those will be selected.">
+			<Property key="qtmvvm_preview" type="string" tr="true">Currently has %L1 elements selected</Property>
+		</Entry>
 	</Group>
 </SettingsConfig>

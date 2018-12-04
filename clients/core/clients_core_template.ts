@@ -100,7 +100,7 @@
 <context>
     <name>KptRootViewModel</name>
     <message>
-        <location filename="kptrootviewmodel.cpp" line="+18"/>
+        <location filename="kptrootviewmodel.cpp" line="+19"/>
         <source>A tool to securely transfer passwords and other credentials from any device to a remote computer for easy access anywhere.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -186,11 +186,26 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>If activated, the application will automatically start the transfer if valid data was pasted in the QR-View</source>
+        <source>If activated, the application will automatically start the transfer if valid data was pasted in the QR-View.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Default &amp;transfer entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Select the entries you would like to be transfered to the partner by default. When starting a transfer from Keepass those will be selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Currently has %L1 elements selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-3"/>
         <source>Send data to partner if valid data was pasted</source>
         <translation type="unfinished"></translation>
     </message>
