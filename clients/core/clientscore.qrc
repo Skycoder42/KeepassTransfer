@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/etc">
-        <file>settings.xml</file>
+        <file alias="settings.xml">gui_settings.xml</file>
     </qresource>
     <qresource prefix="/icons">
         <file alias="main.svg">kpt.svg</file>

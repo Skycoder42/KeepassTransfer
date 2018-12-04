@@ -11,8 +11,8 @@ HEADERS += \
 	transferselectionviewmodel.h \
 	kptrootviewmodel.h \
 	clienttransferservice.h \
-    qrcodeconnectorviewmodel.h \
-    qrclientencryptor.h
+	qrcodeconnectorviewmodel.h \
+	qrclientencryptor.h
 
 SOURCES += \
 	kptclientapp.cpp \
@@ -20,8 +20,11 @@ SOURCES += \
 	transferselectionviewmodel.cpp \
 	kptrootviewmodel.cpp \
 	clienttransferservice.cpp \
-    qrcodeconnectorviewmodel.cpp \
-    qrclientencryptor.cpp
+	qrcodeconnectorviewmodel.cpp \
+	qrclientencryptor.cpp
+
+SETTINGS_DEFINITIONS += \
+	settings.xml
 
 RESOURCES += \
 	clientscore.qrc
@@ -29,7 +32,7 @@ RESOURCES += \
 TRANSLATIONS += clients_core_de.ts \
 	clients_core_template.ts
 
-SETTINGS_TRANSLATIONS = settings.xml
+SETTINGS_TRANSLATIONS = gui_settings.xml
 
 DISTFILES += $$TRANSLATIONS \
 	qpmx.json

@@ -19,8 +19,6 @@ QrCodeConnectorPage::QrCodeConnectorPage(QtMvvm::ViewModel *viewModel, QWidget *
 	});
 	connect(_viewModel, &QrCodeConnectorViewModel::qrDataChanged,
 			this, &QrCodeConnectorPage::qrDataChanged);
-	connect(_viewModel->transferService(), &ClientTransferService::transferCompleted,
-			qApp, &QApplication::quit); //TODO move to vm, based on settings
 }
 
 bool QrCodeConnectorPage::validatePage()
@@ -37,14 +35,14 @@ void QrCodeConnectorPage::pasteQrData()
 {
 	_ui->plainTextEdit->selectAll();
 	_ui->plainTextEdit->paste();
-	if(_viewModel->isValid()) //TODO action in vm, via settings
+	if(_viewModel->doPasteTransfer())
 		_viewModel->transfer();
 }
 
 void QrCodeConnectorPage::qrDataChanged()
 {
 	auto pal = palette();
-	if(_viewModel->isValid()) { //TODO get text/color from VM
+	if(_viewModel->isValid()) {
 		_ui->statusLabel->setText(tr("Content is valid"));
 		pal.setColor(QPalette::WindowText, Qt::darkGreen);
 		_ui->statusLabel->setPalette(pal);

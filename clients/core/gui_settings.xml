@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SettingsConfig>
+	<Group>
+		<Entry key="server/url"
+			   type="url"
+			   title="Server-&amp;URL"
+			   tooltip="The URL of the delegate server to route the transfer through."
+			   default="wss://kpt.skycoder42.de/backend" >
+			<Property key="allowedSchemes" type="list">
+				<Element type="string">wss</Element>
+				<Element type="string">ws</Element>
+			</Property>
+		</Entry>
+	</Group>
+	<Group title="Data-Transfer">
+		<Entry key="transfer/exit"
+			   type="bool"
+			   title="&amp;Exit after transfer"
+			   tooltip="If activated, the application will quit automatically after informing you that data was transfered to a partner."
+			   default="true" />
+		<Entry key="transfer/commit"
+			   type="bool"
+			   title="Automatically &amp;send on paste"
+			   tooltip="If activated, the application will automatically start the transfer if valid data was pasted in the QR-View"
+			   default="true" />
+	</Group>
+</SettingsConfig>

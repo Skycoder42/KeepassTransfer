@@ -13,6 +13,8 @@ namespace {
 
 void onPasteEvent(val event) {
 	event.call<void>("preventDefault");
+	//auto text = event["clipboardData"].call<val>("getData", std::string{"text/plain"});
+	//qDebug() << "event CP data:" << text.as<std::string>().c_str();
 	clipInstance->readText();
 }
 

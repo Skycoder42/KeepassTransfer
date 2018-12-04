@@ -36,11 +36,6 @@ Page {
 		}
 	}
 
-	Connections {
-		target: viewModel.transferService
-		onTransferCompleted: Qt.quit() // TODO quit or return to credentials VM
-	}
-
 	header: ContrastToolBar {
 		height: headerLayout.implicitHeight
 
@@ -133,7 +128,7 @@ Page {
 				onClicked: {
 					codeArea.clear();
 					codeArea.paste();
-					if(viewModel.valid)
+					if(viewModel.pasteTransfer)
 						viewModel.transfer();
 				}
 			}

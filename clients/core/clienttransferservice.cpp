@@ -13,6 +13,8 @@ ClientTransferService::ClientTransferService(QObject *parent) :
 void ClientTransferService::sendCredentials(IClientEncryptor *clientCrypt, const QList<Credential> &credentials)
 {
 	Q_ASSERT(_encryptor);
+	Q_ASSERT(_settings);
+
 	if(_currentSocket) {
 		QtMvvm::warning(tr("Already transferring data"),
 						tr("You can only transfer one dataset a time. "
@@ -36,7 +38,7 @@ void ClientTransferService::sendCredentials(IClientEncryptor *clientCrypt, const
 			this, &ClientTransferService::userCanceled);
 
 	// step 2: initiate the connection
-	const QUrl targetUrl{QStringLiteral("ws://192.168.179.37:27352")}; //TODO get from settings
+	const QUrl targetUrl = _settings->server.url;
 	_currentSocket = new QWebSocket{targetUrl.authority(), QWebSocketProtocol::VersionLatest, this};
 	connect(_currentSocket, &QWebSocket::connected,
 			this, &ClientTransferService::connected);

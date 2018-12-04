@@ -8,7 +8,7 @@ TARGET = $${PROJECT_TARGET}-app
 
 SOURCES += main.cpp \
 	qrcodescanner.cpp \
-    transferloader.cpp
+	transferloader.cpp
 
 RESOURCES += \
 	clientsquick.qrc
@@ -26,14 +26,14 @@ DISTFILES += $$TRANSLATIONS \
 	$$files(android/res/*, true) \
 	android/build.gradle \
 	android/src/de/skycoder42/kpt/TransferAccessReceiver.java \
-    android/src/de/skycoder42/kpt/TransferActionReceiver.java
+	android/src/de/skycoder42/kpt/TransferActionReceiver.java
 
 # Link with core project
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -l$${PROJECT_TARGET}-core
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../core/debug/ -l$${PROJECT_TARGET}-core
 else:unix: LIBS += -L$$OUT_PWD/../core/ -l$${PROJECT_TARGET}-core
 
-INCLUDEPATH += $$PWD/../core
+INCLUDEPATH += $$PWD/../core $$OUT_PWD/../core
 DEPENDPATH += $$PWD/../core
 
 win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../core/release/lib$${PROJECT_TARGET}-core.a
@@ -49,4 +49,4 @@ include($$SRC_ROOT_DIR/lib/lib.pri)
 
 HEADERS += \
 	qrcodescanner.h \
-    transferloader.h
+	transferloader.h

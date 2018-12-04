@@ -4,7 +4,7 @@
 <context>
     <name>ClientTransferService</name>
     <message>
-        <location filename="clienttransferservice.cpp" line="+32"/>
+        <location filename="clienttransferservice.cpp" line="+34"/>
         <source>Transferring data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -143,20 +143,30 @@
     </message>
 </context>
 <context>
-    <name>settings.xml</name>
+    <name>gui_settings.xml</name>
     <message>
-        <location filename="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/core/.tr-dummies/settings.tsdummy.cpp" line="+7"/>
+        <location filename="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/core/.tr-dummies/gui_settings.tsdummy.cpp" line="+7"/>
+        <source>Server-&amp;URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The URL of the delegate server to route the transfer through.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Data-Transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>&amp;Exit after transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>If activated, the application will quit automatically after informing you that data was transfered to a partner.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>QR-Code Transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

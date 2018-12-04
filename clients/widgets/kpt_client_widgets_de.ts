@@ -82,7 +82,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="qrcodeconnectorpage.cpp" line="+48"/>
+        <location filename="qrcodeconnectorpage.cpp" line="+46"/>
         <source>Content is valid</source>
         <translation type="unfinished"></translation>
     </message>

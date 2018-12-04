@@ -53,7 +53,6 @@ void TransferServer::newConnection()
 				visitor.addVisitor(this, &TransferServer::onClientTransfer, socket);
 
 				// wait for the first message
-				//TODO improve in coroutine
 				visitor.visit(QtCoroutine::awaitargs<QByteArray>::await(socket, &QWebSocket::binaryMessageReceived));
 			} while(_server->hasPendingConnections());
 		});

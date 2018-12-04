@@ -15,6 +15,7 @@
 #include <cryptopp/secblock.h>
 #include <messages/serverokmessage.h>
 #include <messages/errormessage.h>
+#include "settings.h"
 
 class IClientEncryptor
 {
@@ -32,6 +33,7 @@ class ClientTransferService : public QObject
 {
 	Q_OBJECT
 	QTMVVM_INJECT_PROP(DataEncryptor*, encryptor, _encryptor)
+	QTMVVM_INJECT_PROP(Settings*, settings, _settings)
 
 public:
 	Q_INVOKABLE explicit ClientTransferService(QObject *parent = nullptr);
@@ -56,6 +58,7 @@ private:
 	static QThreadStorage<CryptoPP::AutoSeededRandomPool> _rngs;
 
 	DataEncryptor *_encryptor = nullptr;
+	Settings *_settings = nullptr;
 
 	QWebSocket *_currentSocket = nullptr;
 	QPointer<QtMvvm::ProgressControl> _currentControl = nullptr;

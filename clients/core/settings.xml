@@ -1,17 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<SettingsConfig>
-	<Group>
-		<Entry key="transfer/exit"
-			   type="bool"
-			   title="&amp;Exit after transfer"
-			   tooltip="If activated, the application will quit automatically after informing you that data was transfered to a partner."
-			   default="true" />
-	</Group>
-	<Group title="QR-Code Transfer">
-		<Entry key="transfer/commit"
-			   type="bool"
-			   title="Automatically &amp;send on paste"
-			   tooltip="If activated, the application will automatically start the transfer if valid data was pasted in the QR-View"
-			   default="true" />
-	</Group>
-</SettingsConfig>
+<?xml version="1.0" encoding="UTF-8" ?>
+<Settings name="Settings">
+	<Include>QUrl</Include>
+
+	<TypeMapping key="url" type="QUrl"/>
+	<Import>gui_settings.xml</Import>
+</Settings>

@@ -64,7 +64,7 @@ void QrEncoder::recreateKeys()
 		return;
 
 	try {
-		//TODO make async
+		//NOTE make async
 		_privKey.clear();
 		_pubKey.clear();
 		_qrData.clear();
