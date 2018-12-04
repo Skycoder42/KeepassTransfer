@@ -14,8 +14,6 @@ public:
 public slots:
 	void showSettings();
 	void about();
-
-	void onInit(const QVariantHash &params) override;
 };
 
 #endif // KPTROOTVIEWMODEL_H

@@ -1,8 +1,6 @@
 #include "kptrootviewmodel.h"
 #include <QtMvvmCore/Messages>
 #include <QtMvvmCore/SettingsViewModel>
-#include "credentialseditviewmodel.h"
-#include "transferselectionviewmodel.h"
 #include "kptsettingsviewmodel.h"
 
 KptRootViewModel::KptRootViewModel(QObject *parent) :
@@ -25,16 +23,8 @@ void KptRootViewModel::about()
 				  tr("Attributions:<ul>"
 					 "<li><a href=\"https://github.com/weidai11/cryptopp\">CryptoPP (BSL-1.0)</a></li>"
 					 "<li><a href=\"https://github.com/nayuki/QR-Code-generator\">QR-Code-generator (MIT)</a></li>"
+					 "<li><a href=\"https://github.com/iamantony/qtcsv\">qtcsv (MIT)</a></li>"
 					 "<li><a href=\"https://github.com/PhilippC/keepass2android\">Keepass2Android Plugin SDK (GPL-3.0)</a></li>"
 					 "<li><a href=\"https://material.io/tools/icons\">MaterialIO Icons (Apache-2.0)</a></li>"
 					 "</ul>"));
-}
-
-void KptRootViewModel::onInit(const QVariantHash &params)
-{
-	Q_UNUSED(params);
-	if(params.contains(TransferSelectionViewModel::paramCred))
-		show<TransferSelectionViewModel>(params);
-	else
-		show<CredentialsEditViewModel>();
 }

@@ -7,3 +7,6 @@
 [submodule "3rdparty/keepass2android"]
 	path = 3rdparty/keepass2android
 	url = https://github.com/PhilippC/keepass2android.git
+[submodule "3rdparty/qtcsv"]
+	path = 3rdparty/qtcsv
+	url = https://github.com/iamantony/qtcsv

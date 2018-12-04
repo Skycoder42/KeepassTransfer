@@ -19,6 +19,11 @@ protected:
 
 private:
 	QList<Credential> _initCredentials;
+
+	bool readCliCredentials(const QCommandLineParser &parser);
+	bool readJsonCredentials(QIODevice *device);
+	bool readCsvCredentials(QIODevice *device);
+	bool readPlainCredentials(QIODevice *device);
 };
 
 #undef coreApp

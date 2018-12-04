@@ -98,9 +98,36 @@
     </message>
 </context>
 <context>
+    <name>KPTClientApp</name>
+    <message>
+        <location filename="kptclientapp.cpp" line="+61"/>
+        <source>Pass password entries to the application to transfer them. You can either pass a path as last argument or let the application read the data from stdin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Specify the &lt;format&gt; of that the data beeing passed has. Only works in conjunction with &apos;--transfer&apos;. Supported formats are:
+- json
+- csv (with &apos;;&apos; as seperator)
+- plain
+The default format is determined from the file extension and falls back to &apos;plain&apos; for stdin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>The path to a file that contains the credentials to be transferred. Can only be specified if &apos;--transfer&apos; is set. If left empty, data is read from stdin.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>KptRootViewModel</name>
     <message>
-        <location filename="kptrootviewmodel.cpp" line="+19"/>
+        <location filename="kptrootviewmodel.cpp" line="+17"/>
         <source>A tool to securely transfer passwords and other credentials from any device to a remote computer for easy access anywhere.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -112,8 +139,8 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <oldsource>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</oldsource>
+        <source>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/iamantony/qtcsv&quot;&gt;qtcsv (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <oldsource>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
