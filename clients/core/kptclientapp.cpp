@@ -93,7 +93,6 @@ int KPTClientApp::startApp(const QStringList &arguments)
 	}
 
 	//show a viewmodel to complete the startup
-	qDebug() << _initCredentials;
 	if(_initCredentials.isEmpty())
 		show<CredentialsEditViewModel>();
 	else
@@ -112,6 +111,7 @@ bool KPTClientApp::readCliCredentials(const QCommandLineParser &parser)
 		if(!inDevice->open(QIODevice::ReadOnly | QIODevice::Text)) {
 			qCritical() << "Failed to read file" << parser.positionalArguments().value(0)
 						<< "with error:" << qUtf8Printable(inDevice->errorString());
+			inDevice->deleteLater();
 			return false;
 		}
 	} else {
@@ -120,6 +120,7 @@ bool KPTClientApp::readCliCredentials(const QCommandLineParser &parser)
 		if(!cFile->open(stdin, QIODevice::ReadOnly | QIODevice::Text)) {
 			qCritical().noquote() << "Failed to read from stdin with error:"
 								  << inDevice->errorString();
+			inDevice->deleteLater();
 			return false;
 		}
 	}

@@ -120,7 +120,8 @@ The default format is determined from the file extension and falls back to &apos
     </message>
     <message>
         <location line="+4"/>
-        <source>The path to a file that contains the credentials to be transferred. Can only be specified if &apos;--transfer&apos; is set. If left empty, data is read from stdin.</source>
+        <source>The path to a file that contains the credentials to be transferred. Can only be specified if &apos;--transfer&apos; is set. If left empty, data is read from stdin (Use CTRL+D to commit data from the terminal).</source>
+        <oldsource>The path to a file that contains the credentials to be transferred. Can only be specified if &apos;--transfer&apos; is set. If left empty, data is read from stdin.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
