@@ -5,6 +5,7 @@
 #include <QtCore/QThreadStorage>
 #include <QtCore/QFutureWatcher>
 #include <QtCore/QPointer>
+#include <QtCore/QUuid>
 #include <QtWebSockets/QWebSocket>
 #include <QtMvvmCore/ProgressControl>
 #include <QtMvvmCore/Injection>

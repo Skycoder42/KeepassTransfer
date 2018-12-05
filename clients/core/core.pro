@@ -15,7 +15,8 @@ HEADERS += \
 	qrclientencryptor.h \
 	kptsettingsviewmodel.h \
 	transferpreselectionentry.h \
-    credentialsselectionviewmodel.h
+    credentialsselectionviewmodel.h \
+    passclientencryptor.h
 
 SOURCES += \
 	kptclientapp.cpp \
@@ -27,7 +28,8 @@ SOURCES += \
 	qrclientencryptor.cpp \
 	kptsettingsviewmodel.cpp \
 	transferpreselectionentry.cpp \
-    credentialsselectionviewmodel.cpp
+    credentialsselectionviewmodel.cpp \
+    passclientencryptor.cpp
 
 SETTINGS_DEFINITIONS += \
 	settings.xml
