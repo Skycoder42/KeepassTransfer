@@ -30,9 +30,6 @@ void TransferPreSelectionEdit::setElements(const QVariantList &elements)
 	for(const auto &element : qAsConst(_elements)) {
 		auto item = new QListWidgetItem{this};
 		item->setText(element.key);
-		item->setIcon(element.confidential ?
-						  QIcon::fromTheme(QStringLiteral("lock")) :
-						  QIcon::fromTheme(QStringLiteral("unlock")));
 		item->setCheckState(element.selected ? Qt::Checked : Qt::Unchecked);
 		item->setFlags((item->flags() | Qt::ItemIsUserCheckable) & ~Qt::ItemIsEditable);
 	}

@@ -9,12 +9,10 @@ struct TransferPreSelectionEntry
 	Q_GADGET
 
 	Q_PROPERTY(QString key MEMBER key)
-	Q_PROPERTY(bool confidential MEMBER confidential)
 	Q_PROPERTY(bool selected MEMBER selected)
 
 public:
 	QString key;
-	bool confidential = false;
 	bool selected = false;
 };
 

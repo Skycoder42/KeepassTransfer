@@ -5,7 +5,6 @@
     <name>CredentialsEditPage</name>
     <message>
         <location filename="credentialseditpage.ui" line="+14"/>
-        <location line="+3"/>
         <source>Enter Credentials</source>
         <translation type="unfinished"></translation>
     </message>
@@ -26,9 +25,42 @@
     </message>
 </context>
 <context>
+    <name>CredentialsSelectionPage</name>
+    <message>
+        <location filename="credentialsselectionpage.ui" line="+14"/>
+        <source>Select Credentials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select the credentials you want to transfer to the partner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+65"/>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ctrl+A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Deselect all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ctrl+Shift+A</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>KptRootWizard</name>
     <message>
-        <location filename="kptrootwizard.cpp" line="+39"/>
+        <location filename="kptrootwizard.cpp" line="+38"/>
         <source>Transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,11 +79,6 @@
     <name>QrCodeConnectorPage</name>
     <message>
         <location filename="qrcodeconnectorpage.ui" line="+14"/>
-        <source>WizardPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>QR-Code Transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62,12 +89,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+31"/>
         <source>Paste the QR-Code data here to continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+18"/>
         <source>Paste</source>
         <translation type="unfinished"></translation>
     </message>
@@ -96,11 +123,6 @@
     <name>TransferSelectionPage</name>
     <message>
         <location filename="transferselectionpage.ui" line="+14"/>
-        <source>WizardPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>Select a mode</source>
         <translation type="unfinished"></translation>
     </message>

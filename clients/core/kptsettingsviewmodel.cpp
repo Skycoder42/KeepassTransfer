@@ -13,7 +13,7 @@ QVariant KptSettingsViewModel::loadValue(const QString &key, const QVariant &def
 		QVariantList presel;
 		presel.reserve(settings.preselected.size());
 		for(const auto &entry : settings.preselected)
-			presel.append(QVariant::fromValue(TransferPreSelectionEntry{entry.key, entry.confidential, entry.selected}));
+			presel.append(QVariant::fromValue(TransferPreSelectionEntry{entry.key, entry.selected}));
 		return presel;
 	} else
 		return SettingsViewModel::loadValue(key, defaultValue);
@@ -28,7 +28,6 @@ void KptSettingsViewModel::saveValue(const QString &key, const QVariant &value)
 			const auto entry = entryVar.value<TransferPreSelectionEntry>();
 			auto elem = settings.preselected.push_deferred();
 			elem->key = entry.key;
-			elem->confidential = entry.confidential;
 			elem->selected = entry.selected;
 		}
 	} else

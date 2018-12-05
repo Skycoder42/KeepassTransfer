@@ -16,7 +16,7 @@
 #include "kptrootviewmodel.h"
 #include "clienttransferservice.h"
 #include "credentialseditviewmodel.h"
-#include "transferselectionviewmodel.h"
+#include "credentialsselectionviewmodel.h"
 #include "transferpreselectionentry.h"
 
 KPTClientApp::KPTClientApp(QObject *parent) :
@@ -96,7 +96,7 @@ int KPTClientApp::startApp(const QStringList &arguments)
 	if(_initCredentials.isEmpty())
 		show<CredentialsEditViewModel>();
 	else
-		show<TransferSelectionViewModel>(TransferSelectionViewModel::params(_initCredentials));
+		show<CredentialsSelectionViewModel>(CredentialsSelectionViewModel::params(_initCredentials));
 	return EXIT_SUCCESS;
 }
 

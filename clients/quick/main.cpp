@@ -8,6 +8,7 @@
 #include <clienttransferservice.h>
 #include <kptrootviewmodel.h>
 #include <credentialseditviewmodel.h>
+#include <credentialsselectionviewmodel.h>
 #include <transferselectionviewmodel.h>
 #include <qrcodeconnectorviewmodel.h>
 #include <qrcodescanner.h>
@@ -81,6 +82,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<QrCodeScanner>("de.skycoder42.kpt", 1, 0, "QrCodeScanner");
 	qmlRegisterUncreatableType<KptRootViewModel>("de.skycoder42.kpt", 1, 0, "KptRootViewModel", QStringLiteral("ViewModels cannot be created!"));
 	qmlRegisterUncreatableType<CredentialsEditViewModel>("de.skycoder42.kpt", 1, 0, "CredentialsEditViewModel", QStringLiteral("ViewModels cannot be created!"));
+	qmlRegisterUncreatableType<CredentialsSelectionViewModel>("de.skycoder42.kpt", 1, 0, "CredentialsSelectionViewModel", QStringLiteral("ViewModels cannot be created!"));
 	qmlRegisterUncreatableType<TransferSelectionViewModel>("de.skycoder42.kpt", 1, 0, "TransferSelectionViewModel", QStringLiteral("ViewModels cannot be created!"));
 	qmlRegisterUncreatableType<QrCodeConnectorViewModel>("de.skycoder42.kpt", 1, 0, "QrCodeConnectorViewModel", QStringLiteral("ViewModels cannot be created!"));
 

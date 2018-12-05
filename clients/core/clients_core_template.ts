@@ -98,6 +98,19 @@
     </message>
 </context>
 <context>
+    <name>CredentialsSelectionViewModel</name>
+    <message>
+        <location filename="credentialsselectionviewmodel.cpp" line="+45"/>
+        <source>Invalid Credentials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>You must select at least one credential before you can continue!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>KPTClientApp</name>
     <message>
         <location filename="kptclientapp.cpp" line="+61"/>

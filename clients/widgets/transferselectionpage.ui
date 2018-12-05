@@ -10,9 +10,6 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>WizardPage</string>
-  </property>
   <property name="title">
    <string>Select a mode</string>
   </property>

@@ -8,6 +8,7 @@
         <file>TransferSelectionView.qml</file>
         <file>KptRootDrawer.qml</file>
         <file>QrCodeConnectorView.qml</file>
+        <file>CredentialsSelectionView.qml</file>
     </qresource>
     <qresource prefix="/icons">
         <file alias="send.svg">icons/baseline-send-24px.svg</file>

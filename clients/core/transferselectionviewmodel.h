@@ -28,7 +28,7 @@ public slots:
 	void onInit(const QVariantHash &params) override;
 
 private:
-	QStandardItemModel *_modeModel;
+	QStandardItemModel * const _modeModel;
 	QList<Credential> _credentials;
 };
 

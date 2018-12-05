@@ -9,9 +9,6 @@
 	<ListNode key="preselected">
 		<Entry key="key"
 			   type="QString"/>
-		<Entry key="confidential"
-			   type="bool"
-			   default="false"/>
 		<Entry key="selected"
 			   type="bool"
 			   default="false"/>
@@ -30,7 +27,6 @@
 					for(const auto &amp;field : standardFields) {
 						auto entry = preselected.push_deferred();
 						entry->key = field;
-						entry->confidential = (field == QStringLiteral("Password"));
 						entry->selected = true;
 					}
 				}

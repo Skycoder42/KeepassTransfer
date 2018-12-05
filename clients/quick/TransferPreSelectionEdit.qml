@@ -22,8 +22,6 @@ ScrollView {
 			id: delegate
 			width: preSelView.width
 			text: modelData.key
-			icon.name: modelData.confidential ? "lock" : "unlock"
-			icon.source: modelData.confidential ? "qrc:/icons/locked.svg" : "qrc:/icons/unlocked.svg"
 			checked: modelData.selected
 			onCheckedChanged: inputValue[index].selected = delegate.checked
 		}

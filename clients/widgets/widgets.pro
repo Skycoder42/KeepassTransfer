@@ -10,19 +10,22 @@ HEADERS += \
 	credentialseditpage.h \
 	transferselectionpage.h \
 	qrcodeconnectorpage.h \
-    transferpreselectionedit.h
+    transferpreselectionedit.h \
+    credentialsselectionpage.h
 
 SOURCES += main.cpp \
 	kptrootwizard.cpp \
 	credentialseditpage.cpp \
 	transferselectionpage.cpp \
 	qrcodeconnectorpage.cpp \
-    transferpreselectionedit.cpp
+    transferpreselectionedit.cpp \
+    credentialsselectionpage.cpp
 
 FORMS += \
 	credentialseditpage.ui \
 	transferselectionpage.ui \
-	qrcodeconnectorpage.ui
+	qrcodeconnectorpage.ui \
+    credentialsselectionpage.ui
 
 TRANSLATIONS += \
 	kpt_client_widgets_de.ts \

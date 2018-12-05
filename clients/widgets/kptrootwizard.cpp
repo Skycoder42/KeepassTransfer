@@ -30,8 +30,7 @@ KptRootWizard::KptRootWizard(QtMvvm::ViewModel *viewModel, QWidget *parent) :
 	setWizardStyle(ModernStyle);
 #endif
 
-	setOptions(IndependentPages |
-			   NoBackButtonOnStartPage |
+	setOptions(NoBackButtonOnStartPage |
 			   HaveHelpButton |
 			   HaveCustomButton1);
 	setPixmap(LogoPixmap, windowIcon().pixmap(windowHandle(), {64, 64}));
@@ -87,6 +86,7 @@ int KptRootWizard::nextId() const
 
 void KptRootWizard::initializePage(int id)
 {
+	qDebug() << Q_FUNC_INFO << id;
 	if(id != topStack())
 		qWarning() << "Wizard corrupted - invalid id in initializePage - can crash anytime now";
 	QWizard::initializePage(id);
@@ -94,6 +94,7 @@ void KptRootWizard::initializePage(int id)
 
 void KptRootWizard::cleanupPage(int id)
 {
+	qDebug() << Q_FUNC_INFO << id;
 	if(id != topStack())
 		qWarning() << "Wizard corrupted - invalid id in cleanupPage - can crash anytime now";
 

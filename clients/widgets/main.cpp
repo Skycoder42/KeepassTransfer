@@ -4,6 +4,7 @@
 
 #include "kptrootwizard.h"
 #include "credentialseditpage.h"
+#include "credentialsselectionpage.h"
 #include "transferselectionpage.h"
 #include "qrcodeconnectorpage.h"
 #include "transferpreselectionedit.h"
@@ -21,6 +22,7 @@ int main(int argc, char *argv[])
 
 	QtMvvm::WidgetsPresenter::registerView<KptRootWizard>();
 	QtMvvm::WidgetsPresenter::registerView<CredentialsEditPage>();
+	QtMvvm::WidgetsPresenter::registerView<CredentialsSelectionPage>();
 	QtMvvm::WidgetsPresenter::registerView<TransferSelectionPage>();
 	QtMvvm::WidgetsPresenter::registerView<QrCodeConnectorPage>();
 
