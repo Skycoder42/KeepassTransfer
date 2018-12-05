@@ -47,4 +47,8 @@ ApplicationWindow {
 	}
 
 	ErrorDialog {}
+
+	AboutDialog {
+		id: aboutDialog
+	}
 }

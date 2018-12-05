@@ -70,6 +70,14 @@ void EmJsConnector::setTag(const QString &tag)
 	location.set("hash", "#" + tag.toStdString());
 }
 
+void EmJsConnector::openUrl(const QUrl &url)
+{
+	auto window = val::global("window");
+	window.call<val>("open",
+					 url.toString(QUrl::FullyEncoded).toStdString(),
+					 std::string{"_blank"});
+}
+
 void EmJsConnector::qtDataChanged()
 {
 	if(_skipNext) {

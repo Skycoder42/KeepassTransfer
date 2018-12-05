@@ -1,7 +1,6 @@
 #include "emjsconnector.h"
-#include <QGuiApplication>
 #include <QGlobalStatic>
-#include <QDebug>
+#include <QDesktopServices>
 
 Q_GLOBAL_STATIC(EmJsConnector, clipInstance)
 
@@ -19,6 +18,11 @@ void EmJsConnector::readText() {}
 void EmJsConnector::updateClipboard(const QString &) {}
 
 void EmJsConnector::setTag(const QString &) {}
+
+void EmJsConnector::openUrl(const QUrl &url)
+{
+	QDesktopServices::openUrl(url);
+}
 
 void EmJsConnector::qtDataChanged() {}
 

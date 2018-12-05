@@ -41,6 +41,18 @@ Page {
 				horizontalAlignment: Qt.AlignLeft
 				verticalAlignment: Qt.AlignVCenter
 			}
+
+			ToolButton {
+				id: aboutBtn
+				flat: true
+				icon.name: "help-about"
+				icon.source: "qrc:/icons/about.svg"
+				onClicked: aboutDialog.open()
+
+				ToolTip.visible: pressed
+				ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+				ToolTip.text:  qsTr("About Keepass Transfer")
+			}
 		}
 	}
 

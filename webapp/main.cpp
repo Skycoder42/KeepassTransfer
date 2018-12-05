@@ -43,6 +43,8 @@ int main(int argc, char *argv[])
 	engine.addImageProvider(QStringLiteral("qrcode"), new QrImageProvider{});
 	engine.rootContext()->setContextProperty(QStringLiteral("connector"), &connector);
 	engine.rootContext()->setContextProperty(QStringLiteral("emjscon"), EmJsConnector::instance());
+	engine.rootContext()->setContextProperty(QStringLiteral("appVersion"), QCoreApplication::applicationVersion());
+	engine.rootContext()->setContextProperty(QStringLiteral("qtVersion"), QStringLiteral(QT_VERSION_STR));
 
 	engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 	if (engine.rootObjects().isEmpty())

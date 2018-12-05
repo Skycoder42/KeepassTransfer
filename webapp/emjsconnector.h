@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QClipboard>
+#include <QUrl>
 
 class EmJsConnector : public QObject
 {
@@ -16,7 +17,10 @@ public:
 	void readText();
 	void updateClipboard(const QString &text);
 
-	Q_INVOKABLE void setTag(const QString &tag);
+
+public slots:
+	void setTag(const QString &tag);
+	void openUrl(const QUrl &url);
 
 signals:
 	void tagChanged(const QString &tag);

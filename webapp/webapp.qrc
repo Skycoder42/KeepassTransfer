@@ -5,6 +5,7 @@
         <file>MainView.qml</file>
         <file>QrTabView.qml</file>
         <file>CredentialsView.qml</file>
+        <file>AboutDialog.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
@@ -15,5 +16,6 @@
         <file alias="copy.svg">icons/baseline-file_copy-24px.svg</file>
         <file alias="main.svg">icons/kpt.svg</file>
         <file alias="back.svg">icons/baseline-arrow_back-24px.svg</file>
+        <file alias="about.svg">icons/outline-info-24px.svg</file>
     </qresource>
 </RCC>

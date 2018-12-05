@@ -10,8 +10,9 @@ Page {
 		Material.background: Material.primary
 		Material.foreground: "black"
 
-		ColumnLayout {
+		GridLayout {
 			anchors.fill: parent
+			columns: 2
 
 			Label {
 				Layout.preferredHeight: 56
@@ -25,10 +26,23 @@ Page {
 				leftPadding: 16
 			}
 
+			ToolButton {
+				id: aboutBtn
+				flat: true
+				icon.name: "help-about"
+				icon.source: "qrc:/icons/about.svg"
+				onClicked: aboutDialog.open()
+
+				ToolTip.visible: pressed
+				ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+				ToolTip.text:  qsTr("About Keepass Transfer")
+			}
+
 			TabBar {
 				id: modeBar
 				currentIndex: modeView.currentIndex
 				Layout.fillWidth: true
+				Layout.columnSpan: 2
 
 				TabButton {
 					text: qsTr("QR-Code")
