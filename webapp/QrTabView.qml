@@ -31,11 +31,13 @@ ScrollView {
 		ColumnLayout {
 			id: contentLayout
 			anchors.fill: parent
+			spacing: 16
 
 			GroupBox {
 				id: paramGroup
 				title: qsTr("Key-Generation Parameters")
-				Layout.alignment: Qt.AlignCenter
+				Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+				Layout.preferredWidth: 400
 
 				GridLayout {
 					anchors.fill: parent
@@ -44,7 +46,7 @@ ScrollView {
 
 					Label {
 						text: qsTr("ECC-Curve:")
-						Layout.fillWidth: true
+						Layout.alignment: Qt.AlignLeft
 					}
 
 					ComboBox {
@@ -66,7 +68,7 @@ ScrollView {
 
 					Label {
 						text: qsTr("Error-Correction:")
-						Layout.fillWidth: true
+						Layout.alignment: Qt.AlignLeft
 					}
 
 					ComboBox {
@@ -86,7 +88,7 @@ ScrollView {
 
 					Label {
 						text: qsTr("QR-Code Size:")
-						Layout.fillWidth: true
+						Layout.alignment: Qt.AlignLeft
 					}
 
 					SpinBox {
@@ -111,7 +113,7 @@ ScrollView {
 			GroupBox {
 				id: qrViewBox
 				title: qsTr("QR-Code")
-				Layout.alignment: Qt.AlignCenter
+				Layout.alignment: Qt.AlignHCenter
 				visible: encoder.valid
 
 				ColumnLayout {
@@ -134,7 +136,7 @@ ScrollView {
 						id: codeArea
 						Layout.fillWidth: true
 						Layout.preferredWidth: sizeBox.value
-						text: encoder.qrData //TODO use monospace font
+						text: encoder.qrData
 						readOnly: true
 						selectByMouse: true
 						wrapMode: TextArea.WrapAnywhere

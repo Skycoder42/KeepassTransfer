@@ -7,6 +7,7 @@
 #include <dataencryptor.h>
 
 #include "qrencoder.h"
+#include "passencoder.h"
 #include "qrimageprovider.h"
 #include "emjsconnector.h"
 
@@ -36,8 +37,9 @@ int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<ServerConnector>("de.skycoder42.kpt", 1, 0, "ServerConnector", {});
 	qmlRegisterUncreatableType<DataEncryptor>("de.skycoder42.kpt", 1, 0, "DataEncryptor", {});
 	qmlRegisterType<QrEncoder>("de.skycoder42.kpt", 1, 0, "QrEncoder");
+	qmlRegisterType<PassEncoder>("de.skycoder42.kpt", 1, 0, "PassEncoder");
 
-	ServerConnector connector{QStringLiteral("ws://localhost:27352")};
+	ServerConnector connector{EmJsConnector::instance()->getHostUrl()};
 
 	QQmlApplicationEngine engine;
 	engine.addImageProvider(QStringLiteral("qrcode"), new QrImageProvider{});

@@ -104,10 +104,7 @@ Page {
 						flat: true
 						icon.name: "edit-copy"
 						icon.source: "qrc:/icons/copy.svg"
-						onClicked: {
-							valueField.selectAll(); //TODO wont work, do via cpp
-							valueField.copy();
-						}
+						onClicked: emjscon.copyText(valueField.text)
 
 						ToolTip.visible: pressed
 						ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
@@ -126,16 +123,7 @@ Page {
 					Button {
 						Layout.alignment: Qt.AlignRight
 						text: qsTr("Clear Clipboard")
-						onClicked: {
-							cpClear.selectAll();
-							cpClear.copy();
-						}
-
-						TextField {
-							id: cpClear
-							visible: false
-							text: qsTr("-- Clipboard was cleared --")
-						}
+						onClicked: emjscon.copyText(qsTr("-- Clipboard was cleared --"))
 					}
 				}
 			}

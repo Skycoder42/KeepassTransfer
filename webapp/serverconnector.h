@@ -15,6 +15,7 @@ class ServerConnector : public QObject
 
 	Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
 	Q_PROPERTY(QUuid appId READ appId NOTIFY appIdChanged)
+	Q_PROPERTY(QString appIdStr READ appIdStr NOTIFY appIdChanged)
 
 public:
 	explicit ServerConnector(QUrl url,
@@ -22,13 +23,14 @@ public:
 
 	bool isConnected() const;
 	QUuid appId() const;
+	QString appIdStr() const;
 
 signals:
 	void credentialsReceived(const QVariantList &receivedCreds, const QString &entryTitle);
 	void serverError(const QString &message);
 
 	void connectedChanged(bool connected, QPrivateSignal);
-	void appIdChanged(QUuid appId, QPrivateSignal);
+	void appIdChanged(QPrivateSignal);
 
 private slots:
 	void connected();

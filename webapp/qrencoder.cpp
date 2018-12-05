@@ -99,7 +99,6 @@ void QrEncoder::setChannelId(QUuid channelId)
 
 QByteArray QrEncoder::decryptData(const QByteArray &keyInfo, const QByteArray &iv, const QByteArray &data) const
 {
-	auto secretKey = encryptor()->decryptSecretKey(rng(), keyInfo, _privKey);
-	auto plainData = encryptor()->decryptSymmetric(data, secretKey, iv);
-	return plainData;
+	const auto secretKey = encryptor()->decryptSecretKey(rng(), keyInfo, _privKey);
+	return encryptor()->decryptSymmetric(data, secretKey, iv);
 }

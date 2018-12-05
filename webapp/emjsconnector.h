@@ -17,10 +17,13 @@ public:
 	void readText();
 	void updateClipboard(const QString &text);
 
+	QUrl getHostUrl() const;
 
 public slots:
 	void setTag(const QString &tag);
 	void openUrl(const QUrl &url);
+
+	void copyText(const QString &text);
 
 signals:
 	void tagChanged(const QString &tag);

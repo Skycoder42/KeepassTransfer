@@ -64,6 +64,16 @@ void EmJsConnector::updateClipboard(const QString &text)
 	_qtClipboard->setText(text);
 }
 
+QUrl EmJsConnector::getHostUrl() const
+{
+#ifdef QT_NO_DEBUG
+	auto location = val::global("location");
+	return QStringLiteral("wss://%1/backend").arg(QString::fromStdString(location["host"].as<std::string>()));
+#else
+	return QStringLiteral("ws://localhost:27352");
+#endif
+}
+
 void EmJsConnector::setTag(const QString &tag)
 {
 	auto location = val::global("location");
@@ -76,6 +86,11 @@ void EmJsConnector::openUrl(const QUrl &url)
 	window.call<val>("open",
 					 url.toString(QUrl::FullyEncoded).toStdString(),
 					 std::string{"_blank"});
+}
+
+void EmJsConnector::copyText(const QString &text)
+{
+	_qtClipboard->setText(text);
 }
 
 void EmJsConnector::qtDataChanged()

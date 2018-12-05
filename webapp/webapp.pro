@@ -18,14 +18,16 @@ HEADERS += \
 	iencoder.h \
 	qrencoder.h \
 	qrimageprovider.h \
-	emjsconnector.h
+	emjsconnector.h \
+    passencoder.h
 
 SOURCES += \
 	main.cpp \
 	serverconnector.cpp \
 	iencoder.cpp \
 	qrencoder.cpp \
-	qrimageprovider.cpp
+	qrimageprovider.cpp \
+    passencoder.cpp
 
 RESOURCES += \
 	webapp.qrc

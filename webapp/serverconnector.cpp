@@ -8,6 +8,7 @@ ServerConnector::ServerConnector(QUrl url, QObject *parent) :
 	QObject{parent},
 	_serverUrl{std::move(url)}
 {
+	qInfo() << "Connecting to remote backend server with url:" << _serverUrl;
 	recreateSocket();
 }
 
@@ -19,6 +20,11 @@ bool ServerConnector::isConnected() const
 QUuid ServerConnector::appId() const
 {
 	return _appId;
+}
+
+QString ServerConnector::appIdStr() const
+{
+	return _appId.toString(QUuid::WithoutBraces).toUpper();
 }
 
 void ServerConnector::connected()
@@ -41,7 +47,7 @@ void ServerConnector::disconnected()
 	_retryTimeout = std::min(_retryTimeout * 2, 30000);
 
 	emit connectedChanged(isConnected(), {});
-	emit appIdChanged(_appId, {});
+	emit appIdChanged({});
 }
 
 void ServerConnector::error(QAbstractSocket::SocketError error)
@@ -77,7 +83,7 @@ void ServerConnector::recreateSocket()
 	// cleanup appid if still set
 	if(!_appId.isNull()) {
 		_appId = {};
-		emit appIdChanged(_appId, {});
+		emit appIdChanged({});
 	}
 
 	// create and connect the new socket
@@ -98,7 +104,7 @@ void ServerConnector::onServerIdent(const ServerIdentMessage message)
 {
 	_appId = message.channelId;
 	qDebug() << message.channelId;
-	emit appIdChanged(_appId, {});
+	emit appIdChanged({});
 }
 
 void ServerConnector::onError(const ErrorMessage &message)

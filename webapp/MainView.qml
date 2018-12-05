@@ -60,10 +60,8 @@ Page {
 		anchors.fill: parent
 		currentIndex: modeBar.currentIndex
 
-		QrTabView {
+		QrTabView {}
 
-		}
-
-		Item {}
+		PassTabView {}
 	}
 }
