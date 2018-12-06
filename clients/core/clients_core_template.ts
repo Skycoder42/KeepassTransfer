@@ -161,7 +161,7 @@ The default format is determined from the file extension and falls back to &apos
 <context>
     <name>TransferSelectionViewModel</name>
     <message>
-        <location filename="transferselectionviewmodel.cpp" line="+18"/>
+        <location filename="transferselectionviewmodel.cpp" line="+19"/>
         <source>QR-Code</source>
         <translation type="unfinished"></translation>
     </message>

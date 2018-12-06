@@ -1,5 +1,6 @@
 #include "transferselectionviewmodel.h"
-#include <qrcodeconnectorviewmodel.h>
+#include "qrcodeconnectorviewmodel.h"
+#include "passconnectorviewmodel.h"
 #include <QDebug>
 
 const QString TransferSelectionViewModel::paramCred = QStringLiteral("credentials");
@@ -36,7 +37,7 @@ bool TransferSelectionViewModel::startTransfer(int index)
 		show<QrCodeConnectorViewModel>(params(_credentials));
 		return true;
 	case 1: //passItem
-		qDebug() << "starting passItem";
+		show<PassConnectorViewModel>(params(_credentials));
 		return true;
 	default:
 		qWarning() << "Unknown index" << index;

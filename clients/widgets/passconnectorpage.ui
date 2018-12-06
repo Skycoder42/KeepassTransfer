@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PassConnectorPage</class>
+ <widget class="QWizardPage" name="PassConnectorPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WizardPage</string>
+  </property>
+  <property name="title">
+   <string>Passphrase Transfer</string>
+  </property>
+  <property name="subTitle">
+   <string>Enter the ID of the partner and choose a password to protect your data with. Visit https://kpt.skycoder42.de to obtain the data.</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="channelIDLabel">
+     <property name="text">
+      <string>&amp;Channel-ID:</string>
+     </property>
+     <property name="buddy">
+      <cstring>channelIDLineEdit</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="channelIDLineEdit">
+     <property name="inputMask">
+      <string>HHHHHHHH-HHHH-HHHH-HHHH-HHHHHHHHHHHH</string>
+     </property>
+     <property name="text">
+      <string>00000000-0000-0000-0000-000000000000</string>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="passphraseLabel">
+     <property name="text">
+      <string>&amp;Passphrase:</string>
+     </property>
+     <property name="buddy">
+      <cstring>passphraseLineEdit</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="passphraseLineEdit">
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

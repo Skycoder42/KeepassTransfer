@@ -76,6 +76,44 @@
     </message>
 </context>
 <context>
+    <name>PassConnectorPage</name>
+    <message>
+        <location filename="passconnectorpage.ui" line="+14"/>
+        <source>WizardPage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Passphrase Transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Enter the ID of the partner and choose a password to protect your data with. Visit https://kpt.skycoder42.de to obtain the data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>&amp;Channel-ID:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>HHHHHHHH-HHHH-HHHH-HHHH-HHHHHHHHHHHH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>00000000-0000-0000-0000-000000000000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>&amp;Passphrase:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QrCodeConnectorPage</name>
     <message>
         <location filename="qrcodeconnectorpage.ui" line="+14"/>

@@ -1,0 +1,65 @@
+#include "passconnectorviewmodel.h"
+#include "transferselectionviewmodel.h"
+
+PassConnectorViewModel::PassConnectorViewModel(QObject *parent) :
+	ViewModel{parent}
+{}
+
+QUuid PassConnectorViewModel::channelId() const
+{
+	return _passCryptor ? _passCryptor->channelId() : QUuid{};
+}
+
+QString PassConnectorViewModel::passphrase() const
+{
+	return _passCryptor ? _passCryptor->passphrase() : QString{};
+}
+
+bool PassConnectorViewModel::isValid() const
+{
+	return _passCryptor && !_passCryptor->channelId().isNull();
+}
+
+bool PassConnectorViewModel::transfer()
+{
+	if(!isValid())
+		return false;
+
+	_transferService->sendCredentials(_passCryptor, _credentials);
+	return true;
+}
+
+void PassConnectorViewModel::onInit(const QVariantHash &params)
+{
+	Q_ASSERT(_transferService);
+	Q_ASSERT(_encryptor);
+	Q_ASSERT(_settings);
+	connect(_transferService, &ClientTransferService::transferCompleted,
+			this, &PassConnectorViewModel::transferDone);
+
+	_passCryptor = new PassClientEncryptor{_encryptor, this};
+	connect(_passCryptor, &PassClientEncryptor::channelIdChanged,
+			this, &PassConnectorViewModel::channelIdChanged);
+	connect(_passCryptor, &PassClientEncryptor::passphraseChanged,
+			this, &PassConnectorViewModel::passphraseChanged);
+
+	_credentials = params.value(TransferSelectionViewModel::paramCred).value<QList<Credential>>();
+}
+
+void PassConnectorViewModel::setChannelId(QUuid channelId)
+{
+	if(_passCryptor)
+		_passCryptor->setChannelId(channelId);
+}
+
+void PassConnectorViewModel::setPassphrase(QString passphrase)
+{
+	if(_passCryptor)
+		_passCryptor->setPassphrase(std::move(passphrase));
+}
+
+void PassConnectorViewModel::transferDone()
+{
+	if(_settings->transfer.exit)
+		QCoreApplication::quit();
+}

@@ -7,6 +7,7 @@
 #include "credentialsselectionpage.h"
 #include "transferselectionpage.h"
 #include "qrcodeconnectorpage.h"
+#include "passconnectorpage.h"
 #include "transferpreselectionedit.h"
 
 // Register the core app
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
 	QtMvvm::WidgetsPresenter::registerView<CredentialsSelectionPage>();
 	QtMvvm::WidgetsPresenter::registerView<TransferSelectionPage>();
 	QtMvvm::WidgetsPresenter::registerView<QrCodeConnectorPage>();
+	QtMvvm::WidgetsPresenter::registerView<PassConnectorPage>();
 
 	return a.exec();
 }
