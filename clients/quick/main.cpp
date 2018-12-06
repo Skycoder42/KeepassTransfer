@@ -11,6 +11,7 @@
 #include <credentialsselectionviewmodel.h>
 #include <transferselectionviewmodel.h>
 #include <qrcodeconnectorviewmodel.h>
+#include <passconnectorviewmodel.h>
 #include <qrcodescanner.h>
 #include <transferpreselectionentry.h>
 #include "transferloader.h"
@@ -85,6 +86,7 @@ int main(int argc, char *argv[])
 	qmlRegisterUncreatableType<CredentialsSelectionViewModel>("de.skycoder42.kpt", 1, 0, "CredentialsSelectionViewModel", QStringLiteral("ViewModels cannot be created!"));
 	qmlRegisterUncreatableType<TransferSelectionViewModel>("de.skycoder42.kpt", 1, 0, "TransferSelectionViewModel", QStringLiteral("ViewModels cannot be created!"));
 	qmlRegisterUncreatableType<QrCodeConnectorViewModel>("de.skycoder42.kpt", 1, 0, "QrCodeConnectorViewModel", QStringLiteral("ViewModels cannot be created!"));
+	qmlRegisterUncreatableType<PassConnectorViewModel>("de.skycoder42.kpt", 1, 0, "PassConnectorViewModel", QStringLiteral("ViewModels cannot be created!"));
 
 	QQmlApplicationEngine engine;
 	engine.load(QUrl(QStringLiteral("qrc:/App.qml")));

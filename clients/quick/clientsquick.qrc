@@ -9,6 +9,7 @@
         <file>KptRootDrawer.qml</file>
         <file>QrCodeConnectorView.qml</file>
         <file>CredentialsSelectionView.qml</file>
+        <file>PassConnectorView.qml</file>
     </qresource>
     <qresource prefix="/icons">
         <file alias="send.svg">icons/baseline-send-24px.svg</file>
@@ -18,6 +19,9 @@
         <file alias="menu.svg">icons/baseline-menu-24px.svg</file>
         <file alias="about.svg">icons/outline-info-24px.svg</file>
         <file alias="camera.svg">icons/baseline-photo_camera-24px.svg</file>
+        <file alias="hide.svg">icons/baseline-visibility_off-24px.svg</file>
+        <file alias="show.svg">icons/baseline-visibility-24px.svg</file>
+        <file alias="key.svg">icons/baseline-vpn_key-24px.svg</file>
     </qresource>
     <qresource prefix="/qtmvvm/inputs">
         <file>TransferPreSelectionEdit.qml</file>
