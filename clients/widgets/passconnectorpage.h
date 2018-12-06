@@ -20,6 +20,9 @@ public:
 	bool validatePage() override;
 	bool isComplete() const override;
 
+private slots:
+	void appIdChanged();
+
 private:
 	PassConnectorViewModel *_viewModel;
 	QScopedPointer<Ui::PassConnectorPage> _ui;

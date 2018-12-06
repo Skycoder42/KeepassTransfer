@@ -2,6 +2,7 @@
 #define PASSCONNECTORVIEWMODEL_H
 
 #include <QtCore/QUuid>
+#include <QtGui/QRegularExpressionValidator>
 #include <QtMvvmCore/ViewModel>
 #include "passclientencryptor.h"
 
@@ -14,6 +15,9 @@ class PassConnectorViewModel : public QtMvvm::ViewModel
 	QTMVVM_INJECT_PROP(Settings*, settings, _settings)
 	QTMVVM_INJECT_PROP(ClientTransferService*, transferService, _transferService)
 
+	Q_PROPERTY(QRegularExpressionValidator* channelIdValidator READ channelIdValidator CONSTANT)
+
+	Q_PROPERTY(QString channelIdStr READ channelIdStr WRITE setChannelIdStr NOTIFY channelIdChanged)
 	Q_PROPERTY(QUuid channelId READ channelId WRITE setChannelId NOTIFY channelIdChanged)
 	Q_PROPERTY(QString passphrase READ passphrase WRITE setPassphrase NOTIFY passphraseChanged)
 	Q_PROPERTY(bool valid READ isValid NOTIFY channelIdChanged)
@@ -21,7 +25,9 @@ class PassConnectorViewModel : public QtMvvm::ViewModel
 public:
 	Q_INVOKABLE explicit PassConnectorViewModel(QObject *parent = nullptr);
 
+	QRegularExpressionValidator* channelIdValidator() const;
 	QUuid channelId() const;
+	QString channelIdStr() const;
 	QString passphrase() const;
 	bool isValid() const;
 
@@ -31,6 +37,7 @@ public slots:
 	void onInit(const QVariantHash &params) override;
 
 	void setChannelId(QUuid channelId);
+	void setChannelIdStr(QString channelIdStr);
 	void setPassphrase(QString passphrase);
 
 signals:
@@ -45,6 +52,7 @@ private:
 	Settings *_settings = nullptr;
 	ClientTransferService *_transferService = nullptr;
 	PassClientEncryptor *_passCryptor = nullptr;
+	QRegularExpressionValidator* _channelIdValidator;
 
 	QList<Credential> _credentials;
 };

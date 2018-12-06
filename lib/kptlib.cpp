@@ -2,6 +2,7 @@
 #include "encrypteddata.h"
 #include "credential.h"
 #include "qrdata.h"
+#include <QtEndian>
 
 const quint32 KPTLib::ProtocolVersion = 0x01;
 
@@ -10,6 +11,32 @@ void KPTLib::setup()
 	qRegisterMetaTypeStreamOperators<EncryptedData>();
 	qRegisterMetaTypeStreamOperators<Credential>();
 	qRegisterMetaTypeStreamOperators<QrData>();
+}
+
+QString KPTLib::uiEncodeId(QUuid id)
+{
+	if(id.isNull())
+		return {};
+
+	auto baseId = id.toRfc4122();
+	const auto mCheck = qToBigEndian(qChecksum(baseId.constData(), static_cast<uint>(baseId.size())));
+	baseId += QByteArray{reinterpret_cast<const char*>(&mCheck), sizeof(quint16)};
+	auto appStr = QString::fromUtf8(baseId.toBase64());
+	for(auto i = 4; i < appStr.size(); i += 5)
+		appStr = appStr.mid(0, i) + QLatin1Char('-') + appStr.mid(i);
+	return appStr;
+}
+
+QUuid KPTLib::uiDecodeId(QString idText)
+{
+	constexpr auto dataSize = 16; //size of a binary UUID
+	const auto baseData = QByteArray::fromBase64(idText.remove(QLatin1Char('-')).toUtf8());
+	if(dataSize != baseData.size() - sizeof(quint16))
+		return {};
+	const auto mCheck = qFromBigEndian<quint16>(baseData.constData() + dataSize);
+	if(mCheck != qChecksum(baseData.constData(), static_cast<uint>(dataSize)))
+		return {};
+	return QUuid::fromRfc4122(baseData.mid(0, dataSize));
 }
 
 void KPTLib::setupStream(QDataStream &stream)

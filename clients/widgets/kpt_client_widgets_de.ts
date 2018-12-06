@@ -98,18 +98,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>HHHHHHHH-HHHH-HHHH-HHHH-HHHHHHHHHHHH</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>00000000-0000-0000-0000-000000000000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
+        <location line="+17"/>
         <source>&amp;Passphrase:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="passconnectorpage.cpp" line="+41"/>
+        <source>Channel-ID is valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Channel-ID is invalid</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

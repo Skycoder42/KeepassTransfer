@@ -38,6 +38,9 @@ public:
 
 	static void setup();
 
+	static QString uiEncodeId(QUuid id);
+	static QUuid uiDecodeId(QString idText);
+
 	template <typename TData>
 	static QByteArray encode(const TData &gadget, bool asBase64 = false);
 	template <typename TData>

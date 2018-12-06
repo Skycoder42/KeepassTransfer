@@ -24,7 +24,7 @@ QUuid ServerConnector::appId() const
 
 QString ServerConnector::appIdStr() const
 {
-	return _appId.toString(QUuid::WithoutBraces).toUpper();
+	return KPTLib::uiEncodeId(_appId);
 }
 
 void ServerConnector::connected()

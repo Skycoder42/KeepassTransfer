@@ -2,12 +2,29 @@
 #include "transferselectionviewmodel.h"
 
 PassConnectorViewModel::PassConnectorViewModel(QObject *parent) :
-	ViewModel{parent}
-{}
+	ViewModel{parent},
+	_channelIdValidator{new QRegularExpressionValidator{this}}
+{
+	_channelIdValidator->setRegularExpression(QRegularExpression{
+												  QStringLiteral(R"__(^(?:[a-zA-Z0-9+\/]{4}-){5}[a-zA-Z0-9+\/]{4}$)__"),
+												  QRegularExpression::OptimizeOnFirstUsageOption |
+												  QRegularExpression::DontCaptureOption
+											  });
+}
+
+QRegularExpressionValidator *PassConnectorViewModel::channelIdValidator() const
+{
+	return _channelIdValidator;
+}
 
 QUuid PassConnectorViewModel::channelId() const
 {
 	return _passCryptor ? _passCryptor->channelId() : QUuid{};
+}
+
+QString PassConnectorViewModel::channelIdStr() const
+{
+	return KPTLib::uiEncodeId(channelId());
 }
 
 QString PassConnectorViewModel::passphrase() const
@@ -50,6 +67,11 @@ void PassConnectorViewModel::setChannelId(QUuid channelId)
 {
 	if(_passCryptor)
 		_passCryptor->setChannelId(channelId);
+}
+
+void PassConnectorViewModel::setChannelIdStr(QString channelIdStr)
+{
+	setChannelId(KPTLib::uiDecodeId(std::move(channelIdStr)));
 }
 
 void PassConnectorViewModel::setPassphrase(QString passphrase)
