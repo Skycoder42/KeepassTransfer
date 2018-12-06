@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="add.svg">icons/baseline-add-24px.svg</file>
+        <file alias="unlock.svg">icons/baseline-lock_open-24px.svg</file>
+        <file alias="lock.svg">icons/baseline-lock-24px.svg</file>
+        <file alias="hide.svg">icons/baseline-visibility_off-24px.svg</file>
+        <file alias="show.svg">icons/baseline-visibility-24px.svg</file>
+        <file alias="key.svg">icons/baseline-vpn_key-24px.svg</file>
+        <file alias="select.svg">icons/baseline-select_all-24px.svg</file>
+        <file alias="deselect.svg">icons/baseline-tab_unselected-24px.svg</file>
+        <file alias="paste.svg">icons/baseline-assignment-24px.svg</file>
+    </qresource>
+</RCC>

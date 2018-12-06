@@ -55,3 +55,6 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../core/lib$${PROJECT_TARGET}-core.a
 else: include($$OUT_PWD/qpmx_generated.pri)
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
+
+RESOURCES += \
+    clientswidgets.qrc

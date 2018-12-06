@@ -19,6 +19,8 @@ Dialog {
 Project Website: <a href=\"https://github.com/Skycoder42/KeepassTransfer\">https://github.com/Skycoder42/KeepassTransfer</a><br/>
 License: <a href=\"https://github.com/Skycoder42/KeepassTransfer/blob/master/LICENSE\">GPL-3.0</a></p>
 <p>Attributions:<ul>
+<li><a href=\"https://github.com/Skycoder42/QtMvvm\">QtMvvm (BSD-3)</a></li>
+<li><a href=\"https://github.com/Skycoder42/QtService\">QtService (BSD-3)</a></li>
 <li><a href=\"https://github.com/weidai11/cryptopp\">CryptoPP (BSL-1.0)</a></li>
 <li><a href=\"https://github.com/nayuki/QR-Code-generator\">QR-Code-generator (MIT)</a></li>
 <li><a href=\"https://github.com/iamantony/qtcsv\">qtcsv (MIT)</a></li>

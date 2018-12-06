@@ -71,7 +71,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="visibility"/>
+    <iconset theme="visibility" resource="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/quick/clientsquick_qmlcache.qrc">
+     <normaloff>:/icons/show.svg</normaloff>:/icons/show.svg</iconset>
    </property>
    <property name="text">
     <string>Toggle passphrase visibility</string>
@@ -82,7 +83,8 @@
   </action>
   <action name="actionGenerate_random_passphrase">
    <property name="icon">
-    <iconset theme="password-generate"/>
+    <iconset theme="password-generate" resource="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/quick/clientsquick_qmlcache.qrc">
+     <normaloff>:/icons/key.svg</normaloff>:/icons/key.svg</iconset>
    </property>
    <property name="text">
     <string>Generate random passphrase</string>
@@ -92,6 +94,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../build-KeepassTransfer-Desktop_Qt_5_11_2_GCC_64bit-Debug/clients/quick/clientsquick_qmlcache.qrc"/>
+ </resources>
  <connections/>
 </ui>

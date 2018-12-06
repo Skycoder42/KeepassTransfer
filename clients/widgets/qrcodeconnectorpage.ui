@@ -59,8 +59,8 @@
   </layout>
   <action name="actionPaste">
    <property name="icon">
-    <iconset theme="edit-paste">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-paste" resource="../../webapp/webapp.qrc">
+     <normaloff>:/icons/copy.svg</normaloff>:/icons/copy.svg</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
@@ -73,6 +73,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../webapp/webapp.qrc"/>
+ </resources>
  <connections/>
 </ui>
