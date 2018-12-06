@@ -11,6 +11,14 @@ PassConnectorPage::PassConnectorPage(QtMvvm::ViewModel *viewModel, QWidget *pare
 	setFinalPage(true);
 
 	_ui->channelIDLineEdit->setValidator(_viewModel->channelIdValidator());
+	_ui->passphraseLineEdit->addAction(_ui->actionGenerate_random_passphrase, QLineEdit::TrailingPosition);
+	_ui->passphraseLineEdit->addAction(_ui->actionToggle_passphrase_visibility, QLineEdit::TrailingPosition);
+
+	connect(_ui->actionToggle_passphrase_visibility, &QAction::triggered,
+			this, &PassConnectorPage::toggleVisible);
+	connect(_ui->actionGenerate_random_passphrase, &QAction::triggered,
+			_viewModel, &PassConnectorViewModel::generateRandomPassphrase);
+
 	QtMvvm::bind(_viewModel, "channelIdStr",
 				 _ui->channelIDLineEdit, "text",
 				 QtMvvm::Binding::OneWayToViewModel);
@@ -47,6 +55,11 @@ void PassConnectorPage::appIdChanged()
 		_ui->statusLabel->setPalette(pal);
 	}
 	emit completeChanged();
+}
+
+void PassConnectorPage::toggleVisible(bool visible)
+{
+	_ui->passphraseLineEdit->setEchoMode(visible ? QLineEdit::Normal : QLineEdit::Password);
 }
 
 PassConnectorPage::~PassConnectorPage() = default;

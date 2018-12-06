@@ -22,6 +22,7 @@ public:
 
 private slots:
 	void appIdChanged();
+	void toggleVisible(bool visible);
 
 private:
 	PassConnectorViewModel *_viewModel;

@@ -46,6 +46,14 @@ bool PassConnectorViewModel::transfer()
 	return true;
 }
 
+void PassConnectorViewModel::generateRandomPassphrase()
+{
+	QByteArray rngData{12, Qt::Uninitialized};
+	_rng.GenerateBlock(reinterpret_cast<CryptoPP::byte*>(rngData.data()),
+					   static_cast<size_t>(rngData.size()));
+	setPassphrase(QString::fromUtf8(rngData.toBase64(QByteArray::OmitTrailingEquals)));
+}
+
 void PassConnectorViewModel::onInit(const QVariantHash &params)
 {
 	Q_ASSERT(_transferService);

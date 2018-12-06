@@ -43,11 +43,7 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QLineEdit" name="channelIDLineEdit">
-     <property name="clearButtonEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <widget class="QLineEdit" name="channelIDLineEdit"/>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="passphraseLabel">
@@ -64,15 +60,37 @@
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>
      </property>
-     <property name="clearButtonEnabled">
-      <bool>true</bool>
-     </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="QLabel" name="statusLabel"/>
    </item>
   </layout>
+  <action name="actionToggle_passphrase_visibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="visibility"/>
+   </property>
+   <property name="text">
+    <string>Toggle passphrase visibility</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionGenerate_random_passphrase">
+   <property name="icon">
+    <iconset theme="password-generate"/>
+   </property>
+   <property name="text">
+    <string>Generate random passphrase</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

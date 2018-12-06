@@ -98,12 +98,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>&amp;Passphrase:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="passconnectorpage.cpp" line="+41"/>
+        <location line="+26"/>
+        <source>Toggle passphrase visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ctrl+H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Generate random passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ctrl+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="passconnectorpage.cpp" line="+49"/>
         <source>Channel-ID is valid</source>
         <translation type="unfinished"></translation>
     </message>

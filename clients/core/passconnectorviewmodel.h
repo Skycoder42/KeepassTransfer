@@ -4,6 +4,7 @@
 #include <QtCore/QUuid>
 #include <QtGui/QRegularExpressionValidator>
 #include <QtMvvmCore/ViewModel>
+#include <cryptopp/osrng.h>
 #include "passclientencryptor.h"
 
 class PassConnectorViewModel : public QtMvvm::ViewModel
@@ -33,6 +34,7 @@ public:
 
 public slots:
 	bool transfer();
+	void generateRandomPassphrase();
 
 	void onInit(const QVariantHash &params) override;
 
@@ -48,6 +50,8 @@ private slots:
 	void transferDone();
 
 private:
+	CryptoPP::AutoSeededRandomPool _rng;
+
 	DataEncryptor *_encryptor = nullptr;
 	Settings *_settings = nullptr;
 	ClientTransferService *_transferService = nullptr;
