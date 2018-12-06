@@ -21,7 +21,7 @@ QtService::Service::CommandResult KPTService::onStart()
 	_settings = new QSettings{this};
 	_settings->setFallbacksEnabled(true);
 
-	_server = new TransferServer{this};
+	_server = new TransferServer{_settings->value(QStringLiteral("server/timeout"), 30000).toLongLong(), this};
 	const auto hostName = _settings->value(QStringLiteral("server/host"), QStringLiteral("localhost")).toString();
 	auto socket = getSocket();
 	auto ok = false;

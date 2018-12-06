@@ -1,8 +1,8 @@
 TEMPLATE = app
 
 QT = core service websockets
-CONFIG += c++14 console
-CONFIG -= app_bundle
+CONFIG -= app_bundle c++14
+CONFIG += c++17	console
 
 TARGET = $${PROJECT_TARGET}-server
 

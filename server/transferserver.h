@@ -6,6 +6,8 @@
 #include <QWebSocketServer>
 #include <QUuid>
 #include <QHash>
+#include <QDeadlineTimer>
+#include <QTimer>
 
 #include <messages/errormessage.h>
 #include <messages/appidentmessage.h>
@@ -17,7 +19,7 @@ class TransferServer : public QObject
 	Q_OBJECT
 
 public:
-	explicit TransferServer(QObject *parent = nullptr);
+	explicit TransferServer(qint64 timeout, QObject *parent = nullptr);
 
 	bool startServer(const QString &serverName, int socket);
 	bool startServer(const QString &serverName, bool localHostOnly, quint16 port);
@@ -36,9 +38,15 @@ private slots:
 	void onAppOk(const AppOkMessage &message, QWebSocket *clientSocket);
 	void onAppError(const ErrorMessage &message, QWebSocket *clientSocket);
 
+	void timeout();
+
 private:
 	QWebSocketServer *_server = nullptr;
 	QHash<QUuid, QWebSocket*> _appHash;
+
+	QTimer *_timeoutTimer;
+	const qint64 _timeout;
+	QHash<QWebSocket*, std::pair<QDeadlineTimer, bool>> _timeouts;
 
 	void setup();
 	void setupCleanupConnections(QWebSocket *socket);

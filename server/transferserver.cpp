@@ -9,9 +9,17 @@
 
 #include <QTimer>
 
-TransferServer::TransferServer(QObject *parent) :
-	QObject{parent}
-{}
+TransferServer::TransferServer(qint64 timeout, QObject *parent) :
+	QObject{parent},
+	_timeoutTimer{new QTimer{this}},
+	_timeout{timeout}
+{
+	using namespace std::chrono_literals;
+	_timeoutTimer->setTimerType(Qt::VeryCoarseTimer);
+	connect(_timeoutTimer, &QTimer::timeout,
+			this, &TransferServer::timeout);
+	_timeoutTimer->start(5s);
+}
 
 bool TransferServer::startServer(const QString &serverName, int socket)
 {
@@ -102,7 +110,7 @@ void TransferServer::onAppIdent(const AppIdentMessage message, QWebSocket *socke
 	});
 
 #ifndef QT_NO_DEBUG
-	qDebug() << "New WebApp socket " << socket->peerAddress() << "connected for id" << id;
+	qDebug() << "New WebApp socket" << socket->peerAddress() << "connected for id" << id;
 #endif
 	socket->sendBinaryMessage(KPTLib::serializeMessage(ServerIdentMessage{id}));
 }
@@ -116,7 +124,7 @@ void TransferServer::onClientTransfer(ClientTransferMessage message, QWebSocket 
 	// verify webapp exists
 	auto appSocket = _appHash.value(message.channelId);
 	if(!appSocket) {
-		qDebug() << "Client socket " << clientSocket->peerAddress() << "specified an unknown WebApp ID:" << message.channelId;
+		qDebug() << "Client socket" << clientSocket->peerAddress() << "specified an unknown WebApp ID:" << message.channelId;
 		clientSocket->sendBinaryMessage(KPTLib::serializeMessage(ErrorMessage{
 			tr("Unknown Channel-ID. The WebApp you want to connect to does not exist!")
 		}));
@@ -148,6 +156,40 @@ void TransferServer::onAppError(const ErrorMessage &message, QWebSocket *clientS
 	closeOnTimeout(clientSocket);
 }
 
+void TransferServer::timeout()
+{
+	for(auto it = _timeouts.begin(); it != _timeouts.end(); ++it) {
+		if(it->first.hasExpired()) {
+			const auto socket = it.key();
+			if(it->second) {
+				qCritical().noquote() << "Disconnecting" << socket->peerAddress()
+									  << "after timeout of ping message";
+				socket->close(QWebSocketProtocol::CloseCodeBadOperation);
+			} else {
+				it->second = true;
+				const auto killId = QUuid::createUuid();
+				QtCoroutine::createAndRun([this, socket, killId](){
+					connect(socket, &QWebSocket::destroyed,
+							this, std::bind(&QtCoroutine::cancel, QtCoroutine::current()),
+							Qt::QueuedConnection);
+
+					socket->ping(killId.toRfc4122());
+					auto [delay, payload] = QtCoroutine::await(socket, &QWebSocket::pong);
+					qDebug().noquote() << "Received pong of" << socket->peerAddress()
+									   << "with delay:" << delay;
+					if(payload == killId.toRfc4122())
+						_timeouts[socket] = {QDeadlineTimer{_timeout}, false};
+					else {
+						qCritical().noquote() << "Disconnecting" << socket->peerAddress()
+											  << "after receiving invalid pong response";
+						socket->close(QWebSocketProtocol::CloseCodeBadOperation);
+					}
+				});
+			}
+		}
+	}
+}
+
 void TransferServer::setup()
 {
 	connect(_server, &QWebSocketServer::newConnection,
@@ -164,8 +206,9 @@ void TransferServer::setupCleanupConnections(QWebSocket *socket)
 			this, std::bind(&QtCoroutine::cancel, QtCoroutine::current()),
 			Qt::QueuedConnection);
 	connect(socket, &QWebSocket::disconnected,
-			socket, [socket](){
+			socket, [this, socket](){
 		qDebug() << "Client with address" << socket->peerAddress() << "has disconnected";
+		_timeouts.remove(socket);
 		socket->deleteLater();
 	});
 	connect(socket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error),
@@ -176,6 +219,7 @@ void TransferServer::setupCleanupConnections(QWebSocket *socket)
 		if(socket->state() == QAbstractSocket::ConnectedState)
 			socket->close();
 	}, Qt::QueuedConnection);
+	_timeouts.insert(socket, {QDeadlineTimer{_timeout}, false});
 }
 
 bool TransferServer::verifyProtocolVersion(quint32 version, QWebSocket *socket)
