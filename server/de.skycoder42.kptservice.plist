@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>de.skycoder42.KPTService</string>
+	<string>de.skycoder42.kptransfer</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/path/to/server</string>
+		<string>/path/to/kptransfer-server</string>
 		<string>--backend</string>
 		<string>launchd</string>
 	</array>

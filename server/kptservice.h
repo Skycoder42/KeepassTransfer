@@ -1,6 +1,7 @@
 #ifndef KPTSERVICE_H
 #define KPTSERVICE_H
 
+#include <QSettings>
 #include <QtService/Service>
 
 #include "transferserver.h"
@@ -17,6 +18,7 @@ protected:
 	CommandResult onStop(int &exitCode) override;
 
 private:
+	QSettings *_settings = nullptr;
 	TransferServer *_server = nullptr;
 };
 

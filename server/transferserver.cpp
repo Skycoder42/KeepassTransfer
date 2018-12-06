@@ -101,7 +101,9 @@ void TransferServer::onAppIdent(const AppIdentMessage message, QWebSocket *socke
 		_appHash.remove(id);
 	});
 
-	qDebug() << "WebApp socket " << socket->peerAddress() << "connected for id" << id;
+#ifndef QT_NO_DEBUG
+	qDebug() << "New WebApp socket " << socket->peerAddress() << "connected for id" << id;
+#endif
 	socket->sendBinaryMessage(KPTLib::serializeMessage(ServerIdentMessage{id}));
 }
 
