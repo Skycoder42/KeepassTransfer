@@ -66,7 +66,7 @@ void setStatusBarColor(const QColor &color)
 
 int main(int argc, char *argv[])
 {
-	setStatusBarColor(QColor(0x38, 0x8E, 0x3C));//see qtquickcontrols2.conf
+	setStatusBarColor(QColor(0x68, 0x9F, 0x38));//see qtquickcontrols2.conf
 
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	// If you want to support file dialogs on platforms other then android, use a QApplication instead (and add QT += widgets to the pro file)
