@@ -41,7 +41,7 @@ QUuid KPTLib::uiDecodeId(QString idText)
 
 void KPTLib::setupStream(QDataStream &stream)
 {
-	stream.setVersion(QDataStream::Qt_5_11);
+	stream.setVersion(QDataStream::Qt_5_11); //TODO use 5_12
 }
 
 QByteArray KPTLib::serializeMessageImpl(const QVariant &message)

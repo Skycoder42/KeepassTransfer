@@ -23,18 +23,24 @@ ColumnLayout {
 		Layout.fillWidth: true
 		Layout.preferredHeight: width * 0.666
 		color: QuickPresenter.currentStyle == "Material" ? Material.primary : helper.highlight
-	}
 
-	Item {
-		id: spacer
-		Layout.fillHeight: true
-		Layout.fillWidth: true
-	}
+		ColumnLayout {
+			anchors.fill: parent
 
-	MenuSeparator {
-		Layout.fillWidth: true
-		topPadding: 0
-		bottomPadding: 0
+			TintIcon {
+				Layout.alignment: Qt.AlignCenter
+				icon.source: "qrc:/icons/main.svg"
+				icon.color: Material.accent
+				icon.width: parent.height * 0.666
+				icon.height: parent.height * 0.666
+			}
+
+			ToolBarLabel {
+				Layout.fillWidth: true
+				Layout.bottomMargin: 8
+				text: qsTr("Keepass Transfer")
+			}
+		}
 	}
 
 	ItemDelegate {
@@ -62,5 +68,17 @@ ColumnLayout {
 		icon.source: "qrc:/icons/about.svg"
 		text: qsTr("About this App")
 		onClicked: viewModel.about()
+	}
+
+	MenuSeparator {
+		Layout.fillWidth: true
+		topPadding: 0
+		bottomPadding: 0
+	}
+
+	Item {
+		id: spacer
+		Layout.fillHeight: true
+		Layout.fillWidth: true
 	}
 }
