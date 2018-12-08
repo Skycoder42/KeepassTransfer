@@ -15,8 +15,6 @@ EmJsConnector *EmJsConnector::instance()
 	return clipInstance;
 }
 
-void EmJsConnector::readText() {}
-
 void EmJsConnector::updateClipboard(const QString &) {}
 
 QUrl EmJsConnector::getHostUrl() const
@@ -42,4 +40,4 @@ void EmJsConnector::copyText(const QString &text)
 
 void EmJsConnector::qtDataChanged() {}
 
-void EmJsConnector::installHandlers() {}
+void EmJsConnector::readJsClipboard() {}

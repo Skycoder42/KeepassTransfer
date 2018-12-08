@@ -14,7 +14,6 @@ public:
 
 	static EmJsConnector *instance();
 
-	void readText();
 	void updateClipboard(const QString &text);
 
 	QUrl getHostUrl() const;
@@ -30,8 +29,7 @@ signals:
 
 private slots:
 	void qtDataChanged();
-
-	void installHandlers();
+	void readJsClipboard();
 
 private:
 	QClipboard * const _qtClipboard = nullptr;

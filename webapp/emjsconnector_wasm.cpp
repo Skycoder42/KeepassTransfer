@@ -2,6 +2,7 @@
 #include <QGuiApplication>
 #include <QGlobalStatic>
 #include <QDebug>
+#include <QTimer>
 
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
@@ -10,13 +11,6 @@ using namespace emscripten;
 Q_GLOBAL_STATIC(EmJsConnector, clipInstance)
 
 namespace {
-
-void onPasteEvent(val event) {
-	event.call<void>("preventDefault");
-	//auto text = event["clipboardData"].call<val>("getData", std::string{"text/plain"});
-	//qDebug() << "event CP data:" << text.as<std::string>().c_str();
-	clipInstance->readText();
-}
 
 void onGetTextCallback(val text) {
 	clipInstance->updateClipboard(QString::fromStdString(text.as<std::string>()));
@@ -31,7 +25,6 @@ void onPopState(val event) {
 }
 
 EMSCRIPTEN_BINDINGS(EmJsConnectorModule) {
-	function("onPasteEvent", &onPasteEvent);
 	function("onGetTextCallback", &onGetTextCallback);
 	function("onPopState", &onPopState);
 }
@@ -42,20 +35,20 @@ EmJsConnector::EmJsConnector(QObject *parent) :
 {
 	connect(_qtClipboard, &QClipboard::dataChanged,
 			this, &EmJsConnector::qtDataChanged);
-	QMetaObject::invokeMethod(this, "installHandlers", Qt::QueuedConnection);
+
+	auto cpTimer = new QTimer{this};
+	cpTimer->setTimerType(Qt::CoarseTimer);
+	connect(cpTimer, &QTimer::timeout,
+			this, &EmJsConnector::readJsClipboard);
+	cpTimer->start(500);
+
+	auto window = val::global("window");
+	window.set("onpopstate", val::module_property("onPopState"));
 }
 
 EmJsConnector *EmJsConnector::instance()
 {
 	return clipInstance;
-}
-
-void EmJsConnector::readText()
-{
-	auto navigator = val::global("navigator");
-	auto clipboard = navigator["clipboard"];
-	auto promise = clipboard.call<val>("readText");
-	promise.call<val>("then", val::module_property("onGetTextCallback"));
 }
 
 void EmJsConnector::updateClipboard(const QString &text)
@@ -105,12 +98,10 @@ void EmJsConnector::qtDataChanged()
 	clipboard.call<val>("writeText", _qtClipboard->text().toStdString());
 }
 
-void EmJsConnector::installHandlers()
+void EmJsConnector::readJsClipboard()
 {
-	auto document = val::global("document");
-	document.call<void>("addEventListener",
-						std::string{"paste"},
-						val::module_property("onPasteEvent"));
-	auto window = val::global("window");
-	window.set("onpopstate", val::module_property("onPopState"));
+	auto navigator = val::global("navigator");
+	auto clipboard = navigator["clipboard"];
+	auto promise = clipboard.call<val>("readText");
+	promise.call<val>("then", val::module_property("onGetTextCallback"));
 }
