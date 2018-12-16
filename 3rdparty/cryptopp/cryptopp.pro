@@ -65,7 +65,7 @@ DISTFILES += cryptopp.pri
 
 load(qt_build_paths)
 
-HEADER_INSTALL_DIR = "$$MODULE_BASE_OUTDIR/include/cryptopp"
+HEADER_INSTALL_DIR = "$$shadowed($$SRC_ROOT_DIR)/include/cryptopp"
 !ReleaseBuild|!DebugBuild {
 	!mkpath($$HEADER_INSTALL_DIR):error("Failed to create cryptopp header dir: $$HEADER_INSTALL_DIR")
 	for(hdr, HEADERS):!system($$QMAKE_QMAKE -install qinstall "$$PWD/$$hdr" "$$HEADER_INSTALL_DIR/$$basename(hdr)"):error("Failed to install header file: $$hdr")
