@@ -44,15 +44,17 @@ QMAKE_EXTRA_TARGETS += deploy_target
 		QMAKE_ANDROIDDEPLOYQT += --deployment bundled --gradle
 		CONFIG(release, debug|release) {
 			QMAKE_ANDROIDDEPLOYQT += --release --no-gdbserver
+			APK_PREFIX = release
 			APK_TYPE = release-unsigned
 		}
 		CONFIG(debug, debug|release) {
 			QMAKE_ANDROIDDEPLOYQT += --gdbserver
+			APK_PREFIX = debug
 			APK_TYPE = debug
 		}
 		for(bin, DEPLOY_BINS) {
 			run_deploy.commands += $$QMAKE_ANDROIDDEPLOYQT --input $$shell_path($$bin) --output \"$(INSTALL_ROOT)$$PREFIX\" $$escape_expand(\n\t)
-			run_deploy.commands += $$QMAKE_INSTALL_FILE \"$(INSTALL_ROOT)$$PREFIX/build/outputs/apk/`basename \"$(INSTALL_ROOT)$$PREFIX\"`-$${APK_TYPE}.apk\" \"$(INSTALL_ROOT)/syrem-$${VERSION}_$${QT_PLATFORM}_$${APK_TYPE}.apk\"
+			run_deploy.commands += $$QMAKE_INSTALL_FILE \"$(INSTALL_ROOT)$$PREFIX/build/outputs/apk/$APK_PREFIX/`basename \"$(INSTALL_ROOT)$$PREFIX\"`-$${APK_TYPE}.apk\" \"$(INSTALL_ROOT)/$${PROJECT_TARGET}-$${VERSION}_$${QT_PLATFORM}_$${APK_TYPE}.apk\"
 		}
 	}
 
