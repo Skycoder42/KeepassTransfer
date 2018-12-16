@@ -10,3 +10,6 @@
 [submodule "3rdparty/qtcsv"]
 	path = 3rdparty/qtcsv
 	url = https://github.com/iamantony/qtcsv
+[submodule "deploy"]
+	path = deploy
+	url = https://github.com/Skycoder42/deployment

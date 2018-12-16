@@ -38,7 +38,7 @@ DISTFILES += $$TRANSLATIONS \
 	android/src/de/skycoder42/kpt/TransferAccessReceiver.java \
 	android/src/de/skycoder42/kpt/TransferActionReceiver.java
 
-include(../../install.pri)
+include(../../deploy/install.pri)
 target.path = $$INSTALL_BINS
 qpmx_ts_target.path = $$INSTALL_TRANSLATIONS
 INSTALLS += target qpmx_ts_target

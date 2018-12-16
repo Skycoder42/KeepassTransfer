@@ -47,7 +47,7 @@ TRANSLATIONS += \
 DISTFILES += $$TRANSLATIONS \
 	qpmx.json
 
-include(../../install.pri)
+include(../../deploy/install.pri)
 mac: target.path = $$INSTALL_APPS
 else: target.path = $$INSTALL_BINS
 qpmx_ts_target.path = $$INSTALL_TRANSLATIONS

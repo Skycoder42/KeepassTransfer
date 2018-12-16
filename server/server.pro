@@ -25,7 +25,7 @@ DISTFILES += \
 	de.skycoder42.kptransfer.server.plist
 
 # install
-include(../install.pri)
+include(../deploy/install.pri)
 
 win32 {
 	install_service.files += $$PWD/kptserver-install.bat
