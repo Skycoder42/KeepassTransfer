@@ -48,7 +48,6 @@ wasm {
 		emjsconnector.cpp
 }
 
-
 include($$SRC_ROOT_DIR/lib/lib.pri)
 include($$SRC_ROOT_DIR/3rdparty/QR-Code-generator/QR-Code-generator.pri)
 

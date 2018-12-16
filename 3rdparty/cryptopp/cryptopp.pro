@@ -2,7 +2,7 @@ TEMPLATE = lib
 CONFIG += staticlib
 CONFIG -= qt
 
-TARGET = qtcryptopp
+TARGET = $$qtLibraryTarget(qtcryptopp)
 
 QMAKE_CXXFLAGS_RELEASE += "-DNDEBUG"
 

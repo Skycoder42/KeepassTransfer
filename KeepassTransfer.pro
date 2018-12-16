@@ -15,6 +15,9 @@ webapp.depends += 3rdparty lib
 clients.depends += 3rdparty lib
 server.depends += 3rdparty lib
 
+prepareRecursiveTarget(lrelease)
+QMAKE_EXTRA_TARGETS += lrelease
+
 DISTFILES += \
 	.qmake.conf
 
