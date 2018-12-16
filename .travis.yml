@@ -27,6 +27,7 @@ matrix:
         - PLATFORM=flatpak
         - DOCKER_IMAGE=
         - DOCKER_IMAGE_BASE="base/archlinux:latest"
+        - FLATDEP_DIR=deploy/flatpak
         - FLATPAK_MANIFEST=flatpak/de.skycoder42.kptransfer.json
     #- os: linux
       #env:
