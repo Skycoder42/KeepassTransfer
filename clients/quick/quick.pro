@@ -6,6 +6,10 @@ CONFIG(release, debug|release): CONFIG += qtquickcompiler
 
 TARGET = $${PROJECT_TARGET}-app
 
+HEADERS += \
+	qrcodescanner.h \
+	transferloader.h
+
 SOURCES += main.cpp \
 	qrcodescanner.cpp \
 	transferloader.cpp
@@ -17,16 +21,16 @@ TRANSLATIONS += \
 	kpt_client_quick_de.ts \
 	kpt_client_quick_template.ts
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+#ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
-DISTFILES += $$TRANSLATIONS \
-	qpmx.json \
-	android/AndroidManifest.xml \
-	$$files(android/src/*, true) \
-	$$files(android/res/*, true) \
-	android/build.gradle \
-	android/src/de/skycoder42/kpt/TransferAccessReceiver.java \
-	android/src/de/skycoder42/kpt/TransferActionReceiver.java
+#DISTFILES += $$TRANSLATIONS \
+#	qpmx.json \
+#	android/AndroidManifest.xml \
+#	$$files(android/src/*, true) \
+#	$$files(android/res/*, true) \
+#	android/build.gradle \
+#	android/src/de/skycoder42/kpt/TransferAccessReceiver.java \
+#	android/src/de/skycoder42/kpt/TransferActionReceiver.java
 
 # Link with core project
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -l$${PROJECT_TARGET}-core
@@ -47,6 +51,21 @@ else: include($$OUT_PWD/qpmx_generated.pri)
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
 
-HEADERS += \
-	qrcodescanner.h \
-	transferloader.h
+contains(ANDROID_TARGET_ARCH,x86) {
+	ANDROID_EXTRA_LIBS = \
+		$$PWD/../../3rdparty/openssl/x86/libcrypto.so \
+		$$PWD/../../3rdparty/openssl/x86/libssl.so
+} else:contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+	ANDROID_EXTRA_LIBS = \
+		$$PWD/../../3rdparty/openssl/armv7/libcrypto.so \
+		$$PWD/../../3rdparty/openssl/armv7/libssl.so
+}
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/build.gradle \
+    android/AndroidManifest.xml \
+    android/res/values/libs.xml \
+    android/build.gradle
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

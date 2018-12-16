@@ -1,5 +1,7 @@
 #include "qrcodescanner.h"
 #include <QDebug>
+#include <QGuiApplication>
+#include <QClipboard>
 #ifdef Q_OS_ANDROID
 #include <QtAndroidExtras/QAndroidJniObject>
 #include <QtAndroidExtras/QtAndroid>
@@ -26,6 +28,12 @@ bool QrCodeScanner::canScan() const
 #else
 	return false;
 #endif
+}
+
+QString QrCodeScanner::pasteData()
+{
+	const auto cp = QGuiApplication::clipboard();
+	return cp->text();
 }
 
 void QrCodeScanner::initiateScan()

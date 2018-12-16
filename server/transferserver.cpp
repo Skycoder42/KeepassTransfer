@@ -24,7 +24,7 @@ TransferServer::TransferServer(qint64 timeout, QObject *parent) :
 bool TransferServer::startServer(const QString &serverName, int socket)
 {
 	_server = new QWebSocketServer{serverName, QWebSocketServer::NonSecureMode, this};
-	if(_server->setSocketDescriptor(socket)) {
+	if(_server->setNativeDescriptor(socket)) {
 		setup();
 		qInfo() << "Server activated on existing socket for port" << _server->serverPort();
 		return true;

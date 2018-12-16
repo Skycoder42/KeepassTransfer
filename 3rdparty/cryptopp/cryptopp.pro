@@ -1,29 +1,72 @@
-TEMPLATE = aux
+TEMPLATE = lib
+CONFIG += staticlib
+CONFIG -= qt
 
-wasm {
-	QMAKE_CXXFLAGS_RELEASE += "-DNDEBUG"
+TARGET = qtcryptopp
 
-	cryptopp_target.target = static
-	cryptopp_target.commands += \
-		test -f GNUmakefile || $$QMAKE_COPY_DIR $$shell_path($$PWD/src/*) .
-	cryptopp_target.commands += $$escape_expand(\\n\\t)+emmake $(MAKE) -f GNUmakefile static CFLAGS=\"$(CFLAGS)\" CXXFLAGS=\"$(CXXFLAGS)\" LFLAGS=\"$(LFLAGS)\"
-	QMAKE_EXTRA_TARGETS += cryptopp_target
-	PRE_TARGETDEPS += static
-} else:android {
-	equals(ANDROID_TARGET_ARCH, armeabi-v7a): ANDROID_TARGET_ARCH_SHORT = armv7
-	else: ANDROID_TARGET_ARCH_SHORT = $$ANDROID_TARGET_ARCH
-	# download the precompiled binaries
-	download_target.target = cryptopp.tar.xz
-	download_target.commands = curl -Lo $$shell_path($$OUT_PWD/cryptopp.tar.xz) \
-		$$shell_quote(https://github.com/Skycoder42/ci-builds/releases/download/cryptopp_7_0_0/cryptopp_7_0_0_android_$${ANDROID_TARGET_ARCH_SHORT}.tar.xz)
+QMAKE_CXXFLAGS_RELEASE += "-DNDEBUG"
 
-	unpack_target.target = unpack
-	unpack_target.depends += cryptopp.tar.xz
-	unpack_target.commands += tar -xf $$shell_path($$OUT_PWD/cryptopp.tar.xz) -C $$shell_path($$OUT_PWD) \
-		$$escape_expand(\\n\\t)$$QMAKE_COPY $$shell_path($$OUT_PWD/cryptopp/include/cryptopp/*.h) $$shell_path($$OUT_PWD/) \
-		$$escape_expand(\\n\\t)$$QMAKE_COPY $$shell_path($$OUT_PWD/cryptopp/lib/*.a) $$shell_path($$OUT_PWD/) \
-		$$escape_expand(\\n\\t)touch unpack
+win32:!win32-g++ {
+	QMAKE_CXXFLAGS += /arch:AVX2
+	DEFINES += CRYPTOPP_DISABLE_ASM #TODO reenable again later
+	cross_compile: DEFINES += NO_OS_DEPENDENCE
+} else {
+	# based on https://github.com/KayEss/fost-crypto/blob/master/CMakeLists.txt
+	QMAKE_CXXFLAGS += -Wno-keyword-macro -Wno-unused-const-variable -Wno-unused-private-field
 
-	QMAKE_EXTRA_TARGETS += download_target unpack_target
-	PRE_TARGETDEPS += unpack
+	!isEmpty(ANDROID_TARGET_ARCH) {
+		message("Building for android arch $$ANDROID_TARGET_ARCH")
+		INCLUDEPATH += $$(ANDROID_NDK_ROOT)/sources/android/cpufeatures
+		SOURCES += $$(ANDROID_NDK_ROOT)/sources/android/cpufeatures/cpu-features.c
+
+		equals(ANDROID_TARGET_ARCH, armeabi-v7a) {
+			QMAKE_CXXFLAGS -= -mfpu=vfp
+			QMAKE_CXXFLAGS += -mfpu=neon
+		} else:equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+			# nothing to be done
+		} else:equals(ANDROID_TARGET_ARCH, x86) {
+			QMAKE_CXXFLAGS += -maes -mpclmul -msha -msse4.1 -msse4.2 -mssse3
+			# Do this for Android builds for now as the NDK is broken
+			DEFINES += CRYPTOPP_DISABLE_ASM
+			warning("Disabled x86 crypto ASM")
+		}
+	} else {
+		# assume "normal" x86 arch
+		message("Building for host x86 arch")
+		QMAKE_CXXFLAGS += -maes -mpclmul -msha -msse4.1 -msse4.2 -mssse3
+	}
 }
+
+# Input
+HEADERS += $$files(src/*.h)
+
+SOURCES += $$files(src/*.cpp)
+
+SOURCES -= \
+	src/bench1.cpp \
+	src/bench2.cpp \
+	src/datatest.cpp \
+	src/dlltest.cpp \
+	src/pch.cpp \
+	src/regtest1.cpp \
+	src/regtest2.cpp \
+	src/regtest3.cpp \
+	src/test.cpp \
+	src/validat0.cpp \
+	src/validat1.cpp \
+	src/validat2.cpp \
+	src/validat3.cpp \
+	src/validat4.cpp \
+	src/TestScripts/cryptest-coverity.cpp
+
+DISTFILES += cryptopp.pri
+
+load(qt_build_paths)
+
+HEADER_INSTALL_DIR = "$$MODULE_BASE_OUTDIR/include/cryptopp"
+!ReleaseBuild|!DebugBuild {
+	!mkpath($$HEADER_INSTALL_DIR):error("Failed to create cryptopp header dir: $$HEADER_INSTALL_DIR")
+	for(hdr, HEADERS):!system($$QMAKE_QMAKE -install qinstall "$$PWD/$$hdr" "$$HEADER_INSTALL_DIR/$$basename(hdr)"):error("Failed to install header file: $$hdr")
+}
+
+INCLUDEPATH += "$$MODULE_BASE_OUTDIR/include"

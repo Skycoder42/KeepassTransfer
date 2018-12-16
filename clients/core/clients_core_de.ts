@@ -186,7 +186,7 @@ The default format is determined from the file extension and falls back to &apos
 <context>
     <name>gui_settings.xml</name>
     <message>
-        <location filename="../../../build-KeepassTransfer-System_Qt_5_11_2_Arch-Debug/clients/core/.tr-dummies/gui_settings.tsdummy.cpp" line="+7"/>
+        <location filename="../../../build-KeepassTransfer-Android_f_r_armeabi_v7a_GCC_4_9_Qt_5_12_0_android_armv7-Debug/clients/core/.tr-dummies/gui_settings.tsdummy.cpp" line="+7"/>
         <source>Server-&amp;URL</source>
         <translation type="unfinished"></translation>
     </message>

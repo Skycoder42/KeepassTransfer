@@ -1,22 +1,16 @@
 {
-    "dependencies": [
-        {
-            "package": "de.skycoder42.qtandroid.openssl",
-            "provider": "qpm",
-            "version": "1.0.2.17"
-        }
-    ],
-    "license": {
-        "file": "",
-        "name": ""
-    },
-    "prcFile": "",
-    "priFile": "",
-    "priIncludes": [
-        "../core"
-    ],
-    "publishers": {
-    },
-    "qbsFile": "",
-    "source": false
+	"dependencies": [],
+	"license": {
+		"file": "",
+		"name": ""
+	},
+	"prcFile": "",
+	"priFile": "",
+	"priIncludes": [
+		"../core"
+	],
+	"publishers": {
+	},
+	"qbsFile": "",
+	"source": false
 }

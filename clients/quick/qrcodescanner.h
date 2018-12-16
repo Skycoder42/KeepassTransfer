@@ -17,6 +17,8 @@ public:
 
 	bool canScan() const;
 
+	Q_INVOKABLE QString pasteData();
+
 public slots:
 	void initiateScan();
 
