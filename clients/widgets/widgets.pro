@@ -10,6 +10,8 @@ QMAKE_TARGET_DESCRIPTION = "$$PROJECT_NAME Desktop Client"
 RC_ICONS += ../../icon/kpt.ico
 ICON += ../../icon/kpt.icns
 
+DEFINES += QTCSV_STATIC_LIB
+
 HEADERS += \
 	kptrootwizard.h \
 	credentialseditpage.h \

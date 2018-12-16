@@ -5,6 +5,8 @@ CONFIG += static
 
 TARGET = $${PROJECT_TARGET}-core
 
+DEFINES += QTCSV_STATIC_LIB
+
 HEADERS += \
 	kptclientapp.h \
 	credentialseditviewmodel.h \
@@ -15,9 +17,9 @@ HEADERS += \
 	qrclientencryptor.h \
 	kptsettingsviewmodel.h \
 	transferpreselectionentry.h \
-    credentialsselectionviewmodel.h \
-    passclientencryptor.h \
-    passconnectorviewmodel.h
+	credentialsselectionviewmodel.h \
+	passclientencryptor.h \
+	passconnectorviewmodel.h
 
 SOURCES += \
 	kptclientapp.cpp \
@@ -29,9 +31,9 @@ SOURCES += \
 	qrclientencryptor.cpp \
 	kptsettingsviewmodel.cpp \
 	transferpreselectionentry.cpp \
-    credentialsselectionviewmodel.cpp \
-    passclientencryptor.cpp \
-    passconnectorviewmodel.cpp
+	credentialsselectionviewmodel.cpp \
+	passclientencryptor.cpp \
+	passconnectorviewmodel.cpp
 
 SETTINGS_DEFINITIONS += \
 	settings.xml
