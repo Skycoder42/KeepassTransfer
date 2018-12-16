@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Keepass Transfer</string>
+	<string name="app_name">KeePass-Transfer</string>
 
 	<!-- plugin -->
 	<string name="kp2aplugin_title">@string/app_name</string>

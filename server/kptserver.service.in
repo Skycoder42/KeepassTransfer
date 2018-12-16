@@ -1,14 +1,14 @@
 [Unit]
-Description=Keepass Transfer Service
+Description=KeePass-Transfer Service
 Documentation=https://github.com/Skycoder42/KeepassTransfer
 After=network-online.target kptservice.socket
 
 [Service]
 Type=notify
 NotifyAccess=exec
-ExecStart=/usr/bin/kptransfer-server -platform minimal --backend systemd
-ExecReload=/usr/bin/kptransfer-server -platform minimal --backend systemd reload $MAINPID
-ExecStop=/usr/bin/kptransfer-server -platform minimal --backend systemd stop $MAINPID
+ExecStart=%{INSTALL_BINS}/kptransfer-server -platform minimal --backend systemd
+ExecReload=%{INSTALL_BINS}/kptransfer-server -platform minimal --backend systemd reload $MAINPID
+ExecStop=%{INSTALL_BINS}/kptransfer-server -platform minimal --backend systemd stop $MAINPID
 #WatchdogSec=10
 Restart=on-abnormal
 RuntimeDirectory=kptransfer

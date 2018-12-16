@@ -17,7 +17,7 @@ Page {
 			Label {
 				Layout.preferredHeight: 56
 				Layout.fillWidth: true
-				text: qsTr("Keepass Transfer")
+				text: Qt.application.displayName
 				font.pointSize: 14
 				font.bold: true
 				elide: Label.ElideRight
@@ -35,7 +35,7 @@ Page {
 
 				ToolTip.visible: pressed
 				ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-				ToolTip.text:  qsTr("About Keepass Transfer")
+				ToolTip.text: qsTr("About %1").arg(Qt.application.displayName)
 			}
 
 			TabBar {

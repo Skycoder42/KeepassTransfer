@@ -186,7 +186,7 @@ The default format is determined from the file extension and falls back to &apos
 <context>
     <name>gui_settings.xml</name>
     <message>
-        <location filename="../../../build-KeepassTransfer-Android_f_r_armeabi_v7a_GCC_4_9_Qt_5_12_0_android_armv7-Debug/clients/core/.tr-dummies/gui_settings.tsdummy.cpp" line="+7"/>
+        <location filename="../../../build-KeepassTransfer-Qt_5_12_0_gcc_64-Debug/clients/core/.tr-dummies/gui_settings.tsdummy.cpp" line="+7"/>
         <source>Server-&amp;URL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -237,7 +237,7 @@ The default format is determined from the file extension and falls back to &apos
     </message>
     <message>
         <location line="+1"/>
-        <source>Select the entries you would like to be transfered to the partner by default. When starting a transfer from Keepass those will be selected.</source>
+        <source>Select the entries you would like to be transfered to the partner by default. When starting a transfer from KeePass those will be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

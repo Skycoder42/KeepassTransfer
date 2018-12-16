@@ -6,7 +6,7 @@ Dialog {
 	id: errorDialog
 	x: (appWindow.width - errorDialog.width) / 2
 	y: (appWindow.height - errorDialog.height) / 2
-	title: qsTr("About Keepass Transfer — Version %1").arg(appVersion)
+	title: qsTr("About %1 — Version %2").arg(Qt.application.displayName).arg(Qt.application.version)
 	standardButtons: Dialog.Ok
 	modal: true
 

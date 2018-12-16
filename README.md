@@ -1,8 +1,8 @@
-# KeepassTransfer
+# KeePass-Transfer
 A Plugin for [Keepass2Android](https://play.google.com/store/apps/details?id=keepass2android.keepass2android) to transfer entries to the browser
 
 ## General Idea
-With Keepass Transfer, you can safly access your database entries from any browser, by using your Android app. With the plugin for Keepass2Android, you can select an entry, and then send it encrypted to your browser. There, by running the Web-App, your entry will be decrypted and you can access the fields.
+With KeePass-Transfer, you can safly access your database entries from any browser, by using your Android app. With the plugin for Keepass2Android, you can select an entry, and then send it encrypted to your browser. There, by running the Web-App, your entry will be decrypted and you can access the fields.
 
 ## Usage
 1. Download the [Plugin-App](https://github.com/Skycoder42/KeepassTransfer/releases) and enable it in the Keepass2Android.

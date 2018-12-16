@@ -34,7 +34,7 @@ Page {
 			Label {
 				Layout.fillWidth: true
 				Layout.fillHeight: true
-				text: qsTr("%1 — Keepass Transfer").arg(idCred)
+				text: qsTr("%1 — %2").arg(idCred).arg(Qt.application.displayName)
 				font.pointSize: 14
 				font.bold: true
 				elide: Label.ElideRight
@@ -51,7 +51,7 @@ Page {
 
 				ToolTip.visible: pressed
 				ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-				ToolTip.text:  qsTr("About Keepass Transfer")
+				ToolTip.text:  qsTr("About %1").arg(Qt.application.displayName)
 			}
 		}
 	}

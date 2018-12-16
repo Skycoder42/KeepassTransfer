@@ -9,7 +9,7 @@ ApplicationWindow {
 	visible: true
 	width: 960
 	height: 720
-	title: qsTr("KeePass Transfer")
+	title: Qt.application.displayName
 
 	StackView {
 		id: mainStack

@@ -5,6 +5,10 @@ CONFIG += c++14
 
 TARGET = $${PROJECT_TARGET}-client
 
+QMAKE_TARGET_DESCRIPTION = "$$PROJECT_NAME Desktop Client"
+RC_ICONS += ../../icon/kpt.ico
+ICON += ../../icon/kpt.icns
+
 HEADERS += \
 	kptrootwizard.h \
 	credentialseditpage.h \
@@ -29,6 +33,9 @@ FORMS += \
 	qrcodeconnectorpage.ui \
 	credentialsselectionpage.ui \
 	passconnectorpage.ui
+
+RESOURCES += \
+	clientswidgets.qrc
 
 TRANSLATIONS += \
 	kpt_client_widgets_de.ts \
@@ -61,6 +68,3 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../core/lib$${PROJECT_TARGET}-core.a
 else: include($$OUT_PWD/qpmx_generated.pri)
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
-
-RESOURCES += \
-	clientswidgets.qrc

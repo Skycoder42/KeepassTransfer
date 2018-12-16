@@ -38,7 +38,7 @@ ColumnLayout {
 			ToolBarLabel {
 				Layout.fillWidth: true
 				Layout.bottomMargin: 8
-				text: qsTr("Keepass Transfer")
+				text: Qt.application.displayName
 			}
 		}
 	}

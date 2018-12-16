@@ -31,7 +31,7 @@
 		<Entry key="transfer/preselected"
 			   type="TransferPreSelection"
 			   title="Default &amp;transfer entries"
-			   tooltip="Select the entries you would like to be transfered to the partner by default. When starting a transfer from Keepass those will be selected.">
+			   tooltip="Select the entries you would like to be transfered to the partner by default. When starting a transfer from KeePass those will be selected.">
 			<Property key="qtmvvm_preview" type="string" tr="true">Currently has %L1 elements selected</Property>
 		</Entry>
 	</Group>

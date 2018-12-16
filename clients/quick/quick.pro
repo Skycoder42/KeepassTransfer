@@ -6,6 +6,10 @@ CONFIG(release, debug|release): CONFIG += qtquickcompiler
 
 TARGET = $${PROJECT_TARGET}-app
 
+QMAKE_TARGET_DESCRIPTION = "$$PROJECT_NAME Mobile App"
+RC_ICONS += ../../icon/kpt.ico
+ICON += ../../icon/kpt.icns
+
 HEADERS += \
 	qrcodescanner.h \
 	transferloader.h
@@ -65,12 +69,3 @@ contains(ANDROID_TARGET_ARCH,x86) {
 		$$PWD/../../3rdparty/openssl/armv7/libcrypto.so \
 		$$PWD/../../3rdparty/openssl/armv7/libssl.so
 }
-
-DISTFILES += \
-	android/AndroidManifest.xml \
-	android/build.gradle \
-	android/AndroidManifest.xml \
-	android/res/values/libs.xml \
-	android/build.gradle
-
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

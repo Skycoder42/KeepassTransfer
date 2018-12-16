@@ -1,5 +1,5 @@
 [Unit]
-Description=Keepass Transfer Service Socket
+Description=KeePass-Transfer Service Socket
 Documentation=https://github.com/Skycoder42/KeepassTransfer
 After=network.target
 PartOf=kptservice.service

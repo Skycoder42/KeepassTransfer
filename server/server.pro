@@ -1,10 +1,13 @@
 TEMPLATE = app
 
 QT = core service websockets
-CONFIG -= app_bundle c++14
 CONFIG += c++17	console
+CONFIG -= app_bundle c++14
 
 TARGET = $${PROJECT_TARGET}-server
+
+QMAKE_TARGET_DESCRIPTION = "$$PROJECT_NAME Server"
+RC_ICONS += ../icon/kpt.ico
 
 HEADERS += \
 	kptservice.h \
@@ -16,16 +19,36 @@ SOURCES += \
 	transferserver.cpp
 
 DISTFILES += \
-	kptservice.service \
-	kptservice.socket \
-	kptservice-install.bat \
-	de.skycoder42.kptservice.plist
+	kptserver.service.in \
+	kptserver.socket \
+	kptserver-install.bat \
+	de.skycoder42.kptransfer.server.plist
 
 # install
 include(../install.pri)
+
+win32 {
+	install_service.files += $$OUT_PWD/kptserver-install.bat
+	install_service.path = $$INSTALL_BINS
+} else:mac {
+	install_service.files += $$OUT_PWD/de.skycoder42.kptransfer.server.plist
+	install_service.path = $$INSTALL_SHARE/LaunchAgents
+} else: {
+	create_service.target = kptserver.service
+	create_service.depends += $$PWD/kptserver.service.in
+	create_service.commands += sed "s:%{INSTALL_BINS}:$$INSTALL_BINS:g" $$PWD/kptserver.service.in > kptserver.service
+
+	QMAKE_EXTRA_TARGETS += create_service
+	PRE_TARGETDEPS += kptserver.service
+
+	install_service.files += $$OUT_PWD/kptserver.service kptserver.socket
+	install_service.CONFIG += no_check_exist
+	install_service.path = $$INSTALL_LIBS/systemd/system/
+}
+
 target.path = $$INSTALL_BINS
 qpmx_ts_target.path = $$INSTALL_TRANSLATIONS
-INSTALLS += target qpmx_ts_target
+INSTALLS += target install_service qpmx_ts_target
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
 

@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>de.skycoder42.kptransfer</string>
+	<string>de.skycoder42.kptransfer.server</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/path/to/kptransfer-server</string>
+		<string>~/Applications/KeePass-Transfer.app/Contents/MacOs/kptransfer-server</string>
 		<string>--backend</string>
 		<string>launchd</string>
 	</array>
