@@ -6,7 +6,7 @@ SUBDIRS += \
 	webapp \
 	clients
 
-!cross_compile: SUBDIRS += server
+!no_server:!cross_compile: SUBDIRS += server
 no_webapp: SUBDIRS -= webapp
 wasm: SUBDIRS -= clients
 
@@ -22,11 +22,6 @@ DISTFILES += \
 	.qmake.conf
 
 include(deploy/install.pri)
-!no_bundle_deploy:mac {
-	install.commands += cp -pPRfv "$(INSTALL_ROOT)$$INSTALL_APPS/" "$(INSTALL_ROOT)$${PREFIX}/"$$escape_expand(\n\t) \
-		rm -rf "$(INSTALL_ROOT)$$INSTALL_APPS"$$escape_expand(\n\t)
-	QMAKE_EXTRA_TARGETS += install
-}
 
 !isEmpty(PREFIX):!no_bundle_deploy {
 	win32: DEPLOY_BINS = "$$INSTALL_BINS/$${PROJECT_TARGET}-client.exe" "$$INSTALL_BINS/$${PROJECT_TARGET}-server.exe"

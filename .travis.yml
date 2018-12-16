@@ -22,12 +22,12 @@ matrix:
       env:
         - PLATFORM=gcc_64
         - QMAKE_FLAGS="PREFIX=/deploy CONFIG+=no_quick"
-    #- os: linux
-      #env:
-        #- PLATFORM=flatpak
-        #- DOCKER_IMAGE=
-        #- DOCKER_IMAGE_BASE="base/archlinux:latest"
-        #- FLATPAK_MANIFEST=flatpak/de.skycoder42.kpt.json
+    - os: linux
+      env:
+        - PLATFORM=flatpak
+        - DOCKER_IMAGE=
+        - DOCKER_IMAGE_BASE="base/archlinux:latest"
+        - FLATPAK_MANIFEST=flatpak/de.skycoder42.kptransfer.json
     #- os: linux
       #env:
         #- PLATFORM=android_arm64_v8a

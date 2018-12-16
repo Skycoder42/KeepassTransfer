@@ -2,7 +2,7 @@
 	"id": "de.skycoder42.kptransfer",
 	"branch": "master",
 	"runtime": "org.kde.Platform",
-	"runtime-version": "5.12",
+	"runtime-version": "5.11",
 	"sdk": "org.kde.Sdk",
 	"command": "kptransfer-client",
 	"finish-args": [
@@ -14,12 +14,15 @@
 	"build-options": {
 		"env": {
 			"QMAKEPATH": "/app/lib",
-			"QT_PLUGIN_PATH": "/app/lib/plugins:/app/qpmx/usr/lib/plugins"
+			"QT_PLUGIN_PATH": "/app/lib/plugins"
 		}
 	},
 	
 	"depends": [
-		"cryptopp"
+		"cryptopp",
+		"qpmx",
+		"qtservice",
+		"qtmvvm-nods"
 	],
 
 	"modules": [
@@ -35,6 +38,7 @@
 			},
 			"config-opts": [
 				"CONFIG+=no_quick",
+				"CONFIG+=no_server",
 				"CONFIG+=no_auto_lupdate",
 				"CONFIG+=auto_lrelease",
 				"CONFIG+=no_bundle_deploy",
