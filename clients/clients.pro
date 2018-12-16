@@ -5,7 +5,8 @@ SUBDIRS += \
 	widgets \
 	quick
 
-android: SUBDIRS -= widgets
+no_widgets: SUBDIRS -= widgets
+no_quick: SUBDIRS -= quick
 
 widgets.depends += core
 quick.depends += core

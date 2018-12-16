@@ -1,0 +1,81 @@
+language: cpp
+
+services:
+  - docker
+
+sudo: required
+dist: trusty
+osx_image: xcode10.1
+
+env:
+  global:
+    - QPMX_CACHE_DIR=$HOME/.qpmx-cache
+    - QT_VER_MINOR=5.12
+    - QT_VER=${QT_VER_MINOR}.0
+    - EXTRA_MODULES=".skycoder42"
+    - DOCKER_IMAGE=full
+    - NO_TESTS=true
+
+matrix:
+  include:
+    - os: linux
+      env:
+        - PLATFORM=gcc_64
+        - QMAKE_FLAGS="PREFIX=/deploy CONFIG+=no_quick"
+    #- os: linux
+      #env:
+        #- PLATFORM=flatpak
+        #- DOCKER_IMAGE=
+        #- DOCKER_IMAGE_BASE="base/archlinux:latest"
+        #- FLATPAK_MANIFEST=flatpak/de.skycoder42.kpt.json
+    #- os: linux
+      #env:
+        #- PLATFORM=android_arm64_v8a
+    - os: linux
+      env:
+        - PLATFORM=android_armv7
+    - os: linux
+      env:
+        - PLATFORM=android_x86
+    - os: osx
+      env:
+        - PLATFORM=clang_64
+        - QMAKE_FLAGS="PREFIX=/deploy CONFIG+=no_quick"
+
+before_install:
+  - git clone https://github.com/Skycoder42/QtModules.git ./qtmodules-travis
+  - travis_wait 40 ./qtmodules-travis/ci/$TRAVIS_OS_NAME/setup.sh
+
+script:
+  - ./ci/travis_init.sh
+  - ./qtmodules-travis/ci/$TRAVIS_OS_NAME/build.sh
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./ci/travis_postbuild.sh; fi
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: <key>
+  file_glob: true
+  file:
+    - ./install/kptransfer-*.dmg
+    - ./install/kptransfer-*.apk
+    - ./install/flatpak_build.tar.xz
+  on:
+    repo: Skycoder42/KeepassTransfer
+    tags: true
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+  - rm -rf $QPMX_CACHE_DIR/locks
+  - rm -rf $QPMX_CACHE_DIR/tmp
+  - sudo rm -rf flatpak-build/.flatpak-builder/build
+  - sudo rm -rf flatpak-build/.flatpak-builder/rofiles
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+    - $QPMX_CACHE_DIR
+    - flatpak-build/.flatpak-builder

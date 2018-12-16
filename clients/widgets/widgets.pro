@@ -10,32 +10,38 @@ HEADERS += \
 	credentialseditpage.h \
 	transferselectionpage.h \
 	qrcodeconnectorpage.h \
-    transferpreselectionedit.h \
-    credentialsselectionpage.h \
-    passconnectorpage.h
+	transferpreselectionedit.h \
+	credentialsselectionpage.h \
+	passconnectorpage.h
 
 SOURCES += main.cpp \
 	kptrootwizard.cpp \
 	credentialseditpage.cpp \
 	transferselectionpage.cpp \
 	qrcodeconnectorpage.cpp \
-    transferpreselectionedit.cpp \
-    credentialsselectionpage.cpp \
-    passconnectorpage.cpp
+	transferpreselectionedit.cpp \
+	credentialsselectionpage.cpp \
+	passconnectorpage.cpp
 
 FORMS += \
 	credentialseditpage.ui \
 	transferselectionpage.ui \
 	qrcodeconnectorpage.ui \
-    credentialsselectionpage.ui \
-    passconnectorpage.ui
+	credentialsselectionpage.ui \
+	passconnectorpage.ui
 
 TRANSLATIONS += \
 	kpt_client_widgets_de.ts \
-	kpt_client_template.ts
+	kpt_client_widgets_template.ts
 
 DISTFILES += $$TRANSLATIONS \
 	qpmx.json
+
+include(../../install.pri)
+mac: target.path = $$INSTALL_APPS
+else: target.path = $$INSTALL_BINS
+qpmx_ts_target.path = $$INSTALL_TRANSLATIONS
+INSTALLS += target qpmx_ts_target
 
 # Link with core project
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -l$${PROJECT_TARGET}-core
@@ -57,4 +63,4 @@ else: include($$OUT_PWD/qpmx_generated.pri)
 include($$SRC_ROOT_DIR/lib/lib.pri)
 
 RESOURCES += \
-    clientswidgets.qrc
+	clientswidgets.qrc

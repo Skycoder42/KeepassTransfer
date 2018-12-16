@@ -21,16 +21,21 @@ TRANSLATIONS += \
 	kpt_client_quick_de.ts \
 	kpt_client_quick_template.ts
 
-#ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
-#DISTFILES += $$TRANSLATIONS \
-#	qpmx.json \
-#	android/AndroidManifest.xml \
-#	$$files(android/src/*, true) \
-#	$$files(android/res/*, true) \
-#	android/build.gradle \
-#	android/src/de/skycoder42/kpt/TransferAccessReceiver.java \
-#	android/src/de/skycoder42/kpt/TransferActionReceiver.java
+DISTFILES += $$TRANSLATIONS \
+	qpmx.json \
+	android/AndroidManifest.xml \
+	$$files(android/src/*, true) \
+	$$files(android/res/*, true) \
+	android/build.gradle \
+	android/src/de/skycoder42/kpt/TransferAccessReceiver.java \
+	android/src/de/skycoder42/kpt/TransferActionReceiver.java
+
+include(../../install.pri)
+target.path = $$INSTALL_BINS
+qpmx_ts_target.path = $$INSTALL_TRANSLATIONS
+INSTALLS += target qpmx_ts_target
 
 # Link with core project
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../core/release/ -l$${PROJECT_TARGET}-core
@@ -62,10 +67,10 @@ contains(ANDROID_TARGET_ARCH,x86) {
 }
 
 DISTFILES += \
-    android/AndroidManifest.xml \
-    android/build.gradle \
-    android/AndroidManifest.xml \
-    android/res/values/libs.xml \
-    android/build.gradle
+	android/AndroidManifest.xml \
+	android/build.gradle \
+	android/AndroidManifest.xml \
+	android/res/values/libs.xml \
+	android/build.gradle
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
