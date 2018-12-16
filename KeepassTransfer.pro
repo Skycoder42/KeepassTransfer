@@ -29,7 +29,7 @@ include(install.pri)
 }
 
 !isEmpty(PREFIX):!no_bundle_deploy {
-	win32: DEPLOY_BINS = "$$INSTALL_BINS/$${PROJECT_TARGET}.exe" "$$INSTALL_BINS/$${PROJECT_TARGET}-server.exe"
+	win32: DEPLOY_BINS = "$$INSTALL_BINS/$${PROJECT_TARGET}-client.exe" "$$INSTALL_BINS/$${PROJECT_TARGET}-server.exe"
 	else:mac: DEPLOY_BINS = "$$PREFIX/$${PROJECT_NAME}.app" "$$PREFIX/$${APP_PREFIX}/MacOs/$${PROJECT_TARGET}-server"
 	else:android: DEPLOY_BINS = "$$OUT_PWD/clients/quick/android-lib$${PROJECT_TARGET}-app.so-deployment-settings.json"
 	DEPLOY_PLUGINS += servicebackends
