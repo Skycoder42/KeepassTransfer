@@ -10,6 +10,8 @@ win32:!win32-g++ {
 	QMAKE_CXXFLAGS += /arch:AVX2
 	DEFINES += CRYPTOPP_DISABLE_ASM #TODO reenable again later
 	cross_compile: DEFINES += NO_OS_DEPENDENCE
+} else:wasm {
+	QMAKE_CXXFLAGS += -msse4.1 -mssse3
 } else {
 	# based on https://github.com/KayEss/fost-crypto/blob/master/CMakeLists.txt
 	QMAKE_CXXFLAGS += -Wno-keyword-macro -Wno-unused-const-variable -Wno-unused-private-field

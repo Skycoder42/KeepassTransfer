@@ -25,9 +25,9 @@ Page {
 
 		onScanResultReady: {
 			scanning = (scanResult == "");
-			bugLoader.codeAreaItem.text = scanResult
-			if(viewModel.valid)
-				viewModel.transfer();
+			codeArea.text = scanResult
+			//if(viewModel.valid) //NOTE bug in 5.12.0 -> reenable in 5.12.1
+			//	viewModel.transfer();
 		}
 
 		function startScan() {
@@ -77,8 +77,8 @@ Page {
 	}
 
 	Component.onCompleted: {
-//		if(scanner.canScan)
-//			scanner.startScan();
+		if(scanner.canScan)
+			scanner.startScan();
 	}
 
 	PresenterProgress {}
@@ -89,69 +89,30 @@ Page {
 			anchors.fill: parent
 			columns: 2
 
-			Component {
-				id: normalEditComponent
-
-				ScrollView {
-					id: textScroller
-					property var codeAreaRef: codeArea
-
-					Flickable {
-						TextArea.flickable: TextArea {
-							id: codeArea
-							selectByMouse: true
-							selectByKeyboard: true
-							wrapMode: TextArea.WrapAnywhere
-							textFormat: TextEdit.PlainText
-							placeholderText: qsTr("Scan a QR-Code or paste the\npublic key data here to continue.")
-
-							MvvmBinding {
-								viewModel: qrView.viewModel
-								viewModelProperty: "qrData"
-								view: codeArea
-								viewProperty: "text"
-								type: MvvmBinding.OneWayToViewModel
-							}
-						}
-					}
-				}
-			}
-
-			Component {
-				id: bugFixComponent
-
-				Label {
-					property var codeAreaRef: codeAreaDummy
-
-					text: qrView.viewModel.qrData
-					wrapMode: Label.WrapAnywhere
-					textFormat: Label.PlainText
-
-					QtObject {
-						id: codeAreaDummy
-						property string text
-						//onTextChanged: qrView.viewModel.qrData = text
-						function clear() {
-							text = "";
-						}
-						function paste() {
-							text = scanner.pasteData();
-						}
-					}
-				}
-			}
-
-			Loader {
-				id: bugLoader
-				property var codeAreaItem: null
-
+			ScrollView {
+				id: textScroller
 				Layout.fillWidth: true
 				Layout.fillHeight: true
 				Layout.columnSpan: 2
 
-				active: true
-				sourceComponent: scanner.canScan ? bugFixComponent : normalEditComponent
-				onLoaded: codeAreaItem = item.codeAreaRef
+				Flickable {
+					TextArea.flickable: TextArea {
+						id: codeArea
+						selectByMouse: true
+						selectByKeyboard: true
+						wrapMode: TextArea.WrapAnywhere
+						textFormat: TextEdit.PlainText
+						placeholderText: qsTr("Scan a QR-Code or paste the\npublic key data here to continue.")
+
+						MvvmBinding {
+							viewModel: qrView.viewModel
+							viewModelProperty: "qrData"
+							view: codeArea
+							viewProperty: "text"
+							type: MvvmBinding.OneWayToViewModel
+						}
+					}
+				}
 			}
 
 			Label {
@@ -165,8 +126,8 @@ Page {
 				id: pasteBtn
 				text: qsTr("Paste")
 				onClicked: {
-					bugLoader.codeAreaItem.clear();
-					bugLoader.codeAreaItem.paste();
+					codeArea.clear();
+					codeArea.paste();
 					if(viewModel.pasteTransfer)
 						viewModel.transfer();
 				}
