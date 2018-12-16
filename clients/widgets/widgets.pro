@@ -57,6 +57,8 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../core/debug/ -l$$
 else:unix: LIBS += -L$$OUT_PWD/../core/ -l$${PROJECT_TARGET}-core
 
 INCLUDEPATH += $$PWD/../core  $$OUT_PWD/../core
+win32:CONFIG(release, debug|release): INCLUDEPATH += $$OUT_PWD/../core/release
+else:win32:CONFIG(debug, debug|release): INCLUDEPATH += $$OUT_PWD/../core/debug
 DEPENDPATH += $$PWD/../core
 
 win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../core/release/lib$${PROJECT_TARGET}-core.a

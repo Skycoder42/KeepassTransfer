@@ -28,10 +28,10 @@ DISTFILES += \
 include(../install.pri)
 
 win32 {
-	install_service.files += $$OUT_PWD/kptserver-install.bat
+	install_service.files += $$PWD/kptserver-install.bat
 	install_service.path = $$INSTALL_BINS
 } else:mac {
-	install_service.files += $$OUT_PWD/de.skycoder42.kptransfer.server.plist
+	install_service.files += $$PWD/de.skycoder42.kptransfer.server.plist
 	install_service.path = $$INSTALL_SHARE/LaunchAgents
 } else: {
 	create_service.target = kptserver.service
