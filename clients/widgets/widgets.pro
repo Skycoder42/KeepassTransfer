@@ -45,9 +45,23 @@ TRANSLATIONS += \
 	kpt_client_widgets_template.ts
 
 DISTFILES += $$TRANSLATIONS \
-	qpmx.json
+	qpmx.json \
+	de.skycoder42.kptransfer.desktop
 
 include(../../deploy/install.pri)
+linux {
+	create_icons.target = create_icons
+	create_icons.commands += $$shell_path($$PWD/../../deploy/create-icons.sh) de.skycoder42.kptransfer $$shell_path($$PWD/../../icon/pngs/kpt) $$ICON_SIZES
+	QMAKE_EXTRA_TARGETS += create_icons
+
+	desktop_install.files = de.skycoder42.kptransfer.desktop
+	desktop_install.path = $$INSTALL_SHARE/applications/
+	install_icons.files += $$shadowed(icon_export/hicolor)
+	install_icons.path = $$INSTALL_SHARE/icons/
+	install_icons.CONFIG += no_check_exist
+	install_icons.depends += create_icons
+	INSTALLS += desktop_install install_icons
+}
 mac: target.path = $$INSTALL_APPS
 else: target.path = $$INSTALL_BINS
 qpmx_ts_target.path = $$INSTALL_TRANSLATIONS

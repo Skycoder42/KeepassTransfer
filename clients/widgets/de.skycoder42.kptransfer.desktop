@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Version=1.1
+Name=KeePass-Transfer
+GenericName=Secure Password transfers
+Comment=An extension of KeePassXC to transfer entries to the browser
+Categories=Utility;Security;Qt;
+Exec=kptransfer-client
+Icon=de.skycoder42.kptransfer
+Terminal=false
