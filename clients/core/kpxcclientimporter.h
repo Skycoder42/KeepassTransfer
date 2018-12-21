@@ -17,6 +17,7 @@ public:
 	explicit KPXCClientImporter(QObject *parent = nullptr);
 
 public slots:
+	void setKpxcPath(QString path);
 	void importCredentials();
 
 signals:
@@ -34,6 +35,7 @@ private slots:
 	void onCancel();
 
 private:
+	QString _kpxcPath;
 	KPXCClient::Client *_client;
 	QUrl _fetchUrl;
 

@@ -41,11 +41,7 @@ QUuid KPTLib::uiDecodeId(QString idText)
 
 void KPTLib::setupStream(QDataStream &stream)
 {
-#ifdef FLATPAK_BUILD
-	stream.setVersion(QDataStream::Qt_5_11); //TODO remove again, just for testing
-#else
 	stream.setVersion(QDataStream::Qt_5_12);
-#endif
 }
 
 QByteArray KPTLib::serializeMessageImpl(const QVariant &message)

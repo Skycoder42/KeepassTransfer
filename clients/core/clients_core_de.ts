@@ -66,7 +66,7 @@
 <context>
     <name>CredentialsEditViewModel</name>
     <message>
-        <location filename="credentialseditviewmodel.cpp" line="+34"/>
+        <location filename="credentialseditviewmodel.cpp" line="+43"/>
         <source>Invalid Credentials</source>
         <translation type="unfinished"></translation>
     </message>
@@ -76,7 +76,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+43"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -132,7 +132,17 @@ The default format is determined from the file extension and falls back to &apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
+        <source>The &lt;path&gt; to KeePassXC (or preferebly: the KeePassXC-Proxy. Must be specified if you want to use the KeePassXC-Import, but keepasscx-proxy is not in the PATH.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>The path to a file that contains the credentials to be transferred. Can only be specified if &apos;--transfer&apos; is set. If left empty, data is read from stdin (Use CTRL+D to commit data from the terminal).</source>
         <oldsource>The path to a file that contains the credentials to be transferred. Can only be specified if &apos;--transfer&apos; is set. If left empty, data is read from stdin.</oldsource>
         <translation type="unfinished"></translation>
@@ -141,7 +151,7 @@ The default format is determined from the file extension and falls back to &apos
 <context>
     <name>KPXCClientImporter</name>
     <message>
-        <location filename="kpxcclientimporter.cpp" line="+37"/>
+        <location filename="kpxcclientimporter.cpp" line="+42"/>
         <source>Importing from KeePassXC</source>
         <translation type="unfinished"></translation>
     </message>
@@ -152,17 +162,17 @@ The default format is determined from the file extension and falls back to &apos
     </message>
     <message>
         <location line="-1"/>
-        <location line="+61"/>
+        <location line="+64"/>
         <source>Import from KeePassXC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-51"/>
+        <location line="-54"/>
         <source>Connecting to KeePassXC instance…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+27"/>
         <source>Searching entries for URL &quot;%1&quot; in KeePassXC…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -247,7 +257,7 @@ The default format is determined from the file extension and falls back to &apos
 <context>
     <name>gui_settings.xml</name>
     <message>
-        <location filename="../../../build-KeepassTransfer-Android_f_r_x86_GCC_4_9_Qt_5_12_0_android_x86-Debug/clients/core/.tr-dummies/gui_settings.tsdummy.cpp" line="+7"/>
+        <location filename="../../../build-KeepassTransfer-Qt_5_12_0_gcc_64-Debug/clients/core/.tr-dummies/gui_settings.tsdummy.cpp" line="+7"/>
         <source>Server-&amp;URL</source>
         <translation type="unfinished"></translation>
     </message>

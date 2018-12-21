@@ -17,6 +17,9 @@ class CredentialsEditViewModel : public QtMvvm::ViewModel
 	Q_PROPERTY(CredentialsEditViewModel::CredentialsModel* credentialsModel READ credentialsModel CONSTANT)
 
 public:
+	static const QString paramKpxcPath;
+	static QVariantHash params(const QString &kpxcPath);
+
 	using CredentialsModel = QGenericListModel<Credential>;
 
 	Q_INVOKABLE explicit CredentialsEditViewModel(QObject *parent = nullptr);
@@ -26,6 +29,8 @@ public:
 	Q_INVOKABLE bool commitCredentials();
 
 public slots:
+	void onInit(const QVariantHash &params) override;
+
 	void addEmptyEntry();
 	void importFromKPXC();
 

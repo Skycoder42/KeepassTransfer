@@ -5,6 +5,15 @@
 #include "kpxcclientimporter.h"
 #endif
 
+const QString CredentialsEditViewModel::paramKpxcPath{QStringLiteral("kpxcPath")};
+
+QVariantHash CredentialsEditViewModel::params(const QString &kpxcPath)
+{
+	return {
+		{paramKpxcPath, kpxcPath}
+	};
+}
+
 CredentialsEditViewModel::CredentialsEditViewModel(QObject *parent) :
 	ViewModel{parent},
 	_credModel{new CredentialsModel{this}}
@@ -38,6 +47,15 @@ bool CredentialsEditViewModel::commitCredentials()
 		show<TransferSelectionViewModel>(TransferSelectionViewModel::params(creds));
 		return true;
 	}
+}
+
+void CredentialsEditViewModel::onInit(const QVariantHash &params)
+{
+#ifdef USE_KPXCCLIENT_LIB
+	_importer->setKpxcPath(params.value(paramKpxcPath).toString());
+#else
+	Q_UNUSED(params)
+#endif
 }
 
 void CredentialsEditViewModel::addEmptyEntry()

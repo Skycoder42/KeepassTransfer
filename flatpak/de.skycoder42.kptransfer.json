@@ -2,7 +2,7 @@
 	"id": "de.skycoder42.kptransfer",
 	"branch": "master",
 	"runtime": "org.kde.Platform",
-	"runtime-version": "5.11",
+	"runtime-version": "5.12",
 	"sdk": "org.kde.Sdk",
 	"command": "kptransfer-client",
 	"finish-args": [
@@ -22,7 +22,8 @@
 		"cryptopp",
 		"qpmx",
 		"qtservice",
-		"qtmvvm-nods"
+		"qtmvvm-nods",
+		"libkpxcclient"
 	],
 
 	"modules": [

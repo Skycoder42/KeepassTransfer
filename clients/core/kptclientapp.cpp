@@ -80,6 +80,12 @@ int KPTClientApp::startApp(const QStringList &arguments)
 						 tr("format"),
 						 QStringLiteral("auto")
 					 });
+	parser.addOption({
+						 QStringLiteral("kpxc-path"),
+						 tr("The <path> to KeePassXC (or preferebly: the KeePassXC-Proxy. Must be specified if "
+							"you want to use the KeePassXC-Import, but keepasscx-proxy is not in the PATH."),
+						 tr("path")
+					 });
 	parser.addPositionalArgument(QStringLiteral("transfer-file-path"),
 								 tr("The path to a file that contains the credentials to be transferred. "
 									"Can only be specified if '--transfer' is set. If left empty, data is "
@@ -101,7 +107,7 @@ int KPTClientApp::startApp(const QStringList &arguments)
 
 	//show a viewmodel to complete the startup
 	if(_initCredentials.isEmpty())
-		show<CredentialsEditViewModel>();
+		show<CredentialsEditViewModel>(CredentialsEditViewModel::params(parser.value(QStringLiteral("kpxc-path"))));
 	else
 		show<CredentialsSelectionViewModel>(CredentialsSelectionViewModel::params(_initCredentials));
 	return EXIT_SUCCESS;

@@ -20,6 +20,11 @@ KPXCClientImporter::KPXCClientImporter(QObject *parent) :
 			this, &KPXCClientImporter::onError);
 }
 
+void KPXCClientImporter::setKpxcPath(QString path)
+{
+	_kpxcPath = std::move(path);
+}
+
 void KPXCClientImporter::importCredentials()
 {
 	if(_currentProgress)
@@ -41,7 +46,10 @@ void KPXCClientImporter::importCredentials()
 
 			switch(_client->state()) {
 			case Client::State::Disconnected:
-				_client->connectToKeePass();
+				if(_kpxcPath.isEmpty())
+					_client->connectToKeePass();
+				else
+					_client->connectToKeePass(_kpxcPath);
 				break;
 			case Client::State::Locked:
 				_client->openDatabase();
