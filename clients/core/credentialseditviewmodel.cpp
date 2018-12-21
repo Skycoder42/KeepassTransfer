@@ -1,13 +1,24 @@
 #include "credentialseditviewmodel.h"
 #include "transferselectionviewmodel.h"
 #include <QtMvvmCore/Messages>
+#ifdef USE_KPXCCLIENT_LIB
+#include "kpxcclientimporter.h"
+#endif
 
 CredentialsEditViewModel::CredentialsEditViewModel(QObject *parent) :
 	ViewModel{parent},
 	_credModel{new CredentialsModel{this}}
+#ifdef USE_KPXCCLIENT_LIB
+	,_importer{new KPXCClientImporter{this}}
+#endif
 {
 	setupModel();
 	addEmptyEntry();
+
+#ifdef USE_KPXCCLIENT_LIB
+	connect(_importer, &KPXCClientImporter::credentialsImported,
+			this, &CredentialsEditViewModel::entryImported);
+#endif
 }
 
 CredentialsEditViewModel::CredentialsModel *CredentialsEditViewModel::credentialsModel() const
@@ -34,8 +45,24 @@ void CredentialsEditViewModel::addEmptyEntry()
 	_credModel->addGadget({});
 }
 
+void CredentialsEditViewModel::importFromKPXC()
+{
+#ifdef USE_KPXCCLIENT_LIB
+	_importer->importCredentials();
+#else
+	Q_UNIMPLEMENTED();
+#endif
+}
+
+void CredentialsEditViewModel::entryImported(const QList<Credential> &credentials)
+{
+	_credModel->resetModel(credentials);
+}
+
 void CredentialsEditViewModel::setupModel()
 {
+	using Convert = CredentialsModel::Convert;
+
 	_credModel->setEditable(true);
 
 	// key column
@@ -45,11 +72,20 @@ void CredentialsEditViewModel::setupModel()
 	// value column
 	column = _credModel->addColumn(tr("Value"), "value");
 	_credModel->addRole(column, Qt::EditRole, "value");
+	_credModel->addAliasConverter(column, Qt::DisplayRole, [this](Convert c, const QVariant &value) {
+		if(c == Convert::Read) {
+			for(const auto &cred : _credModel->gadgets()) { // NOTE uneffective, make better...
+				if(cred.value() == value && cred.confidential())
+					return QVariant{QStringLiteral("●").repeated(value.toString().size())};
+			}
+			return value;
+		} else
+			return QVariant{};
+	});
 
 	// confidential column
 	column = _credModel->addColumn(tr("Confidential"), "confidential");
 	_credModel->addRole(column, Qt::CheckStateRole, "confidential");
-	using Convert = CredentialsModel::Convert;
 	_credModel->setExtraFlags(column, Qt::ItemIsUserCheckable, Qt::ItemIsEditable);
 	_credModel->addAliasConverter(column, Qt::DisplayRole, [](Convert c, const QVariant &value){
 		if(c == Convert::Read)

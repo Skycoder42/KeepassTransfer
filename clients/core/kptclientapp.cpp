@@ -13,6 +13,10 @@
 
 #include <qtcsv/reader.h>
 
+#ifdef USE_KPXCCLIENT_LIB
+#include <kpxcclient/kpxcclient_global.h>
+#endif
+
 #include "kptrootviewmodel.h"
 #include "clienttransferservice.h"
 #include "credentialseditviewmodel.h"
@@ -40,6 +44,9 @@ void KPTClientApp::performRegistrations()
 	Q_INIT_RESOURCE(clientscore);
 	QGuiApplication::setWindowIcon(QIcon{QStringLiteral(":/icons/main.svg")});
 
+#ifdef USE_KPXCCLIENT_LIB
+	KPXCClient::init();
+#endif
 	KPTLib::setup();
 
 	qRegisterMetaType<KptRootViewModel*>();

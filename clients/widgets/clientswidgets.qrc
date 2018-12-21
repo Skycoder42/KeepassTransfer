@@ -9,5 +9,6 @@
         <file alias="select.svg">icons/baseline-select_all-24px.svg</file>
         <file alias="deselect.svg">icons/baseline-tab_unselected-24px.svg</file>
         <file alias="paste.svg">icons/baseline-assignment-24px.svg</file>
+        <file alias="keepassxc.svg">icons/keepassxc.svg</file>
     </qresource>
 </RCC>

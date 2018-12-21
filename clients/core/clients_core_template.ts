@@ -66,7 +66,7 @@
 <context>
     <name>CredentialsEditViewModel</name>
     <message>
-        <location filename="credentialseditviewmodel.cpp" line="+23"/>
+        <location filename="credentialseditviewmodel.cpp" line="+34"/>
         <source>Invalid Credentials</source>
         <translation type="unfinished"></translation>
     </message>
@@ -76,7 +76,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+34"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86,8 +86,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+6"/>
+        <location line="+14"/>
+        <location line="+5"/>
         <source>Confidential</source>
         <translation type="unfinished"></translation>
     </message>
@@ -113,7 +113,7 @@
 <context>
     <name>KPTClientApp</name>
     <message>
-        <location filename="kptclientapp.cpp" line="+61"/>
+        <location filename="kptclientapp.cpp" line="+68"/>
         <source>Pass password entries to the application to transfer them. You can either pass a path as last argument or let the application read the data from stdin.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -139,6 +139,67 @@ The default format is determined from the file extension and falls back to &apos
     </message>
 </context>
 <context>
+    <name>KPXCClientImporter</name>
+    <message>
+        <location filename="kpxcclientimporter.cpp" line="+37"/>
+        <source>Importing from KeePassXC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-8"/>
+        <source>Enter a URL to search entries for in KeePassXC:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <location line="+61"/>
+        <source>Import from KeePassXC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-51"/>
+        <source>Connecting to KeePassXC instance…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Searching entries for URL &quot;%1&quot; in KeePassXC…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+33"/>
+        <location line="+14"/>
+        <source>Import from KeePassXC failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-46"/>
+        <source>Unable to find any entries for the given URL!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Select the Entrie you would like to transfer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>The connection to KeePassXC was unexpectedly closed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Failed to import data with error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>KptRootViewModel</name>
     <message>
         <location filename="kptrootviewmodel.cpp" line="+17"/>
@@ -153,8 +214,8 @@ The default format is determined from the file extension and falls back to &apos
     </message>
     <message>
         <location line="+3"/>
-        <source>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtMvvm&quot;&gt;QtMvvm (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtService&quot;&gt;QtService (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/iamantony/qtcsv&quot;&gt;qtcsv (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <oldsource>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtMvvm&quot;&gt;QtMvvm (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtService&quot;&gt;QtService (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/iamantony/qtcsv&quot;&gt;qtcsv (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;http://www.fatcow.com/free-icons&quot;&gt;FatCow Free Icons (CC-3.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</oldsource>
+        <source>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtMvvm&quot;&gt;QtMvvm (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtService&quot;&gt;QtService (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/iamantony/qtcsv&quot;&gt;qtcsv (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/keepassxc-client-library&quot;&gt;keepassxc-client-library (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/jedisct1/libsodium&quot;&gt;libsodium (ISC)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/keepassxreboot/keepassxc&quot;&gt;KeePassXC Icon (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <oldsource>Attributions:&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtMvvm&quot;&gt;QtMvvm (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/QtService&quot;&gt;QtService (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/weidai11/cryptopp&quot;&gt;CryptoPP (BSL-1.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nayuki/QR-Code-generator&quot;&gt;QR-Code-generator (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/iamantony/qtcsv&quot;&gt;qtcsv (MIT)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/PhilippC/keepass2android&quot;&gt;Keepass2Android Plugin SDK (GPL-3.0)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Skycoder42/keepassxc-client-library&quot;&gt;keepassxc-client-library (BSD-3)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/jedisct1/libsodium&quot;&gt;libsodium (ISC)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://material.io/tools/icons&quot;&gt;MaterialIO Icons (Apache-2.0)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>

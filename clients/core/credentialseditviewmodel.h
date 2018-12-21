@@ -5,6 +5,10 @@
 #include <qgadgetlistmodel.h>
 #include <credential.h>
 
+#ifdef USE_KPXCCLIENT_LIB
+class KPXCClientImporter;
+#endif
+
 class CredentialsEditViewModel : public QtMvvm::ViewModel
 {
 	Q_OBJECT
@@ -23,9 +27,16 @@ public:
 
 public slots:
 	void addEmptyEntry();
+	void importFromKPXC();
+
+private slots:
+	void entryImported(const QList<Credential> &credentials);
 
 private:
 	CredentialsModel *_credModel;
+#ifdef USE_KPXCCLIENT_LIB
+	KPXCClientImporter *_importer;
+#endif
 
 	void setupModel();
 };

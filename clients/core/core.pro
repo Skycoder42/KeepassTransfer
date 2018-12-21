@@ -7,6 +7,15 @@ TARGET = $${PROJECT_TARGET}-core
 
 DEFINES += QTCSV_STATIC_LIB
 
+packagesExist(libkpxcclient) {
+	CONFIG += link_pkgconfig
+	PKGCONFIG += libkpxcclient
+	DEFINES += USE_KPXCCLIENT_LIB
+
+	HEADERS += kpxcclientimporter.h
+	SOURCES += kpxcclientimporter.cpp
+}
+
 HEADERS += \
 	kptclientapp.h \
 	credentialseditviewmodel.h \
