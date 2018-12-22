@@ -66,6 +66,7 @@ deploy:
   file:
     - ./install/kptransfer-*.dmg
     - ./install/kptransfer-*.apk
+    - ./install/kptransfer-*_emscripten.tar.xz
     - ./install/flatpak_build.tar.xz
   on:
     repo: Skycoder42/KeepassTransfer
