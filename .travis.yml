@@ -33,6 +33,7 @@ matrix:
       env:
         - PLATFORM=emscripten
         - DOCKER_IMAGE=base
+        - QMAKE_FLAGS="PREFIX=/wasm INSTALL_WWW=/wasm/www"
     #- os: linux
       #env:
         #- PLATFORM=android_arm64_v8a

@@ -25,7 +25,10 @@ License: <a href=\"https://github.com/Skycoder42/KeepassTransfer/blob/master/LIC
 <li><a href=\"https://github.com/nayuki/QR-Code-generator\">QR-Code-generator (MIT)</a></li>
 <li><a href=\"https://github.com/iamantony/qtcsv\">qtcsv (MIT)</a></li>
 <li><a href=\"https://github.com/PhilippC/keepass2android\">Keepass2Android Plugin SDK (GPL-3.0)</a></li>
+<li><a href=\"https://github.com/Skycoder42/keepassxc-client-library\">keepassxc-client-library (BSD-3)</a></li>
+<li><a href=\"https://github.com/jedisct1/libsodium\">libsodium (ISC)</a></li>
 <li><a href=\"https://material.io/tools/icons\">MaterialIO Icons (Apache-2.0)</a></li>
+<li><a href=\"https://github.com/keepassxreboot/keepassxc\">KeePassXC Icon (GPL-3.0)</a></li>
 </ul>").arg(qtVersion)
 
 		onLinkActivated: emjscon.openUrl(link)

@@ -50,6 +50,7 @@ wasm {
 
 include($$SRC_ROOT_DIR/lib/lib.pri)
 include($$SRC_ROOT_DIR/3rdparty/QR-Code-generator/QR-Code-generator.pri)
+include($$SRC_ROOT_DIR/deploy/install.pri)
 
 wasm {
 	# adjust HTML file
@@ -73,15 +74,27 @@ wasm {
 	QMAKE_EXTRA_TARGETS += html_fixup_target
 	PRE_TARGETDEPS += index.html
 
+	# shellfile target hack
+	shellfiles_target.target = shellfiles
+	shellfiles_target.commands += \
+		@touch apphtml \
+		$$escape_expand(\n\t)@touch appjs \
+		$$escape_expand(\n\t)@touch appsvg \
+		$$escape_expand(\n\t)@touch shellfiles
+	QMAKE_EXTRA_TARGETS += shellfiles_target
+
 	wasm_install.files += $$OUT_PWD/index.html \
 		$$OUT_PWD/$${TARGET}.wasm \
-		$$OUT_PWD/$${TARGET}.js \
+#		$$OUT_PWD/$${TARGET}.js \
 		$$OUT_PWD/qtloader.js \
 		$$OUT_PWD/qtlogo.svg
 	wasm_install.CONFIG += no_check_exist
-	wasm_install.path = /www
+	wasm_install.path = $$INSTALL_WWW
+	target.path = $$INSTALL_WWW
 	INSTALLS += wasm_install
 } else {
 	target.path = $$INSTALL_BINS
 	INSTALLS += target
 }
+
+QMAKE_EXTRA_TARGETS += lrelease
