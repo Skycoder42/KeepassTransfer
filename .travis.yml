@@ -29,6 +29,10 @@ matrix:
         - DOCKER_IMAGE_BASE="base/archlinux:latest"
         - FLATDEP_DIR=deploy/flatpak
         - FLATPAK_MANIFEST=flatpak/de.skycoder42.kptransfer.json
+    - os: linux
+      env:
+        - PLATFORM=emscripten
+        - DOCKER_IMAGE=base
     #- os: linux
       #env:
         #- PLATFORM=android_arm64_v8a
