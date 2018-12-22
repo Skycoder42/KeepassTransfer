@@ -2,13 +2,11 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 	3rdparty \
-	lib \
-	webapp \
-	clients
+	lib
 
 !no_server:!cross_compile: SUBDIRS += server
-no_webapp: SUBDIRS -= webapp
-wasm: SUBDIRS -= clients
+!no_webapp: SUBDIRS += webapp
+!no_clients: SUBDIRS += clients
 
 lib.depends += 3rdparty
 webapp.depends += 3rdparty lib

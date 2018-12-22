@@ -10,14 +10,15 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
-import android.util.Log;
-
 import org.qtproject.qt5.android.bindings.QtActivity;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class KptActivity extends QtActivity {
+	public static final String DataEntriesExtra = "de.skycoder42.kpt.KptActivity.DataEntriesExtra";
+	public static final String GuardedEntriesExtra = "de.skycoder42.kpt.KptActivity.GuardedEntriesExtra";
+	
 	public static class KptEntry {
 		public String key;
 		public String value;
@@ -29,9 +30,6 @@ public class KptActivity extends QtActivity {
 			this.guarded = guarded;
 		}
 	}
-
-	public static final String DataEntriesExtra = "de.skycoder42.kpt.KptActivity.DataEntriesExtra";
-	public static final String GuardedEntriesExtra = "de.skycoder42.kpt.KptActivity.GuardedEntriesExtra";
 
 	private ArrayList<KptEntry> _cachedFields;
 	private synchronized void setTransferEntries(ArrayList<KptEntry> entries) {

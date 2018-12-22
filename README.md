@@ -1,6 +1,13 @@
 # KeePass-Transfer
 A collection of tools to securely transfer passwords to your browser. You transfer passwords from desktop and your mobile phone, with integrations for [KeePassXC](https://github.com/keepassxreboot/keepassxc) and [Keepass2Android](https://play.google.com/store/apps/details?id=keepass2android.keepass2android).
 
+[![Build Status](https://travis-ci.org/Skycoder42/KeepassTransfer.svg?branch=master)](https://travis-ci.org/Skycoder42/KeepassTransfer)
+[![Build status](https://ci.appveyor.com/api/projects/status/5314bp8u703fo660?svg=true)](https://ci.appveyor.com/project/Skycoder42/keepasstransfer)
+[![Docker Build Status](https://img.shields.io/docker/build/skycoder42/kptransfer-server.svg)](https://hub.docker.com/r/skycoder42/kptransfer-server)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79d2bf9e93a94407955cd5f9a96ad82f)](https://www.codacy.com/app/Skycoder42/KeepassTransfer)
+[![AUR](https://img.shields.io/aur/version/keepass-transfer.svg)](https://aur.archlinux.org/packages/keepass-transfer/)
+
+
 ## Demo
  Desktop | Webapp | Mobile
 ---------|--------|--------

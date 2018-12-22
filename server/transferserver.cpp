@@ -174,7 +174,9 @@ void TransferServer::timeout()
 							Qt::QueuedConnection);
 
 					socket->ping(killId.toRfc4122());
-					auto [delay, payload] = QtCoroutine::await(socket, &QWebSocket::pong);
+					quint64 delay;
+					QByteArray payload;
+					std::tie(delay, payload) = QtCoroutine::await(socket, &QWebSocket::pong);
 					qDebug().noquote() << "Received pong of" << socket->peerAddress()
 									   << "with delay:" << delay;
 					if(payload == killId.toRfc4122())

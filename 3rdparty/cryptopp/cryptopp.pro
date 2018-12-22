@@ -1,5 +1,7 @@
 TEMPLATE = lib
-CONFIG += staticlib
+
+load(qt_build_config)
+CONFIG += staticlib exceptions c++14
 CONFIG -= qt
 
 TARGET = $$qtLibraryTarget(qtcryptopp)
