@@ -85,7 +85,7 @@ wasm {
 
 	wasm_install.files += $$OUT_PWD/index.html \
 		$$OUT_PWD/$${TARGET}.wasm \
-#		$$OUT_PWD/$${TARGET}.js \
+		$$OUT_PWD/$${TARGET}.js \
 		$$OUT_PWD/qtloader.js \
 		$$OUT_PWD/qtlogo.svg
 	wasm_install.CONFIG += no_check_exist
