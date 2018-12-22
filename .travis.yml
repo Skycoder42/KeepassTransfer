@@ -61,7 +61,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: <key>
+    secure: ultP5Os1hFNW9FXRQCNCH6zZ+TqdBAJIXkdINIVZCIPIm3Haipk7SWDUXN0ZC8w9iN3/efx7woiUTQB/euNHZXOPMVsTYfuzw/VxrOzgTnKQg/euUMvJedSf9UGW4yw6Ftm7/mR7RtrCp1nImHmnVLZqqEhbhsTc9PTcm7LC45jFnWHhOv6So1mCg1n/ckCkqZy+AIQVum25L2MPsKvMhezqoetU3g2h1KZJrEd1y5nSl1mF9YsYoIl9RUutqG5wewex7n6NXNOGdoj0eal+VtkzNRUvrJiNGsFiVbxn9oAIf72avQ2Pe4XDTwSboDnxI0uki3s2xiJ98NcDrpcgm1xiz9GgVsAp4nKXu5EGjWHKaFpkOp7bmhI9ssQQ06njwEO+E+mKaCsJxhYP5F5v5j+IxEWaS6GXtCIDQAwAgORktEY/MIZIXdYNusWgfy2yO8qJseFp4bFbfOhJO9cqcgHfp31RtdgqQdDk8T96ODd2ffz/O0czLTN7YfmCGOp2gqu5JWDwAXA/UaANBWVM+V8PD4+sRdY+R8CEN5+9LQCQxhy1RJ0naR7LANx1KK4jDgmTL/eZwx2Ch6Fk4ny13eVBh8KWqQikjmiYIwyVX8Y8o8SPfHiMhGB5YyHmQ/4j0Ih4uD6wpVwCwayAll0Noy3V6+p7WyxebzKffddZ2yI=
   file_glob: true
   file:
     - ./install/kptransfer-*.dmg
