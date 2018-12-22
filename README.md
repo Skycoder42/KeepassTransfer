@@ -43,7 +43,7 @@ A collection of tools to securely transfer passwords to your browser. You transf
 	- Alternative install method:
 		1. Add The repository: `sudo flatpak repo-add skycoder42 'https://raw.githubusercontent.com/Skycoder42/KeepassTransfer/master/flatpak/de.skycoder42.flatpakrepo'`
 		2. Install: `sudo flatpak install skycoder42 de.skycoder42.kptransfer`
-3. **Android:** While the apk is available as direct download, you can also get it via google play store: [KeePass-Transfer Google Play](https://play.google.com/store/apps/details?id=de.skycoder42.kptransfer)
+3. **Android:** While the apk is available as direct download, you can also get it via google play store: [KeePass-Transfer Google Play](https://play.google.com/store/apps/details?id=de.skycoder42.kpt)
 4. **Windows:** Get it via [chocolatey](https://chocolatey.org/): `choco install kptransfer`
 	- See [KeePass-Transfer - Chocolatey](https://chocolatey.org/packages/kptransfer/) for package details
 	- Chocolatey can be install using the following description: https://chocolatey.org/install#installing-chocolatey
