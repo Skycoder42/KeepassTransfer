@@ -33,13 +33,13 @@ QtService::Service::CommandResult KPTService::onStart()
 								  static_cast<quint16>(_settings->value(QStringLiteral("server/port"), 27352).toUInt()));
 	}
 	if(!ok)
-		return OperationFailed;
+		return CommandResult::Failed;
 
-	return OperationCompleted;
+	return CommandResult::Completed;
 }
 
 QtService::Service::CommandResult KPTService::onStop(int &exitCode)
 {
 	exitCode = EXIT_SUCCESS;
-	return OperationCompleted;
+	return CommandResult::Completed;
 }
